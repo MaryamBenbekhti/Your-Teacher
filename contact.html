@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تواصل وحجز | منصة تعليم</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-content">
+    <a href="index.html" class="logo">معلمتك<span>✦</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="about.html">مين أستاذة عزيزة؟</a></li>
+      <li><a href="subjects.html">المواد</a></li>
+      <li><a href="problems.html">المشاكل الشائعة</a></li>
+      <li><a href="moms.html">آراء الأمهات</a></li>
+      <li><a href="videos.html">شروحات </a></li>
+      <li><a href="contact.html" class="nav-btn">احجزي جلستك الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="container">
+  <div class="contact-card-modern hidden-load">
+    <div class="contact-info-panel">
+      <span class="badge">نحن هنا لمساعدتك</span>
+      <h2>تواصل مباشر</h2>
+      <p>عندك استفسار أو تبغين تحجزين جلسة تجريبية؟ لا تترددين بالتواصل معنا.</p>
+      
+      <div class="info-items">
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h4>البريد الإلكتروني</h4>
+            <p>support@platform.com</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fab fa-whatsapp"></i>
+          <div>
+            <h4>واتساب مباشر</h4>
+            <p>+966 50 000 0000</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <h4>أوقات التجاوب</h4>
+            <p>يومياً: 4 عصراً - 10 مساءً</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-panel">
+      <form id="pro-contact-form">
+        <div class="form-row">
+          <div class="input-group">
+            <label>اسم الطالبة</label>
+            <input type="text" placeholder="مثال: سارة أحمد" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label>رقم الجوال (واتساب)</label>
+            <input type="tel" placeholder="05xxxxxxxx" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label>المادة المهتمة بها</label>
+            <select required>
+              <option value="" disabled selected>اختاري المادة</option>
+              <option>رياضيات</option>
+              <option>علوم</option>
+              <option>إنجليزي</option>
+              <option>عربي</option>
+              <option>قدرات / تحصيلي</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label>رسالة إضافية (اختياري)</label>
+            <textarea placeholder="أي ملاحظات حابة تذكرينها..." rows="4"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn primary full-width">
+          إرسال الطلب الآن <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
