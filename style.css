@@ -643,3 +643,36 @@ body { background: var(--bg-main); color: var(--text-dark); direction: rtl; over
 
 .stat h3 { font-size: 1.8rem; font-weight: 900; }
 .stat p { font-size: 0.85rem; opacity: 0.6; }
+/* 📱 Mobile */
+@media (max-width: 768px) {
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .container {
+    padding: 60px 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .test-grid {
+    flex-direction: column;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+}
