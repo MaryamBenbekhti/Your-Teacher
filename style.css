@@ -676,3 +676,111 @@ body { background: var(--bg-main); color: var(--text-dark); direction: rtl; over
     flex-direction: column;
   }
 }
+/* =========================
+   🔥 FINAL MOBILE FIX (IMPORTANT)
+   ========================= */
+
+@media (max-width: 768px) {
+
+  /* Prevent any horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* ===== NAVBAR FIX ===== */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .nav-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    display: flex !important; /* override your display:none */
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 10px;
+  }
+
+  /* ===== HERO FIX (IMPORTANT: you used GRID + FLEX conflict) ===== */
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-visual-container {
+    width: 100%;
+  }
+
+  .main-glass-card {
+    max-width: 100%;
+  }
+
+  /* Remove floating elements breaking layout */
+  .floating-label,
+  .ting-label {
+    display: none;
+  }
+
+  /* ===== STATS FIX ===== */
+  .hero-stats {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  /* ===== GRID FIX ===== */
+  .grid,
+  .test-grid,
+  .subjects-grid,
+  .modern-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ===== CARDS ===== */
+  .card,
+  .test-card,
+  .problem-card,
+  .subject-card {
+    width: 100%;
+  }
+
+  /* ===== CONTACT PAGE ===== */
+  .contact-card-modern {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-info-panel,
+  .contact-form-panel {
+    padding: 30px 20px;
+  }
+
+  /* ===== VIDEO ===== */
+  iframe {
+    width: 100%;
+    height: 200px;
+  }
+
+  /* ===== FOOTER ===== */
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
