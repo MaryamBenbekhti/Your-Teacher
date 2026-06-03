@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الشروحات | معلمتك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-content">
+    <a href="index.html" class="logo">معلمتك<span>✦</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="about.html">مين أستاذة عزيزة؟</a></li>
+      <li><a href="subjects.html">المواد</a></li>
+      <li><a href="problems.html">المشاكل الشائعة</a></li>
+      <li><a href="moms.html">آراء الأمهات</a></li>
+      <li><a href="videos.html">شروحات</a></li>
+      <li><a href="contact.html" class="nav-btn">احجزي جلستك الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="container">
+
+  <!-- Breadcrumb -->
+  <div class="hidden-load" style="margin-bottom: 30px; font-size: 0.9rem; color: #999; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <a href="videos.html" style="color:var(--accent); font-weight:700; text-decoration:none;">الشروحات</a>
+    <span style="opacity:0.4;">◂</span>
+    <a id="bc-grade" href="#" style="color:var(--accent); font-weight:700; text-decoration:none;">المرحلة</a>
+    <span style="opacity:0.4;">◂</span>
+    <a id="bc-subject" href="#" style="color:var(--accent); font-weight:700; text-decoration:none;">المادة</a>
+    <span style="opacity:0.4;">◂</span>
+    <span id="bc-current" style="color:var(--text-dark); font-weight:700;">الفيديوهات</span>
+  </div>
+
+  <!-- Header -->
+  <div class="section-header hidden-load" style="text-align:center; margin-bottom: 10px;">
+    <span class="badge" id="page-badge">📂</span>
+    <h1 class="main-title">شروحات <span style="color:var(--accent)" id="page-title">المادة</span></h1>
+    <p class="subtitle" id="page-subtitle">جميع الفيديوهات المتعلقة بهذه المادة</p>
+  </div>
+
+  <!-- Videos Grid -->
+  <div class="grid" id="videos-grid">
+    <!-- ============================================================
+         أضيفي فيديوهاتك هنا — انسخي الـ block اللي تحت وكرريه
+         غيري فقط:
+           1. رابط YouTube في src (استبدلي VIDEO_ID برقم الفيديو)
+           2. عنوان الفيديو في <h3>
+         ============================================================ -->
+
+    <div class="video-card hidden-load">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="video-info">
+        <h3>عنوان الفيديو الأول</h3>
+      </div>
+    </div>
+
+    <div class="video-card hidden-load">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="video-info">
+        <h3>عنوان الفيديو الثاني</h3>
+      </div>
+    </div>
+
+    <div class="video-card hidden-load">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="video-info">
+        <h3>عنوان الفيديو الثالث</h3>
+      </div>
+    </div>
+
+    <!-- أضيفي المزيد هنا ... -->
+
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+<script>
+  const params  = new URLSearchParams(window.location.search);
+  const cat     = params.get('cat')     || '';
+  const grade   = params.get('grade')   || '';
+  const subject = params.get('subject') || '';
+
+  const catMeta = {
+    qudurat: { label: '🧠 قدرات' },
+    tahsili: { label: '📚 تحصيلي' },
+    term1:   { label: '🍂 الترم الأول' },
+    term2:   { label: '🌸 الترم الثاني' },
+  };
+
+  const gradeLabels = {
+    'اول-ابتدائي':  'أول ابتدائي',
+    'ثاني-ابتدائي': 'ثاني ابتدائي',
+    'ثالث-ابتدائي': 'ثالث ابتدائي',
+    'رابع-ابتدائي': 'رابع ابتدائي',
+    'خامس-ابتدائي': 'خامس ابتدائي',
+    'سادس-ابتدائي': 'سادس ابتدائي',
+    'اول-متوسط':    'أول متوسط',
+    'ثاني-متوسط':   'ثاني متوسط',
+    'ثالث-متوسط':   'ثالث متوسط',
+    'اول-ثانوي':    'أول ثانوي',
+    'ثاني-ثانوي':   'ثاني ثانوي',
+    'ثالث-ثانوي':   'ثالث ثانوي',
+  };
+
+  const subjectLabels = {
+    math:      'رياضيات',
+    physics:   'فيزياء',
+    chemistry: 'كيمياء',
+    biology:   'أحياء',
+    english:   'إنجليزي',
+  };
+
+  const catLabel     = (catMeta[cat] || {}).label || cat;
+  const gradeLabel   = gradeLabels[grade]          || grade;
+  const subjectLabel = subjectLabels[subject]       || subject;
+
+  // Update page text
+  document.getElementById('page-badge').textContent    = catLabel + ' • ' + gradeLabel;
+  document.getElementById('page-title').textContent    = subjectLabel;
+  document.getElementById('page-subtitle').textContent = 'جميع شروحات ' + subjectLabel + ' لـ ' + gradeLabel;
+  document.title = subjectLabel + ' — ' + gradeLabel + ' | معلمتك';
+
+  // Breadcrumb links
+  document.getElementById('bc-grade').textContent   = gradeLabel;
+  document.getElementById('bc-grade').href          = 'grade-select.html?cat=' + cat;
+  document.getElementById('bc-subject').textContent = subjectLabel;
+  document.getElementById('bc-subject').href        = 'subject-select.html?cat=' + cat + '&grade=' + grade;
+  document.getElementById('bc-current').textContent = 'الفيديوهات';
+</script>
+</body>
+</html>
