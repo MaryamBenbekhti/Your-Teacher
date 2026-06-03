@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختاري المرحلة | معلمتك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-content">
+    <a href="index.html" class="logo">معلمتك<span>✦</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="about.html">مين أستاذة عزيزة؟</a></li>
+      <li><a href="subjects.html">المواد</a></li>
+      <li><a href="problems.html">المشاكل الشائعة</a></li>
+      <li><a href="moms.html">آراء الأمهات</a></li>
+      <li><a href="videos.html">شروحات</a></li>
+      <li><a href="contact.html" class="nav-btn">احجزي جلستك الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="container">
+
+  <!-- Breadcrumb using badge-text style -->
+  <div class="hidden-load" style="margin-bottom: 30px; font-size: 0.9rem; color: #999; display:flex; align-items:center; gap:8px;">
+    <a href="videos.html" style="color:var(--accent); font-weight:700; text-decoration:none;">الشروحات</a>
+    <span style="opacity:0.4;">◂</span>
+    <span id="breadcrumb-cat" style="color:var(--text-dark); font-weight:700;">اختيار المرحلة</span>
+  </div>
+
+  <!-- Page Header -->
+  <div class="section-header hidden-load" style="text-align:center; margin-bottom: 10px;">
+    <span class="badge" id="cat-label">📂 التصنيف</span>
+    <h1 class="main-title">اختاري <span style="color:var(--accent)">مرحلتك</span></h1>
+    <p class="subtitle">اختاري الصف الدراسي المناسب لك لعرض الشروحات المخصصة</p>
+  </div>
+
+  <!-- ابتدائي -->
+  <p class="badge-text hidden-load" style="margin: 40px 0 15px; font-size:1rem; border-right: 4px solid var(--accent); padding-right:12px;">🏫 المرحلة الابتدائية</p>
+  <div class="subjects-grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+    <a href="#" class="subject-card arabic-theme hidden-load" data-grade="اول-ابتدائي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">1️⃣</div>
+      <h3 style="font-size:1rem;">أول ابتدائي</h3>
+    </a>
+    <a href="#" class="subject-card arabic-theme hidden-load" data-grade="ثاني-ابتدائي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">2️⃣</div>
+      <h3 style="font-size:1rem;">ثاني ابتدائي</h3>
+    </a>
+    <a href="#" class="subject-card arabic-theme hidden-load" data-grade="ثالث-ابتدائي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">3️⃣</div>
+      <h3 style="font-size:1rem;">ثالث ابتدائي</h3>
+    </a>
+    <a href="#" class="subject-card arabic-theme hidden-load" data-grade="رابع-ابتدائي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">4️⃣</div>
+      <h3 style="font-size:1rem;">رابع ابتدائي</h3>
+    </a>
+    <a href="#" class="subject-card arabic-theme hidden-load" data-grade="خامس-ابتدائي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">5️⃣</div>
+      <h3 style="font-size:1rem;">خامس ابتدائي</h3>
+    </a>
+    <a href="#" class="subject-card arabic-theme hidden-load" data-grade="سادس-ابتدائي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">6️⃣</div>
+      <h3 style="font-size:1rem;">سادس ابتدائي</h3>
+    </a>
+  </div>
+
+  <!-- متوسط -->
+  <p class="badge-text hidden-load" style="margin: 40px 0 15px; font-size:1rem; border-right: 4px solid var(--accent); padding-right:12px;">🎒 المرحلة المتوسطة</p>
+  <div class="subjects-grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+    <a href="#" class="subject-card math-theme hidden-load" data-grade="اول-متوسط" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">📗</div>
+      <h3 style="font-size:1rem;">أول متوسط</h3>
+    </a>
+    <a href="#" class="subject-card math-theme hidden-load" data-grade="ثاني-متوسط" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">📘</div>
+      <h3 style="font-size:1rem;">ثاني متوسط</h3>
+    </a>
+    <a href="#" class="subject-card math-theme hidden-load" data-grade="ثالث-متوسط" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">📙</div>
+      <h3 style="font-size:1rem;">ثالث متوسط</h3>
+    </a>
+  </div>
+
+  <!-- ثانوي -->
+  <p class="badge-text hidden-load" style="margin: 40px 0 15px; font-size:1rem; border-right: 4px solid var(--accent); padding-right:12px;">🎓 المرحلة الثانوية</p>
+  <div class="subjects-grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+    <a href="#" class="subject-card english-theme hidden-load" data-grade="اول-ثانوي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">📕</div>
+      <h3 style="font-size:1rem;">أول ثانوي</h3>
+    </a>
+    <a href="#" class="subject-card english-theme hidden-load" data-grade="ثاني-ثانوي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">📒</div>
+      <h3 style="font-size:1rem;">ثاني ثانوي</h3>
+    </a>
+    <a href="#" class="subject-card english-theme hidden-load" data-grade="ثالث-ثانوي" style="text-decoration:none; color:inherit; padding:28px 15px;">
+      <div class="icon-box" style="font-size:2rem;">🎓</div>
+      <h3 style="font-size:1rem;">ثالث ثانوي</h3>
+    </a>
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('cat') || 'qudurat';
+
+  const catMeta = {
+    qudurat: { label: '🧠 قدرات',       breadcrumb: 'قدرات' },
+    tahsili: { label: '📚 تحصيلي',      breadcrumb: 'تحصيلي' },
+    term1:   { label: '🍂 الترم الأول', breadcrumb: 'الترم الأول' },
+    term2:   { label: '🌸 الترم الثاني', breadcrumb: 'الترم الثاني' },
+  };
+
+  const meta = catMeta[cat] || catMeta['qudurat'];
+  document.getElementById('cat-label').textContent = meta.label;
+  document.getElementById('breadcrumb-cat').textContent = meta.breadcrumb;
+  document.title = meta.breadcrumb + ' | معلمتك';
+
+  document.querySelectorAll('[data-grade]').forEach(card => {
+    card.href = 'video-list.html?cat=' + cat + '&grade=' + card.getAttribute('data-grade');
+  });
+</script>
+</body>
+</html>
