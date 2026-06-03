@@ -6,42 +6,15 @@
 
 const VIDEOS_DATA = {
 
-  // ============ قدرات ============
 
-  "qudurat--اول-ثانوي--math": [
-    { id: "VIDEO_ID", title: "درس 1 - المقدمة" },
-    { id: "VIDEO_ID", title: "درس 2 - الجبر" },
-  ],
 
-  "qudurat--ثاني-ثانوي--math": [
-    { id: "VIDEO_ID", title: "درس 1 - المعادلات" },
-  ],
-
-  "qudurat--ثالث-ثانوي--math": [
-    { id: "VIDEO_ID", title: "درس 1 - التفاضل" },
-  ],
-
-  "qudurat--اول-ثانوي--physics": [
-    { id: "VIDEO_ID", title: "درس 1 - الحركة" },
-  ],
-
-  // ============ تحصيلي ============
-
-  "tahsili--اول-ثانوي--math": [
-    { id: "VIDEO_ID", title: "درس 1 - الأعداد" },
-  ],
-
-  "tahsili--ثاني-ثانوي--chemistry": [
-    { id: "VIDEO_ID", title: "درس 1 - الجدول الدوري" },
-  ],
-
-  "tahsili--ثالث-ثانوي--biology": [
-    { id: "VIDEO_ID", title: "درس 1 - الخلية" },
-  ],
 
   // ============ الترم الأول ============
 
   "term1--اول-متوسط--math": [
+    { id: "VIDEO_ID", title: "درس 1 - الكسور" },
+  ],
+  "term1--اول-متوسط-physics": [
     { id: "VIDEO_ID", title: "درس 1 - الكسور" },
   ],
 
