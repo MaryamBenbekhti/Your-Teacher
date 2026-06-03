@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختاري المادة | معلمتك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-content">
+    <a href="index.html" class="logo">معلمتك<span>✦</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="about.html">مين أستاذة عزيزة؟</a></li>
+      <li><a href="subjects.html">المواد</a></li>
+      <li><a href="problems.html">المشاكل الشائعة</a></li>
+      <li><a href="moms.html">آراء الأمهات</a></li>
+      <li><a href="videos.html">شروحات</a></li>
+      <li><a href="contact.html" class="nav-btn">احجزي جلستك الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="container">
+
+  <!-- Breadcrumb -->
+  <div class="hidden-load" style="margin-bottom: 30px; font-size: 0.9rem; color: #999; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <a href="videos.html" style="color:var(--accent); font-weight:700; text-decoration:none;">الشروحات</a>
+    <span style="opacity:0.4;">◂</span>
+    <a id="breadcrumb-back" href="grade-select.html" style="color:var(--accent); font-weight:700; text-decoration:none;">المرحلة</a>
+    <span style="opacity:0.4;">◂</span>
+    <span id="breadcrumb-current" style="color:var(--text-dark); font-weight:700;">اختيار المادة</span>
+  </div>
+
+  <!-- Header -->
+  <div class="section-header hidden-load" style="text-align:center; margin-bottom: 10px;">
+    <span class="badge" id="page-badge">📂 التصنيف</span>
+    <h1 class="main-title">اختاري <span style="color:var(--accent)">المادة</span></h1>
+    <p class="subtitle">اختاري المادة اللي تبغين تشوفين شروحاتها</p>
+  </div>
+
+  <!-- Subjects Grid -->
+  <div class="subjects-grid">
+
+    <a href="#" class="subject-card math-theme hidden-load" data-subject="math" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">🔢</div>
+      <h3>رياضيات</h3>
+      <p>جبر، هندسة، إحصاء، حساب مثلثات — فهم حقيقي لا حفظ.</p>
+      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
+    </a>
+
+    <a href="#" class="subject-card science-theme hidden-load" data-subject="physics" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">⚡</div>
+      <h3>فيزياء</h3>
+      <p>ميكانيكا، كهرباء، موجات — ربط النظري بالتطبيقي.</p>
+      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
+    </a>
+
+    <a href="#" class="subject-card arabic-theme hidden-load" data-subject="chemistry" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">🧪</div>
+      <h3>كيمياء</h3>
+      <p>عناصر، روابط، تفاعلات — الكيمياء بطريقة مبسطة.</p>
+      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
+    </a>
+
+    <a href="#" class="subject-card english-theme hidden-load" data-subject="biology" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">🔬</div>
+      <h3>أحياء</h3>
+      <p>خلايا، أنظمة، وراثة — علم الحياة بأسلوب واضح.</p>
+      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
+    </a>
+
+    <a href="#" class="subject-card science-theme hidden-load" data-subject="english" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">🌐</div>
+      <h3>إنجليزي</h3>
+      <p>قواعد، مفردات، قراءة وكتابة — ثقة حقيقية باللغة.</p>
+      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
+    </a>
+
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const cat   = params.get('cat')   || 'qudurat';
+  const grade = params.get('grade') || '';
+
+  const catMeta = {
+    qudurat: { label: '🧠 قدرات',        breadcrumb: 'قدرات' },
+    tahsili: { label: '📚 تحصيلي',       breadcrumb: 'تحصيلي' },
+    term1:   { label: '🍂 الترم الأول',  breadcrumb: 'الترم الأول' },
+    term2:   { label: '🌸 الترم الثاني', breadcrumb: 'الترم الثاني' },
+  };
+
+  const gradeLabels = {
+    'اول-ابتدائي':   'أول ابتدائي',
+    'ثاني-ابتدائي':  'ثاني ابتدائي',
+    'ثالث-ابتدائي':  'ثالث ابتدائي',
+    'رابع-ابتدائي':  'رابع ابتدائي',
+    'خامس-ابتدائي':  'خامس ابتدائي',
+    'سادس-ابتدائي':  'سادس ابتدائي',
+    'اول-متوسط':     'أول متوسط',
+    'ثاني-متوسط':    'ثاني متوسط',
+    'ثالث-متوسط':    'ثالث متوسط',
+    'اول-ثانوي':     'أول ثانوي',
+    'ثاني-ثانوي':    'ثاني ثانوي',
+    'ثالث-ثانوي':    'ثالث ثانوي',
+  };
+
+  const meta       = catMeta[cat] || catMeta['qudurat'];
+  const gradeLabel = gradeLabels[grade] || grade;
+
+  // Update badge and breadcrumb
+  document.getElementById('page-badge').textContent     = meta.label + ' • ' + gradeLabel;
+  document.getElementById('breadcrumb-current').textContent = gradeLabel;
+  document.getElementById('breadcrumb-back').href       = 'grade-select.html?cat=' + cat;
+  document.title = gradeLabel + ' | معلمتك';
+
+  // Wire each subject card to video-list page
+  document.querySelectorAll('[data-subject]').forEach(card => {
+    const subject = card.getAttribute('data-subject');
+    card.href = 'video-list.html?cat=' + cat + '&grade=' + grade + '&subject=' + subject;
+  });
+</script>
+</body>
+</html>
