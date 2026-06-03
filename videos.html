@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>شروحات مرئية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>شروحات مرئية | معلمتك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <nav class="navbar">
   <div class="nav-content">
     <a href="index.html" class="logo">معلمتك<span>✦</span></a>
@@ -17,31 +18,50 @@
       <li><a href="subjects.html">المواد</a></li>
       <li><a href="problems.html">المشاكل الشائعة</a></li>
       <li><a href="moms.html">آراء الأمهات</a></li>
-      <li><a href="videos.html">شروحات </a></li>
+      <li><a href="videos.html">شروحات</a></li>
       <li><a href="contact.html" class="nav-btn">احجزي جلستك الآن</a></li>
     </ul>
   </div>
 </nav>
 
 <section class="container">
-  <div class="section-header hidden-load">
-    <h1>فيديوهات شرح</h1>
-    <p>ألقي نظرة على أسلوبنا في تبسيط المعلومات.</p>
+
+  <div class="section-header hidden-load" style="text-align:center; margin-bottom: 10px;">
+    <span class="badge-outline">✦ مكتبة الشروحات</span>
+    <h1 class="main-title">اختاري <span style="color:var(--accent)">نوع الشرح</span></h1>
+    <p class="subtitle">اختاري التصنيف المناسب لك وابدأي رحلتك في الفهم الحقيقي.</p>
   </div>
 
-  <div class="grid">
-    <div class="video-card hidden-load">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-info"><h3>شرح أساسيات الرياضيات</h3></div>
-    </div>
-    <div class="video-card hidden-load">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-info"><h3>تأسيس لغة إنجليزية</h3></div>
-    </div>
+  <div class="subjects-grid">
+
+    <a href="grade-select.html?cat=qudurat" class="subject-card arabic-theme hidden-load" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">🧠</div>
+      <h3>قدرات</h3>
+      <p>شروحات اختبار القدرات الكمي واللفظي لجميع المراحل</p>
+      <div class="pill-tags"><span>اختر مرحلتك ←</span></div>
+    </a>
+
+    <a href="grade-select.html?cat=tahsili" class="subject-card science-theme hidden-load" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">📚</div>
+      <h3>تحصيلي</h3>
+      <p>مواد التحصيل الدراسي — علوم ورياضيات وعربي وإنجليزي</p>
+      <div class="pill-tags"><span>اختر مرحلتك ←</span></div>
+    </a>
+
+    <a href="grade-select.html?cat=term1" class="subject-card math-theme hidden-load" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">🍂</div>
+      <h3>الترم الأول</h3>
+      <p>شروحات الفصل الدراسي الأول لجميع المراحل الدراسية</p>
+      <div class="pill-tags"><span>اختر مرحلتك ←</span></div>
+    </a>
+
+    <a href="grade-select.html?cat=term2" class="subject-card english-theme hidden-load" style="text-decoration:none; color:inherit;">
+      <div class="icon-box">🌸</div>
+      <h3>الترم الثاني</h3>
+      <p>شروحات الفصل الدراسي الثاني لجميع المراحل الدراسية</p>
+      <div class="pill-tags"><span>اختر مرحلتك ←</span></div>
+    </a>
+
   </div>
 </section>
 
