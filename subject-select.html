@@ -37,58 +37,21 @@
 
   <!-- Header -->
   <div class="section-header hidden-load" style="text-align:center; margin-bottom: 10px;">
-    <span class="badge" id="page-badge">📂 التصنيف</span>
+    <span class="badge" id="cat-label">📂 التصنيف</span>
     <h1 class="main-title">اختاري <span style="color:var(--accent)">المادة</span></h1>
     <p class="subtitle">اختاري المادة اللي تبغين تشوفين شروحاتها</p>
   </div>
 
-  <!-- Subjects Grid -->
-  <div class="subjects-grid">
-
-    <a href="#" class="subject-card math-theme hidden-load" data-subject="math" style="text-decoration:none; color:inherit;">
-      <div class="icon-box">🔢</div>
-      <h3>رياضيات</h3>
-      <p>جبر، هندسة، إحصاء، حساب مثلثات — فهم حقيقي لا حفظ.</p>
-      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
-    </a>
-
-    <a href="#" class="subject-card science-theme hidden-load" data-subject="physics" style="text-decoration:none; color:inherit;">
-      <div class="icon-box">⚡</div>
-      <h3>فيزياء</h3>
-      <p>ميكانيكا، كهرباء، موجات — ربط النظري بالتطبيقي.</p>
-      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
-    </a>
-
-    <a href="#" class="subject-card arabic-theme hidden-load" data-subject="chemistry" style="text-decoration:none; color:inherit;">
-      <div class="icon-box">🧪</div>
-      <h3>كيمياء</h3>
-      <p>عناصر، روابط، تفاعلات — الكيمياء بطريقة مبسطة.</p>
-      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
-    </a>
-
-    <a href="#" class="subject-card english-theme hidden-load" data-subject="biology" style="text-decoration:none; color:inherit;">
-      <div class="icon-box">🔬</div>
-      <h3>أحياء</h3>
-      <p>خلايا، أنظمة، وراثة — علم الحياة بأسلوب واضح.</p>
-      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
-    </a>
-
-    <a href="#" class="subject-card science-theme hidden-load" data-subject="english" style="text-decoration:none; color:inherit;">
-      <div class="icon-box">🌐</div>
-      <h3>إنجليزي</h3>
-      <p>قواعد، مفردات، قراءة وكتابة — ثقة حقيقية باللغة.</p>
-      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
-    </a>
-
-  </div>
+  <!-- Subjects Grid — injected by JS -->
+  <div class="subjects-grid" id="subjects-grid"></div>
 
 </section>
 
 <script src="script.js"></script>
 <script>
   const params = new URLSearchParams(window.location.search);
-  const cat   = params.get('cat')   || 'qudurat';
-  const grade = params.get('grade') || '';
+  const cat    = params.get('cat')   || 'qudurat';
+  const grade  = params.get('grade') || '';
 
   const catMeta = {
     qudurat: { label: '🧠 قدرات',        breadcrumb: 'قدرات' },
@@ -98,34 +61,74 @@
   };
 
   const gradeLabels = {
-    'اول-ابتدائي':   'أول ابتدائي',
-    'ثاني-ابتدائي':  'ثاني ابتدائي',
-    'ثالث-ابتدائي':  'ثالث ابتدائي',
-    'رابع-ابتدائي':  'رابع ابتدائي',
-    'خامس-ابتدائي':  'خامس ابتدائي',
-    'سادس-ابتدائي':  'سادس ابتدائي',
-    'اول-متوسط':     'أول متوسط',
-    'ثاني-متوسط':    'ثاني متوسط',
-    'ثالث-متوسط':    'ثالث متوسط',
-    'اول-ثانوي':     'أول ثانوي',
-    'ثاني-ثانوي':    'ثاني ثانوي',
-    'ثالث-ثانوي':    'ثالث ثانوي',
+    'اول-ابتدائي':  'أول ابتدائي',  'ثاني-ابتدائي': 'ثاني ابتدائي',
+    'ثالث-ابتدائي': 'ثالث ابتدائي', 'رابع-ابتدائي': 'رابع ابتدائي',
+    'خامس-ابتدائي': 'خامس ابتدائي', 'سادس-ابتدائي': 'سادس ابتدائي',
+    'اول-متوسط':    'أول متوسط',    'ثاني-متوسط':   'ثاني متوسط',
+    'ثالث-متوسط':   'ثالث متوسط',   'اول-ثانوي':    'أول ثانوي',
+    'ثاني-ثانوي':   'ثاني ثانوي',   'ثالث-ثانوي':   'ثالث ثانوي',
   };
 
+  // ── SUBJECT LISTS ──────────────────────────────────────────
+  // Add or remove subjects here anytime
+
+  const elementarySubjects = [
+    { key: 'math',    icon: '🔢', name: 'رياضيات',  desc: 'جمع، طرح، ضرب، قسمة وأكثر.',          theme: 'math-theme' },
+    { key: 'arabic',  icon: '📖', name: 'عربي',      desc: 'قراءة، كتابة، إملاء ونحو.',            theme: 'arabic-theme' },
+    { key: 'english', icon: '🌐', name: 'إنجليزي',   desc: 'أساسيات اللغة الإنجليزية.',            theme: 'english-theme' },
+    { key: 'science', icon: '🌿', name: 'علوم',      desc: 'علوم الطبيعة والبيئة والجسم.',         theme: 'science-theme' },
+    { key: 'social',  icon: '🗺️', name: 'اجتماعيات', desc: 'تاريخ، جغرافيا والتربية الوطنية.',     theme: 'arabic-theme' },
+    { key: 'islamic', icon: '📿', name: 'إسلامية',   desc: 'قرآن، فقه وتربية إسلامية.',            theme: 'math-theme' },
+  ];
+
+  const middleHighSubjects = [
+    { key: 'math',      icon: '🔢', name: 'رياضيات', desc: 'جبر، هندسة، إحصاء وحساب مثلثات.',     theme: 'math-theme' },
+    { key: 'physics',   icon: '⚡', name: 'فيزياء',  desc: 'ميكانيكا، كهرباء وموجات.',             theme: 'science-theme' },
+    { key: 'chemistry', icon: '🧪', name: 'كيمياء',  desc: 'عناصر، روابط وتفاعلات كيميائية.',      theme: 'arabic-theme' },
+    { key: 'biology',   icon: '🔬', name: 'أحياء',   desc: 'خلايا، أنظمة ووراثة.',                 theme: 'english-theme' },
+    { key: 'english',   icon: '🌐', name: 'إنجليزي', desc: 'قواعد، مفردات وقراءة وكتابة.',         theme: 'english-theme' },
+  ];
+
+  // ── DETECT STAGE ───────────────────────────────────────────
+  const elementaryGrades = [
+    'اول-ابتدائي','ثاني-ابتدائي','ثالث-ابتدائي',
+    'رابع-ابتدائي','خامس-ابتدائي','سادس-ابتدائي'
+  ];
+
+  const isElementary = elementaryGrades.includes(grade);
+  const subjectList  = isElementary ? elementarySubjects : middleHighSubjects;
+
+  // ── UPDATE PAGE LABELS ─────────────────────────────────────
   const meta       = catMeta[cat] || catMeta['qudurat'];
   const gradeLabel = gradeLabels[grade] || grade;
 
-  // Update badge and breadcrumb
-  document.getElementById('page-badge').textContent     = meta.label + ' • ' + gradeLabel;
+  document.getElementById('cat-label').textContent        = meta.label + ' • ' + gradeLabel;
   document.getElementById('breadcrumb-current').textContent = gradeLabel;
-  document.getElementById('breadcrumb-back').href       = 'grade-select.html?cat=' + cat;
+  document.getElementById('breadcrumb-back').href         = 'grade-select.html?cat=' + cat;
   document.title = gradeLabel + ' | معلمتك';
 
-  // Wire each subject card to video-list page
-  document.querySelectorAll('[data-subject]').forEach(card => {
-    const subject = card.getAttribute('data-subject');
-    card.href = 'video-list.html?cat=' + cat + '&grade=' + grade + '&subject=' + subject;
+  // ── BUILD CARDS ────────────────────────────────────────────
+  const grid = document.getElementById('subjects-grid');
+
+  subjectList.forEach(sub => {
+    const a = document.createElement('a');
+    a.href      = 'video-list.html?cat=' + cat + '&grade=' + grade + '&subject=' + sub.key;
+    a.className = 'subject-card ' + sub.theme + ' hidden-load';
+    a.style     = 'text-decoration:none; color:inherit;';
+    a.innerHTML = `
+      <div class="icon-box">${sub.icon}</div>
+      <h3>${sub.name}</h3>
+      <p>${sub.desc}</p>
+      <div class="pill-tags"><span>شوفي الشروحات ←</span></div>
+    `;
+    grid.appendChild(a);
   });
+
+  // Re-run scroll observer for dynamically added cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.hidden-load').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
