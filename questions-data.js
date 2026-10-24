@@ -210,6 +210,16 @@ const QUESTIONS_DATA = {
     },
   ],
 
+  "term1--اول-ثانوي--biology": [
+    {
+      // Ready-made training: questions live in training-term1-grade10-biology-test1.html
+      // (طبيعة العلم، خصائص المخلوقات الحية، التصنيف — 40 questions)
+      id: "term1-grade10-biology-test1",
+      title: "اختبار أحياء 1",
+      count: 40,
+    },
+  ],
+
   // ── قدرات (qudurat.html) ─ ready-made trainings, originals in qudurat-trainings/
   "qudurat": [
     {
