@@ -1,8 +1,12 @@
 // ============================================================
 // HOW TO ADD QUESTIONS:
 // Key format:  "category--grade--subject"  (same keys as videos-data.js)
-// Each key holds a list of question sets; each set has a title and
-// its questions in order.
+// Each key holds a list of trainings (question sets). Each training has:
+//   id:        unique id; its page is training-<id>.html (copy an existing
+//              training page and change TRAINING_ID)
+//   title:     training title shown on its page
+//   questions: its questions in order
+// Never remove or edit existing trainings when adding a new one.
 //
 // QUESTION FORMAT:
 //   q:       question text
@@ -15,6 +19,7 @@ const QUESTIONS_DATA = {
 
   "term1--سادس-ابتدائي--math": [
     {
+      id: "term1-grade6-math-statistics",
       title: "تدريب نافس | الإحصاء وتمثيل البيانات",
       questions: [
         // 1

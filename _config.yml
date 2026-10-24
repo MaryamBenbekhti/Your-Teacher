@@ -1,0 +1,3 @@
+# GitHub Pages: keep project instructions out of the published site
+exclude:
+  - CLAUDE.md
