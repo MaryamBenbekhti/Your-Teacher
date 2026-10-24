@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>اختاري المرحلة | معلمتك</title>
+  <title>اختاري المرحلة | مدربتك</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,7 +11,7 @@
 
 <nav class="navbar">
   <div class="nav-content">
-    <a href="index.html" class="logo">معلمتك<span>✦</span></a>
+    <a href="index.html" class="logo">مدربتك<span>✦</span></a>
     <ul class="nav-links">
       <li><a href="index.html">الرئيسية</a></li>
       <li><a href="about.html">مين أستاذة عزيزة؟</a></li>
@@ -120,7 +120,7 @@
   const meta = catMeta[cat] || catMeta['qudurat'];
   document.getElementById('cat-label').textContent = meta.label;
   document.getElementById('breadcrumb-cat').textContent = meta.breadcrumb;
-  document.title = meta.breadcrumb + ' | معلمتك';
+  document.title = meta.breadcrumb + ' | مدربتك';
 
   document.querySelectorAll('[data-grade]').forEach(card => {
     card.href = 'subject-select.html?cat=' + cat + '&grade=' + card.getAttribute('data-grade');
