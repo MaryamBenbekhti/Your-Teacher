@@ -70,10 +70,10 @@
   const subject = params.get('subject') || '';
 
   const catMeta = {
-    qudurat: { label: '🧠 قدرات' },
-    tahsili: { label: '📚 تحصيلي' },
-    term1:   { label: '🍂 الترم الأول' },
-    term2:   { label: '🌸 الترم الثاني' },
+    qudurat: { label: '🧠 قدرات',        name: 'قدرات' },
+    tahsili: { label: '📚 تحصيلي',       name: 'تحصيلي' },
+    term1:   { label: '🍂 الترم الأول',  name: 'الترم الأول' },
+    term2:   { label: '🌸 الترم الثاني', name: 'الترم الثاني' },
   };
 
   const gradeLabels = {
@@ -186,12 +186,40 @@
         <h2 class="main-title">اختبري <span style="color:var(--accent)">نفسك</span></h2>
         <p class="subtitle">اختاري الإجابة الصحيحة، وبتعرفين على طول إذا كانت صح أو غلط</p>
       </div>
-      <div class="quiz-score">
-        <span>الدرجة: <strong id="quiz-correct">٠</strong> / ${toArabicNum(total)}</span>
-        <span>أجبتِ على <strong id="quiz-answered">٠</strong> من ${toArabicNum(total)}</span>
-        <button type="button" class="quiz-reset" id="quiz-reset">إعادة المحاولة ↻</button>
+      <button type="button" class="quiz-file hidden-load" id="quiz-file" aria-expanded="false" aria-controls="quiz-body">
+        <span class="quiz-file-icon" aria-hidden="true">📄</span>
+        <span class="quiz-file-name"></span>
+        <span class="quiz-file-hint" id="quiz-file-hint"></span>
+      </button>
+      <div class="quiz-body" id="quiz-body" hidden>
+        <div class="quiz-score">
+          <span>الدرجة: <strong id="quiz-correct">٠</strong> / ${toArabicNum(total)}</span>
+          <span>أجبتِ على <strong id="quiz-answered">٠</strong> من ${toArabicNum(total)}</span>
+          <button type="button" class="quiz-reset" id="quiz-reset">إعادة المحاولة ↻</button>
+        </div>
       </div>
     `;
+
+    // File tile: shows the training as a file; clicking it opens/closes the questions
+    const body     = document.getElementById('quiz-body');
+    const fileBtn  = document.getElementById('quiz-file');
+    const fileHint = document.getElementById('quiz-file-hint');
+    const catName  = (catMeta[cat] || {}).name || cat;
+    fileBtn.querySelector('.quiz-file-name').textContent = subjectLabel + ' — ' + gradeLabel + ' — ' + catName;
+
+    const setOpen = open => {
+      body.hidden = !open;
+      fileBtn.setAttribute('aria-expanded', open);
+      fileBtn.classList.toggle('open', open);
+      fileHint.textContent = toArabicNum(total) + ' سؤال • ' + (open ? 'اضغطي لإغلاق التدريب' : 'اضغطي لفتح التدريب');
+    };
+    setOpen(false);
+
+    fileBtn.addEventListener('click', () => {
+      const open = body.hidden;
+      setOpen(open);
+      if (open) body.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
     const updateScore = () => {
       document.getElementById('quiz-correct').textContent  = toArabicNum(correct);
@@ -202,7 +230,7 @@
       const title = document.createElement('h3');
       title.className   = 'quiz-set-title';
       title.textContent = set.title;
-      section.appendChild(title);
+      body.appendChild(title);
 
       set.questions.forEach((item, i) => {
         const card = document.createElement('div');
@@ -255,7 +283,7 @@
 
         card.appendChild(opts);
         card.appendChild(feedback);
-        section.appendChild(card);
+        body.appendChild(card);
       });
     });
 
@@ -272,7 +300,7 @@
         f.classList.remove('ok', 'no');
       });
       updateScore();
-      section.scrollIntoView({ behavior: 'smooth' });
+      body.scrollIntoView({ behavior: 'smooth' });
     });
   }
 </script>
