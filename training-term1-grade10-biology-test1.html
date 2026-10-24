@@ -199,7 +199,7 @@ function home(){
 
 function start(key){
   cur=key; const Q=QUIZ[key]; answers=new Array(Q.qs.length).fill(null);
-  let h=`<div class="top"><button class="back" id="back">الرئيسية</button>
+  let h=`<div class="top"><button class="back" id="back">البداية</button>
     <div class="prog"><div class="lbl" id="lbl"></div><div class="bar"><i id="barf"></i></div></div></div>
     <div class="qhead"><h2>${Q.name}</h2></div><div class="list">`;
   Q.qs.forEach((q,i)=>{
@@ -242,7 +242,7 @@ function update(){
     <div class="score">${ar(score)} <span>/ ${ar(t)}</span></div>
     <p>${ar(msg)}</p>
     ${wrong.length?`<p class="miss">راجع الأسئلة: ${wrong.join(' ، ')}</p>`:''}
-    <div class="actions"><button class="btn main" id="again">أعد الاختبار</button><button class="btn alt" id="home2">الرئيسية</button></div></div>`;
+    <div class="actions"><button class="btn main" id="again">أعد الاختبار</button><button class="btn alt" id="home2">البداية</button></div></div>`;
   document.getElementById('again').onclick=()=>start(cur);
   document.getElementById('home2').onclick=home;
   end.scrollIntoView({behavior:'smooth',block:'center'});
