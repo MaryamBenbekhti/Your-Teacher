@@ -55,9 +55,13 @@
     <a href="videos.html" class="btn-black" style="margin-top:30px; display:inline-block;">العودة للشروحات</a>
   </div>
 
+  <!-- Questions injected here (only when this subject has questions) -->
+  <div id="questions-section"></div>
+
 </section>
 
 <script src="videos-data.js"></script>
+<script src="questions-data.js"></script>
 <script src="script.js"></script>
 <script>
   const params  = new URLSearchParams(window.location.search);
@@ -127,6 +131,149 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.hidden-load').forEach(el => observer.observe(el));
+  }
+
+  // ── QUESTIONS ──────────────────────────────────────────────
+  const questionSets = QUESTIONS_DATA[key] || [];
+  const letters      = ['أ', 'ب', 'ج', 'د'];
+  const toArabicNum  = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+
+  // Dot plot drawn as SVG: one × per value above a number line
+  function buildDotPlot(pairs) {
+    const ns    = 'http://www.w3.org/2000/svg';
+    const max   = Math.max(...pairs.map(p => p[1]));
+    const step  = pairs.length > 6 ? 34 : 70;
+    const w     = step * (pairs.length - 1) + 80;
+    const lineY = 22 * max + 30;
+    const svg   = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + (lineY + 40));
+    svg.setAttribute('class', 'dot-plot');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'تمثيل بالنقاط: ' +
+      pairs.map(p => toArabicNum(p[0]) + ' (' + toArabicNum(p[1]) + ')').join('، '));
+
+    const el = (tag, attrs, text) => {
+      const n = document.createElementNS(ns, tag);
+      Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
+      if (text !== undefined) n.textContent = text;
+      svg.appendChild(n);
+    };
+
+    el('line', { x1: 15, y1: lineY, x2: w - 15, y2: lineY, class: 'dp-axis' });
+    el('path', { d: 'M8 ' + lineY + ' l10 -6 v12 z', class: 'dp-arrow' });
+    el('path', { d: 'M' + (w - 8) + ' ' + lineY + ' l-10 -6 v12 z', class: 'dp-arrow' });
+
+    pairs.forEach(([value, count], i) => {
+      const x = 40 + i * step;
+      el('line', { x1: x, y1: lineY - 7, x2: x, y2: lineY + 7, class: 'dp-axis' });
+      el('text', { x: x, y: lineY + 30, class: 'dp-label' }, toArabicNum(value));
+      for (let c = 0; c < count; c++) {
+        el('text', { x: x, y: lineY - 12 - c * 22, class: 'dp-mark' }, '×');
+      }
+    });
+    return svg;
+  }
+
+  if (questionSets.length > 0) {
+    const section = document.getElementById('questions-section');
+    const total   = questionSets.reduce((sum, set) => sum + set.questions.length, 0);
+    let answered  = 0;
+    let correct   = 0;
+
+    section.innerHTML = `
+      <div class="section-header hidden-load" style="text-align:center; margin:60px 0 10px;">
+        <span class="badge">📝 تمارين وأسئلة</span>
+        <h2 class="main-title">اختبري <span style="color:var(--accent)">نفسك</span></h2>
+        <p class="subtitle">اختاري الإجابة الصحيحة، وبتعرفين على طول إذا كانت صح أو غلط</p>
+      </div>
+      <div class="quiz-score">
+        <span>الدرجة: <strong id="quiz-correct">٠</strong> / ${toArabicNum(total)}</span>
+        <span>أجبتِ على <strong id="quiz-answered">٠</strong> من ${toArabicNum(total)}</span>
+        <button type="button" class="quiz-reset" id="quiz-reset">إعادة المحاولة ↻</button>
+      </div>
+    `;
+
+    const updateScore = () => {
+      document.getElementById('quiz-correct').textContent  = toArabicNum(correct);
+      document.getElementById('quiz-answered').textContent = toArabicNum(answered);
+    };
+
+    questionSets.forEach(set => {
+      const title = document.createElement('h3');
+      title.className   = 'quiz-set-title';
+      title.textContent = set.title;
+      section.appendChild(title);
+
+      set.questions.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'quiz-card hidden-load';
+
+        const head = document.createElement('div');
+        head.className = 'quiz-question';
+        head.innerHTML = `<span class="quiz-num">${toArabicNum(i + 1)}</span><p></p>`;
+        head.querySelector('p').textContent = item.q;
+        card.appendChild(head);
+
+        if (item.dotplot) {
+          const plot = document.createElement('div');
+          plot.className = 'dot-plot-box';
+          plot.appendChild(buildDotPlot(item.dotplot));
+          card.appendChild(plot);
+        }
+
+        const opts = document.createElement('div');
+        opts.className = 'quiz-options';
+        const feedback = document.createElement('p');
+        feedback.className = 'quiz-feedback';
+
+        item.options.forEach((text, idx) => {
+          const btn = document.createElement('button');
+          btn.type      = 'button';
+          btn.className = 'quiz-option';
+          btn.innerHTML = `<span class="quiz-letter">${letters[idx]}</span><span></span>`;
+          btn.lastChild.textContent = text;
+
+          btn.addEventListener('click', () => {
+            if (card.classList.contains('answered')) return;
+            card.classList.add('answered');
+            answered++;
+            opts.children[item.answer].classList.add('correct');
+            if (idx === item.answer) {
+              correct++;
+              feedback.textContent = 'إجابة صحيحة! 🎉';
+              feedback.classList.add('ok');
+            } else {
+              btn.classList.add('wrong');
+              feedback.textContent = 'إجابة خاطئة — الإجابة الصحيحة: (' + letters[item.answer] + ') ' + item.options[item.answer];
+              feedback.classList.add('no');
+            }
+            opts.querySelectorAll('button').forEach(b => b.disabled = true);
+            updateScore();
+          });
+          opts.appendChild(btn);
+        });
+
+        card.appendChild(opts);
+        card.appendChild(feedback);
+        section.appendChild(card);
+      });
+    });
+
+    document.getElementById('quiz-reset').addEventListener('click', () => {
+      answered = 0;
+      correct  = 0;
+      section.querySelectorAll('.quiz-card').forEach(card => card.classList.remove('answered'));
+      section.querySelectorAll('.quiz-option').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+      section.querySelectorAll('.quiz-feedback').forEach(f => {
+        f.textContent = '';
+        f.classList.remove('ok', 'no');
+      });
+      updateScore();
+      section.scrollIntoView({ behavior: 'smooth' });
+    });
   }
 </script>
 </body>
