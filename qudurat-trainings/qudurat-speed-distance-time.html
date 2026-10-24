@@ -1,0 +1,193 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تدريب السرعة والمسافة والزمن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF8EE; --ink:#1F2A37; --soft:#5b6572; --card:#FFFFFF; --box:#f8f4ea; --boxLine:rgba(0,0,0,.08);
+  --hint:#fdf2ea; --hintOpen:#eef7f6; --opt:#fffdf9; --optLine:#e9e1d2; --funny:#8a7350;
+  --okBg:#e8f8f1; --ok:#1a9c6b; --okTxt:#136b47; --noBg:#fdecea; --no:#FF6B5E; --noTxt:#8f2e22;
+  --solBg:#eef4fb; --solLine:#d7e6f7; --solTxt:#2a5da0; --teal:#0E8C86; --tealDark:#0A6B66; --purple:#8E6FD1;
+  --shadow:0 10px 25px rgba(31,42,55,.10);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141A22; --ink:#ECEFF3; --soft:#A9B3BF; --card:#1E2632; --box:#26303D; --boxLine:rgba(255,255,255,.10);
+    --hint:#2B2A2A; --hintOpen:#1F3433; --opt:#232C38; --optLine:#38434F; --funny:#D2B98E;
+    --okBg:#173B2C; --okTxt:#8FE0B9; --noBg:#43201F; --noTxt:#F5A9A2;
+    --solBg:#1D2B3D; --solLine:#2C4260; --solTxt:#9CC3F0; --tealDark:#5CC7C0; --shadow:0 10px 25px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141A22; --ink:#ECEFF3; --soft:#A9B3BF; --card:#1E2632; --box:#26303D; --boxLine:rgba(255,255,255,.10);
+  --hint:#2B2A2A; --hintOpen:#1F3433; --opt:#232C38; --optLine:#38434F; --funny:#D2B98E;
+  --okBg:#173B2C; --okTxt:#8FE0B9; --noBg:#43201F; --noTxt:#F5A9A2;
+  --solBg:#1D2B3D; --solLine:#2C4260; --solTxt:#9CC3F0; --tealDark:#5CC7C0; --shadow:0 10px 25px rgba(0,0,0,.35);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,'Segoe UI',sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:16px 12px 50px}
+header{text-align:center;margin-bottom:12px}
+.badge{display:inline-block;background:var(--teal);color:#fff;font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);transform:rotate(-2deg)}
+h1{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:23px;margin:12px 0 4px;color:var(--tealDark)}
+header p{margin:0;color:var(--soft);font-size:13.5px}
+.groups{display:flex;gap:8px;justify-content:center;margin:14px 0 4px;font-size:12px;font-weight:700}
+.groups span{padding:5px 12px;border-radius:999px;color:#fff}
+.score-bar{display:flex;align-items:center;gap:10px;margin:14px auto 20px;background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);font-weight:700;font-size:14px;width:fit-content;position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:10}
+.score-bar span{color:var(--purple)}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;margin-bottom:22px;position:relative;overflow:hidden;border-top:5px solid var(--accent)}
+.card::before{content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;background:var(--accent);opacity:.12;border-radius:50%}
+.qtitle{display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:14px;color:var(--accent);margin-bottom:10px;flex-wrap:wrap}
+.qnum{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:15px}
+.qtag{font-size:11px;color:#fff;background:var(--accent);padding:2px 10px;border-radius:999px}
+.qgroup{font-size:11px;color:var(--soft);margin-inline-start:auto}
+.qtext{background:var(--box);border-radius:14px;padding:15px;font-size:22px;font-weight:900;line-height:1.7;margin-bottom:8px;border:2px dashed var(--boxLine);text-align:center}
+.funny{font-size:12.5px;color:var(--funny);margin:0 0 14px;text-align:center}
+.hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.hint-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;background:var(--hint);color:var(--ink);font-family:inherit;font-weight:700;font-size:13.5px;padding:11px 14px;border-radius:12px;cursor:pointer;text-align:right}
+.hint-btn:focus-visible,.opt-btn:focus-visible,.share-btn:focus-visible{outline:3px solid #FFC23C;outline-offset:2px}
+.hint-reveal{display:none;background:var(--hintOpen);border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:11px 14px}
+.hint-reveal.open{display:block}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt-btn{display:flex;align-items:center;gap:12px;border:2px solid var(--optLine);background:var(--opt);color:var(--ink);font-family:inherit;font-weight:700;font-size:16px;padding:12px 14px;border-radius:14px;cursor:pointer;text-align:right;width:100%}
+.opt-btn:hover{border-color:var(--accent)}
+.opt-btn .l{flex:0 0 28px;height:28px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:13px}
+.opt-btn .v{flex:1}
+.opt-btn .tag{font-size:17px}
+.opt-btn.correct{background:var(--okBg);border-color:var(--ok);color:var(--okTxt)}
+.opt-btn.wrong{background:var(--noBg);border-color:var(--no);color:var(--noTxt)}
+.opt-btn:disabled{cursor:default}
+.opt-explain{display:none;font-size:13px;line-height:1.7;font-weight:600;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px}
+.opt-explain.show{display:block}
+.opt-explain.ok{background:var(--okBg);color:var(--okTxt)}
+.opt-explain.no{background:var(--noBg);color:var(--noTxt)}
+.solution-box{display:none;margin-top:14px;background:var(--solBg);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.9;border:2px solid var(--solLine)}
+.solution-box.show{display:block}
+.solution-box .lbl{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;color:var(--solTxt);display:block;margin-bottom:4px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.15;margin:0 3px;font-size:.9em}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 3px}
+.result-card{text-align:center;background:linear-gradient(135deg,#0E8C86,#8E6FD1);color:#fff;border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none}
+.result-card.show{display:block}
+.result-card h2{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-size:22px;margin:0 0 8px}
+.result-card p{margin:0;font-size:14.5px}
+.result-card .emoji{font-size:40px;margin-bottom:6px}
+.share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.share-btn{display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;color:#fff}
+.wa{background:#25D366}.rt{background:#1F2A37}
+footer{text-align:center;color:var(--soft);font-size:12px;margin-top:24px}
+
+.legend{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.legend a{font-size:11.5px;font-weight:700;color:#fff;text-decoration:none;padding:5px 11px;border-radius:999px}
+.legend a:focus-visible{outline:3px solid #FFC23C;outline-offset:2px}
+.sec{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:17px;color:#fff;padding:8px 16px;border-radius:14px;margin:28px 0 14px;text-align:center;scroll-margin-top:70px}
+.qtext{font-size:17px;font-weight:800;text-align:right;line-height:1.9}
+.done-count{color:var(--soft)!important;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>تدريب السرعة والمسافة والزمن</h1>
+    <p>٤٠ سؤال بأسلوب القياس 🚗 اضغط على أي مهارة تروح لها مباشرة</p>
+  </header>
+  <nav class="legend" id="legend"></nav>
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">٠ من ٤٠</span><span class="done-count" id="doneDisplay">· ٠ مجاوب</span></div>
+  <div id="cards"></div>
+  <div class="result-card" id="resultCard" aria-live="polite">
+    <div class="emoji" id="rEmoji">🎉</div><h2 id="rTitle"></h2><p id="rText"></p>
+  </div>
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank" rel="noopener">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+  <footer>فكّر أقل ... حُلّ أسرع — تدريب السرعة والمسافة والزمن 🧠✨</footer>
+</div>
+<script>
+const SEC={"basic": ["القانون الأساسي: م = س × ز", "#0E8C86", "🔺"], "unit": ["تحويل الوحدات", "#3E7CB1", "🔄"], "clock": ["وقت الوصول والانطلاق", "#A0714E", "⏰"], "rel": ["السرعة النسبية", "#8E6FD1", "↔️"], "meet": ["زمن الالتقاء", "#FF6B5E", "🤝"], "catch": ["زمن اللحاق", "#D9739F", "🏃"], "round": ["السرعة المتوسطة (ذهاب وعودة)", "#1a9c6b", "🔁"], "avg": ["السرعة المتوسطة (عام)", "#C9184A", "📊"]};
+const Q=[{"s": "basic", "q": "سيارة سرعتها ٩٠ كم/س تسير ٤ ساعات، كم المسافة؟", "f": "المسافة = السرعة × الزمن، بس كذا 😎", "h": "غطّ المسافة في المثلث: يبقى س × ز", "o": [["٩٤ كم", "جمعت السرعة والزمن بدل ما تضربهم"], ["٢٢٫٥ كم", "قسمت بدل ما تضرب"], ["٣٢٠ كم", "راجع الضرب: ٩٠ × ٤"], ["٣٦٠ كم", null]], "a": 3, "sol": "م = ٩٠ × ٤ = ٣٦٠ كم"}, {"s": "basic", "q": "قطار قطع ٤٥٠ كم في ٥ ساعات، ما سرعته؟", "f": "المجهول السرعة؟ غطّها بالمثلث 🔺", "h": "س = م ÷ ز", "o": [["٢٢٥٠ كم/س", "ضربت بدل ما تقسم"], ["٩٠ كم/س", null], ["٨٠ كم/س", "راجع القسمة: ٤٥٠ ÷ ٥"], ["١٠٠ كم/س", "راجع القسمة: ٤٥٠ ÷ ٥"]], "a": 1, "sol": "س = ٤٥٠ ÷ ٥ = ٩٠ كم/س"}, {"s": "basic", "q": "سيارة تقطع ٣٠٠ كم بسرعة ٧٥ كم/س، كم الزمن؟", "f": "هذي المرة المجهول الزمن ⏳", "h": "ز = م ÷ س", "o": [["٤ ساعات", null], ["٣ ساعات", "راجع القسمة: ٧٥ × ٣ = ٢٢٥ مو ٣٠٠"], ["٥ ساعات", "راجع القسمة: ٧٥ × ٥ = ٣٧٥ مو ٣٠٠"], ["٦ ساعات", "راجع القسمة: ٧٥ × ٦ = ٤٥٠"]], "a": 0, "sol": "ز = ٣٠٠ ÷ ٧٥ = ٤ ساعات"}, {"s": "basic", "q": "دراجة سرعتها ١٨ كم/س تسير ٢٠ دقيقة، كم المسافة؟", "f": "انتبه! السرعة بالساعة والزمن بالدقائق 👀", "h": "حوّل الدقائق لساعات: ٢٠ دقيقة = ⅓ ساعة", "o": [["٣٦٠ كم", "ضربت في ٢٠ دقيقة بدون تحويل"], ["٣٫٦ كم", "اعتبرت ٢٠ دقيقة = ٠٫٢ ساعة، والصح ⅓ ساعة"], ["٩ كم", "هذا لنص ساعة مو ٢٠ دقيقة"], ["٦ كم", null]], "a": 3, "sol": "٢٠ دقيقة = ⅓ ساعة ← م = ١٨ × ⅓ = ٦ كم"}, {"s": "basic", "q": "سيارة تسير بسرعة ٨٠ كم/س لمدة ساعتين و٣٠ دقيقة، كم المسافة؟", "f": "ساعتين ونص مو ٢٫٣ 😅", "h": "ساعتين و٣٠ دقيقة = ٢٫٥ ساعة", "o": [["١٨٤ كم", "اعتبرت ساعتين و٣٠ دقيقة = ٢٫٣ ساعة"], ["١٦٠ كم", "حسبت الساعتين بس ونسيت النص"], ["٢٠٠ كم", null], ["٢٤٠ كم", "حسبت ٣ ساعات"]], "a": 2, "sol": "ز = ٢٫٥ ساعة ← م = ٨٠ × ٢٫٥ = ٢٠٠ كم"}, {"s": "basic", "q": "عدّاء قطع ١٢ كم في ٤٥ دقيقة، ما سرعته بالكم/س؟", "f": "٤٥ دقيقة = كم ساعة؟ هنا السر 🔑", "h": "٤٥ دقيقة = ¾ ساعة = ٠٫٧٥ ساعة", "o": [["٩ كم/س", "ضربت ١٢ × ٠٫٧٥ بدل ما تقسم"], ["٢٠ كم/س", "اعتبرت ٤٥ دقيقة = ٠٫٦ ساعة"], ["٢٤ كم/س", "اعتبرت ٤٥ دقيقة = نص ساعة"], ["١٦ كم/س", null]], "a": 3, "sol": "س = ١٢ ÷ ٠٫٧٥ = ١٦ كم/س"}, {"s": "basic", "q": "طائرة سرعتها ٦٠٠ كم/س، كم دقيقة تحتاج لقطع ١٥٠ كم؟", "f": "الجواب بالدقائق، لا تنسى تحوّل ✈️", "h": "ز = ١٥٠ ÷ ٦٠٠ ساعة، وبعدين × ٦٠", "o": [["٤ دقائق", "قسمت ٦٠٠ ÷ ١٥٠، المقلوب!"], ["١٥ دقيقة", null], ["٢٥ دقيقة", "راجع: ¼ ساعة = ١٥ دقيقة"], ["٣٠ دقيقة", "هذا نص ساعة، والصح ربع ساعة"]], "a": 1, "sol": "ز = ١٥٠ ÷ ٦٠٠ = ¼ ساعة = ١٥ دقيقة"}, {"s": "basic", "q": "إذا ضاعفت سيارة سرعتها لقطع نفس المسافة، فإن زمن الرحلة:", "f": "سؤال فكرة بدون أرقام 🧠", "h": "المسافة ثابتة ← السرعة والزمن علاقة عكسية", "o": [["يتضاعف", "العكس! السرعة الأكبر تختصر الوقت"], ["لا يتغير", "الزمن يتغير لأن السرعة تغيّرت"], ["يصير النصف", null], ["ينقص الربع", "السرعة ×٢ ← الزمن ÷٢ يعني النصف"]], "a": 2, "sol": "المسافة ثابتة: س × ز = ثابت ← السرعة × ٢ يعني الزمن ÷ ٢"}, {"s": "unit", "q": "سيارة سرعتها ٧٢ كم/س، كم سرعتها بالمتر في الثانية؟", "f": "من كم/س إلى م/ث؟ اقسم على ٣٫٦ ➗", "h": "كم/س ← م/ث : اقسم على ٣٫٦", "o": [["٢٥٩٫٢ م/ث", "ضربت في ٣٫٦ بدل ما تقسم"], ["٢ م/ث", "قسمت على ٣٦ بدل ٣٫٦"], ["٧٢ م/ث", "نسيت تحوّل"], ["٢٠ م/ث", null]], "a": 3, "sol": "٧٢ ÷ ٣٫٦ = ٢٠ م/ث"}, {"s": "unit", "q": "جسم يتحرك بسرعة ٢٥ م/ث، كم سرعته بالكم/س؟", "f": "العكس هنا: اضرب في ٣٫٦ ✖️", "h": "م/ث ← كم/س : اضرب في ٣٫٦", "o": [["٧ كم/س", "قسمت على ٣٫٦ بدل ما تضرب (≈ ٧)"], ["٢٥ كم/س", "نسيت تحوّل"], ["٢٥٠ كم/س", "ضربت في ١٠ بدل ٣٫٦"], ["٩٠ كم/س", null]], "a": 3, "sol": "٢٥ × ٣٫٦ = ٩٠ كم/س"}, {"s": "unit", "q": "حوّل ٥٤ كم/س إلى م/ث", "f": "نفس الحيلة، أرقام جديدة 🎯", "h": "اقسم على ٣٫٦", "o": [["١٩٤٫٤ م/ث", "ضربت في ٣٫٦ بدل ما تقسم"], ["١٥ م/ث", null], ["٥٤ م/ث", "نسيت تحوّل"], ["٥٫٤ م/ث", "قسمت على ١٠ بدل ٣٫٦"]], "a": 1, "sol": "٥٤ ÷ ٣٫٦ = ١٥ م/ث"}, {"s": "unit", "q": "حوّل ١٢ م/ث إلى كم/س", "f": "لا تخاف من الكسر العشري 😉", "h": "اضرب في ٣٫٦", "o": [["٤٫٣٢ كم/س", "الفاصلة بمكان غلط"], ["١٢ كم/س", "نسيت تحوّل"], ["٤٣٫٢ كم/س", null], ["١٢٠ كم/س", "ضربت في ١٠ بدل ٣٫٦"]], "a": 2, "sol": "١٢ × ٣٫٦ = ٤٣٫٢ كم/س"}, {"s": "unit", "q": "عدّاء يقطع ١٠٠ م في ١٠ ثوانٍ، ما سرعته بالكم/س؟", "f": "خطوتين: احسب م/ث وبعدين حوّل 🏃", "h": "السرعة = ١٠٠ ÷ ١٠ م/ث، وبعدين × ٣٫٦", "o": [["٣٦ كم/س", null], ["١٠ كم/س", "هذي السرعة بالـ م/ث، نسيت تحوّل"], ["٣٫٦ كم/س", "ضربت ١ × ٣٫٦ بدل ١٠ × ٣٫٦"], ["١٠٠ كم/س", "هذي المسافة مو السرعة"]], "a": 0, "sol": "س = ١٠٠ ÷ ١٠ = ١٠ م/ث ← ١٠ × ٣٫٦ = ٣٦ كم/س"}, {"s": "unit", "q": "سيارة سرعتها ١٠٨ كم/س، كم مترًا تقطع في ٥ ثوانٍ؟", "f": "الزمن بالثواني، فحوّل السرعة لـ م/ث أول 🔄", "h": "١٠٨ كم/س ÷ ٣٫٦ = ؟ م/ث", "o": [["٥٤٠ م", "ضربت ١٠٨ × ٥ بدون تحويل"], ["٣٠ م", "هذي السرعة بالـ م/ث، نسيت تضرب في ٥"], ["١٥٠٠ م", "راجع الضرب: ٣٠ × ٥"], ["١٥٠ م", null]], "a": 3, "sol": "١٠٨ ÷ ٣٫٦ = ٣٠ م/ث ← م = ٣٠ × ٥ = ١٥٠ م"}, {"s": "clock", "q": "انطلقت سيارة الساعة ٨ صباحًا بسرعة ٧٠ كم/س لقطع ٢١٠ كم، متى تصل؟", "f": "احسب الزمن وأضفه للساعة ⏰", "h": "ز = ٢١٠ ÷ ٧٠", "o": [["١٠ صباحًا", "حسبت ساعتين بدل ٣"], ["١٢ ظهرًا", "حسبت ٤ ساعات بدل ٣"], ["١١ صباحًا", null], ["١١:٣٠ صباحًا", "الزمن ٣ ساعات بالضبط، ما فيه نص"]], "a": 2, "sol": "ز = ٢١٠ ÷ ٧٠ = ٣ ساعات ← ٨ + ٣ = ١١ صباحًا"}, {"s": "clock", "q": "انطلق قطار الساعة ٩:٣٠ صباحًا بسرعة ١٢٠ كم/س لقطع ٣٠٠ كم، متى يصل؟", "f": "انتبه لنص الساعة 👀", "h": "ز = ٣٠٠ ÷ ١٢٠ = ٢٫٥ ساعة", "o": [["١١:٣٠ صباحًا", "حسبت ساعتين بس ونسيت النص"], ["١٢:٣٠ ظهرًا", "حسبت ٣ ساعات"], ["١٢:٠٠ ظهرًا", null], ["١١:٠٠ صباحًا", "اعتبرت ٢٫٥ ساعة = ساعة ونص"]], "a": 2, "sol": "ز = ٢٫٥ ساعة = ساعتين و٣٠ دقيقة ← ٩:٣٠ + ٢:٣٠ = ١٢:٠٠ ظهرًا"}, {"s": "clock", "q": "وصلت حافلة الساعة ٢ ظهرًا بعد أن قطعت ٢٤٠ كم بسرعة ٨٠ كم/س، متى انطلقت؟", "f": "هذي المرة ارجع بالوقت للخلف ⏪", "h": "ز = ٢٤٠ ÷ ٨٠، واطرحه من وقت الوصول", "o": [["٥ مساءً", "أضفت الزمن بدل ما تطرحه"], ["١٢ ظهرًا", "طرحت ساعتين بدل ٣"], ["١١ صباحًا", null], ["١٠ صباحًا", "طرحت ٤ ساعات بدل ٣"]], "a": 2, "sol": "ز = ٢٤٠ ÷ ٨٠ = ٣ ساعات ← ٢ ظهرًا − ٣ = ١١ صباحًا"}, {"s": "clock", "q": "انطلقت سيارة الساعة ٧:١٥ صباحًا بسرعة ٦٠ كم/س لقطع ٩٠ كم، متى تصل؟", "f": "١٫٥ ساعة = ساعة و٣٠ دقيقة، مو ٥٠ 😏", "h": "ز = ٩٠ ÷ ٦٠ = ١٫٥ ساعة", "o": [["٨:١٥ صباحًا", "حسبت ساعة بس"], ["٨:٤٥ صباحًا", null], ["٩:١٥ صباحًا", "حسبت ساعتين"], ["٨:٢٠ صباحًا", "اعتبرت ١٫٥ ساعة = ساعة و٥ دقائق"]], "a": 1, "sol": "ز = ١٫٥ ساعة = ساعة و٣٠ دقيقة ← ٧:١٥ + ١:٣٠ = ٨:٤٥ صباحًا"}, {"s": "rel", "q": "سيارتان تسيران باتجاهين متعاكسين بسرعتي ٦٠ كم/س و٧٠ كم/س، ما السرعة النسبية بينهما؟", "f": "متعاكسين؟ اجمع ➕", "h": "متعاكسان: س١ + س٢", "o": [["١٣٠ كم/س", null], ["١٠ كم/س", "طرحت، والطرح لنفس الاتجاه"], ["٦٥ كم/س", "أخذت المتوسط، والصح المجموع"], ["٤٢٠٠ كم/س", "ضربت السرعتين"]], "a": 0, "sol": "متعاكسان ← ٦٠ + ٧٠ = ١٣٠ كم/س"}, {"s": "rel", "q": "سيارتان تسيران في نفس الاتجاه بسرعتي ٩٠ كم/س و٦٥ كم/س، ما السرعة النسبية؟", "f": "نفس الاتجاه؟ اطرح ➖", "h": "نفس الاتجاه: س١ − س٢", "o": [["١٥٥ كم/س", "جمعت، والجمع للمتعاكسين"], ["٧٧٫٥ كم/س", "أخذت المتوسط"], ["٩٠ كم/س", "أخذت سرعة الأسرع بس"], ["٢٥ كم/س", null]], "a": 3, "sol": "نفس الاتجاه ← ٩٠ − ٦٥ = ٢٥ كم/س"}, {"s": "rel", "q": "قطاران يتحركان باتجاهين متعاكسين نحو بعضهما بسرعتي ٨٠ كم/س و١٠٠ كم/س، كم تقل المسافة بينهما خلال ساعتين؟", "f": "السرعة النسبية × الزمن 🚆", "h": "متعاكسان: السرعة النسبية = ٨٠ + ١٠٠", "o": [["٤٠ كم", "طرحت السرعتين، والقطارين متعاكسين"], ["٣٦٠ كم", null], ["١٨٠ كم", "حسبت ساعة وحدة بس"], ["٧٢٠ كم", "حسبت ٤ ساعات بدل ساعتين"]], "a": 1, "sol": "السرعة النسبية = ١٨٠ كم/س ← ١٨٠ × ٢ = ٣٦٠ كم"}, {"s": "rel", "q": "انطلقت سيارتان من نفس النقطة وفي نفس الاتجاه بسرعتي ٧٥ كم/س و٥٠ كم/س، كم المسافة بينهما بعد ٣ ساعات؟", "f": "وحدة تسبق الثانية، بكم؟ 🏁", "h": "نفس الاتجاه: الفرق = ٧٥ − ٥٠ كل ساعة", "o": [["٧٥ كم", null], ["٣٧٥ كم", "جمعت السرعتين، وهم بنفس الاتجاه"], ["٢٥ كم", "حسبت ساعة وحدة بس"], ["١٢٥ كم", "حسبت ٥ ساعات"]], "a": 0, "sol": "السرعة النسبية = ٢٥ كم/س ← ٢٥ × ٣ = ٧٥ كم"}, {"s": "meet", "q": "المسافة بين مدينتين ٤٠٠ كم، انطلقت سيارتان من المدينتين باتجاه بعضهما بسرعتي ٩٠ كم/س و١١٠ كم/س، بعد كم ساعة تلتقيان؟", "f": "يقتربون من بعض؟ اجمع السرعتين 🤝", "h": "زمن الالتقاء = المسافة ÷ مجموع السرعتين", "o": [["٢٠ ساعة", "قسمت على الفرق بدل المجموع"], ["٤ ساعات", "قسمت على متوسط السرعتين (١٠٠) بدل مجموعهم"], ["٣ ساعات", "راجع: ٤٠٠ ÷ ٢٠٠"], ["٢ ساعة", null]], "a": 3, "sol": "ز = ٤٠٠ ÷ (٩٠ + ١١٠) = ٤٠٠ ÷ ٢٠٠ = ٢ ساعة"}, {"s": "meet", "q": "شخصان بينهما ٢٧ كم، يمشيان باتجاه بعضهما بسرعتي ٤ كم/س و٥ كم/س، بعد كم ساعة يلتقيان؟", "f": "نفس القانون بأرقام صغيرة 🚶", "h": "ز = المسافة ÷ (س١ + س٢)", "o": [["٣ ساعات", null], ["٢٧ ساعة", "قسمت على الفرق (١) بدل المجموع"], ["٩ ساعات", "هذا مجموع السرعتين مو الزمن"], ["٥٫٤ ساعات", "قسمت على سرعة وحدة بس (٥)"]], "a": 0, "sol": "ز = ٢٧ ÷ (٤ + ٥) = ٢٧ ÷ ٩ = ٣ ساعات"}, {"s": "meet", "q": "انطلق قطاران متقابلان الساعة ٩ صباحًا والمسافة بينهما ٥٤٠ كم، سرعتاهما ١٢٠ كم/س و١٥٠ كم/س. متى يلتقيان؟", "f": "زمن الالتقاء + الساعة ⏰", "h": "احسب ز = ٥٤٠ ÷ (١٢٠ + ١٥٠) وأضفه للساعة ٩", "o": [["١٠ صباحًا", "حسبت ساعة وحدة"], ["١١ صباحًا", null], ["١٢ ظهرًا", "حسبت ٣ ساعات"], ["٢ ظهرًا", "حسبت ٥ ساعات"]], "a": 1, "sol": "ز = ٥٤٠ ÷ ٢٧٠ = ٢ ساعة ← ٩ + ٢ = ١١ صباحًا"}, {"s": "meet", "q": "سيارتان متقابلتان المسافة بينهما ٣٠٠ كم، التقتا بعد ساعتين. إذا كانت سرعة الأولى ٧٠ كم/س، فما سرعة الثانية؟", "f": "اعكس القانون: جيب مجموع السرعتين أول 🔄", "h": "مجموع السرعتين = ٣٠٠ ÷ ٢", "o": [["١٥٠ كم/س", "هذا مجموع السرعتين، اطرح منه ٧٠"], ["٨٠ كم/س", null], ["٧٥ كم/س", "قسمت ١٥٠ على ٢"], ["٧٠ كم/س", "نفس سرعة الأولى، بس المجموع ١٥٠"]], "a": 1, "sol": "مجموع السرعتين = ٣٠٠ ÷ ٢ = ١٥٠ ← الثانية = ١٥٠ − ٧٠ = ٨٠ كم/س"}, {"s": "meet", "q": "سيارتان متقابلتان بسرعتي ٦٠ كم/س و٩٠ كم/س التقتا بعد ٤ ساعات. كم كانت المسافة بينهما؟", "f": "هنا المجهول المسافة 📏", "h": "م = (س١ + س٢) × ز", "o": [["١٢٠ كم", "استخدمت الفرق بدل المجموع"], ["١٥٠ كم", "هذا مجموع السرعتين، نسيت تضرب في ٤"], ["٣٦٠ كم", "حسبت السيارة الثانية بس"], ["٦٠٠ كم", null]], "a": 3, "sol": "م = (٦٠ + ٩٠) × ٤ = ١٥٠ × ٤ = ٦٠٠ كم"}, {"s": "catch", "q": "سيارة سرعتها ٨٠ كم/س تلاحق سيارة أخرى سرعتها ٦٠ كم/س وبينهما ٤٠ كم، بعد كم ساعة تلحقها؟", "f": "تلاحقها؟ اطرح السرعتين 🏃", "h": "زمن اللحاق = المسافة الفاصلة ÷ الفرق بين السرعتين", "o": [["٢ ساعة", null], ["٠٫٥ ساعة", "قسمت الفرق على المسافة، المقلوب"], ["٤ ساعات", "راجع: ٤٠ ÷ ٢٠"], ["١ ساعة", "راجع: ٤٠ ÷ ٢٠"]], "a": 0, "sol": "ز = ٤٠ ÷ (٨٠ − ٦٠) = ٤٠ ÷ ٢٠ = ٢ ساعة"}, {"s": "catch", "q": "انطلقت سيارة بسرعة ٥٠ كم/س، وبعد ساعتين انطلقت خلفها سيارة أخرى بسرعة ٧٥ كم/س. بعد كم ساعة من انطلاق الثانية تلحق بها؟", "f": "أول شي: كم سبقتها الأولى؟ 🤔", "h": "في الساعتين قطعت الأولى ٥٠ × ٢ = ١٠٠ كم", "o": [["٤ ساعات", null], ["٢ ساعة", "هذا التأخير، مو زمن اللحاق"], ["٦ ساعات", "هذا من انطلاق الأولى، والسؤال من انطلاق الثانية"], ["٠٫٨ ساعة", "جمعت السرعتين، والصح الفرق"]], "a": 0, "sol": "المسافة الفاصلة = ٥٠ × ٢ = ١٠٠ كم ← ز = ١٠٠ ÷ (٧٥ − ٥٠) = ٤ ساعات"}, {"s": "catch", "q": "قطار سرعته ١٠٠ كم/س يلاحق قطارًا سرعته ٧٥ كم/س، ولحقه بعد ٣ ساعات. كم كانت المسافة بينهما في البداية؟", "f": "اعكس قانون اللحاق 🔄", "h": "المسافة الفاصلة = الفرق بين السرعتين × الزمن", "o": [["٧٥ كم", null], ["٥٢٥ كم", "جمعت السرعتين، والصح الفرق"], ["٣٠٠ كم", "هذي مسافة القطار الأول بس"], ["٢٢٥ كم", "هذي مسافة القطار الثاني بس"]], "a": 0, "sol": "م = (١٠٠ − ٧٥) × ٣ = ٢٥ × ٣ = ٧٥ كم"}, {"s": "catch", "q": "شرطي سرعته ١٢٠ كم/س يلاحق سيارة سرعتها ٩٠ كم/س متقدمة عليه بمسافة ١٥ كم، كم دقيقة يحتاج حتى يلحقها؟", "f": "الجواب بالدقائق! 🚓", "h": "ز = ١٥ ÷ (١٢٠ − ٩٠) ساعة، وبعدين × ٦٠", "o": [["٠٫٥ دقيقة", "هذي ٠٫٥ ساعة، نسيت تحوّلها لدقائق"], ["١٥ دقيقة", "هذا ربع ساعة، راجع القسمة"], ["٣٠ دقيقة", null], ["٦٠ دقيقة", "هذا ساعة كاملة، راجع القسمة"]], "a": 2, "sol": "ز = ١٥ ÷ ٣٠ = ٠٫٥ ساعة = ٣٠ دقيقة"}, {"s": "catch", "q": "خرج أحمد ماشيًا الساعة ٧ صباحًا بسرعة ٤ كم/س، ولحقه أخوه الساعة ٨ صباحًا بدراجة سرعتها ١٢ كم/س. متى يلحق به؟", "f": "آخر سؤال لحاق: فيه ساعة كمان ⏰", "h": "الساعة ٨ أحمد سبق أخوه بـ ٤ كم", "o": [["٧:٣٠ صباحًا", "أضفت نص الساعة على ٧ بدل ٨"], ["٩:٠٠ صباحًا", "راجع: ٤ ÷ ٨ = نص ساعة مو ساعة"], ["٨:٣٠ صباحًا", null], ["٨:٢٠ صباحًا", "راجع: نص الساعة = ٣٠ دقيقة"]], "a": 2, "sol": "المسافة الفاصلة = ٤ × ١ = ٤ كم ← ز = ٤ ÷ (١٢ − ٤) = ٠٫٥ ساعة ← ٨:٣٠ صباحًا"}, {"s": "round", "q": "سيارة ذهبت بسرعة ٣٠ كم/س وعادت نفس الطريق بسرعة ٦٠ كم/س، ما السرعة المتوسطة للرحلة كاملة؟", "f": "احذر! مو متوسط السرعتين ⚠️", "h": "ذهاب وعودة: (٢ × س١ × س٢) ÷ (س١ + س٢)", "o": [["٤٥ كم/س", "هذا الفخ! أخذت متوسط السرعتين"], ["٤٠ كم/س", null], ["٩٠ كم/س", "جمعت السرعتين"], ["٥٠ كم/س", "راجع القانون: (٢ × ٣٠ × ٦٠) ÷ ٩٠"]], "a": 1, "sol": "(٢ × ٣٠ × ٦٠) ÷ (٣٠ + ٦٠) = ٣٦٠٠ ÷ ٩٠ = ٤٠ كم/س"}, {"s": "round", "q": "دراجة ذهبت إلى المدرسة بسرعة ١٢ كم/س ورجعت بسرعة ٦ كم/س، ما سرعتها المتوسطة؟", "f": "نفس الفخ بأرقام ثانية 😏", "h": "ذهاب وعودة: (٢ × س١ × س٢) ÷ (س١ + س٢)", "o": [["٨ كم/س", null], ["٩ كم/س", "هذا الفخ! أخذت متوسط السرعتين"], ["١٨ كم/س", "جمعت السرعتين"], ["٧ كم/س", "راجع القانون: (٢ × ١٢ × ٦) ÷ ١٨"]], "a": 0, "sol": "(٢ × ١٢ × ٦) ÷ (١٢ + ٦) = ١٤٤ ÷ ١٨ = ٨ كم/س"}, {"s": "round", "q": "سيارة قطعت ١٢٠ كم ذهابًا بسرعة ٦٠ كم/س، ثم عادت نفس المسافة بسرعة ٤٠ كم/س. ما السرعة المتوسطة؟", "f": "حلها بالقانون أو بالمسافة والزمن، النتيجة وحدة ✌️", "h": "المسافة الكلية ٢٤٠ كم، احسب زمن كل مشوار", "o": [["٥٠ كم/س", "هذا الفخ! أخذت متوسط السرعتين"], ["١٠٠ كم/س", "جمعت السرعتين"], ["٤٨ كم/س", null], ["٤٥ كم/س", "راجع حساب الأزمنة: ٢ + ٣"]], "a": 2, "sol": "الزمن = ١٢٠÷٦٠ + ١٢٠÷٤٠ = ٢ + ٣ = ٥ ساعات ← ٢٤٠ ÷ ٥ = ٤٨ كم/س"}, {"s": "round", "q": "شخص ذهب بسرعة ٨٠ كم/س ورجع نفس الطريق بسرعة ٢٠ كم/س، ما السرعة المتوسطة؟", "f": "الفرق بين السرعتين كبير، والفخ أكبر 🕳️", "h": "ذهاب وعودة: (٢ × س١ × س٢) ÷ (س١ + س٢)", "o": [["٥٠ كم/س", "هذا الفخ! أخذت متوسط السرعتين"], ["٣٢ كم/س", null], ["٤٠ كم/س", "راجع القانون: (٢ × ٨٠ × ٢٠) ÷ ١٠٠"], ["٦٠ كم/س", "طرحت السرعتين"]], "a": 1, "sol": "(٢ × ٨٠ × ٢٠) ÷ (٨٠ + ٢٠) = ٣٢٠٠ ÷ ١٠٠ = ٣٢ كم/س"}, {"s": "avg", "q": "قطعت سيارة ١٥٠ كم في ساعتين، ثم ٩٠ كم في ساعة واحدة. ما سرعتها المتوسطة؟", "f": "المسافة الكلية ÷ الزمن الكلي، دايمًا 📊", "h": "المسافة الكلية = ١٥٠ + ٩٠ ، الزمن الكلي = ٢ + ١", "o": [["٨٢٫٥ كم/س", "أخذت متوسط السرعتين ٧٥ و٩٠"], ["٨٠ كم/س", null], ["٢٤٠ كم/س", "هذي المسافة الكلية، نسيت تقسم"], ["٧٠ كم/س", "راجع: ٢٤٠ ÷ ٣"]], "a": 1, "sol": "(١٥٠ + ٩٠) ÷ (٢ + ١) = ٢٤٠ ÷ ٣ = ٨٠ كم/س"}, {"s": "avg", "q": "قطع شخص ٦٠ كم بسرعة ٣٠ كم/س، ثم ٦٠ كم بسرعة ٦٠ كم/س. ما سرعته المتوسطة؟", "f": "احسب زمن كل مرحلة أول ⏱️", "h": "الزمن الأول = ٦٠ ÷ ٣٠ ، الزمن الثاني = ٦٠ ÷ ٦٠", "o": [["٤٥ كم/س", "هذا الفخ! أخذت متوسط السرعتين"], ["١٢٠ كم/س", "هذي المسافة الكلية"], ["٥٠ كم/س", "راجع: ١٢٠ ÷ ٣"], ["٤٠ كم/س", null]], "a": 3, "sol": "الزمن = ٢ + ١ = ٣ ساعات ← ١٢٠ ÷ ٣ = ٤٠ كم/س"}, {"s": "avg", "q": "سار قطار ٣ ساعات بسرعة ٥٠ كم/س، ثم ساعتين بسرعة ٧٥ كم/س. ما سرعته المتوسطة؟", "f": "الأزمنة مختلفة، فلا تاخذ المتوسط مباشرة ⚠️", "h": "احسب مسافة كل مرحلة: ٥٠ × ٣ و٧٥ × ٢", "o": [["٦٢٫٥ كم/س", "أخذت متوسط السرعتين"], ["٦٥ كم/س", "راجع: ٣٠٠ ÷ ٥"], ["٦٠ كم/س", null], ["٣٠٠ كم/س", "هذي المسافة الكلية، نسيت تقسم على ٥"]], "a": 2, "sol": "المسافة = ١٥٠ + ١٥٠ = ٣٠٠ كم ، الزمن = ٥ ساعات ← ٣٠٠ ÷ ٥ = ٦٠ كم/س"}, {"s": "avg", "q": "سافرت عائلة ٣٦٠ كم: قطعت ٢٠٠ كم في ٢٫٥ ساعة، ثم توقفت نصف ساعة للاستراحة، ثم أكملت ١٦٠ كم في ساعتين. ما متوسط سرعة الرحلة كاملة؟", "f": "آخر سؤال! الاستراحة جزء من الزمن الكلي 😴", "h": "الزمن الكلي = ٢٫٥ + ٠٫٥ + ٢", "o": [["٧٢ كم/س", null], ["٨٠ كم/س", "نسيت تحسب نص ساعة الاستراحة"], ["٩٠ كم/س", "راجع الزمن الكلي: ٥ ساعات"], ["٦٤ كم/س", "راجع: ٣٦٠ ÷ ٥"]], "a": 0, "sol": "الزمن الكلي = ٢٫٥ + ٠٫٥ + ٢ = ٥ ساعات ← ٣٦٠ ÷ ٥ = ٧٢ كم/س"}];
+const L=["أ","ب","ج","د"], AD="٠١٢٣٤٥٦٧٨٩";
+const ar=n=>String(n).replace(/\d/g,d=>AD[d]);
+const box=document.getElementById("cards"), legend=document.getElementById("legend");
+let score=0, done=0, wrongSec={}, last=null;
+Q.forEach((q,i)=>{
+  const [label,color,emo]=SEC[q.s], n=i+1;
+  if(q.s!==last){
+    last=q.s;
+    const s=document.createElement("div"); s.className="sec"; s.id="sec-"+q.s; s.style.background=color; s.textContent=`${emo} ${label}`; box.appendChild(s);
+    const a=document.createElement("a"); a.href="#sec-"+q.s; a.style.background=color; a.textContent=`${emo} ${label}`; legend.appendChild(a);
+  }
+  const card=document.createElement("section");
+  card.className="card"; card.style.setProperty("--accent",color);
+  card.innerHTML=`<div class="qtitle"><span class="qnum">${ar(n)}</span>السؤال ${ar(n)}<span class="qtag">${emo} ${label}</span></div>
+   <div class="qtext">${q.q}</div>
+   <div class="funny">💬 ${q.f}</div>
+   <div class="hints"><div><button class="hint-btn" aria-expanded="false"><span>🔎 تلميح</span><span>＋</span></button><div class="hint-reveal">${q.h}</div></div></div>
+   <div class="options">${q.o.map((o,k)=>`
+     <button class="opt-btn" data-k="${k}"><span class="l">${L[k]}</span><span class="v">${o[0]}</span><span class="tag"></span></button>
+     <div class="opt-explain ${k===q.a?"ok":"no"}">${k===q.a?"صح عليك! 👏":"❌ "+o[1]}</div>`).join("")}</div>
+   <div class="solution-box"><span class="lbl">✅ الحل</span>${q.sol}</div>`;
+  box.appendChild(card);
+  const hb=card.querySelector(".hint-btn");
+  hb.onclick=()=>{const r=hb.nextElementSibling,open=r.classList.toggle("open");hb.lastElementChild.textContent=open?"－":"＋";hb.setAttribute("aria-expanded",open);};
+  const btns=card.querySelectorAll(".opt-btn");
+  btns.forEach(b=>b.onclick=()=>{
+    if(card.dataset.done) return;
+    card.dataset.done=1; done++;
+    const k=+b.dataset.k, ok=k===q.a;
+    btns.forEach(x=>x.disabled=true);
+    btns[q.a].classList.add("correct"); btns[q.a].querySelector(".tag").textContent="✅";
+    if(ok) score++; else { b.classList.add("wrong"); b.querySelector(".tag").textContent="❌"; wrongSec[q.s]=(wrongSec[q.s]||0)+1; }
+    b.nextElementSibling.classList.add("show");
+    card.querySelector(".solution-box").classList.add("show");
+    document.getElementById("scoreDisplay").textContent=`${ar(score)} من ٤٠`;
+    document.getElementById("doneDisplay").textContent=`· ${ar(done)} مجاوب`;
+    if(done===Q.length) finish();
+  });
+});
+function finish(){
+  const rc=document.getElementById("resultCard"), e=document.getElementById("rEmoji"), t=document.getElementById("rTitle"), p=document.getElementById("rText");
+  const s=ar(score);
+  const weak=Object.entries(wrongSec).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k])=>SEC[k][0]);
+  const tip=weak.length?` راجع: ${weak.join("، ")}`:"";
+  if(score===40){e.textContent="🏆";t.textContent="أسطوري! ٤٠ من ٤٠";p.textContent="ولا غلطة! صرت أسرع من السيارات نفسها 🏎️";}
+  else if(score>=32){e.textContent="🔥";t.textContent="ممتاز جدًا!";p.textContent=`نتيجتك ${s} من ٤٠.`+tip;}
+  else if(score>=24){e.textContent="💪";t.textContent="شغل حلو!";p.textContent=`نتيجتك ${s} من ٤٠.`+tip;}
+  else if(score>=12){e.textContent="🙂";t.textContent="بداية طيبة";p.textContent=`نتيجتك ${s} من ٤٠.`+tip;}
+  else{e.textContent="🌱";t.textContent="وقت المراجعة";p.textContent="ولا يهمك، كل خبير بدأ من هنا."+tip;}
+  rc.classList.add("show");
+  rc.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function restart(){
+  score=0; done=0; wrongSec={};
+  document.getElementById("scoreDisplay").textContent="٠ من ٤٠";
+  document.getElementById("doneDisplay").textContent="· ٠ مجاوب";
+  document.querySelectorAll(".card").forEach(c=>delete c.dataset.done);
+  document.querySelectorAll(".opt-btn").forEach(b=>{b.disabled=false;b.classList.remove("correct","wrong");b.querySelector(".tag").textContent="";});
+  document.querySelectorAll(".opt-explain,.solution-box").forEach(x=>x.classList.remove("show"));
+  document.querySelectorAll(".hint-reveal").forEach(h=>h.classList.remove("open"));
+  document.querySelectorAll(".hint-btn").forEach(b=>{b.lastElementChild.textContent="＋";b.setAttribute("aria-expanded","false");});
+  document.getElementById("resultCard").classList.remove("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.getElementById("waBtn").href="https://wa.me/?text="+encodeURIComponent(`🚗 تدريب السرعة والمسافة والزمن: فكّر أقل ... حُلّ أسرع
+
+٤٠ سؤال بأسلوب القياس: القانون الأساسي 🔺 ، تحويل الوحدات 🔄 ، وقت الوصول ⏰ ، السرعة النسبية ↔️ ، الالتقاء 🤝 ، اللحاق 🏃 ، والسرعة المتوسطة 📊
+كم بتجيب من ٤٠؟ 😉
+
+${location.href}`);
+</script>
+</body>
+</html>
+</body></html>

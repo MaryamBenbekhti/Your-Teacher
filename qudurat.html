@@ -40,48 +40,13 @@
     <p class="subtitle" id="page-subtitle">جميع الفيديوهات المتعلقة بهذه المادة</p>
   </div>
 
-  <!-- Videos Grid -->
-  <div class="grid" id="videos-grid">
-    <!-- ============================================================
-         أضيفي فيديوهاتك هنا — انسخي الـ block اللي تحت وكرريه
-         غيري فقط:
-           1. رابط YouTube في src (استبدلي VIDEO_ID برقم الفيديو)
-           2. عنوان الفيديو في <h3>
-         ============================================================ -->
-
-    <div class="video-card hidden-load">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-info">
-        <h3>عنوان الفيديو الأول</h3>
-      </div>
-    </div>
-
-    <div class="video-card hidden-load">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-info">
-        <h3>عنوان الفيديو الثاني</h3>
-      </div>
-    </div>
-
-    <div class="video-card hidden-load">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-info">
-        <h3>عنوان الفيديو الثالث</h3>
-      </div>
-    </div>
-
-    <!-- أضيفي المزيد هنا ... -->
-
-  </div>
+  <!-- Training file tiles (questions-data.js, key "qudurat") -->
+  <div id="trainings"></div>
 
 </section>
 
+<script src="questions-data.js"></script>
+<script src="training.js"></script>
 <script src="script.js"></script>
 <script>
   const params  = new URLSearchParams(window.location.search);
@@ -136,6 +101,9 @@
 
   // Breadcrumb
   document.getElementById('bc-current').textContent = heading;
+
+  // Trainings: one 📄 tile per training, each opens its own page
+  renderTrainingTiles(document.getElementById('trainings'), cat);
 </script>
 </body>
 </html>

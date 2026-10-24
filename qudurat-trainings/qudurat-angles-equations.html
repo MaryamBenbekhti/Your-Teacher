@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>تحدي: فكّر أقل، حُلّ أسرع 🧠⚡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EE;
+    --ink:#1F2A37;
+    --teal:#0E8C86;
+    --teal-dark:#0A6B66;
+    --coral:#FF6B5E;
+    --sun:#FFC23C;
+    --purple:#8E6FD1;
+    --green:#1a9c6b;
+    --card:#FFFFFF;
+    --shadow: 0 10px 25px rgba(31,42,55,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,194,60,0.25), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(142,111,209,0.18), transparent 45%),
+      var(--cream);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    padding:16px 12px 60px;
+    min-height:100vh;
+  }
+  .wrap{max-width:620px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:18px;}
+  header .badge{
+    display:inline-block;background:var(--purple);color:#fff;font-family:'Baloo Bhaijaan 2';
+    font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+  }
+  header h1{font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:24px;margin:12px 0 4px;color:var(--teal-dark);}
+  header p{margin:0;color:#5b6572;font-size:13.5px;}
+
+  .score-bar{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 20px;
+    background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);
+    font-weight:700;font-size:14px;width:fit-content;margin-inline:auto;
+  }
+  .score-bar span{color:var(--purple);}
+
+  .card{
+    background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;
+    margin-bottom:22px;border:2px solid rgba(0,0,0,0.03);position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;
+    background:var(--accent, var(--teal));opacity:0.12;border-radius:50%;
+  }
+  .qtitle{
+    display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2';font-weight:700;
+    font-size:15px;color:var(--accent, var(--teal-dark));margin-bottom:10px;
+  }
+  .qnum{
+    display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+    background:var(--accent, var(--teal));color:#fff;font-weight:900;font-size:15px;box-shadow:var(--shadow);
+  }
+  .qtag{font-size:11px;color:#8a7350;}
+  .qtext{
+    background:#f8f4ea;border-radius:14px;padding:15px;font-size:16.5px;font-weight:700;line-height:1.9;
+    margin-bottom:8px;border:2px dashed rgba(0,0,0,0.07);
+  }
+  .funny{font-size:12.5px;color:#8a7350;margin:0 0 16px;}
+
+  .hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .hint-btn{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;
+    background:#fdf2ea;color:var(--ink);font-family:'Cairo';font-weight:700;font-size:13.5px;
+    padding:11px 14px;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:right;
+  }
+  .hint-btn:active{transform:scale(0.98);}
+  .hint-reveal{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;
+    background:#eef7f6;border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:0 14px;
+  }
+  .hint-reveal.open{max-height:220px;padding:11px 14px;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    display:flex;align-items:center;justify-content:space-between;border:2px solid #e9e1d2;background:#fffdf9;
+    font-family:'Cairo';font-weight:700;font-size:14.5px;padding:13px 16px;border-radius:14px;cursor:pointer;
+    transition:all .18s ease;
+  }
+  .opt-btn:hover{border-color:var(--accent, var(--teal));}
+  .opt-btn .tag{font-size:17px;}
+  .opt-btn.correct{background:#e8f8f1;border-color:var(--green);color:var(--green);}
+  .opt-btn.wrong{background:#fdecea;border-color:var(--coral);color:#b6392e;}
+  .opt-btn.disabled{pointer-events:none;opacity:0.75;}
+
+  .fb-msg{margin-top:12px;font-weight:700;font-size:14.5px;min-height:20px;}
+  .fb-msg.ok{color:var(--green);}
+  .fb-msg.no{color:#b6392e;}
+
+  .result-card{
+    text-align:center;background:linear-gradient(135deg, var(--teal), var(--purple));color:#fff;
+    border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none;
+  }
+  .result-card.show{display:block;}
+  .result-card h2{font-family:'Baloo Bhaijaan 2';font-size:22px;margin:0 0 8px;}
+  .result-card p{margin:0;font-size:14.5px;opacity:0.95;}
+  .result-card .emoji{font-size:40px;margin-bottom:6px;}
+
+  .share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;
+    font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:14px;cursor:pointer;box-shadow:var(--shadow);
+    text-decoration:none;color:#fff;
+  }
+  .wa{background:#25D366;}
+  .rt{background:var(--sun);color:var(--ink);}
+
+  footer{text-align:center;margin-top:18px;font-size:11.5px;color:#a9a094;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>تحدي الزوايا</h1>
+    <p>متتامة، متكاملة، حول نقطة، متوازيان... افترض الزاوية = س وكوّن المعادلة 📐</p>
+  </header>
+
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">0 / 5</span></div>
+
+  <!-- ===== السؤال الأول ===== -->
+  <div class="card" id="card1" style="--accent:#FF6B5E">
+    <div class="qtitle"><span class="qnum">١</span> السؤال الأول <span class="qtag">(زاوية ومتتامتها)</span></div>
+    <div class="qtext">
+      زاوية تساوي أربعة أمثال متتامتها.
+      <br>فما الزاوية؟ 📐
+    </div>
+    <div class="funny">💬 "متتامة" مو "متكاملة"! لا تخلط بين ٩٠ و١٨٠ 😏</div>
+
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h1-1"><span>🔎 تلميح: وش تعني "متتامة"؟</span><span>＋</span></button>
+        <div class="hint-reveal" id="h1-1">زاويتان متتامتان: مجموعهما ٩٠°. يعني متتامة الزاوية = ٩٠ - الزاوية.</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h1-2"><span>🎯 تلميح: افترض المجهول</span><span>＋</span></button>
+        <div class="hint-reveal" id="h1-2">خلّي الزاوية = س ← جرب تكوّن المعادلة: س = ٤ × (٩٠-س)</div>
+      </div>
+    </div>
+
+    <div class="options" id="opts1">
+      <button class="opt-btn" data-val="72">أ) ٧٢° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="144">ب) ١٤٤° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="18">ج) ١٨° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="90">د) ٩٠° <span class="tag"></span></button>
+    </div>
+    <div class="fb-msg" id="fb1"></div>
+  </div>
+
+  <!-- ===== السؤال الثاني ===== -->
+  <div class="card" id="card2" style="--accent:#0E8C86">
+    <div class="qtitle"><span class="qnum">٢</span> السؤال الثاني <span class="qtag">(زاوية ومتكاملتها)</span></div>
+    <div class="qtext">
+      الفرق بين زاوية ومتكاملتها يساوي ٥٠°.
+      <br>فما الزاوية؟ 📏
+    </div>
+    <div class="funny">💬 خلك منتبه: يبونك الزاوية نفسها، مو متكاملتها 😉</div>
+
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h2-1"><span>🔎 تلميح: وش تعني "متكاملة"؟</span><span>＋</span></button>
+        <div class="hint-reveal" id="h2-1">زاويتان متكاملتان: مجموعهما ١٨٠°. يعني متكاملة الزاوية = ١٨٠ - الزاوية.</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h2-2"><span>🎯 تلميح: افترض المجهول</span><span>＋</span></button>
+        <div class="hint-reveal" id="h2-2">خلّي الزاوية = س ← جرب تكوّن المعادلة: س - (١٨٠-س) = ٥٠</div>
+      </div>
+    </div>
+
+    <div class="options" id="opts2">
+      <button class="opt-btn" data-val="115">أ) ١١٥° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="70">ب) ٧٠° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="65">ج) ٦٥° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="150">د) ١٥٠° <span class="tag"></span></button>
+    </div>
+    <div class="fb-msg" id="fb2"></div>
+  </div>
+
+  <!-- ===== السؤال الثالث ===== -->
+  <div class="card" id="card3" style="--accent:#8E6FD1">
+    <div class="qtitle"><span class="qnum">٣</span> السؤال الثالث <span class="qtag">(زوايا حول نقطة)</span></div>
+    <div class="qtext">
+      خمس زوايا حول نقطة واحدة بنسبة ١ : ٢ : ٣ : ٤ : ٥.
+      <br>فما أصغر هذه الزوايا؟ 🔵
+    </div>
+    <div class="funny">💬 لا تنسَ: مجموع الزوايا حول نقطة له قيمة ثابتة معروفة 😏</div>
+
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h3-1"><span>🔎 تلميح: كم مجموع الزوايا حول نقطة؟</span><span>＋</span></button>
+        <div class="hint-reveal" id="h3-1">مجموع الزوايا حول نقطة واحدة = ٣٦٠° دائمًا.</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h3-2"><span>🎯 تلميح: اجمع النسب</span><span>＋</span></button>
+        <div class="hint-reveal" id="h3-2">مجموع النسب = ١+٢+٣+٤+٥ ← أصغر زاوية = (١ ÷ مجموع النسب) × ٣٦٠</div>
+      </div>
+    </div>
+
+    <div class="options" id="opts3">
+      <button class="opt-btn" data-val="24">أ) ٢٤° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="120">ب) ١٢٠° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="36">ج) ٣٦° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="72">د) ٧٢° <span class="tag"></span></button>
+    </div>
+    <div class="fb-msg" id="fb3"></div>
+  </div>
+
+  <!-- ===== السؤال الرابع ===== -->
+  <div class="card" id="card4" style="--accent:#0E8C86">
+    <div class="qtitle"><span class="qnum">٤</span> السؤال الرابع <span class="qtag">(مستقيمان متوازيان)</span></div>
+    <div class="qtext">
+      مستقيمان متوازيان، إحدى الزوايا الداخلية على نفس جانب القاطع تساوي ثلاثة أمثال الزاوية الأخرى.
+      <br>فما قيمة كل زاوية؟ 📊
+    </div>
+    <div class="funny">💬 الزاويتان الداخليتان على نفس الجانب دايمًا بينهم علاقة خاصة 🧐</div>
+
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h4-1"><span>🔎 تلميح: علاقة الزاويتين</span><span>＋</span></button>
+        <div class="hint-reveal" id="h4-1">الزاويتان الداخليتان على نفس جانب القاطع بين مستقيمين متوازيين مجموعهما ١٨٠° دائمًا (متكاملتان).</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h4-2"><span>🎯 تلميح: افترض المجهول</span><span>＋</span></button>
+        <div class="hint-reveal" id="h4-2">خلّي الزاوية الصغرى = س والأخرى = ٣س ← جرب تكوّن المعادلة: س + ٣س = ١٨٠</div>
+      </div>
+    </div>
+
+    <div class="options" id="opts4">
+      <button class="opt-btn" data-val="45-135">أ) ٤٥° و١٣٥° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="60-120">ب) ٦٠° و١٢٠° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="90-90">ج) ٩٠° و٩٠° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="36-144">د) ٣٦° و١٤٤° <span class="tag"></span></button>
+    </div>
+    <div class="fb-msg" id="fb4"></div>
+  </div>
+
+  <!-- ===== السؤال الخامس ===== -->
+  <div class="card" id="card5" style="--accent:#FF6B5E">
+    <div class="qtitle"><span class="qnum">٥</span> السؤال الخامس <span class="qtag">(زاوية وجزء منها)</span></div>
+    <div class="qtext">
+      زاوية تزيد على ربعها بـ ٤٥°.
+      <br>فما الزاوية؟ 🎯
+    </div>
+    <div class="funny">💬 آخر سؤال! "ربعها" يعني ربع نفس الزاوية، مو رقم منفصل 💪</div>
+
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h5-1"><span>🔎 تلميح: ترجم الجملة</span><span>＋</span></button>
+        <div class="hint-reveal" id="h5-1">"تزيد على ربعها بـ ٤٥" يعني: الزاوية - ربع الزاوية = ٤٥</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h5-2"><span>🎯 تلميح: افترض المجهول</span><span>＋</span></button>
+        <div class="hint-reveal" id="h5-2">خلّي الزاوية = س ← جرب تكوّن المعادلة: س - س/٤ = ٤٥</div>
+      </div>
+    </div>
+
+    <div class="options" id="opts5">
+      <button class="opt-btn" data-val="60">أ) ٦٠° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="180">ب) ١٨٠° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="45">ج) ٤٥° <span class="tag"></span></button>
+      <button class="opt-btn" data-val="15">د) ١٥° <span class="tag"></span></button>
+    </div>
+    <div class="fb-msg" id="fb5"></div>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div class="emoji" id="resultEmoji">🎉</div>
+    <h2 id="resultTitle">تمام!</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+
+  <footer>فكّر أقل ... حُلّ أسرع — تحدي الزوايا 🧠✨</footer>
+</div>
+
+<script>
+const QCOUNT = 5;
+let score = 0;
+let answered = {1:false,2:false,3:false,4:false,5:false};
+let attempts = {1:0,2:0,3:0,4:0,5:0};
+let resultState = {1:null,2:null,3:null,4:null,5:null};
+const maxAttempts = 2;
+const correctAnswers = {1:"72", 2:"115", 3:"24", 4:"45-135", 5:"60"};
+
+document.querySelectorAll('.hint-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('open');
+    const icon = btn.querySelector('span:last-child');
+    icon.textContent = target.classList.contains('open') ? '－' : '＋';
+  });
+});
+
+function setupOptions(qn){
+  const container = document.getElementById('opts'+qn);
+  const buttons = container.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered[qn]) return;
+      if(btn.classList.contains('disabled')) return;
+      const val = btn.dataset.val;
+      const fb = document.getElementById('fb'+qn);
+
+      if(val === correctAnswers[qn]){
+        answered[qn] = true;
+        resultState[qn] = 'correct';
+        buttons.forEach(b=>b.classList.add('disabled'));
+        btn.classList.add('correct');
+        btn.querySelector('.tag').textContent = '✅';
+        fb.textContent = pickPraise();
+        fb.className = 'fb-msg ok';
+        score++;
+        updateScore();
+        checkFinish();
+      } else {
+        attempts[qn]++;
+        btn.classList.add('wrong');
+        btn.classList.add('disabled');
+        btn.querySelector('.tag').textContent = '❌';
+
+        if(attempts[qn] >= maxAttempts){
+          answered[qn] = true;
+          resultState[qn] = 'review';
+          buttons.forEach(b=>b.classList.add('disabled'));
+          fb.textContent = 'يحتاج مراجعة 📚 الشرح بيوصلك بكرا إن شاء الله';
+          fb.className = 'fb-msg no';
+          checkFinish();
+        } else {
+          fb.textContent = pickOops();
+          fb.className = 'fb-msg no';
+        }
+      }
+    });
+  });
+}
+for(let i=1;i<=QCOUNT;i++){ setupOptions(i); }
+
+function pickPraise(){
+  const arr = ['يااس! 🎉 عقلك زي البرق ⚡','ما شاء الله عليك 👏','تمام التمام ✅ كذا نحبها'];
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+function pickOops(){
+  const arr = ['قربت بس مو هذا 🙃 جرب مرة ثانية','أووبس 😅 عندك محاولة كمان، خذ وقتك','ولا يهمك، راجع التلميح وحاول مرة أخرى 👆'];
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function updateScore(){
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + QCOUNT;
+}
+
+function checkFinish(){
+  const allDone = Object.values(answered).every(v=>v===true);
+  if(allDone){
+    const rc = document.getElementById('resultCard');
+    const title = document.getElementById('resultTitle');
+    const text = document.getElementById('resultText');
+    const emoji = document.getElementById('resultEmoji');
+    rc.classList.add('show');
+
+    const correctCount = Object.values(resultState).filter(s=>s==='correct').length;
+
+    if(correctCount === QCOUNT){
+      emoji.textContent = '🏆';
+      title.textContent = 'خرافي! نتيجة كاملة';
+      text.textContent = 'أجبت على كل الأسئلة صح 😎 صرت خبير بمسائل الزوايا';
+    } else if(correctCount === 0){
+      emoji.textContent = '🌱';
+      title.textContent = 'الأسئلة تحتاج مراجعة';
+      text.textContent = 'ولا يهمك، راجع الفرق بين "متتامة" و"متكاملة" والشرح بيوصلك بكرا 📚';
+    } else {
+      emoji.textContent = '💪';
+      title.textContent = 'نتيجة مختلطة';
+      text.textContent = 'بعض الأسئلة تمام وبعضها يحتاج مراجعة، الشرح بيوضح كل شيء بكرا إن شاء الله';
+    }
+  }
+}
+
+function restart(){
+  score = 0;
+  for(let i=1;i<=QCOUNT;i++){
+    answered[i]=false; attempts[i]=0; resultState[i]=null;
+    const buttons = document.querySelectorAll('#opts'+i+' .opt-btn');
+    buttons.forEach(b=>{
+      b.classList.remove('correct','wrong','disabled');
+      b.querySelector('.tag').textContent = '';
+    });
+    document.getElementById('fb'+i).textContent = '';
+  }
+  updateScore();
+  document.getElementById('resultCard').classList.remove('show');
+  document.querySelectorAll('.hint-reveal.open').forEach(h=>h.classList.remove('open'));
+  document.querySelectorAll('.hint-btn span:last-child').forEach(i=>i.textContent='＋');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+const waText = encodeURIComponent(
+`🧠 تحدي: فكّر أقل ... حُلّ أسرع (الزوايا)
+
+سؤال ١: زاوية تساوي أربعة أمثال متتامتها. ما الزاوية؟
+
+سؤال ٢: الفرق بين زاوية ومتكاملتها = ٥٠°. ما الزاوية؟
+
+سؤال ٣: خمس زوايا حول نقطة بنسبة ١:٢:٣:٤:٥. ما أصغرها؟
+
+سؤال ٤: مستقيمان متوازيان، إحدى الزوايا الداخلية = ٣ أمثال الأخرى. ما كل زاوية؟
+
+سؤال ٥: زاوية تزيد على ربعها بـ ٤٥°. ما الزاوية؟
+
+لا تخلط بين متتامة (٩٠) ومتكاملة (١٨٠) 😉`
+);
+document.getElementById('waBtn').href = `https://wa.me/?text=${waText}`;
+</script>
+</body>
+</html>

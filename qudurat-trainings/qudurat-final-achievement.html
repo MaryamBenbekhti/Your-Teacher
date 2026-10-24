@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>الإنجاز النهائي 🏆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EE;
+    --ink:#1F2A37;
+    --teal:#0E8C86;
+    --teal-dark:#0A6B66;
+    --coral:#FF6B5E;
+    --sun:#FFC23C;
+    --purple:#8E6FD1;
+    --blue:#3E7CB1;
+    --green:#1a9c6b;
+    --pink:#D9739F;
+    --brown:#A0714E;
+    --card:#FFFFFF;
+    --shadow: 0 10px 25px rgba(31,42,55,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,194,60,0.25), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(142,111,209,0.18), transparent 45%),
+      var(--cream);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    padding:16px 12px 60px;
+    min-height:100vh;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:14px;}
+  header .badge{
+    display:inline-block;background:var(--sun);color:var(--ink);font-family:'Baloo Bhaijaan 2';
+    font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+  }
+  header h1{font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:25px;margin:12px 0 4px;color:var(--teal-dark);}
+  header p{margin:0;color:#5b6572;font-size:13.5px;}
+
+  .legend{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:14px 0 6px;font-size:10px;font-weight:700;}
+  .legend span{padding:4px 8px;border-radius:999px;color:#fff;}
+
+  .score-bar{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 20px;
+    background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);
+    font-weight:700;font-size:14px;width:fit-content;margin-inline:auto;position:-webkit-sticky;position:sticky;top:8px;z-index:10;
+  }
+  .score-bar span{color:var(--purple);}
+
+  .card{
+    background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;
+    margin-bottom:22px;border:2px solid rgba(0,0,0,0.03);position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;
+    background:var(--accent, var(--teal));opacity:0.12;border-radius:50%;
+  }
+  .qtitle{
+    display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2';font-weight:700;
+    font-size:14px;color:var(--accent, var(--teal-dark));margin-bottom:10px;flex-wrap:wrap;
+  }
+  .qnum{
+    display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+    background:var(--accent, var(--teal));color:#fff;font-weight:900;font-size:15px;box-shadow:var(--shadow);
+  }
+  .qtag{font-size:10.5px;color:#fff;background:var(--accent, var(--teal));padding:2px 10px;border-radius:999px;opacity:0.85;}
+  .qtext{
+    background:#f8f4ea;border-radius:14px;padding:15px;font-size:15.5px;font-weight:700;line-height:1.9;
+    margin-bottom:8px;border:2px dashed rgba(0,0,0,0.07);
+  }
+  .funny{font-size:12.5px;color:#8a7350;margin:0 0 16px;}
+
+  .hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .hint-btn{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;
+    background:#fdf2ea;color:var(--ink);font-family:'Cairo';font-weight:700;font-size:13.5px;
+    padding:11px 14px;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:right;
+  }
+  .hint-btn:active{transform:scale(0.98);}
+  .hint-reveal{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;
+    background:#eef7f6;border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:0 14px;
+  }
+  .hint-reveal.open{max-height:220px;padding:11px 14px;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    display:flex;align-items:center;justify-content:space-between;border:2px solid #e9e1d2;background:#fffdf9;
+    font-family:'Cairo';font-weight:700;font-size:14px;padding:13px 16px;border-radius:14px;cursor:pointer;
+    transition:all .18s ease;
+  }
+  .opt-btn:hover{border-color:var(--accent, var(--teal));}
+  .opt-btn .tag{font-size:17px;}
+  .opt-btn.correct{background:#e8f8f1;border-color:var(--green);color:var(--green);}
+  .opt-btn.wrong{background:#fdecea;border-color:var(--coral);color:#b6392e;}
+  .opt-btn.disabled{pointer-events:none;opacity:0.85;}
+
+  .opt-explain{
+    display:none;font-size:13px;line-height:1.7;font-weight:600;
+    background:#fff7ef;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px;margin-bottom:2px;
+  }
+  .opt-explain.show{display:block;}
+  .opt-explain.ok{background:#eafaf3;color:#136b47;}
+  .opt-explain.no{background:#fdeceb;color:#8f2e22;}
+
+  .solution-box{
+    display:none;margin-top:14px;background:#eef4fb;border-radius:14px;padding:14px 16px;
+    font-size:14px;line-height:1.9;border:2px solid #d7e6f7;
+  }
+  .solution-box.show{display:block;}
+  .solution-box .lbl{font-family:'Baloo Bhaijaan 2';font-weight:700;color:#2a5da0;margin-bottom:6px;display:block;}
+
+  .result-card{
+    text-align:center;background:linear-gradient(135deg, var(--teal), var(--purple));color:#fff;
+    border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none;
+  }
+  .result-card.show{display:block;}
+  .result-card h2{font-family:'Baloo Bhaijaan 2';font-size:22px;margin:0 0 8px;}
+  .result-card p{margin:0;font-size:14.5px;opacity:0.95;}
+  .result-card .emoji{font-size:40px;margin-bottom:6px;}
+
+  .share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;
+    font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:14px;cursor:pointer;box-shadow:var(--shadow);
+    text-decoration:none;color:#fff;
+  }
+  .wa{background:#25D366;}
+  .rt{background:var(--sun);color:var(--ink);}
+
+  footer{text-align:center;margin-top:18px;font-size:11.5px;color:#a9a094;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>الإنجاز النهائي: ٤٠ سؤال 🏆</h1>
+    <p>معادلات، قاعدة ثلاثية، ربح وخسارة، شراكة، متوسط، فخوخ، زوايا، أعمار وأكثر... جرب قبل ما تشوف الحل 😎</p>
+  </header>
+
+  <div class="legend">
+    <span style="background:#0E8C86">🧮 معادلات</span>
+    <span style="background:#8E6FD1">⚖️ قاعدة ثلاثية</span>
+    <span style="background:#FF6B5E">🔄 ترجم فورًا</span>
+    <span style="background:#D9739F">💰 ربح وخسارة</span>
+    <span style="background:#3E7CB1">⚖️ نسب وخلطات</span>
+    <span style="background:#1a9c6b">🤝 شراكة</span>
+    <span style="background:#A0714E">📊 المتوسط</span>
+    <span style="background:#C9184A">⚙️ تناسب مركّب</span>
+    <span style="background:#7C3AED">⚠️ اكتشف الفخ</span>
+    <span style="background:#0A6B66">💰 تكلفة وسعر</span>
+    <span style="background:#3E7CB1">📐 قياس</span>
+    <span style="background:#8E6FD1">📊 زوايا</span>
+    <span style="background:#FF6B5E">⚠️ فخ النسب</span>
+    <span style="background:#0E8C86">🛠️ عمل وإنجاز</span>
+    <span style="background:#D9739F">👨‍👩‍👧 أعمار</span>
+  </div>
+
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">0 / 40</span></div>
+
+  <div id="cardsContainer"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="emoji" id="resultEmoji">🎉</div>
+    <h2 id="resultTitle">تمام!</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+
+  <footer>فكّر أقل ... حُلّ أسرع — الإنجاز النهائي 🏆✨</footer>
+</div>
+
+<script>
+const TYPE_META = {
+  eq: {label:"معادلة", color:"#0E8C86", emoji:"🧮"},
+  rt: {label:"قاعدة ثلاثية", color:"#8E6FD1", emoji:"⚖️"},
+  tr: {label:"ترجم فورًا", color:"#FF6B5E", emoji:"🔄"},
+  pl: {label:"ربح وخسارة", color:"#D9739F", emoji:"💰"},
+  rm: {label:"نسب وخلطات", color:"#3E7CB1", emoji:"⚖️"},
+  pt: {label:"شراكة", color:"#1a9c6b", emoji:"🤝"},
+  avg: {label:"المتوسط", color:"#A0714E", emoji:"📊"},
+  cmp: {label:"تناسب مركّب", color:"#C9184A", emoji:"⚙️"},
+  trap: {label:"اكتشف الفخ", color:"#7C3AED", emoji:"⚠️"},
+  cost: {label:"تكلفة وسعر", color:"#0A6B66", emoji:"💰"},
+  ms: {label:"قياس", color:"#3E7CB1", emoji:"📐"},
+  ang: {label:"زوايا", color:"#8E6FD1", emoji:"📊"},
+  pct: {label:"فخ النسب", color:"#FF6B5E", emoji:"⚠️"},
+  wrk: {label:"عمل وإنجاز", color:"#0E8C86", emoji:"🛠️"},
+  age: {label:"أعمار", color:"#D9739F", emoji:"👨‍👩‍👧"},
+};
+
+const QUESTIONS = [
+{type:"eq", text:"عدد ضاعفناه ثم أضفنا ٩، فأصبح الناتج ٣١.<br>فما هو العدد؟ 🔢", funny:"💬 رتب خطواتك بالعكس، خطوتين بس 😉",
+ h1:"فيه \"تضعيف\" (×٢) ثم \"إضافة ٩\"، والناتج النهائي = ٣١.", h2:"خلّي العدد = س ← جرب تكوّن المعادلة: ٢س + ٩ = ٣١",
+ solution:"٢س + ٩ = ٣١ ← ٢س = ٢٢ ← س = ١١ ✅",
+ options:[
+   {v:"11", ok:true, ex:"صحيح! ٢×١١ + ٩ = ٢٢ + ٩ = ٣١ ✅"},
+   {v:"22", ok:false, ex:"وقفت عند \"٢س = ٢٢\" ونسيت تقسم على ٢ عشان توصل لـ س."},
+   {v:"20", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع خطوات الحل."},
+   {v:"15", ok:false, ex:"هذا ناتج تخمين غير مبني على حل المعادلة الصحيح."}
+ ]},
+{type:"eq", text:"عدد قسمناه على ٦ ثم طرحنا ٣، فأصبح الناتج ٤.<br>فما هو العدد؟ 🔢", funny:"💬 القسمة أول والطرح بعدها، رتبها صح بذهنك 🎯",
+ h1:"فيه \"قسمة على ٦\" ثم \"طرح ٣\"، والناتج النهائي = ٤.", h2:"خلّي العدد = س ← جرب تكوّن المعادلة: س/٦ - ٣ = ٤",
+ solution:"س/٦ - ٣ = ٤ ← س/٦ = ٧ ← س = ٤٢ ✅",
+ options:[
+   {v:"7", ok:false, ex:"وقفت عند \"س/٦ = ٧\" ونسيت تضرب في ٦ عشان توصل لـ س."},
+   {v:"42", ok:true, ex:"صحيح! ٤٢/٦ - ٣ = ٧ - ٣ = ٤ ✅"},
+   {v:"24", ok:false, ex:"هذا لو ضربت ٤×٦ من غير ما تضيف الـ٣ أول."},
+   {v:"1", ok:false, ex:"هذا ناتج تخمين غير مبني على حل المعادلة الصحيح."}
+ ]},
+{type:"eq", text:"ثلاثة أمثال عدد أُنقص منها ٧، فأصبح الناتج ٢٩.<br>فما هو العدد؟ 🔢", funny:"💬 آخر سؤال بهذا النوع، طبّق نفس الفكرة 💪",
+ h1:"فيه \"ضرب في ٣\" ثم \"طرح ٧\"، والناتج النهائي = ٢٩.", h2:"خلّي العدد = س ← جرب تكوّن المعادلة: ٣س - ٧ = ٢٩",
+ solution:"٣س - ٧ = ٢٩ ← ٣س = ٣٦ ← س = ١٢ ✅",
+ options:[
+   {v:"36", ok:false, ex:"وقفت عند \"٣س = ٣٦\" ونسيت تقسم على ٣ عشان توصل لـ س."},
+   {v:"22", ok:false, ex:"هذا لو طرحت ٢٩-٧ بدل ما تضيف، والترتيب انقلب."},
+   {v:"12", ok:true, ex:"صحيح! ٣×١٢ - ٧ = ٣٦ - ٧ = ٢٩ ✅"},
+   {v:"8", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"rt", text:"٧ عمال ينجزون عملاً معينًا في ١٥ يومًا.<br>فكم يومًا يحتاج ٢١ عاملاً لإنجاز نفس العمل؟ 👷", funny:"💬 زيادة العمال تخلص الشغل أسرع، فكّر بعكسية 😉",
+ h1:"كل ما زاد عدد العمال، قلّت الأيام اللازمة ← علاقة عكسية ↓↑", h2:"في العكسي: أ×ب = ج×د ← جرب: ٧ × ١٥ = ٢١ × س",
+ solution:"٧×١٥ = ٢١×س ← ١٠٥ = ٢١س ← س = ٥ أيام ✅",
+ options:[
+   {v:"45", ok:false, ex:"هذا لو عاملت المسألة كأنها طردية بدل عكسية."},
+   {v:"15", ok:false, ex:"هذا نفس عدد الأيام الأصلي، لازم يتغير لأن العمال زادوا."},
+   {v:"3", ok:false, ex:"هذا ناتج تخمين، راجع خطوة الضرب التبادلي."},
+   {v:"5", ok:true, ex:"صحيح! ٧×١٥ = ١٠٥ = ٢١×٥ ✅"}
+ ]},
+{type:"rt", text:"٤ كتب سعرها ٦٠ ريالاً.<br>فكم سعر ١١ كتابًا من نفس النوع؟ 📚", funny:"💬 أكثر كتب = أكثر فلوس، علاقة طردية 🙂",
+ h1:"كل ما زاد عدد الكتب، زاد السعر معه ← علاقة طردية ↑↑", h2:"في الطردي: أ÷ب = ج÷د ← جرب: ٤/٦٠ = ١١/س",
+ solution:"سعر الكتاب = ٦٠÷٤=١٥ ← سعر ١١ كتاب = ١١×١٥ = ١٦٥ ريال ✅",
+ options:[
+   {v:"165", ok:true, ex:"صحيح! ٤×١٦٥ = ٦٦٠ = ٦٠×١١ ✅"},
+   {v:"240", ok:false, ex:"هذا لو ضربت ٤×٦٠ بدل حساب سعر الكتاب الواحد أولًا."},
+   {v:"176", ok:false, ex:"هذا ناتج حسابي غير مرتبط بالنسبة الصحيحة."},
+   {v:"60", ok:false, ex:"هذا نفس السعر الأصلي، ما تغيّر رغم زيادة الكمية."}
+ ]},
+{type:"rt", text:"سيارة تسير بسرعة ٤٥ كم/س تصل للوجهة في ٨ ساعات.<br>فكم ساعة تحتاج بسرعة ٦٠ كم/س؟ 🚗", funny:"💬 آخر سؤال بهذا النوع، زيادة السرعة تقلل الزمن 💪",
+ h1:"كل ما زادت السرعة، قلّ الزمن اللازم ← علاقة عكسية ↓↑", h2:"في العكسي: أ×ب = ج×د ← جرب: ٤٥ × ٨ = ٦٠ × س",
+ solution:"٤٥×٨ = ٦٠×س ← ٣٦٠ = ٦٠س ← س = ٦ ساعات ✅",
+ options:[
+   {v:"11", ok:false, ex:"هذا لو عاملت المسألة كأنها طردية بدل عكسية."},
+   {v:"6", ok:true, ex:"صحيح! ٤٥×٨ = ٣٦٠ = ٦٠×٦ ✅"},
+   {v:"8", ok:false, ex:"هذا نفس عدد الساعات الأصلي، لازم يتغير لأن السرعة زادت."},
+   {v:"4", ok:false, ex:"هذا ناتج تخمين، راجع خطوة الضرب التبادلي."}
+ ]},
+{type:"tr", text:"عدد إذا أُضيف إليه ١٢، أصبح الناتج خمسة أمثاله.<br>فما هو العدد؟ 🔢", funny:"💬 \"خمسة أمثاله\" يعني العدد ×٥، وليس ٥ نفسها 😏",
+ h1:"\"أُضيف إليه ١٢\" يعني +١٢، و\"أصبح خمسة أمثاله\" يعني الناتج = ٥ × العدد نفسه.", h2:"خلّي العدد = س ← جرب تكوّن المعادلة: س + ١٢ = ٥س",
+ solution:"س + ١٢ = ٥س ← ١٢ = ٤س ← س = ٣ ✅",
+ options:[
+   {v:"12", ok:false, ex:"هذا رقم المعطيات نفسه، مو نتيجة حل المعادلة."},
+   {v:"15", ok:false, ex:"هذا ناتج جمع عشوائي، مو ناتج حل المعادلة الصحيح."},
+   {v:"3", ok:true, ex:"صحيح! ٣+١٢ = ١٥ = ٥×٣ ✅"},
+   {v:"6", ok:false, ex:"هذا ناتج تخمين غير مبني على خطوات المعادلة."}
+ ]},
+{type:"tr", text:"عدد إذا أُضيف إليه ٢٥، أصبح الناتج ستة أمثاله.<br>فما هو العدد؟ 🔢", funny:"💬 نفس الفكرة، كوّن المعادلة أول قبل لا تخمن 🧐",
+ h1:"\"أُضيف إليه ٢٥\" يعني +٢٥، و\"أصبح ستة أمثاله\" يعني الناتج = ٦ × العدد نفسه.", h2:"خلّي العدد = س ← جرب تكوّن المعادلة: س + ٢٥ = ٦س",
+ solution:"س + ٢٥ = ٦س ← ٢٥ = ٥س ← س = ٥ ✅",
+ options:[
+   {v:"25", ok:false, ex:"هذا رقم المعطيات نفسه، مو نتيجة حل المعادلة."},
+   {v:"6", ok:false, ex:"هذا ناتج قسمة غير مكتملة، راجع خطوات الحل."},
+   {v:"15", ok:false, ex:"هذا ناتج طرح عشوائي، مو ناتج حل المعادلة الصحيح."},
+   {v:"5", ok:true, ex:"صحيح! ٥+٢٥ = ٣٠ = ٦×٥ ✅"}
+ ]},
+{type:"tr", text:"عدد إذا أُضيف إليه ١٨، أصبح الناتج أربعة أمثاله.<br>فما هو العدد؟ 🔢", funny:"💬 آخر سؤال بهذا النوع، طبّق نفس الطريقة 🎉",
+ h1:"\"أُضيف إليه ١٨\" يعني +١٨، و\"أصبح أربعة أمثاله\" يعني الناتج = ٤ × العدد نفسه.", h2:"خلّي العدد = س ← جرب تكوّن المعادلة: س + ١٨ = ٤س",
+ solution:"س + ١٨ = ٤س ← ١٨ = ٣س ← س = ٦ ✅",
+ options:[
+   {v:"6", ok:true, ex:"صحيح! ٦+١٨ = ٢٤ = ٤×٦ ✅"},
+   {v:"18", ok:false, ex:"هذا رقم المعطيات نفسه، مو نتيجة حل المعادلة."},
+   {v:"9", ok:false, ex:"هذا ناتج قسمة غير مكتملة، راجع خطوات الحل."},
+   {v:"12", ok:false, ex:"هذا ناتج طرح عشوائي، مو ناتج حل المعادلة الصحيح."}
+ ]},
+{type:"pl", text:"اشترى شخص كرسيًا بـ ٤٠٠ ريال، وباعه بـ ٣٤٠ ريالاً.<br>فما نسبة الخسارة؟ 🪑", funny:"💬 الخسارة دائمًا تُحسب من سعر الشراء، لا تنخدع 😏",
+ h1:"الخسارة = سعر الشراء − سعر البيع = ٤٠٠ − ٣٤٠", h2:"نسبة الخسارة% = (الخسارة ÷ سعر الشراء) × ١٠٠",
+ solution:"الخسارة = ٤٠٠-٣٤٠ = ٦٠ ← النسبة = ٦٠/٤٠٠ × ١٠٠ = ١٥٪ ✅",
+ options:[
+   {v:"17.6", ok:false, ex:"هذا لو قسمت الخسارة على سعر البيع بدل سعر الشراء."},
+   {v:"15", ok:true, ex:"صحيح! ٦٠ ÷ ٤٠٠ × ١٠٠ = ١٥٪ ✅"},
+   {v:"20", ok:false, ex:"هذا ناتج تخمين غير مبني على حساب الخسارة الفعلي."},
+   {v:"10", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"pl", text:"اشترى تاجر بضاعة بـ ١٦٠ ريال، وباعها بـ ٢٠٠ ريالاً.<br>فما نسبة الربح؟ 💵", funny:"💬 التاجر مبسوط، بس احسبها نسبة صح 😄",
+ h1:"الربح = سعر البيع − سعر الشراء = ٢٠٠ − ١٦٠", h2:"نسبة الربح% = (الربح ÷ سعر الشراء) × ١٠٠",
+ solution:"الربح = ٢٠٠-١٦٠ = ٤٠ ← النسبة = ٤٠/١٦٠ × ١٠٠ = ٢٥٪ ✅",
+ options:[
+   {v:"20", ok:false, ex:"هذا لو قسمت الربح على سعر البيع بدل سعر الشراء."},
+   {v:"40", ok:false, ex:"هذا ناتج تخمين غير مبني على حساب الربح الفعلي."},
+   {v:"25", ok:true, ex:"صحيح! ٤٠ ÷ ١٦٠ × ١٠٠ = ٢٥٪ ✅"},
+   {v:"15", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"pl", text:"سعر منتج بعد خصم ٢٥٪ أصبح ١٥٠ ريالاً.<br>فما السعر الأصلي قبل الخصم؟ 🏷️", funny:"💬 آخر سؤال بهذا النوع، الخصم نسبة مو رقم ثابت 😉",
+ h1:"بعد خصم ٢٥٪، يتبقى ٧٥٪ من السعر الأصلي = ١٥٠ ريال", h2:"خلّي السعر الأصلي = س ← ٧٥٪ × س = ١٥٠",
+ solution:"٠٫٧٥ × س = ١٥٠ ← س = ١٥٠ ÷ ٠٫٧٥ = ٢٠٠ ريال ✅",
+ options:[
+   {v:"175", ok:false, ex:"هذا لو حسبت ٢٥٪ من السعر بعد الخصم بدل السعر الأصلي."},
+   {v:"187.5", ok:false, ex:"هذا ناتج تخمين غير مبني على معادلة الخصم الصحيحة."},
+   {v:"160", ok:false, ex:"هذا ناتج عملية حسابية عشوائية، راجع الحل."},
+   {v:"200", ok:true, ex:"صحيح! ٢٠٠ × ٠٫٧٥ = ١٥٠ ✅"}
+ ]},
+{type:"rm", text:"وُزّع ٧٠٠٠ ريال بين ثلاثة أشخاص بنسبة ١ : ٢ : ٤.<br>فما نصيب الشخص الأوسط (صاحب النسبة ٢)؟ 💰", funny:"💬 لا تقسم على ٣ أشخاص بس، اجمع النسب أول 😏",
+ h1:"مجموع النسب = ١ + ٢ + ٤", h2:"نصيب الأوسط = (٢ ÷ مجموع النسب) × ٧٠٠٠",
+ solution:"مجموع النسب = ٧ ← نصيب الأوسط = (٢/٧) × ٧٠٠٠ = ٢٠٠٠ ريال ✅",
+ options:[
+   {v:"2000", ok:true, ex:"صحيح! (٢/٧) × ٧٠٠٠ = ٢٠٠٠ ✅"},
+   {v:"1000", ok:false, ex:"هذا نصيب صاحب النسبة ١، مو الأوسط."},
+   {v:"4000", ok:false, ex:"هذا نصيب صاحب النسبة ٤، مو الأوسط."},
+   {v:"3500", ok:false, ex:"هذا نصف المبلغ، وذا مو طريقة توزيع النسب الصحيحة."}
+ ]},
+{type:"rm", text:"خُلط ٣ لتر بتركيز ٦٠٪ مع ٧ لتر بتركيز ٢٠٪.<br>فما تركيز الخليط؟ 🧪", funny:"💬 لا، التركيز مو متوسط الرقمين، الكميات مختلفة 🤓",
+ h1:"المادة الفعلية = الكمية × التركيز ← (٣×٦٠٪) و(٧×٢٠٪)، ثم اجمعهما", h2:"تركيز الخليط = (مجموع المادة الفعلية) ÷ (مجموع الكميات) × ١٠٠٪",
+ solution:"المادة الفعلية = (٣×٠٫٦)+(٧×٠٫٢) = ١٫٨+١٫٤ = ٣٫٢ ← التركيز = ٣٫٢/١٠ × ١٠٠ = ٣٢٪ ✅",
+ options:[
+   {v:"40", ok:false, ex:"هذا متوسط الرقمين (٦٠+٢٠)/٢ بدون مراعاة اختلاف الكميات."},
+   {v:"32", ok:true, ex:"صحيح! ٣٫٢ ÷ ١٠ × ١٠٠ = ٣٢٪ ✅"},
+   {v:"80", ok:false, ex:"هذا مجموع النسبتين مباشرة، وذا مو طريقة حساب تركيز الخليط."},
+   {v:"28", ok:false, ex:"هذا ناتج قسمة غير صحيحة، راجع خطوات الحل."}
+ ]},
+{type:"rm", text:"٦ مضخات تملأ خزانًا في ١٠ ساعات.<br>فكم ساعة تحتاج ٤ مضخات لملء نفس الخزان؟ 🚰", funny:"💬 آخر سؤال بهذا النوع، قلة المضخات تطوّل الوقت 😄",
+ h1:"كل ما قلّ عدد المضخات، زاد الزمن اللازم ← علاقة عكسية ↓↑", h2:"في العكسي: أ×ب = ج×د ← جرب: ٦ × ١٠ = ٤ × س",
+ solution:"٦×١٠ = ٤×س ← ٦٠ = ٤س ← س = ١٥ ساعة ✅",
+ options:[
+   {v:"6.7", ok:false, ex:"هذا ناتج غير مرتبط بقانون النسبة العكسية."},
+   {v:"24", ok:false, ex:"هذا لو ضربت ٤×٦ (عدد المضخات في عدد المضخات) وذا مو الحساب الصح."},
+   {v:"15", ok:true, ex:"صحيح! ٦×١٠ = ٦٠ = ٤×١٥ ✅"},
+   {v:"10", ok:false, ex:"هذا نفس عدد الساعات الأصلي، لازم يتغير لأن عدد المضخات قلّ."}
+ ]},
+{type:"pt", text:"استثمر خالد ٥٠٬٠٠٠ ريال وسالم ٣٠٬٠٠٠ ريال، كلاهما لمدة سنة كاملة.<br>إذا كان الربح ٢٤٬٠٠٠ ريال، فما نصيب خالد؟ 💼", funny:"💬 المدة نفسها، فالحساب كله على رأس المال 😉",
+ h1:"بما إن المدة واحدة للاثنين، النسبة بينهما = ٥٠٬٠٠٠ : ٣٠٬٠٠٠", h2:"نصيب خالد = (رأس مال خالد ÷ مجموع رأسي المال) × الربح الكلي",
+ solution:"النسبة = ٥:٣ ← مجموع الأجزاء = ٨ ← نصيب خالد = (٥/٨) × ٢٤٠٠٠ = ١٥٠٠٠ ريال ✅",
+ options:[
+   {v:"9000", ok:false, ex:"هذا نصيب سالم، مو خالد."},
+   {v:"12000", ok:false, ex:"هذا نصف الربح، وذا مو طريقة توزيع الشراكة الصحيحة."},
+   {v:"18000", ok:false, ex:"هذا ناتج قسمة غير مرتبطة بنسبة رأس المال الصحيحة."},
+   {v:"15000", ok:true, ex:"صحيح! (٥/٨) × ٢٤٠٠٠ = ١٥٠٠٠ ✅"}
+ ]},
+{type:"pt", text:"استثمر تركي ١٨٬٠٠٠ ريال لمدة ٥ أشهر، وفهد ١٥٬٠٠٠ ريال لمدة ٦ أشهر.<br>إذا كان الربح ١٣٬٥٠٠ ريال، فما نصيب تركي؟ 🤔", funny:"💬 احسب حاصل الضرب لكل واحد قبل لا تحكم 🧐",
+ h1:"احسب حاصل الضرب لكل واحد: تركي: ١٨٬٠٠٠×٥ | فهد: ١٥٬٠٠٠×٦", h2:"نصيب كل واحد = (حاصل ضربه ÷ مجموع الحاصلين) × الربح الكلي",
+ solution:"تركي = ٩٠٬٠٠٠ | فهد = ٩٠٬٠٠٠ ← متساويان! ← كل واحد ياخذ نصف الربح = ٦٧٥٠ ريال ✅",
+ options:[
+   {v:"6750", ok:true, ex:"صحيح! حاصل الضرب متساوٍ (٩٠٬٠٠٠ لكل منهما) فالنصيب متساوٍ = ٦٧٥٠ ✅"},
+   {v:"8100", ok:false, ex:"هذا لو قارنت برأس المال فقط (١٨٬٠٠٠:١٥٬٠٠٠) وتجاهلت اختلاف المدة."},
+   {v:"5400", ok:false, ex:"نفس الخطأ السابق بترتيب معكوس، وبتجاهل أثر المدة أيضًا."},
+   {v:"9000", ok:false, ex:"هذا ناتج تخمين غير مبني على حاصل ضرب رأس المال في المدة."}
+ ]},
+{type:"pt", text:"استثمرت هند ٢٠٬٠٠٠ ريال ونورة ٤٠٬٠٠٠ ريال، كلتاهما لمدة سنة كاملة.<br>إذا كان الربح ٢١٬٠٠٠ ريال، فما نصيب هند؟ 👩‍💼", funny:"💬 آخر سؤال بهذا النوع، نورة حطت ضعف هند بالضبط 💪",
+ h1:"بما إن المدة واحدة للاثنين، النسبة بينهما = ٢٠٬٠٠٠ : ٤٠٬٠٠٠", h2:"نصيب هند = (رأس مال هند ÷ مجموع رأسي المال) × الربح الكلي",
+ solution:"النسبة = ١:٢ ← مجموع الأجزاء = ٣ ← نصيب هند = (١/٣) × ٢١٠٠٠ = ٧٠٠٠ ريال ✅",
+ options:[
+   {v:"14000", ok:false, ex:"هذا نصيب نورة، مو هند."},
+   {v:"7000", ok:true, ex:"صحيح! (١/٣) × ٢١٠٠٠ = ٧٠٠٠ ✅"},
+   {v:"10500", ok:false, ex:"هذا نصف الربح، وذا مو طريقة توزيع الشراكة الصحيحة."},
+   {v:"6000", ok:false, ex:"هذا ناتج قسمة غير مرتبطة بنسبة رأس المال الصحيحة."}
+ ]},
+{type:"avg", text:"متوسط ٦ أعداد = ٤٥. أُضيف عدد قيمته ٧٣.<br>فما المتوسط الجديد؟ 📊", funny:"💬 لا تجمع ٤٥ و٧٣ وتقسمهم على ٢، فيه ٦ أعداد أصلاً 😅",
+ h1:"المجموع القديم = المتوسط × العدد = ٤٥ × ٦", h2:"المجموع الجديد = المجموع القديم + ٧٣، والمتوسط الجديد = المجموع الجديد ÷ ٧",
+ solution:"المجموع القديم = ٢٧٠ ← الجديد = ٣٤٣ ← المتوسط = ٣٤٣÷٧ = ٤٩ ✅",
+ options:[
+   {v:"59", ok:false, ex:"هذا لو جمعت ٤٥و٧٣ وقسمت على ٢ (متوسط بسيط) بدل الرجوع للمجموع الكلي."},
+   {v:"73", ok:false, ex:"هذا هو العدد المضاف نفسه، مو المتوسط الجديد."},
+   {v:"49", ok:true, ex:"صحيح! (٢٧٠+٧٣)÷٧ = ٤٩ ✅"},
+   {v:"45", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"avg", text:"متوسط ٤ أعداد = ٢٠.<br>فما الرقم الذي يجب إضافته ليصبح المتوسط ٢٥؟ 🔢", funny:"💬 لا، الجواب مو ٢٥ نفسه، فكّر بالمجموع المطلوب 🤔",
+ h1:"المجموع الحالي = المتوسط × العدد = ٢٠ × ٤", h2:"المجموع المطلوب = ٢٥ × ٥ (بعد الإضافة) ← والرقم المضاف = المجموع المطلوب − المجموع الحالي",
+ solution:"الحالي = ٨٠ ← المطلوب = ١٢٥ ← الرقم المضاف = ١٢٥-٨٠ = ٤٥ ✅",
+ options:[
+   {v:"25", ok:false, ex:"هذا المتوسط المطلوب نفسه، مو الرقم المضاف."},
+   {v:"20", ok:false, ex:"هذا المتوسط الحالي، مو الرقم المطلوب إضافته."},
+   {v:"30", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."},
+   {v:"45", ok:true, ex:"صحيح! ١٢٥ - ٨٠ = ٤٥ ✅"}
+ ]},
+{type:"avg", text:"متوسط ٩ أرقام = ٣٠. حُذف رقم فأصبح المتوسط ٢٨.<br>فما الرقم المحذوف؟ 🗑️", funny:"💬 آخر سؤال بهذا النوع، طبّق الحيلة الذهبية 💪",
+ h1:"المجموع القديم = المتوسط × العدد = ٣٠ × ٩", h2:"المجموع الجديد = ٢٨ × ٨ (بعد الحذف) ← والرقم المحذوف = المجموع القديم − المجموع الجديد",
+ solution:"القديم = ٢٧٠ ← الجديد = ٢٢٤ ← الرقم المحذوف = ٢٧٠-٢٢٤ = ٤٦ ✅",
+ options:[
+   {v:"46", ok:true, ex:"صحيح! ٢٧٠ - ٢٢٤ = ٤٦ ✅"},
+   {v:"30", ok:false, ex:"هذا المتوسط القديم نفسه، مو الرقم المحذوف."},
+   {v:"28", ok:false, ex:"هذا المتوسط الجديد نفسه، مو الرقم المحذوف."},
+   {v:"36", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"cmp", text:"٧ عمال يعملون ٦ ساعات يوميًا لمدة ١٠ أيام لإنجاز عمل معيّن.<br>فكم يومًا يحتاج ١٤ عاملاً لنفس العمل إذا عملوا ٥ ساعات يوميًا؟ 👷", funny:"💬 ثلاث متغيرات، لا تنسَ ولا وحدة منهم 😅",
+ h1:"كمية العمل = عمال × ساعات × أيام = ٧ × ٦ × ١٠ (رقم ثابت)", h2:"نفس كمية العمل = ١٤ × ٥ × س (حل لإيجاد س)",
+ solution:"كمية العمل = ٤٢٠ ← ١٤×٥×س = ٤٢٠ ← ٧٠س = ٤٢٠ ← س = ٦ أيام ✅",
+ options:[
+   {v:"10", ok:false, ex:"هذا نفس عدد الأيام الأصلي، لازم يتغير لأن العمال والساعات تغيرت."},
+   {v:"6", ok:true, ex:"صحيح! ١٤×٥×٦ = ٤٢٠ ✅"},
+   {v:"12", ok:false, ex:"هذا ناتج تخمين غير مبني على معادلة كمية العمل الصحيحة."},
+   {v:"8", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"cmp", text:"٣ آلات تنتج ٣٦٠ وحدة في ٤ أيام.<br>فكم وحدة تنتج ٦ آلات في ٧ أيام؟ 🏭", funny:"💬 لا تحسب الوحدات مباشرة من غير معدل الآلة الواحدة 🔧",
+ h1:"معدل الآلة الواحدة يوميًا = ٣٦٠ ÷ (٣ × ٤)", h2:"الإنتاج الجديد = ٦ × ٧ × معدل الآلة الواحدة",
+ solution:"المعدل = ٣٦٠÷١٢ = ٣٠ ← الإنتاج = ٦×٧×٣٠ = ١٢٦٠ وحدة ✅",
+ options:[
+   {v:"1000", ok:false, ex:"هذا ناتج تخمين غير مبني على معدل الآلة الواحدة الصحيح."},
+   {v:"2520", ok:false, ex:"هذا لو ضاعفت الناتج الصحيح بالخطأ."},
+   {v:"1260", ok:true, ex:"صحيح! ٦×٧×٣٠ = ١٢٦٠ ✅"},
+   {v:"840", ok:false, ex:"هذا ناتج قسمة غير صحيحة، راجع الحل."}
+ ]},
+{type:"cmp", text:"١٠ عمال يعملون ٧ ساعات يوميًا لمدة ٩ أيام لإنجاز عمل.<br>فكم عاملاً يحتاجون لإنجاز نفس العمل في ٦ أيام إذا عملوا ٥ ساعات يوميًا؟ 🧱", funny:"💬 المجهول هذي المرة هو عدد العمال، رتّب المعادلة صح 💪",
+ h1:"كمية العمل = عمال × ساعات × أيام = ١٠ × ٧ × ٩", h2:"نفس كمية العمل = س × ٥ × ٦ (حل لإيجاد س)",
+ solution:"كمية العمل = ٦٣٠ ← س×٥×٦ = ٦٣٠ ← ٣٠س = ٦٣٠ ← س = ٢١ عاملاً ✅",
+ options:[
+   {v:"15", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."},
+   {v:"18", ok:false, ex:"هذا ناتج تخمين غير مبني على معادلة كمية العمل الصحيحة."},
+   {v:"10", ok:false, ex:"هذا نفس عدد العمال الأصلي، لازم يتغير لأن الساعات والأيام تغيرت."},
+   {v:"21", ok:true, ex:"صحيح! ٢١×٥×٦ = ٦٣٠ ✅"}
+ ]},
+{type:"trap", text:"اشترى تاجر سلعة بـ ٢٠٠ ريال، وباعها بـ ٢٥٠ ريالاً.<br>فما نسبة الربح؟ 💰", funny:"💬 كثير يقسمون الربح على سعر البيع بالغلط... لا توقع بنفس الفخ 😏",
+ h1:"نسبة الربح أو الخسارة دائمًا تُحسب من سعر الشراء (التكلفة)، وليس من سعر البيع.", h2:"احسب الربح = سعر البيع − سعر الشراء، ثم نسبة الربح% = (الربح ÷ سعر الشراء) × ١٠٠",
+ solution:"الربح = ٢٥٠-٢٠٠ = ٥٠ ← النسبة = ٥٠/٢٠٠ × ١٠٠ = ٢٥٪ ✅",
+ options:[
+   {v:"25", ok:true, ex:"صحيح! ٥٠ ÷ ٢٠٠ × ١٠٠ = ٢٥٪ ✅"},
+   {v:"20", ok:false, ex:"هذا لو قسمت الربح على سعر البيع (٢٥٠) بدل سعر الشراء."},
+   {v:"50", ok:false, ex:"هذا ناتج تخمين غير مبني على حساب الربح الفعلي."},
+   {v:"10", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"trap", text:"خُصم على سعر منتج ١٠٪، ثم خُصم على السعر الجديد ٢٠٪ أخرى.<br>فما نسبة الخصم الإجمالية الفعلية؟ 🏷️", funny:"💬 لا، الجواب مو ١٠+٢٠=٣٠٪ 😅 هذا أشهر فخ بالقدرات",
+ h1:"الخصم الثاني يُطبق على السعر بعد الخصم الأول، مو على السعر الأصلي.", h2:"افترض السعر = ١٠٠ ← اضرب: ١٠٠ × (١-٠٫١٠) × (١-٠٫٢٠) ← والفرق بينه وبين ١٠٠ هو الخصم الحقيقي",
+ solution:"١٠٠×٠٫٩×٠٫٨ = ٧٢ ← الخصم الفعلي = ١٠٠-٧٢ = ٢٨٪ ✅",
+ options:[
+   {v:"30", ok:false, ex:"هذا لو جمعت النسبتين ١٠+٢٠ مباشرة، وهذا الفخ الشائع بالضبط."},
+   {v:"28", ok:true, ex:"صحيح! ١٠٠×٠٫٩×٠٫٨ = ٧٢ ← الخصم = ٢٨٪ ✅"},
+   {v:"10", ok:false, ex:"هذا الخصم الأول بس، متجاهل الخصم الثاني."},
+   {v:"18", ok:false, ex:"هذا ناتج طرح غير صحيح للنسبتين، راجع الحل."}
+ ]},
+{type:"trap", text:"٩ عمال ينجزون عملاً معينًا في ١٦ يومًا.<br>فكم يومًا يحتاج ١٢ عاملاً لإنجاز نفس العمل؟ 👷", funny:"💬 زيادة العمال تخلص الشغل أسرع، مو أبطأ! 😄",
+ h1:"زيادة عدد العمال تقلل عدد الأيام اللازمة دائمًا ← هذي علاقة عكسية ↓↑", h2:"في العكسي: أ×ب = ج×د ← جرب: ٩ × ١٦ = ١٢ × س",
+ solution:"٩×١٦ = ١٢×س ← ١٤٤ = ١٢س ← س = ١٢ يومًا ✅",
+ options:[
+   {v:"21.3", ok:false, ex:"هذا لو عاملت المسألة كأنها طردية بدل عكسية."},
+   {v:"16", ok:false, ex:"هذا نفس عدد الأيام الأصلي، لازم يتغير لأن العمال زادوا."},
+   {v:"12", ok:true, ex:"صحيح! ٩×١٦ = ١٤٤ = ١٢×١٢ ✅"},
+   {v:"9", ok:false, ex:"هذا ناتج تخمين، راجع خطوة الضرب التبادلي."}
+ ]},
+{type:"cost", text:"تكلفة إنتاج ١٢٠ وحدة = ٣٦٠٠ ريال.<br>فما تكلفة إنتاج ٢٠٠ وحدة؟ 🏭", funny:"💬 علاقة طردية بسيطة، احسب تكلفة الوحدة أول 😉",
+ h1:"تكلفة الوحدة الواحدة = التكلفة الكلية ÷ عدد الوحدات = ٣٦٠٠ ÷ ١٢٠", h2:"التكلفة الجديدة = ٢٠٠ × تكلفة الوحدة الواحدة",
+ solution:"تكلفة الوحدة = ٣٦٠٠÷١٢٠ = ٣٠ ← التكلفة الجديدة = ٢٠٠×٣٠ = ٦٠٠٠ ريال ✅",
+ options:[
+   {v:"5000", ok:false, ex:"هذا ناتج تخمين غير مبني على تكلفة الوحدة الصحيحة."},
+   {v:"3600", ok:false, ex:"هذا نفس التكلفة الأصلية، بدون حساب الزيادة بعدد الوحدات."},
+   {v:"7200", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."},
+   {v:"6000", ok:true, ex:"صحيح! ٢٠٠ × ٣٠ = ٦٠٠٠ ✅"}
+ ]},
+{type:"cost", text:"سعر القلم المفرد ٢ ريال، وعند شراء ٣٠ قلمًا يُمنح خصم ١٥٪.<br>فما مقدار التوفير؟ ✏️", funny:"💬 لا، الجواب مو ١٥ ريال، هذا رقم النسبة مو مبلغ التوفير 😏",
+ h1:"السعر بدون خصم = سعر القلم × الكمية = ٢ × ٣٠", h2:"السعر بعد الخصم = السعر بدون خصم × (١-٠٫١٥)، والتوفير = الفرق بين السعرين",
+ solution:"بدون خصم = ٦٠ ← بعد الخصم = ٥١ ← التوفير = ٦٠-٥١ = ٩ ريال ✅",
+ options:[
+   {v:"9", ok:true, ex:"صحيح! ٦٠ - ٥١ = ٩ ريال ✅"},
+   {v:"15", ok:false, ex:"هذا رقم نسبة الخصم نفسها، مو مبلغ التوفير الفعلي."},
+   {v:"51", ok:false, ex:"هذا السعر بعد الخصم، مو مقدار التوفير."},
+   {v:"6", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"cost", text:"اشترى تاجر بضاعة بـ ٥٠٠ ريال، وأراد ربحًا مقداره ١٨٪.<br>فبكم يجب أن يبيعها؟ 🛍️", funny:"💬 آخر سؤال بهذا النوع، لا تنسَ تضيف الربح لسعر الشراء 😅",
+ h1:"مقدار الربح = سعر الشراء × نسبة الربح = ٥٠٠ × ٠٫١٨", h2:"سعر البيع = سعر الشراء + مقدار الربح (أو مباشرة: سعر الشراء × ١٫١٨)",
+ solution:"الربح = ٩٠ ← سعر البيع = ٥٠٠+٩٠ = ٥٩٠ ريال ✅",
+ options:[
+   {v:"518", ok:false, ex:"هذا ناتج تخمين غير مبني على حساب الربح الصحيح."},
+   {v:"590", ok:true, ex:"صحيح! ٥٠٠ × ١٫١٨ = ٥٩٠ ✅"},
+   {v:"90", ok:false, ex:"هذا مقدار الربح فقط، مو سعر البيع الكامل."},
+   {v:"550", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"ms", text:"زاويتان على خط مستقيم، إحداهما ٦٠°.<br>فما الأخرى؟ 📏", funny:"💬 زاويتان على خط مستقيم لهم علاقة ثابتة دايمًا 😉",
+ h1:"زاويتان متجاورتان على خط مستقيم مجموعهما = ١٨٠° دائمًا.", h2:"الزاوية الأخرى = ١٨٠ - ٦٠",
+ solution:"١٨٠ - ٦٠ = ١٢٠° ✅",
+ options:[
+   {v:"60", ok:false, ex:"هذا نفس الزاوية المعطاة، مو الزاوية الأخرى."},
+   {v:"90", ok:false, ex:"هذا ناتج تخمين، مو مبني على قانون الزاويتين على خط مستقيم."},
+   {v:"120", ok:true, ex:"صحيح! ١٨٠-٦٠ = ١٢٠° ✅"},
+   {v:"30", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"ms", text:"ما متتامة زاوية ٥٥°؟ 📐", funny:"💬 آخر سؤال بهذا النوع، متتامة=٩٠ لا تخلطها 😏",
+ h1:"زاويتان متتامتان مجموعهما = ٩٠° دائمًا.", h2:"المتتامة = ٩٠ - ٥٥",
+ solution:"٩٠ - ٥٥ = ٣٥° ✅",
+ options:[
+   {v:"125", ok:false, ex:"هذا لو استخدمت ١٨٠ (المتكاملة) بدل ٩٠ (المتتامة)."},
+   {v:"55", ok:false, ex:"هذا نفس الزاوية المعطاة، مو متتامتها."},
+   {v:"45", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."},
+   {v:"35", ok:true, ex:"صحيح! ٩٠-٥٥ = ٣٥° ✅"}
+ ]},
+{type:"ang", text:"زاوية تساوي خمسة أمثال متتامتها.<br>فما الزاوية؟ 📐", funny:"💬 \"متتامة\" مو \"متكاملة\"! لا تخلط بين ٩٠ و١٨٠ 😏",
+ h1:"متتامة الزاوية = ٩٠ - الزاوية.", h2:"افترض الزاوية = س ← جرب تكوّن المعادلة: س = ٥ × (٩٠-س)",
+ solution:"س = ٥(٩٠-س) ← س = ٤٥٠-٥س ← ٦س = ٤٥٠ ← س = ٧٥° ✅",
+ options:[
+   {v:"75", ok:true, ex:"صحيح! متتامتها = ١٥°، و٥×١٥ = ٧٥ ✅"},
+   {v:"150", ok:false, ex:"هذا لو استخدمت ١٨٠ (المتكاملة) بدل ٩٠ (المتتامة) بالمعادلة."},
+   {v:"15", ok:false, ex:"هذا هو قيمة المتتامة نفسها، مو الزاوية المطلوبة."},
+   {v:"90", ok:false, ex:"هذا ناتج تخمين غير مبني على حل المعادلة الصحيح."}
+ ]},
+{type:"ang", text:"ثلاث زوايا حول نقطة واحدة بنسبة ٢ : ٥ : ٣.<br>فما أكبر هذه الزوايا؟ 🔵", funny:"💬 آخر سؤال بهذا النوع، مجموع الزوايا حول نقطة ثابت 😏",
+ h1:"مجموع الزوايا حول نقطة واحدة = ٣٦٠° دائمًا.", h2:"مجموع النسب = ٢+٥+٣ ← أكبر زاوية = (٥ ÷ مجموع النسب) × ٣٦٠",
+ solution:"مجموع النسب = ١٠ ← أكبر زاوية = (٥/١٠)×٣٦٠ = ١٨٠° ✅",
+ options:[
+   {v:"72", ok:false, ex:"هذا أصغر زاوية (نسبة ٢)، مو أكبرها."},
+   {v:"180", ok:true, ex:"صحيح! (٥/١٠) × ٣٦٠ = ١٨٠° ✅"},
+   {v:"108", ok:false, ex:"هذا الزاوية الثالثة (نسبة ٣)، مو أكبرها."},
+   {v:"120", ok:false, ex:"هذا ناتج تقسيم ٣٦٠ على ٣ بالتساوي، متجاهل النسب المعطاة."}
+ ]},
+{type:"pct", text:"زاد سعر منتج ٤٠٪، ثم نقص ٤٠٪.<br>هل عاد السعر لأصله؟ 🏷️", funny:"💬 كثير ناس يقولون \"رجع زي ما كان\"... بس هل هذا صح؟ 😏",
+ h1:"النقصان الثاني يُحسب من السعر الجديد (بعد الزيادة)، مو من السعر الأصلي.", h2:"افترض السعر = ١٠٠ ← جرب: ١٠٠ × ١٫٤ × ٠٫٦ = ؟ وقارنه بـ ١٠٠",
+ solution:"١٠٠×١٫٤×٠٫٦ = ٨٤ ← نقص ١٦٪ عن الأصلي ✅",
+ options:[
+   {v:"same", ok:false, ex:"هذا الفخ الشائع، الزيادة والنقصان بنفس النسبة ما يلغون بعض."},
+   {v:"inc16", ok:false, ex:"عكس الاتجاه الصحيح، الناتج أقل من ١٠٠ مو أكبر."},
+   {v:"dec16", ok:true, ex:"صحيح! ١٠٠×١٫٤×٠٫٦ = ٨٤ ← نقص ١٦٪ ✅"},
+   {v:"dec8", ok:false, ex:"هذا ناتج تخمين غير مبني على ضرب المعاملين الصحيح."}
+ ]},
+{type:"pct", text:"راتب موظف زاد ١٠٪، ثم نقص ٥٪.<br>فما نسبة التغيّر الكلية عن الراتب الأصلي؟ 💼", funny:"💬 آخر سؤال بهذا النوع، لا تطرح النسب مباشرة 😅",
+ h1:"افترض الراتب الأصلي = ١٠٠ ← بعد الزيادة ١٠٪ يصبح ١١٠", h2:"انقص ٥٪ من الـ١١٠ (مو من الـ١٠٠) ← قارن الناتج النهائي بـ ١٠٠",
+ solution:"١٠٠×١٫١×٠٫٩٥ = ١٠٤٫٥ ← زاد ٤٫٥٪ عن الأصلي ✅",
+ options:[
+   {v:"dec4.5", ok:false, ex:"عكس الاتجاه، الناتج أكبر من ١٠٠ مو أقل."},
+   {v:"inc5", ok:false, ex:"هذا ناتج طرح ١٠-٥ مباشرة، وهذا الفخ الشائع بالضبط."},
+   {v:"same", ok:false, ex:"هذا ناتج تخمين غير مبني على ضرب المعاملين الصحيح."},
+   {v:"inc4.5", ok:true, ex:"صحيح! ١٠٠×١٫١×٠٫٩٥ = ١٠٤٫٥ ← زاد ٤٫٥٪ ✅"}
+ ]},
+{type:"wrk", text:"أ تُنجز عملاً في ٦ أيام، وب تُنجزه في ١٨ يومًا.<br>فكم يومًا يحتاجان لإنجازه معًا؟ 👷‍♀️", funny:"💬 لا، الجواب مو (٦+١٨)÷٢ 😅 كل واحد له معدل مختلف",
+ h1:"معدل أ باليوم = ١/٦ من العمل، ومعدل ب باليوم = ١/١٨ من العمل.", h2:"معدلهما معًا = ١/٦ + ١/١٨ ← والزمن اللازم = ١ ÷ (هذا المجموع)",
+ solution:"١/٦+١/١٨ = ٣/١٨+١/١٨ = ٤/١٨ = ٢/٩ ← الزمن = ٩/٢ = ٤٫٥ يوم ✅",
+ options:[
+   {v:"4.5", ok:true, ex:"صحيح! ١/٦+١/١٨ = ٢/٩ ← الزمن = ٩/٢ = ٤٫٥ يوم ✅"},
+   {v:"12", ok:false, ex:"هذا متوسط الرقمين (٦+١٨)/٢ بدل جمع المعدلين."},
+   {v:"24", ok:false, ex:"هذا مجموع الأيام مباشرة، وذا مو طريقة حساب العمل المشترك."},
+   {v:"6", ok:false, ex:"هذا نفس مدة أ لوحدها، متجاهلاً مساهمة ب."}
+ ]},
+{type:"wrk", text:"أ وب معًا ينجزان عملاً في ٦ أيام. أ وحدها تحتاج ١٠ أيام.<br>فكم يومًا تحتاج ب وحدها؟ 🔧", funny:"💬 آخر سؤال بهذا النوع، اطرح المعدلات مو الأيام 🧐",
+ h1:"معدل أ وب معًا = ١/٦، ومعدل أ لوحدها = ١/١٠.", h2:"معدل ب = (معدل الاثنين) - (معدل أ) = ١/٦ - ١/١٠ ← والزمن = ١ ÷ (هذا الناتج)",
+ solution:"١/٦-١/١٠ = ٥/٣٠-٣/٣٠ = ١/١٥ ← الزمن = ١٥ يومًا ✅",
+ options:[
+   {v:"4", ok:false, ex:"هذا ناتج طرح الأيام مباشرة (١٠-٦)، وهذا مو طريقة حساب المعدلات."},
+   {v:"15", ok:true, ex:"صحيح! ١/٦-١/١٠ = ١/١٥ ← ١٥ يومًا ✅"},
+   {v:"16", ok:false, ex:"هذا ناتج تخمين غير مبني على طرح المعدلين الصحيح."},
+   {v:"10", ok:false, ex:"هذا نفس مدة أ لوحدها، مو مدة ب."}
+ ]},
+{type:"age", text:"بعد ٣ سنوات، عمر سامي وأخته سيصبح مجموعهما ٤٠، والأخت أكبر من سامي بـ ١٠ سنوات الآن.<br>فما عمر سامي الآن؟ 👦", funny:"💬 لا تحسب المجموع الحالي على طول، فيه \"بعد ٣ سنوات\" 😉",
+ h1:"الفرق بين سامي وأخته ثابت = ١٠ سنوات. وبعد ٣ سنوات المجموع = ٤٠.", h2:"خلّي عمر سامي الآن = س ← عمر الأخت الآن = س+١٠ ← جرب تكوّن المعادلة: (س+٣) + (س+١٠+٣) = ٤٠",
+ solution:"(س+٣)+(س+١٣) = ٤٠ ← ٢س+١٦ = ٤٠ ← ٢س=٢٤ ← س = ١٢ سنة ✅",
+ options:[
+   {v:"15", ok:false, ex:"هذا ناتج تخمين غير مبني على معادلة العمر الصحيحة."},
+   {v:"10", ok:false, ex:"هذا هو الفرق بين العمرين نفسه، مو عمر سامي."},
+   {v:"12", ok:true, ex:"صحيح! ٢س+١٦=٤٠ ← س=١٢ ✅"},
+   {v:"8", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"age", text:"الآن: أم وابنها مجموع أعمارهما ٥٤، والأم أكبر بـ ٢٨ سنة.<br>فما عمر كل منهما؟ 👩‍👦", funny:"💬 آخر سؤال بالتحدي كله! كله \"الآن\" بدون قفزة زمنية 🎉",
+ h1:"المجموع الآن = ٥٤، والفرق بين الأم والابن الآن = ٢٨ سنة.", h2:"خلّي عمر الابن = س ← عمر الأم = س+٢٨ ← جرب تكوّن المعادلة: س + (س+٢٨) = ٥٤",
+ solution:"٢س+٢٨ = ٥٤ ← ٢س = ٢٦ ← س = ١٣ (الابن) ← الأم = ٤١ ✅",
+ options:[
+   {v:"15-39", ok:false, ex:"هذا ناتج تخمين غير مبني على معادلة المجموع والفرق الصحيحة."},
+   {v:"27-27", ok:false, ex:"هذا لو افترضت الأعمار متساوية، متجاهلاً فرق الـ٢٨ سنة."},
+   {v:"10-44", ok:false, ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."},
+   {v:"13-41", ok:true, ex:"صحيح! ٢س+٢٨=٥٤ ← س=١٣، والأم=٤١ ✅"}
+ ]},
+];
+const container = document.getElementById('cardsContainer');
+const QCOUNT = QUESTIONS.length;
+document.getElementById('scoreDisplay').textContent = '0 / ' + QCOUNT;
+
+let score = 0;
+let answered = {};
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const meta = TYPE_META[q.type];
+  answered[n] = false;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card' + n;
+  card.style.setProperty('--accent', meta.color);
+
+  const opts = q.options.map((o,i)=>({...o, key:n+'-'+i}));
+
+  let optsHtml = '';
+  opts.forEach(o=>{
+    optsHtml += `
+      <button class="opt-btn" data-key="${o.key}" data-ok="${o.ok?'1':'0'}">
+        <span>${o.v}</span><span class="tag"></span>
+      </button>
+      <div class="opt-explain ${o.ok?'ok':'no'}" id="ex-${o.key}">${o.ex}</div>`;
+  });
+
+  card.innerHTML = `
+    <div class="qtitle">
+      <span class="qnum">${n}</span> السؤال ${n}
+      <span class="qtag">${meta.emoji} ${meta.label}</span>
+    </div>
+    <div class="qtext">${q.text}</div>
+    <div class="funny">${q.funny}</div>
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h${n}-1"><span>🔎 تلميح: وش المعطيات؟</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-1">${q.h1}</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h${n}-2"><span>🎯 تلميح: صيغة الحل</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-2">${q.h2}</div>
+      </div>
+    </div>
+    <div class="options" id="opts${n}">${optsHtml}</div>
+    <div class="solution-box" id="sol${n}">
+      <span class="lbl">✅ الحل الكامل</span>${q.solution}
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+document.querySelectorAll('.hint-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('open');
+    const icon = btn.querySelector('span:last-child');
+    icon.textContent = target.classList.contains('open') ? '－' : '＋';
+  });
+});
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const cont = document.getElementById('opts'+n);
+  const buttons = cont.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered[n]) return;
+      answered[n] = true;
+      const isOk = btn.dataset.ok === '1';
+      buttons.forEach(b=>b.classList.add('disabled'));
+      btn.classList.add(isOk ? 'correct' : 'wrong');
+      btn.querySelector('.tag').textContent = isOk ? '✅' : '❌';
+      document.getElementById('ex-'+btn.dataset.key).classList.add('show');
+      document.getElementById('sol'+n).classList.add('show');
+      if(isOk){ score++; }
+      updateScore();
+      checkFinish();
+    });
+  });
+});
+
+function updateScore(){
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + QCOUNT;
+}
+
+function checkFinish(){
+  const allDone = Object.values(answered).every(v=>v===true);
+  if(allDone){
+    const rc = document.getElementById('resultCard');
+    const title = document.getElementById('resultTitle');
+    const text = document.getElementById('resultText');
+    const emoji = document.getElementById('resultEmoji');
+    rc.classList.add('show');
+    rc.scrollIntoView({behavior:'smooth', block:'center'});
+
+    if(score === QCOUNT){
+      emoji.textContent = '🏆';
+      title.textContent = 'الإنجاز النهائي مكتمل!';
+      text.textContent = 'حليت الـ' + QCOUNT + ' سؤال كلهم صح 😎🔥 عقلك آلة حاسبة بشرية بجد';
+    } else if(score >= QCOUNT*0.8){
+      emoji.textContent = '🥇';
+      title.textContent = 'أداء أسطوري!';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، قريب جدًا من الإنجاز الكامل — راجع اللي غلطت فيه وشوف الحل';
+    } else if(score >= QCOUNT*0.5){
+      emoji.textContent = '💪';
+      title.textContent = 'أداء ممتاز!';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الأسئلة اللي غلطت فيها وشوف الحل المكتوب تحتها';
+    } else if(score >= QCOUNT*0.25){
+      emoji.textContent = '🙂';
+      title.textContent = 'بداية طيبة';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الحلول المكتوبة تحت كل سؤال غلطت فيه';
+    } else {
+      emoji.textContent = '🌱';
+      title.textContent = 'وقت المراجعة';
+      text.textContent = 'ولا يهمك، كل الحلول مكتوبة تحت كل سؤال، راجعها بهدوء وحاول مرة ثانية';
+    }
+  }
+}
+
+function restart(){
+  score = 0;
+  QUESTIONS.forEach((q, idx)=>{
+    const n = idx + 1;
+    answered[n] = false;
+    const buttons = document.querySelectorAll('#opts'+n+' .opt-btn');
+    buttons.forEach(b=>{
+      b.classList.remove('correct','wrong','disabled');
+      b.querySelector('.tag').textContent = '';
+    });
+    document.querySelectorAll('#opts'+n+' .opt-explain').forEach(e=>e.classList.remove('show'));
+    document.getElementById('sol'+n).classList.remove('show');
+  });
+  updateScore();
+  document.getElementById('resultCard').classList.remove('show');
+  document.querySelectorAll('.hint-reveal.open').forEach(h=>h.classList.remove('open'));
+  document.querySelectorAll('.hint-btn span:last-child').forEach(i=>i.textContent='＋');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+const waText = encodeURIComponent(
+`🏆 الإنجاز النهائي: فكّر أقل ... حُلّ أسرع (٤٠ سؤال)
+
+معادلات 🧮 + قاعدة ثلاثية ⚖️ + ترجم فورًا 🔄 + ربح وخسارة 💰 + نسب وخلطات ⚖️ + شراكة 🤝 + متوسط 📊 + تناسب مركّب ⚙️ + اكتشف الفخ ⚠️ + تكلفة وسعر 💰 + قياس 📐 + زوايا 📊 + فخ النسب ⚠️ + عمل وإنجاز 🛠️ + أعمار 👨‍👩‍👧
+
+جرب تحل الأسئلة بنفسك قبل ما تشوف الحل المكتوب تحت كل سؤال 😉
+رابط التحدي: (الصق الرابط هنا بعد رفعه)`
+);
+document.getElementById('waBtn').href = `https://wa.me/?text=${waText}`;
+</script>
+</body>
+</html>

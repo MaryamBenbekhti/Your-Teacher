@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>التحدي الكبير 4 🧠⚡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EE;
+    --ink:#1F2A37;
+    --teal:#0E8C86;
+    --teal-dark:#0A6B66;
+    --coral:#FF6B5E;
+    --sun:#FFC23C;
+    --purple:#8E6FD1;
+    --blue:#3E7CB1;
+    --green:#1a9c6b;
+    --pink:#D9739F;
+    --card:#FFFFFF;
+    --shadow: 0 10px 25px rgba(31,42,55,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,194,60,0.25), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(142,111,209,0.18), transparent 45%),
+      var(--cream);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    padding:16px 12px 60px;
+    min-height:100vh;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:14px;}
+  header .badge{
+    display:inline-block;background:var(--teal);color:#fff;font-family:'Baloo Bhaijaan 2';
+    font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+  }
+  header h1{font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:23px;margin:12px 0 4px;color:var(--teal-dark);}
+  header p{margin:0;color:#5b6572;font-size:13.5px;}
+
+  .legend{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 6px;font-size:11px;font-weight:700;}
+  .legend span{padding:4px 9px;border-radius:999px;color:#fff;}
+
+  .score-bar{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 20px;
+    background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);
+    font-weight:700;font-size:14px;width:fit-content;margin-inline:auto;position:sticky;top:8px;z-index:10;
+  }
+  .score-bar span{color:var(--purple);}
+
+  .card{
+    background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;
+    margin-bottom:22px;border:2px solid rgba(0,0,0,0.03);position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;
+    background:var(--accent, var(--teal));opacity:0.12;border-radius:50%;
+  }
+  .qtitle{
+    display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2';font-weight:700;
+    font-size:14.5px;color:var(--accent, var(--teal-dark));margin-bottom:10px;flex-wrap:wrap;
+  }
+  .qnum{
+    display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+    background:var(--accent, var(--teal));color:#fff;font-weight:900;font-size:15px;box-shadow:var(--shadow);
+  }
+  .qtag{font-size:11px;color:#fff;background:var(--accent, var(--teal));padding:2px 10px;border-radius:999px;opacity:0.85;}
+  .qtext{
+    background:#f8f4ea;border-radius:14px;padding:15px;font-size:15.5px;font-weight:700;line-height:1.9;
+    margin-bottom:8px;border:2px dashed rgba(0,0,0,0.07);
+  }
+  .funny{font-size:12.5px;color:#8a7350;margin:0 0 16px;}
+
+  .hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .hint-btn{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;
+    background:#fdf2ea;color:var(--ink);font-family:'Cairo';font-weight:700;font-size:13.5px;
+    padding:11px 14px;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:right;
+  }
+  .hint-btn:active{transform:scale(0.98);}
+  .hint-reveal{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;
+    background:#eef7f6;border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:0 14px;
+  }
+  .hint-reveal.open{max-height:220px;padding:11px 14px;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    display:flex;align-items:center;justify-content:space-between;border:2px solid #e9e1d2;background:#fffdf9;
+    font-family:'Cairo';font-weight:700;font-size:14px;padding:13px 16px;border-radius:14px;cursor:pointer;
+    transition:all .18s ease;
+  }
+  .opt-btn:hover{border-color:var(--accent, var(--teal));}
+  .opt-btn .tag{font-size:17px;}
+  .opt-btn.correct{background:#e8f8f1;border-color:var(--green);color:var(--green);}
+  .opt-btn.wrong{background:#fdecea;border-color:var(--coral);color:#b6392e;}
+  .opt-btn.disabled{pointer-events:none;opacity:0.85;}
+
+  .opt-explain{
+    display:none;font-size:13px;line-height:1.7;font-weight:600;
+    background:#fff7ef;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px;margin-bottom:2px;
+  }
+  .opt-explain.show{display:block;}
+  .opt-explain.ok{background:#eafaf3;color:#136b47;}
+  .opt-explain.no{background:#fdeceb;color:#8f2e22;}
+
+  .solution-box{
+    display:none;margin-top:14px;background:#eef4fb;border-radius:14px;padding:14px 16px;
+    font-size:14px;line-height:1.9;border:2px solid #d7e6f7;
+  }
+  .solution-box.show{display:block;}
+  .solution-box .lbl{font-family:'Baloo Bhaijaan 2';font-weight:700;color:#2a5da0;margin-bottom:6px;display:block;}
+
+  .result-card{
+    text-align:center;background:linear-gradient(135deg, var(--teal), var(--purple));color:#fff;
+    border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none;
+  }
+  .result-card.show{display:block;}
+  .result-card h2{font-family:'Baloo Bhaijaan 2';font-size:22px;margin:0 0 8px;}
+  .result-card p{margin:0;font-size:14.5px;opacity:0.95;}
+  .result-card .emoji{font-size:40px;margin-bottom:6px;}
+
+  .share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;
+    font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:14px;cursor:pointer;box-shadow:var(--shadow);
+    text-decoration:none;color:#fff;
+  }
+  .wa{background:#25D366;}
+  .rt{background:var(--sun);color:var(--ink);}
+
+  footer{text-align:center;margin-top:18px;font-size:11.5px;color:#a9a094;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>التحدي الكبير 4: ٢٠ سؤال</h1>
+    <p>قياس + زوايا + زيادة ونقصان + عمل وإنجاز + أعمار + تكلفة وسعر 😎</p>
+  </header>
+
+  <div class="legend">
+    <span style="background:#3E7CB1">📐 قياس</span>
+    <span style="background:#8E6FD1">📊 زوايا</span>
+    <span style="background:#FF6B5E">⚠️ فخ النسب</span>
+    <span style="background:#0E8C86">🛠️ عمل وإنجاز</span>
+    <span style="background:#D9739F">👨‍👩‍👧 أعمار</span>
+    <span style="background:#1a9c6b">💰 تكلفة وسعر</span>
+  </div>
+
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">0 / 20</span></div>
+
+  <div id="cardsContainer"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="emoji" id="resultEmoji">🎉</div>
+    <h2 id="resultTitle">تمام!</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+
+  <footer>فكّر أقل ... حُلّ أسرع — التحدي الكبير 4 🧠✨</footer>
+</div>
+
+<script>
+const TYPE_META = {
+  ms: {label:"قياس",        color:"#3E7CB1", emoji:"📐"},
+  ang:{label:"زوايا",       color:"#8E6FD1", emoji:"📊"},
+  pct:{label:"فخ النسب",    color:"#FF6B5E", emoji:"⚠️"},
+  wrk:{label:"عمل وإنجاز",  color:"#0E8C86", emoji:"🛠️"},
+  age:{label:"أعمار",       color:"#D9739F", emoji:"👨‍👩‍👧"},
+  cst:{label:"تكلفة وسعر",  color:"#1a9c6b", emoji:"💰"}
+};
+
+const QUESTIONS = [
+{type:"ms", text:"زاويتان على خط مستقيم، إحداهما ٨٠°.<br>فما الأخرى؟ 📏", funny:"💬 زاويتان على خط مستقيم لهم علاقة ثابتة دايمًا 😉",
+ h1:"زاويتان متجاورتان على خط مستقيم مجموعهما = ١٨٠° دائمًا.", h2:"الزاوية الأخرى = ١٨٠ - ٨٠",
+ correct:"100", solution:"١٨٠ - ٨٠ = ١٠٠° ✅",
+ options:[
+   {v:"100°", ok:true, ex:"صحيح! ١٨٠-٨٠ = ١٠٠° ✅"},
+   {v:"80°", ex:"هذا نفس الزاوية المعطاة، مو الزاوية الأخرى."},
+   {v:"90°", ex:"هذا ناتج تخمين، مو مبني على قانون الزاويتين على خط مستقيم."},
+   {v:"20°", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"ms", text:"ما متتامة زاوية ٦٠°؟ 📐", funny:"💬 متتامة = ٩٠، لا تخلطها مع متكاملة 😏",
+ h1:"زاويتان متتامتان مجموعهما = ٩٠° دائمًا.", h2:"المتتامة = ٩٠ - ٦٠",
+ correct:"30", solution:"٩٠ - ٦٠ = ٣٠° ✅",
+ options:[
+   {v:"30°", ok:true, ex:"صحيح! ٩٠-٦٠ = ٣٠° ✅"},
+   {v:"120°", ex:"هذا لو استخدمت ١٨٠ (المتكاملة) بدل ٩٠ (المتتامة)."},
+   {v:"60°", ex:"هذا نفس الزاوية المعطاة، مو متتامتها."},
+   {v:"40°", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"ms", text:"تقاطع خطان مستقيمان، وكانت إحدى الزوايا ٤٥°.<br>فما الزاوية المقابلة لها بالرأس؟ ✖️", funny:"💬 أسهل سؤال ممكن يجيك، بس لا تستهبل فيه 😄",
+ h1:"الزوايا المتقابلة بالرأس عند تقاطع خطين تكون متساوية دائمًا.", h2:"الزاوية المقابلة = نفس قيمة الزاوية المعطاة مباشرة",
+ correct:"45", solution:"الزاوية المقابلة بالرأس = ٤٥° (متساوية دائمًا) ✅",
+ options:[
+   {v:"45°", ok:true, ex:"صحيح! الزوايا المتقابلة بالرأس متساوية دائمًا ✅"},
+   {v:"135°", ex:"هذا لو حسبتها كأنها متكاملة (مجاورة) بدل متقابلة بالرأس."},
+   {v:"35°", ex:"هذا ناتج تخمين غير مبني على خاصية التقابل بالرأس."},
+   {v:"90°", ex:"هذا ناتج عملية حسابية غير مرتبطة بالسؤال، راجع الحل."}
+ ]},
+{type:"ang", text:"زاوية تساوي خمسة أمثال متتامتها.<br>فما الزاوية؟ 📐", funny:"💬 \"متتامة\" مو \"متكاملة\"! لا تخلط بين ٩٠ و١٨٠ 😏",
+ h1:"متتامة الزاوية = ٩٠ - الزاوية.", h2:"افترض الزاوية = س ← جرب تكوّن المعادلة: س = ٥ × (٩٠-س)",
+ correct:"75", solution:"س = ٥(٩٠-س) ← س = ٤٥٠-٥س ← ٦س = ٤٥٠ ← س = ٧٥° ✅",
+ options:[
+   {v:"75°", ok:true, ex:"صحيح! متتامتها = ١٥°، و٥×١٥ = ٧٥ ✅"},
+   {v:"150°", ex:"هذا لو استخدمت ١٨٠ (المتكاملة) بدل ٩٠ (المتتامة) بالمعادلة."},
+   {v:"15°", ex:"هذا هو قيمة المتتامة نفسها، مو الزاوية المطلوبة."},
+   {v:"60°", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"ang", text:"الفرق بين زاوية ومتكاملتها يساوي ٦٠°.<br>فما الزاوية؟ 📏", funny:"💬 خلك منتبه: يبونك الزاوية نفسها، مو متكاملتها 😉",
+ h1:"متكاملة الزاوية = ١٨٠ - الزاوية.", h2:"افترض الزاوية = س ← جرب تكوّن المعادلة: س - (١٨٠-س) = ٦٠",
+ correct:"120", solution:"س - (١٨٠-س) = ٦٠ ← ٢س - ١٨٠ = ٦٠ ← ٢س = ٢٤٠ ← س = ١٢٠° ✅",
+ options:[
+   {v:"120°", ok:true, ex:"صحيح! ١٢٠ - (١٨٠-١٢٠) = ١٢٠-٦٠ = ٦٠ ✅"},
+   {v:"75°", ex:"هذا لو استخدمت ٩٠ (المتتامة) بدل ١٨٠ (المتكاملة) بالمعادلة."},
+   {v:"60°", ex:"هذا هو متكاملة الزاوية نفسها، مو الزاوية المطلوبة."},
+   {v:"100°", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"ang", text:"ثلاث زوايا حول نقطة واحدة بنسبة ٢ : ٣ : ٤.<br>فما أكبر هذه الزوايا؟ 🔵", funny:"💬 لا تنسَ: مجموع الزوايا حول نقطة له قيمة ثابتة معروفة 😏",
+ h1:"مجموع الزوايا حول نقطة واحدة = ٣٦٠° دائمًا.", h2:"مجموع النسب = ٢+٣+٤ ← أكبر زاوية = (٤ ÷ مجموع النسب) × ٣٦٠",
+ correct:"160", solution:"مجموع النسب = ٩ ← أكبر زاوية = (٤/٩)×٣٦٠ = ١٦٠° ✅",
+ options:[
+   {v:"160°", ok:true, ex:"صحيح! (٤/٩) × ٣٦٠ = ١٦٠° ✅"},
+   {v:"80°", ex:"هذا أصغر زاوية (الجزء الأول)، مو أكبرها."},
+   {v:"120°", ex:"هذا ناتج تقسيم ٣٦٠ على ٣ بالتساوي، متجاهل النسب المعطاة."},
+   {v:"100°", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"ang", text:"مستقيمان متوازيان، إحدى الزوايا الداخلية على نفس جانب القاطع تساوي أربعة أمثال الزاوية الأخرى.<br>فما قيمة كل زاوية؟ 📊", funny:"💬 الزاويتان الداخليتان على نفس الجانب بينهم علاقة خاصة 🧐",
+ h1:"الزاويتان الداخليتان على نفس جانب القاطع بين مستقيمين متوازيين مجموعهما ١٨٠° (متكاملتان).", h2:"افترض الزاوية الصغرى = س والأخرى = ٤س ← جرب تكوّن المعادلة: س + ٤س = ١٨٠",
+ correct:"36-144", solution:"٥س = ١٨٠ ← س = ٣٦° ← والأخرى = ٤×٣٦ = ١٤٤° ✅",
+ options:[
+   {v:"٣٦° و١٤٤°", ok:true, ex:"صحيح! ٥س=١٨٠ ← س=٣٦، والأخرى=١٤٤ ✅"},
+   {v:"٤٥° و١٣٥°", ex:"هذا لو افترضت النسبة ١:٣ بدل ١:٤ المذكورة بالسؤال."},
+   {v:"٩٠° و٩٠°", ex:"هذا لو افترضت الزاويتين متساويتين، متجاهلاً \"أربعة أمثال\"."},
+   {v:"٣٠° و١٥٠°", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"pct", text:"زاد سعر منتج ٢٥٪، ثم نقص ٢٥٪.<br>هل عاد السعر لأصله؟ 🏷️", funny:"💬 كثير ناس يقولون \"رجع زي ما كان\"... بس هل هذا صح فعلاً؟ 😏",
+ h1:"النقصان الثاني يُحسب من السعر الجديد (بعد الزيادة)، مو من السعر الأصلي.", h2:"افترض السعر = ١٠٠ ← جرب: ١٠٠ × ١٫٢٥ × ٠٫٧٥ = ؟ وقارنه بـ ١٠٠",
+ correct:"dec6.25", solution:"١٠٠×١٫٢٥×٠٫٧٥ = ٩٣٫٧٥ ← نقص ٦٫٢٥٪ عن الأصلي ✅",
+ options:[
+   {v:"نعم، عاد لنفس السعر", ex:"هذا الفخ الشائع بالضبط، الزيادة والنقصان بنفس النسبة ما يلغون بعض."},
+   {v:"لا، نقص ٦٫٢٥٪ عن الأصلي", ok:true, ex:"صحيح! ١٠٠×١٫٢٥×٠٫٧٥ = ٩٣٫٧٥ ← نقص ٦٫٢٥٪ ✅"},
+   {v:"لا، نقص ٥٪ عن الأصلي", ex:"هذا ناتج تخمين غير مبني على ضرب المعاملين الصحيح."},
+   {v:"لا، زاد ٦٫٢٥٪ عن الأصلي", ex:"عكس الاتجاه الصحيح، راجع الحل: الناتج أقل من ١٠٠ مو أكبر."}
+ ]},
+{type:"pct", text:"راتب موظف زاد ٢٠٪، ثم نقص ١٠٪.<br>فما نسبة التغيّر الكلية عن الراتب الأصلي؟ 💼", funny:"💬 لا، الجواب مو ٢٠-١٠=١٠٪ 😅 الحساب أعمق من كذا",
+ h1:"افترض الراتب الأصلي = ١٠٠ ← بعد الزيادة ٢٠٪ يصبح ١٢٠", h2:"انقص ١٠٪ من الـ١٢٠ (مو من الـ١٠٠) ← قارن الناتج النهائي بـ ١٠٠",
+ correct:"inc8", solution:"١٠٠×١٫٢×٠٫٩ = ١٠٨ ← زاد ٨٪ عن الأصلي ✅",
+ options:[
+   {v:"زاد ٨٪", ok:true, ex:"صحيح! ١٠٠×١٫٢×٠٫٩ = ١٠٨ ← زاد ٨٪ ✅"},
+   {v:"نقص ٨٪", ex:"عكس الاتجاه، الناتج أكبر من ١٠٠ مو أقل."},
+   {v:"زاد ١٠٪", ex:"هذا ناتج طرح ٢٠-١٠ مباشرة، وهذا الفخ الشائع بالضبط."},
+   {v:"لا تغيير", ex:"هذا ناتج تخمين غير مبني على ضرب المعاملين الصحيح."}
+ ]},
+{type:"pct", text:"سعر سلعة نقص ٤٠٪، ثم زاد ٤٠٪.<br>هل عاد السعر لأصله؟ 📉", funny:"💬 هذي المرة النقص أول والزيادة بعده، غيّر زاوية تفكيرك 🤔",
+ h1:"الزيادة الثانية تُحسب من السعر بعد النقصان، مو من السعر الأصلي.", h2:"افترض السعر = ١٠٠ ← جرب: ١٠٠ × ٠٫٦ × ١٫٤ = ؟ وقارنه بـ ١٠٠",
+ correct:"dec16", solution:"١٠٠×٠٫٦×١٫٤ = ٨٤ ← نقص ١٦٪ عن الأصلي ✅",
+ options:[
+   {v:"نعم، عاد لنفس السعر", ex:"هذا الفخ الشائع، النقصان والزيادة بنفس النسبة ما يلغون بعض."},
+   {v:"لا، نقص ١٦٪ عن الأصلي", ok:true, ex:"صحيح! ١٠٠×٠٫٦×١٫٤ = ٨٤ ← نقص ١٦٪ ✅"},
+   {v:"لا، زاد ١٦٪ عن الأصلي", ex:"عكس الاتجاه الصحيح، الناتج أقل من ١٠٠ مو أكبر."},
+   {v:"لا، نقص ٢٪ عن الأصلي", ex:"هذا ناتج تخمين غير مبني على ضرب المعاملين الصحيح."}
+ ]},
+{type:"wrk", text:"أ تُنجز عملاً في ٤ أيام، وب تُنجزه في ١٢ يومًا.<br>فكم يومًا يحتاجان لإنجازه معًا؟ 👷‍♀️👷", funny:"💬 لا، الجواب مو (٤+١٢)÷٢ 😅 كل واحد له معدل شغل مختلف",
+ h1:"معدل أ باليوم = ١/٤ من العمل، ومعدل ب باليوم = ١/١٢ من العمل.", h2:"معدلهما معًا = ١/٤ + ١/١٢ ← والزمن اللازم = ١ ÷ (هذا المجموع)",
+ correct:"3", solution:"١/٤+١/١٢ = ٣/١٢+١/١٢ = ٤/١٢ = ١/٣ ← الزمن = ٣ أيام ✅",
+ options:[
+   {v:"3 أيام", ok:true, ex:"صحيح! ١/٤+١/١٢ = ١/٣ ← ٣ أيام ✅"},
+   {v:"8 أيام", ex:"هذا متوسط الرقمين (٤+١٢)/٢ بدل جمع المعدلين."},
+   {v:"16 يومًا", ex:"هذا مجموع الأيام مباشرة، وهذا مو طريقة حساب العمل المشترك."},
+   {v:"4 أيام", ex:"هذا نفس مدة أ لوحدها، متجاهلاً مساهمة ب."}
+ ]},
+{type:"wrk", text:"أ وب معًا ينجزان عملاً في ٤ أيام. أ وحدها تحتاج ٦ أيام.<br>فكم يومًا تحتاج ب وحدها؟ 🔧", funny:"💬 نفس الفكرة بس بالعكس شوي، اطرح المعدلات مو الأيام 🧐",
+ h1:"معدل أ وب معًا = ١/٤، ومعدل أ لوحدها = ١/٦.", h2:"معدل ب = (معدل الاثنين) - (معدل أ) = ١/٤ - ١/٦ ← والزمن = ١ ÷ (هذا الناتج)",
+ correct:"12", solution:"١/٤-١/٦ = ٣/١٢-٢/١٢ = ١/١٢ ← الزمن = ١٢ يومًا ✅",
+ options:[
+   {v:"12 يومًا", ok:true, ex:"صحيح! ١/٤-١/٦ = ١/١٢ ← ١٢ يومًا ✅"},
+   {v:"2 يومًا", ex:"هذا ناتج طرح الأيام مباشرة (٦-٤)، وهذا مو طريقة حساب المعدلات."},
+   {v:"10 أيام", ex:"هذا مجموع الأيام مطروحًا منه رقم عشوائي، راجع الحل."},
+   {v:"6 أيام", ex:"هذا نفس مدة أ لوحدها، مو مدة ب."}
+ ]},
+{type:"wrk", text:"أ تُنجز عملاً في ٧ أيام، وب تُنجزه في ٢١ يومًا.<br>فكم يومًا يحتاجان لإنجازه معًا؟ 🏗️", funny:"💬 الجواب هذي المرة رقم عشري، خذ وقتك بالحساب 🔍",
+ h1:"معدل أ باليوم = ١/٧ من العمل، ومعدل ب باليوم = ١/٢١ من العمل.", h2:"معدلهما معًا = ١/٧ + ١/٢١ ← والزمن اللازم = ١ ÷ (هذا المجموع)",
+ correct:"5.25", solution:"١/٧+١/٢١ = ٣/٢١+١/٢١ = ٤/٢١ ← الزمن = ٢١/٤ = ٥٫٢٥ يوم ✅",
+ options:[
+   {v:"5.25 يوم", ok:true, ex:"صحيح! ١/٧+١/٢١ = ٤/٢١ ← ٢١/٤ = ٥٫٢٥ ✅"},
+   {v:"14 يومًا", ex:"هذا متوسط الرقمين (٧+٢١)/٢ بدل جمع المعدلين."},
+   {v:"28 يومًا", ex:"هذا مجموع الأيام مباشرة، وهذا مو طريقة حساب العمل المشترك."},
+   {v:"7 أيام", ex:"هذا نفس مدة أ لوحدها، متجاهلاً مساهمة ب."}
+ ]},
+{type:"wrk", text:"أ وب معًا ينجزان عملاً في ١٠ أيام. أ وحدها تحتاج ١٥ يومًا.<br>فكم يومًا تحتاج ب وحدها؟ 🛠️", funny:"💬 آخر سؤال بهذا النوع! طبّق نفس فكرة الطرح 💪",
+ h1:"معدل أ وب معًا = ١/١٠، ومعدل أ لوحدها = ١/١٥.", h2:"معدل ب = (معدل الاثنين) - (معدل أ) = ١/١٠ - ١/١٥ ← والزمن = ١ ÷ (هذا الناتج)",
+ correct:"30", solution:"١/١٠-١/١٥ = ٣/٣٠-٢/٣٠ = ١/٣٠ ← الزمن = ٣٠ يومًا ✅",
+ options:[
+   {v:"30 يومًا", ok:true, ex:"صحيح! ١/١٠-١/١٥ = ١/٣٠ ← ٣٠ يومًا ✅"},
+   {v:"5 أيام", ex:"هذا ناتج طرح الأيام مباشرة (١٥-١٠)، وهذا مو طريقة حساب المعدلات."},
+   {v:"25 يومًا", ex:"هذا ناتج تخمين غير مبني على طرح المعدلين الصحيح."},
+   {v:"15 يومًا", ex:"هذا نفس مدة أ لوحدها، مو مدة ب."}
+ ]},
+{type:"age", text:"بعد ٥ سنوات، عمر يوسف وأخته سيصبح مجموعهما ٥٠، والأخت أكبر من يوسف بـ ٨ سنوات الآن.<br>فما عمر يوسف الآن؟ 👦", funny:"💬 لا تحسب المجموع الحالي على طول، فيه \"بعد ٥ سنوات\" لازم تنتبه لها 😉",
+ h1:"الفرق بين يوسف وأخته ثابت = ٨ سنوات. وبعد ٥ سنوات المجموع = ٥٠.", h2:"خلّي عمر يوسف الآن = س ← عمر الأخت الآن = س+٨ ← جرب تكوّن المعادلة: (س+٥) + (س+٨+٥) = ٥٠",
+ correct:"16", solution:"(س+٥)+(س+١٣) = ٥٠ ← ٢س+١٨ = ٥٠ ← ٢س=٣٢ ← س = ١٦ سنة ✅",
+ options:[
+   {v:"16 سنة", ok:true, ex:"صحيح! ٢س+١٨=٥٠ ← س=١٦ ✅"},
+   {v:"20 سنة", ex:"هذا ناتج تخمين غير مبني على معادلة العمر الصحيحة."},
+   {v:"8 سنوات", ex:"هذا هو الفرق بين العمرين نفسه، مو عمر يوسف."},
+   {v:"12 سنة", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"age", text:"الآن: أب وابنته مجموع أعمارهما ٤٨، والأب أكبر بـ ٢٤ سنة.<br>فما عمر كل منهما؟ 👨‍👧", funny:"💬 هذي المرة كله \"الآن\"، ما فيه قفزة بالزمن 🙂",
+ h1:"المجموع الآن = ٤٨، والفرق بين الأب والابنة الآن = ٢٤ سنة.", h2:"خلّي عمر الابنة = س ← عمر الأب = س+٢٤ ← جرب تكوّن المعادلة: س + (س+٢٤) = ٤٨",
+ correct:"12-36", solution:"٢س+٢٤ = ٤٨ ← ٢س = ٢٤ ← س = ١٢ (الابنة) ← الأب = ٣٦ ✅",
+ options:[
+   {v:"الابنة ١٢ والأب ٣٦", ok:true, ex:"صحيح! ٢س+٢٤=٤٨ ← س=١٢، والأب=٣٦ ✅"},
+   {v:"الابنة ١٦ والأب ٣٢", ex:"هذا ناتج تخمين غير مبني على معادلة المجموع والفرق الصحيحة."},
+   {v:"الابنة ٢٤ والأب ٢٤", ex:"هذا لو افترضت الأعمار متساوية، متجاهلاً فرق الـ٢٤ سنة."},
+   {v:"الابنة ١٠ والأب ٣٨", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"age", text:"بعد ٢ سنة، عمر ريم وعمها سيصبح مجموعهما ٤٦، والعم أكبر من ريم بـ ٣٠ سنة الآن.<br>فما عمر ريم الآن؟ 👧", funny:"💬 آخر سؤال بهذا النوع! خله يكون بإذن الله أسهلهم 🎉",
+ h1:"الفرق بين ريم وعمها ثابت = ٣٠ سنة. وبعد سنتين المجموع = ٤٦.", h2:"خلّي عمر ريم الآن = س ← عمر العم الآن = س+٣٠ ← جرب تكوّن المعادلة: (س+٢) + (س+٣٠+٢) = ٤٦",
+ correct:"6", solution:"(س+٢)+(س+٣٢) = ٤٦ ← ٢س+٣٤ = ٤٦ ← ٢س=١٢ ← س = ٦ سنوات ✅",
+ options:[
+   {v:"6 سنوات", ok:true, ex:"صحيح! ٢س+٣٤=٤٦ ← س=٦ ✅"},
+   {v:"16 سنة", ex:"هذا ناتج تخمين غير مبني على معادلة العمر الصحيحة."},
+   {v:"3 سنوات", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."},
+   {v:"10 سنوات", ex:"هذا ناتج قسمة غير صحيحة، راجع خطوات الحل."}
+ ]},
+{type:"cst", text:"تكلفة إنتاج ٢٠٠ وحدة = ٦٠٠٠ ريال.<br>فما تكلفة إنتاج ٣٥٠ وحدة؟ 🏭", funny:"💬 علاقة طردية بسيطة، بس احسب تكلفة الوحدة أول 😉",
+ h1:"تكلفة الوحدة الواحدة = التكلفة الكلية ÷ عدد الوحدات = ٦٠٠٠ ÷ ٢٠٠", h2:"التكلفة الجديدة = ٣٥٠ × تكلفة الوحدة الواحدة",
+ correct:"10500", solution:"تكلفة الوحدة = ٦٠٠٠÷٢٠٠ = ٣٠ ← التكلفة الجديدة = ٣٥٠×٣٠ = ١٠٥٠٠ ريال ✅",
+ options:[
+   {v:"10500", ok:true, ex:"صحيح! ٣٥٠ × ٣٠ = ١٠٥٠٠ ✅"},
+   {v:"9000", ex:"هذا ناتج تخمين غير مبني على تكلفة الوحدة الصحيحة."},
+   {v:"7000", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."},
+   {v:"6000", ex:"هذا نفس التكلفة الأصلية، بدون حساب الزيادة بعدد الوحدات."}
+ ]},
+{type:"cst", text:"سعر الكوب المفرد ٥ ريالات، وعند شراء ١٦ كوبًا يُمنح خصم ٢٥٪.<br>فما مقدار التوفير؟ ☕", funny:"💬 لا، الجواب مو ٢٥ ريال، هذا رقم النسبة مو مبلغ التوفير 😏",
+ h1:"السعر بدون خصم = سعر الكوب × الكمية = ٥ × ١٦", h2:"السعر بعد الخصم = السعر بدون خصم × (١-٠٫٢٥)، والتوفير = الفرق بين السعرين",
+ correct:"20", solution:"بدون خصم = ٨٠ ← بعد الخصم = ٦٠ ← التوفير = ٨٠-٦٠ = ٢٠ ريال ✅",
+ options:[
+   {v:"20", ok:true, ex:"صحيح! ٨٠ - ٦٠ = ٢٠ ريال ✅"},
+   {v:"25", ex:"هذا رقم نسبة الخصم نفسها، مو مبلغ التوفير الفعلي."},
+   {v:"60", ex:"هذا السعر بعد الخصم، مو مقدار التوفير."},
+   {v:"16", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"cst", text:"اشترى تاجر بضاعة بـ ٩٠٠ ريال، وأراد ربحًا مقداره ٢٠٪.<br>فبكم يجب أن يبيعها؟ 🛍️", funny:"💬 آخر سؤال! لا تحسب الربح بس وتنسى تضيفه لسعر الشراء 😅",
+ h1:"مقدار الربح = سعر الشراء × نسبة الربح = ٩٠٠ × ٠٫٢٠", h2:"سعر البيع = سعر الشراء + مقدار الربح (أو مباشرة: سعر الشراء × ١٫٢٠)",
+ correct:"1080", solution:"الربح = ١٨٠ ← سعر البيع = ٩٠٠+١٨٠ = ١٠٨٠ ريال ✅",
+ options:[
+   {v:"1080", ok:true, ex:"صحيح! ٩٠٠ × ١٫٢٠ = ١٠٨٠ ✅"},
+   {v:"180", ex:"هذا مقدار الربح فقط، مو سعر البيع الكامل."},
+   {v:"920", ex:"هذا ناتج تخمين غير مبني على حساب الربح الصحيح."},
+   {v:"1000", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]}
+];
+
+const container = document.getElementById('cardsContainer');
+const QCOUNT = QUESTIONS.length;
+document.getElementById('scoreDisplay').textContent = '0 / ' + QCOUNT;
+
+let score = 0;
+let answered = {};
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const meta = TYPE_META[q.type];
+  answered[n] = false;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card' + n;
+  card.style.setProperty('--accent', meta.color);
+
+  const opts = q.options.map((o,i)=>({...o, key:n+'-'+i}));
+
+  let optsHtml = '';
+  opts.forEach(o=>{
+    optsHtml += `
+      <button class="opt-btn" data-key="${o.key}" data-ok="${o.ok?'1':'0'}">
+        <span>${o.v}</span><span class="tag"></span>
+      </button>
+      <div class="opt-explain ${o.ok?'ok':'no'}" id="ex-${o.key}">${o.ex}</div>`;
+  });
+
+  card.innerHTML = `
+    <div class="qtitle">
+      <span class="qnum">${n}</span> السؤال ${n}
+      <span class="qtag">${meta.emoji} ${meta.label}</span>
+    </div>
+    <div class="qtext">${q.text}</div>
+    <div class="funny">${q.funny}</div>
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h${n}-1"><span>🔎 تلميح: وش المعطيات؟</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-1">${q.h1}</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h${n}-2"><span>🎯 تلميح: صيغة الحل</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-2">${q.h2}</div>
+      </div>
+    </div>
+    <div class="options" id="opts${n}">${optsHtml}</div>
+    <div class="solution-box" id="sol${n}">
+      <span class="lbl">✅ الحل الكامل</span>${q.solution}
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+document.querySelectorAll('.hint-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('open');
+    const icon = btn.querySelector('span:last-child');
+    icon.textContent = target.classList.contains('open') ? '－' : '＋';
+  });
+});
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const cont = document.getElementById('opts'+n);
+  const buttons = cont.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered[n]) return;
+      answered[n] = true;
+      const isOk = btn.dataset.ok === '1';
+      buttons.forEach(b=>b.classList.add('disabled'));
+      btn.classList.add(isOk ? 'correct' : 'wrong');
+      btn.querySelector('.tag').textContent = isOk ? '✅' : '❌';
+      document.getElementById('ex-'+btn.dataset.key).classList.add('show');
+      document.getElementById('sol'+n).classList.add('show');
+      if(isOk){ score++; }
+      updateScore();
+      checkFinish();
+    });
+  });
+});
+
+function updateScore(){
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + QCOUNT;
+}
+
+function checkFinish(){
+  const allDone = Object.values(answered).every(v=>v===true);
+  if(allDone){
+    const rc = document.getElementById('resultCard');
+    const title = document.getElementById('resultTitle');
+    const text = document.getElementById('resultText');
+    const emoji = document.getElementById('resultEmoji');
+    rc.classList.add('show');
+    rc.scrollIntoView({behavior:'smooth', block:'center'});
+
+    if(score === QCOUNT){
+      emoji.textContent = '🏆';
+      title.textContent = 'خرافي! نتيجة كاملة';
+      text.textContent = 'حليت الـ' + QCOUNT + ' سؤال كلهم صح 😎 عقلك مرتب زي الحلول بالظبط';
+    } else if(score >= QCOUNT*0.7){
+      emoji.textContent = '💪';
+      title.textContent = 'أداء ممتاز!';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الأسئلة اللي غلطت فيها وشوف الحل المكتوب تحتها';
+    } else if(score >= QCOUNT*0.4){
+      emoji.textContent = '🙂';
+      title.textContent = 'بداية طيبة';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الحلول المكتوبة تحت كل سؤال غلطت فيه';
+    } else {
+      emoji.textContent = '🌱';
+      title.textContent = 'وقت المراجعة';
+      text.textContent = 'ولا يهمك، كل الحلول مكتوبة تحت كل سؤال، راجعها بهدوء وحاول مرة ثانية';
+    }
+  }
+}
+
+function restart(){
+  score = 0;
+  QUESTIONS.forEach((q, idx)=>{
+    const n = idx + 1;
+    answered[n] = false;
+    const buttons = document.querySelectorAll('#opts'+n+' .opt-btn');
+    buttons.forEach(b=>{
+      b.classList.remove('correct','wrong','disabled');
+      b.querySelector('.tag').textContent = '';
+    });
+    document.querySelectorAll('#opts'+n+' .opt-explain').forEach(e=>e.classList.remove('show'));
+    document.getElementById('sol'+n).classList.remove('show');
+  });
+  updateScore();
+  document.getElementById('resultCard').classList.remove('show');
+  document.querySelectorAll('.hint-reveal.open').forEach(h=>h.classList.remove('open'));
+  document.querySelectorAll('.hint-btn span:last-child').forEach(i=>i.textContent='＋');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+const waText = encodeURIComponent(
+`🧠 التحدي الكبير 4: فكّر أقل ... حُلّ أسرع (٢٠ سؤال)
+
+قياس 📐 + زوايا 📊 + فخ النسب ⚠️ + عمل وإنجاز 🛠️ + أعمار 👨‍👩‍👧 + تكلفة وسعر 💰
+
+جرب تحل الأسئلة بنفسك قبل ما تشوف الحل المكتوب تحت كل سؤال 😉
+رابط التحدي: (الصق الرابط هنا بعد رفعه)`
+);
+document.getElementById('waBtn').href = `https://wa.me/?text=${waText}`;
+</script>
+</body>
+</html>

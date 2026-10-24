@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>تحدي: فكّر أقل، حُلّ أسرع 🧠⚡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EE;
+    --ink:#1F2A37;
+    --teal:#0E8C86;
+    --teal-dark:#0A6B66;
+    --coral:#FF6B5E;
+    --sun:#FFC23C;
+    --purple:#8E6FD1;
+    --blue:#3E7CB1;
+    --green:#1a9c6b;
+    --pink:#D9739F;
+    --brown:#A0714E;
+    --card:#FFFFFF;
+    --shadow: 0 10px 25px rgba(31,42,55,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,194,60,0.25), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(142,111,209,0.18), transparent 45%),
+      var(--cream);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    padding:16px 12px 60px;
+    min-height:100vh;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:14px;}
+  header .badge{
+    display:inline-block;background:var(--teal);color:#fff;font-family:'Baloo Bhaijaan 2';
+    font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+  }
+  header h1{font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:23px;margin:12px 0 4px;color:var(--teal-dark);}
+  header p{margin:0;color:#5b6572;font-size:13.5px;}
+
+  .legend{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:14px 0 6px;font-size:10.5px;font-weight:700;}
+  .legend span{padding:4px 9px;border-radius:999px;color:#fff;}
+
+  .score-bar{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 20px;
+    background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);
+    font-weight:700;font-size:14px;width:fit-content;margin-inline:auto;position:-webkit-sticky;position:sticky;top:8px;z-index:10;
+  }
+  .score-bar span{color:var(--purple);}
+
+  .card{
+    background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;
+    margin-bottom:22px;border:2px solid rgba(0,0,0,0.03);position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;
+    background:var(--accent, var(--teal));opacity:0.12;border-radius:50%;
+  }
+  .qtitle{
+    display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2';font-weight:700;
+    font-size:14px;color:var(--accent, var(--teal-dark));margin-bottom:10px;flex-wrap:wrap;
+  }
+  .qnum{
+    display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+    background:var(--accent, var(--teal));color:#fff;font-weight:900;font-size:15px;box-shadow:var(--shadow);
+  }
+  .qtag{font-size:10.5px;color:#fff;background:var(--accent, var(--teal));padding:2px 10px;border-radius:999px;opacity:0.85;}
+  .qtext{
+    background:#f8f4ea;border-radius:14px;padding:15px;font-size:18px;font-weight:800;line-height:1.7;
+    margin-bottom:8px;border:2px dashed rgba(0,0,0,0.07);text-align:center;
+  }
+  .funny{font-size:12.5px;color:#8a7350;margin:0 0 16px;text-align:center;}
+
+  .hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .hint-btn{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;
+    background:#fdf2ea;color:var(--ink);font-family:'Cairo';font-weight:700;font-size:13.5px;
+    padding:11px 14px;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:right;
+  }
+  .hint-btn:active{transform:scale(0.98);}
+  .hint-reveal{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;
+    background:#eef7f6;border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:0 14px;
+  }
+  .hint-reveal.open{max-height:220px;padding:11px 14px;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    display:flex;align-items:center;justify-content:space-between;border:2px solid #e9e1d2;background:#fffdf9;
+    font-family:'Cairo';font-weight:700;font-size:15px;padding:13px 16px;border-radius:14px;cursor:pointer;
+    transition:all .18s ease;
+  }
+  .opt-btn:hover{border-color:var(--accent, var(--teal));}
+  .opt-btn .tag{font-size:17px;}
+  .opt-btn.correct{background:#e8f8f1;border-color:var(--green);color:var(--green);}
+  .opt-btn.wrong{background:#fdecea;border-color:var(--coral);color:#b6392e;}
+  .opt-btn.disabled{pointer-events:none;opacity:0.85;}
+
+  .opt-explain{
+    display:none;font-size:13px;line-height:1.7;font-weight:600;
+    background:#fff7ef;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px;margin-bottom:2px;
+  }
+  .opt-explain.show{display:block;}
+  .opt-explain.ok{background:#eafaf3;color:#136b47;}
+  .opt-explain.no{background:#fdeceb;color:#8f2e22;}
+
+  .solution-box{
+    display:none;margin-top:14px;background:#eef4fb;border-radius:14px;padding:14px 16px;
+    font-size:14px;line-height:1.9;border:2px solid #d7e6f7;
+  }
+  .solution-box.show{display:block;}
+  .solution-box .lbl{font-family:'Baloo Bhaijaan 2';font-weight:700;color:#2a5da0;margin-bottom:6px;display:block;}
+
+  .result-card{
+    text-align:center;background:linear-gradient(135deg, var(--teal), var(--purple));color:#fff;
+    border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none;
+  }
+  .result-card.show{display:block;}
+  .result-card h2{font-family:'Baloo Bhaijaan 2';font-size:22px;margin:0 0 8px;}
+  .result-card p{margin:0;font-size:14.5px;opacity:0.95;}
+  .result-card .emoji{font-size:40px;margin-bottom:6px;}
+
+  .share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;
+    font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:14px;cursor:pointer;box-shadow:var(--shadow);
+    text-decoration:none;color:#fff;
+  }
+  .wa{background:#25D366;}
+  .rt{background:var(--sun);color:var(--ink);}
+
+  footer{text-align:center;margin-top:18px;font-size:11.5px;color:#a9a094;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>تحدي ملخّص الجذور</h1>
+    <p>تعريف، ضرب، قسمة، جمع، ترشيد بالمرافق، فخ التوزيع، مقارنة، وجذر تكعيبي 📐</p>
+  </header>
+
+  <div class="legend">
+    <span style="background:#0E8C86">√ تعريف</span>
+    <span style="background:#8E6FD1">✖️ ضرب</span>
+    <span style="background:#3E7CB1">➗ قسمة</span>
+    <span style="background:#FF6B5E">➕ جمع</span>
+    <span style="background:#D9739F">🧴 ترشيد</span>
+    <span style="background:#7C3AED">⚠️ فخ التوزيع</span>
+    <span style="background:#1a9c6b">⚖️ مقارنة</span>
+    <span style="background:#A0714E">🧊 تكعيبي</span>
+  </div>
+
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">0 / 20</span></div>
+
+  <div id="cardsContainer"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="emoji" id="resultEmoji">🎉</div>
+    <h2 id="resultTitle">تمام!</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+
+  <footer>فكّر أقل ... حُلّ أسرع — ملخّص الجذور 🧠✨</footer>
+</div>
+
+<script>
+const TYPE_META = {
+  def: {label:"تعريف الجذر", color:"#0E8C86", emoji:"√"},
+  mul: {label:"ضرب الجذور", color:"#8E6FD1", emoji:"✖️"},
+  div: {label:"قسمة الجذور", color:"#3E7CB1", emoji:"➗"},
+  add: {label:"جمع جذور", color:"#FF6B5E", emoji:"➕"},
+  rat: {label:"ترشيد بالمرافق", color:"#D9739F", emoji:"🧴"},
+  trap: {label:"فخ الجذر", color:"#7C3AED", emoji:"⚠️"},
+  cmp: {label:"مقارنة جذور", color:"#1a9c6b", emoji:"⚖️"},
+  cube: {label:"جذر تكعيبي", color:"#A0714E", emoji:"🧊"},
+};
+
+const QUESTIONS = [
+{type:"def", text:"ما قيمة √121 ؟", funny:"💬 دوّر عن عدد إذا ضربته بنفسه يعطيك ١٢١ 🔍",
+ h1:"الجذر التربيعي لعدد = العدد اللي إذا ضربته في نفسه يعطيك العدد الأصلي.", h2:"دوّر عن عدد إذا ضربته في نفسه يطابق ١٢١",
+ solution:"١١×١١ = ١٢١ ← إذن √١٢١ = ١١ ✅",
+ options:[
+   {v:"11", ok:true, ex:"صحيح! ١١×١١ = ١٢١ ✅"},
+   {v:"12", ok:false, ex:"هذا ناتج تخمين، تحقق بضرب ١٢×١٢=١٤٤ وليس ١٢١."},
+   {v:"10", ok:false, ex:"هذا ناتج تخمين، تحقق بضرب ١٠×١٠=١٠٠ وليس ١٢١."},
+   {v:"121", ok:false, ex:"هذا العدد الأصلي نفسه، نسيت تاخذ جذره التربيعي."}
+ ]},
+{type:"def", text:"ما قيمة √169 ؟", funny:"💬 آخر سؤال بهذا النوع، دوّر عن المربع الكامل 💪",
+ h1:"الجذر التربيعي لعدد = العدد اللي إذا ضربته في نفسه يعطيك العدد الأصلي.", h2:"دوّر عن عدد إذا ضربته في نفسه يطابق ١٦٩",
+ solution:"١٣×١٣ = ١٦٩ ← إذن √١٦٩ = ١٣ ✅",
+ options:[
+   {v:"12", ok:false, ex:"هذا ناتج تخمين، تحقق بضرب ١٢×١٢=١٤٤ وليس ١٦٩."},
+   {v:"13", ok:true, ex:"صحيح! ١٣×١٣ = ١٦٩ ✅"},
+   {v:"14", ok:false, ex:"هذا ناتج تخمين، تحقق بضرب ١٤×١٤=١٩٦ وليس ١٦٩."},
+   {v:"169", ok:false, ex:"هذا العدد الأصلي نفسه، نسيت تاخذ جذره التربيعي."}
+ ]},
+{type:"mul", text:"√6 × √24", funny:"💬 اضرب اللي تحت الجذر أول، وبعدين بسّط 😎",
+ h1:"جذر × جذر = جذر حاصل الضرب: √أ × √ب = √(أ×ب).", h2:"اضرب ٦×٢٤=١٤٤ تحت جذر واحد، وشوف هل ١٤٤ مربع كامل",
+ solution:"√٦×√٢٤ = √١٤٤ = ١٢ ✅",
+ options:[
+   {v:"√30", ok:false, ex:"هذا لو جمعت الأعداد تحت الجذر (٦+٢٤) بدل ضربها."},
+   {v:"144", ok:false, ex:"نسيت تاخذ الجذر التربيعي لـ١٤٤ بعد الضرب."},
+   {v:"12", ok:true, ex:"صحيح! √(٦×٢٤) = √١٤٤ = ١٢ ✅"},
+   {v:"18", ok:false, ex:"هذا ناتج تخمين غير مبني على حاصل الضرب الصحيح."}
+ ]},
+{type:"mul", text:"√7 × √7", funny:"💬 جذر العدد بنفسه له نتيجة خاصة 🔑",
+ h1:"جذر × جذر = جذر حاصل الضرب: √أ × √ب = √(أ×ب).", h2:"اضرب ٧×٧=٤٩ تحت جذر واحد، وخذ الجذر التربيعي لـ٤٩",
+ solution:"√٧×√٧ = √٤٩ = ٧ ✅",
+ options:[
+   {v:"√14", ok:false, ex:"هذا لو جمعت الأعداد تحت الجذر (٧+٧) بدل ضربها."},
+   {v:"49", ok:false, ex:"نسيت تاخذ الجذر التربيعي لـ٤٩ بعد الضرب."},
+   {v:"14", ok:false, ex:"هذا ناتج تخمين غير مبني على حاصل الضرب الصحيح."},
+   {v:"7", ok:true, ex:"صحيح! √(٧×٧) = √٤٩ = ٧ ✅"}
+ ]},
+{type:"mul", text:"√10 × √40", funny:"💬 آخر سؤال بهذا النوع، الناتج تحت الجذر مربع كامل 🎯",
+ h1:"جذر × جذر = جذر حاصل الضرب: √أ × √ب = √(أ×ب).", h2:"اضرب ١٠×٤٠=٤٠٠ تحت جذر واحد، وخذ الجذر التربيعي لـ٤٠٠",
+ solution:"√١٠×√٤٠ = √٤٠٠ = ٢٠ ✅",
+ options:[
+   {v:"20", ok:true, ex:"صحيح! √(١٠×٤٠) = √٤٠٠ = ٢٠ ✅"},
+   {v:"√50", ok:false, ex:"هذا لو جمعت الأعداد تحت الجذر (١٠+٤٠) بدل ضربها."},
+   {v:"400", ok:false, ex:"نسيت تاخذ الجذر التربيعي لـ٤٠٠ بعد الضرب."},
+   {v:"30", ok:false, ex:"هذا ناتج تخمين غير مبني على حاصل الضرب الصحيح."}
+ ]},
+{type:"div", text:"√98 ÷ √2", funny:"💬 اقسم اللي تحت الجذر أول، وبعدين بسّط 🔍",
+ h1:"جذر ÷ جذر = جذر ناتج القسمة: √أ ÷ √ب = √(أ÷ب).", h2:"اقسم ٩٨÷٢=٤٩ تحت جذر واحد، وخذ الجذر التربيعي لـ٤٩",
+ solution:"√٩٨÷√٢ = √٤٩ = ٧ ✅",
+ options:[
+   {v:"√96", ok:false, ex:"هذا لو طرحت الأعداد تحت الجذر (٩٨-٢) بدل قسمتها."},
+   {v:"7", ok:true, ex:"صحيح! √(٩٨÷٢) = √٤٩ = ٧ ✅"},
+   {v:"49", ok:false, ex:"نسيت تاخذ الجذر التربيعي لـ٤٩ بعد القسمة."},
+   {v:"14", ok:false, ex:"هذا ناتج تخمين غير مبني على القسمة الصحيحة."}
+ ]},
+{type:"div", text:"√108 ÷ √3", funny:"💬 نفس الفكرة، اقسم وبسّط بثقة 🎯",
+ h1:"جذر ÷ جذر = جذر ناتج القسمة: √أ ÷ √ب = √(أ÷ب).", h2:"اقسم ١٠٨÷٣=٣٦ تحت جذر واحد، وخذ الجذر التربيعي لـ٣٦",
+ solution:"√١٠٨÷√٣ = √٣٦ = ٦ ✅",
+ options:[
+   {v:"√105", ok:false, ex:"هذا لو طرحت الأعداد تحت الجذر (١٠٨-٣) بدل قسمتها."},
+   {v:"36", ok:false, ex:"نسيت تاخذ الجذر التربيعي لـ٣٦ بعد القسمة."},
+   {v:"6", ok:true, ex:"صحيح! √(١٠٨÷٣) = √٣٦ = ٦ ✅"},
+   {v:"9", ok:false, ex:"هذا ناتج تخمين غير مبني على القسمة الصحيحة."}
+ ]},
+{type:"div", text:"√200 ÷ √8", funny:"💬 آخر سؤال بهذا النوع، اقسم بثقة 💪",
+ h1:"جذر ÷ جذر = جذر ناتج القسمة: √أ ÷ √ب = √(أ÷ب).", h2:"اقسم ٢٠٠÷٨=٢٥ تحت جذر واحد، وخذ الجذر التربيعي لـ٢٥",
+ solution:"√٢٠٠÷√٨ = √٢٥ = ٥ ✅",
+ options:[
+   {v:"√192", ok:false, ex:"هذا لو طرحت الأعداد تحت الجذر (٢٠٠-٨) بدل قسمتها."},
+   {v:"25", ok:false, ex:"نسيت تاخذ الجذر التربيعي لـ٢٥ بعد القسمة."},
+   {v:"8", ok:false, ex:"هذا ناتج تخمين غير مبني على القسمة الصحيحة."},
+   {v:"5", ok:true, ex:"صحيح! √(٢٠٠÷٨) = √٢٥ = ٥ ✅"}
+ ]},
+{type:"add", text:"4√7 + 6√7", funny:"💬 نفس العدد تحت الجذر؟ اجمع المعاملات بس 😉",
+ h1:"الجذور متشابهة (نفس العدد تحت الجذر = ٧)، فتُجمع بجمع المعاملات فقط.", h2:"اجمع المعاملين: ٤+٦ = ١٠ ← والجذر يبقى كما هو",
+ solution:"٤√٧+٦√٧ = (٤+٦)√٧ = ١٠√٧ ✅",
+ options:[
+   {v:"10√7", ok:true, ex:"صحيح! (٤+٦)√٧ = ١٠√٧ ✅"},
+   {v:"10√14", ok:false, ex:"هذا لو جمعت الأعداد تحت الجذر (٧+٧) بدل جمع المعاملات."},
+   {v:"24√7", ok:false, ex:"هذا لو ضربت المعاملين (٤×٦) بدل جمعهما."},
+   {v:"2√7", ok:false, ex:"هذا لو طرحت المعاملين بدل جمعهما."}
+ ]},
+{type:"add", text:"9√2 - 3√2", funny:"💬 نفس الفكرة، بس طرح هذي المرة 🎯",
+ h1:"الجذور متشابهة (نفس العدد تحت الجذر = ٢)، فتُطرح بطرح المعاملات فقط.", h2:"اطرح المعاملين: ٩-٣ = ٦ ← والجذر يبقى كما هو",
+ solution:"٩√٢-٣√٢ = (٩-٣)√٢ = ٦√٢ ✅",
+ options:[
+   {v:"6√4", ok:false, ex:"هذا لو طرحت الأعداد تحت الجذر بطريقة خاطئة، الجذر يبقى ٢ كما هو."},
+   {v:"6√2", ok:true, ex:"صحيح! (٩-٣)√٢ = ٦√٢ ✅"},
+   {v:"27√2", ok:false, ex:"هذا لو ضربت المعاملين (٩×٣) بدل طرحهما."},
+   {v:"12√2", ok:false, ex:"هذا لو جمعت المعاملين (٩+٣) بدل طرحهما."}
+ ]},
+{type:"add", text:"5√6 + 2√6 - 4√6", funny:"💬 آخر سؤال بهذا النوع، ثلاث حدود بس نفس الفكرة 💪",
+ h1:"كل الجذور متشابهة (نفس العدد تحت الجذر = ٦)، فتُجمع وتُطرح المعاملات بس.", h2:"احسب: ٥+٢-٤",
+ solution:"(٥+٢-٤)√٦ = ٣√٦ ✅",
+ options:[
+   {v:"3√18", ok:false, ex:"هذا ناتج خاطئ للعدد تحت الجذر، الجذر يبقى ٦ كما هو."},
+   {v:"11√6", ok:false, ex:"هذا لو جمعت الأرقام الثلاثة بدون طرح (٥+٢+٤)."},
+   {v:"3√6", ok:true, ex:"صحيح! (٥+٢-٤)√٦ = ٣√٦ ✅"},
+   {v:"2√6", ok:false, ex:"هذا ناتج جمع وطرح غير دقيق، راجع الحل خطوة بخطوة."}
+ ]},
+{type:"rat", text:"بسّط: 1 ÷ (√5 + 2)", funny:"💬 اضرب بالمرافق عشان يروح الجذر من المقام 🧴",
+ h1:"المرافق لـ(√٥+٢) هو (√٥-٢) ← اضرب البسط والمقام فيه.", h2:"(√٥+٢)(√٥-٢) = ٥-٤ = ١ (المقام يصير عدد صحيح بدون جذر)",
+ solution:"(١)(√٥-٢) ÷ ((√٥+٢)(√٥-٢)) = (√٥-٢) ÷ (٥-٤) = √٥-٢ ✅",
+ options:[
+   {v:"√5 + 2", ok:false, ex:"هذا خطأ بالإشارة، المرافق يعطي طرح مو جمع."},
+   {v:"2 - √5", ok:false, ex:"هذا نفس الإشارة الصحيحة بس بترتيب معكوس، راجع الحل."},
+   {v:"5 - 2", ok:false, ex:"هذا لو تجاهلت الجذر تمامًا، ناقص من الحل الأساسي."},
+   {v:"√5 - 2", ok:true, ex:"صحيح! ١×(√٥-٢) ÷ ١ = √٥-٢ ✅"}
+ ]},
+{type:"rat", text:"بسّط: 3 ÷ (√7 - 1)", funny:"💬 المرافق هذي المرة بإشارة موجبة 🔍",
+ h1:"المرافق لـ(√٧-١) هو (√٧+١) ← اضرب البسط والمقام فيه.", h2:"(√٧-١)(√٧+١) = ٧-١ = ٦ ← البسط يصير ٣(√٧+١)",
+ solution:"٣(√٧+١) ÷ ٦ = (√٧+١)/٢ ✅",
+ options:[
+   {v:"(√7+1)/2", ok:true, ex:"صحيح! ٣(√٧+١)÷٦ = (√٧+١)/٢ ✅"},
+   {v:"3(√7+1)", ok:false, ex:"نسيت تقسم على ٦ بعد الترشيد، هذا البسط بس."},
+   {v:"(√7-1)/2", ok:false, ex:"هذا خطأ بالإشارة، المرافق يعطي جمع مو طرح."},
+   {v:"√7+1", ok:false, ex:"نسيت الضرب في ٣ والقسمة على ٦، ناقص من الحل."}
+ ]},
+{type:"rat", text:"بسّط: 2 ÷ (√3 + 1)", funny:"💬 آخر سؤال بهذا النوع، طبّق نفس الحيلة 🎉",
+ h1:"المرافق لـ(√٣+١) هو (√٣-١) ← اضرب البسط والمقام فيه.", h2:"(√٣+١)(√٣-١) = ٣-١ = ٢ ← البسط يصير ٢(√٣-١)",
+ solution:"٢(√٣-١) ÷ ٢ = √٣-١ ✅",
+ options:[
+   {v:"√3 + 1", ok:false, ex:"هذا خطأ بالإشارة، المرافق يعطي طرح مو جمع."},
+   {v:"√3 - 1", ok:true, ex:"صحيح! ٢(√٣-١)÷٢ = √٣-١ ✅"},
+   {v:"1 - √3", ok:false, ex:"هذا نفس الإشارة الصحيحة بس بترتيب معكوس، راجع الحل."},
+   {v:"2√3 - 2", ok:false, ex:"نسيت تقسم على ٢ بعد الترشيد، هذا البسط بس."}
+ ]},
+{type:"trap", text:"ما ناتج √(9 + 16) ؟", funny:"💬 لا توزع الجذر على الجمع! هذا خطأ شائع جدًا ⚠️",
+ h1:"الجذر لا يتوزع على الجمع أبدًا: √(أ+ب) ≠ √أ + √ب.", h2:"احسب المجموع تحت الجذر أول (٩+١٦=٢٥)، ثم خذ جذر الناتج ككل",
+ solution:"√(٩+١٦) = √٢٥ = ٥ ✅ (وليس √٩+√١٦=٧)",
+ options:[
+   {v:"7", ok:false, ex:"هذا لو وزّعت الجذر بالخطأ: √٩+√١٦=٣+٤=٧، وهذا الفخ الشائع بالضبط."},
+   {v:"25", ok:false, ex:"نسيت تاخذ الجذر التربيعي للمجموع بعد الجمع."},
+   {v:"5", ok:true, ex:"صحيح! √(٩+١٦) = √٢٥ = ٥ ✅"},
+   {v:"3", ok:false, ex:"هذا جذر العدد الأول بس (√٩)، متجاهلاً باقي المسألة."}
+ ]},
+{type:"trap", text:"ما ناتج √(36 + 64) ؟", funny:"💬 آخر سؤال بهذا النوع، لا تنخدع بنفس الفخ 😏",
+ h1:"الجذر لا يتوزع على الجمع أبدًا: √(أ+ب) ≠ √أ + √ب.", h2:"احسب المجموع تحت الجذر أول (٣٦+٦٤=١٠٠)، ثم خذ جذر الناتج ككل",
+ solution:"√(٣٦+٦٤) = √١٠٠ = ١٠ ✅ (وليس √٣٦+√٦٤=١٤)",
+ options:[
+   {v:"14", ok:false, ex:"هذا لو وزّعت الجذر بالخطأ: √٣٦+√٦٤=٦+٨=١٤، وهذا الفخ الشائع بالضبط."},
+   {v:"100", ok:false, ex:"نسيت تاخذ الجذر التربيعي للمجموع بعد الجمع."},
+   {v:"50", ok:false, ex:"هذا ناتج تخمين غير مبني على الحل الصحيح."},
+   {v:"10", ok:true, ex:"صحيح! √(٣٦+٦٤) = √١٠٠ = ١٠ ✅"}
+ ]},
+{type:"cmp", text:"أيهما أكبر: √45 أم √50 ؟", funny:"💬 قارن اللي تحت الجذر مباشرة، ما تحتاج تحسب القيمة الفعلية ⚖️",
+ h1:"لمقارنة جذرين تربيعيين، قارن الأعداد اللي تحت الجذر مباشرة بدون حساب القيم الفعلية.", h2:"العدد الأكبر تحت الجذر يعطي جذرًا أكبر دائمًا: قارن ٤٥ مع ٥٠",
+ solution:"٥٠>٤٥ ← إذن √٥٠ أكبر من √٤٥ ✅",
+ options:[
+   {v:"√50 أكبر", ok:true, ex:"صحيح! ٥٠>٤٥ ← إذن √٥٠>√٤٥ ✅"},
+   {v:"√45 أكبر", ok:false, ex:"عكس النتيجة، راجع مقارنة ٤٥ مع ٥٠ مباشرة."},
+   {v:"متساويان", ok:false, ex:"غير متساويين، ٤٥ لا يساوي ٥٠."},
+   {v:"لا يمكن المقارنة", ok:false, ex:"يمكن المقارنة دائمًا بمقارنة الأعداد تحت الجذر مباشرة."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: √80 أم √75 ؟", funny:"💬 آخر سؤال بهذا النوع، نفس فكرة المقارنة المباشرة 🎉",
+ h1:"لمقارنة جذرين تربيعيين، قارن الأعداد اللي تحت الجذر مباشرة بدون حساب القيم الفعلية.", h2:"العدد الأكبر تحت الجذر يعطي جذرًا أكبر دائمًا: قارن ٨٠ مع ٧٥",
+ solution:"٨٠>٧٥ ← إذن √٨٠ أكبر من √٧٥ ✅",
+ options:[
+   {v:"√75 أكبر", ok:false, ex:"عكس النتيجة، راجع مقارنة ٨٠ مع ٧٥ مباشرة."},
+   {v:"√80 أكبر", ok:true, ex:"صحيح! ٨٠>٧٥ ← إذن √٨٠>√٧٥ ✅"},
+   {v:"متساويان", ok:false, ex:"غير متساويين، ٨٠ لا يساوي ٧٥."},
+   {v:"لا يمكن المقارنة", ok:false, ex:"يمكن المقارنة دائمًا بمقارنة الأعداد تحت الجذر مباشرة."}
+ ]},
+{type:"cube", text:"ما قيمة ∛125 ؟", funny:"💬 دوّر عن عدد إذا كعّبته يعطيك ١٢٥ 🔍",
+ h1:"الجذر التكعيبي لعدد = العدد اللي إذا ضربته في نفسه ثلاث مرات يعطيك العدد الأصلي.", h2:"دوّر عن عدد إذا رفعته للقوة ٣ يطابق ١٢٥",
+ solution:"٥×٥×٥ = ١٢٥ ← إذن ∛١٢٥ = ٥ ✅",
+ options:[
+   {v:"25", ok:false, ex:"هذا لو أخذت الجذر التربيعي بدل التكعيبي (تقريبًا)، راجع الفرق بينهما."},
+   {v:"15", ok:false, ex:"هذا ناتج تخمين غير مبني على التكعيب الصحيح."},
+   {v:"5", ok:true, ex:"صحيح! ٥×٥×٥ = ١٢٥ ✅"},
+   {v:"41.7", ok:false, ex:"هذا لو تعاملت مع الجذر كقسمة مباشرة (١٢٥÷٣)، وذا خطأ مفاهيمي."}
+ ]},
+{type:"cube", text:"ما قيمة ∛64 ؟", funny:"💬 آخر سؤال بالتحدي كله! نفس الفكرة بالضبط 🎉",
+ h1:"الجذر التكعيبي لعدد = العدد اللي إذا ضربته في نفسه ثلاث مرات يعطيك العدد الأصلي.", h2:"دوّر عن عدد إذا رفعته للقوة ٣ يطابق ٦٤",
+ solution:"٤×٤×٤ = ٦٤ ← إذن ∛٦٤ = ٤ ✅",
+ options:[
+   {v:"16", ok:false, ex:"هذا لو أخذت الجذر التربيعي بدل التكعيبي، راجع الفرق بينهما."},
+   {v:"8", ok:false, ex:"هذا ناتج تخمين غير مبني على التكعيب الصحيح."},
+   {v:"21.3", ok:false, ex:"هذا لو تعاملت مع الجذر كقسمة مباشرة (٦٤÷٣)، وذا خطأ مفاهيمي."},
+   {v:"4", ok:true, ex:"صحيح! ٤×٤×٤ = ٦٤ ✅"}
+ ]},
+];
+const container = document.getElementById('cardsContainer');
+const QCOUNT = QUESTIONS.length;
+document.getElementById('scoreDisplay').textContent = '0 / ' + QCOUNT;
+
+let score = 0;
+let answered = {};
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const meta = TYPE_META[q.type];
+  answered[n] = false;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card' + n;
+  card.style.setProperty('--accent', meta.color);
+
+  const opts = q.options.map((o,i)=>({...o, key:n+'-'+i}));
+
+  let optsHtml = '';
+  opts.forEach(o=>{
+    optsHtml += `
+      <button class="opt-btn" data-key="${o.key}" data-ok="${o.ok?'1':'0'}">
+        <span>${o.v}</span><span class="tag"></span>
+      </button>
+      <div class="opt-explain ${o.ok?'ok':'no'}" id="ex-${o.key}">${o.ex}</div>`;
+  });
+
+  card.innerHTML = `
+    <div class="qtitle">
+      <span class="qnum">${n}</span> السؤال ${n}
+      <span class="qtag">${meta.emoji} ${meta.label}</span>
+    </div>
+    <div class="qtext">${q.text}</div>
+    <div class="funny">${q.funny}</div>
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h${n}-1"><span>🔎 تلميح: أي قانون يُستخدم؟</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-1">${q.h1}</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h${n}-2"><span>🎯 تلميح: كمّل الحل</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-2">${q.h2}</div>
+      </div>
+    </div>
+    <div class="options" id="opts${n}">${optsHtml}</div>
+    <div class="solution-box" id="sol${n}">
+      <span class="lbl">✅ الحل الكامل</span>${q.solution}
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+document.querySelectorAll('.hint-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('open');
+    const icon = btn.querySelector('span:last-child');
+    icon.textContent = target.classList.contains('open') ? '－' : '＋';
+  });
+});
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const cont = document.getElementById('opts'+n);
+  const buttons = cont.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered[n]) return;
+      answered[n] = true;
+      const isOk = btn.dataset.ok === '1';
+      buttons.forEach(b=>b.classList.add('disabled'));
+      btn.classList.add(isOk ? 'correct' : 'wrong');
+      btn.querySelector('.tag').textContent = isOk ? '✅' : '❌';
+      document.getElementById('ex-'+btn.dataset.key).classList.add('show');
+      document.getElementById('sol'+n).classList.add('show');
+      if(isOk){ score++; }
+      updateScore();
+      checkFinish();
+    });
+  });
+});
+
+function updateScore(){
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + QCOUNT;
+}
+
+function checkFinish(){
+  const allDone = Object.values(answered).every(v=>v===true);
+  if(allDone){
+    const rc = document.getElementById('resultCard');
+    const title = document.getElementById('resultTitle');
+    const text = document.getElementById('resultText');
+    const emoji = document.getElementById('resultEmoji');
+    rc.classList.add('show');
+    rc.scrollIntoView({behavior:'smooth', block:'center'});
+
+    if(score === QCOUNT){
+      emoji.textContent = '🏆';
+      title.textContent = 'خرافي! نتيجة كاملة';
+      text.textContent = 'حليت الـ' + QCOUNT + ' سؤال كلهم صح 😎 صرت خبير بكل قوانين الجذور';
+    } else if(score >= QCOUNT*0.7){
+      emoji.textContent = '💪';
+      title.textContent = 'أداء ممتاز!';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الأسئلة اللي غلطت فيها وشوف الحل المكتوب تحتها';
+    } else if(score >= QCOUNT*0.4){
+      emoji.textContent = '🙂';
+      title.textContent = 'بداية طيبة';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الحلول المكتوبة تحت كل سؤال غلطت فيه';
+    } else {
+      emoji.textContent = '🌱';
+      title.textContent = 'وقت المراجعة';
+      text.textContent = 'ولا يهمك، كل الحلول مكتوبة تحت كل سؤال، راجعها بهدوء وحاول مرة ثانية';
+    }
+  }
+}
+
+function restart(){
+  score = 0;
+  QUESTIONS.forEach((q, idx)=>{
+    const n = idx + 1;
+    answered[n] = false;
+    const buttons = document.querySelectorAll('#opts'+n+' .opt-btn');
+    buttons.forEach(b=>{
+      b.classList.remove('correct','wrong','disabled');
+      b.querySelector('.tag').textContent = '';
+    });
+    document.querySelectorAll('#opts'+n+' .opt-explain').forEach(e=>e.classList.remove('show'));
+    document.getElementById('sol'+n).classList.remove('show');
+  });
+  updateScore();
+  document.getElementById('resultCard').classList.remove('show');
+  document.querySelectorAll('.hint-reveal.open').forEach(h=>h.classList.remove('open'));
+  document.querySelectorAll('.hint-btn span:last-child').forEach(i=>i.textContent='＋');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+const waText = encodeURIComponent(
+`🧠 تحدي: فكّر أقل ... حُلّ أسرع (ملخّص الجذور)
+
+٢٠ سؤال في: تعريف الجذر √ + الضرب ✖️ + القسمة ➗ + الجمع والطرح ➕ + ترشيد المقام بالمرافق 🧴 + فخ توزيع الجذر ⚠️ + مقارنة الجذور ⚖️ + الجذر التكعيبي 🧊
+
+جرب تحل الأسئلة بنفسك قبل ما تشوف الحل المكتوب تحت كل سؤال 😉
+رابط التحدي: (الصق الرابط هنا بعد رفعه)`
+);
+document.getElementById('waBtn').href = `https://wa.me/?text=${waText}`;
+</script>
+</body>
+</html>

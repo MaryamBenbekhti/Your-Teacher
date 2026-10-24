@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>تحدي: فكّر أقل، حُلّ أسرع 🧠⚡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EE;
+    --ink:#1F2A37;
+    --teal:#0E8C86;
+    --teal-dark:#0A6B66;
+    --coral:#FF6B5E;
+    --sun:#FFC23C;
+    --purple:#8E6FD1;
+    --blue:#3E7CB1;
+    --green:#1a9c6b;
+    --pink:#D9739F;
+    --brown:#A0714E;
+    --card:#FFFFFF;
+    --shadow: 0 10px 25px rgba(31,42,55,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,194,60,0.25), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(142,111,209,0.18), transparent 45%),
+      var(--cream);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    padding:16px 12px 60px;
+    min-height:100vh;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:14px;}
+  header .badge{
+    display:inline-block;background:var(--purple);color:#fff;font-family:'Baloo Bhaijaan 2';
+    font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+  }
+  header h1{font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:22px;margin:12px 0 4px;color:var(--teal-dark);}
+  header p{margin:0;color:#5b6572;font-size:13.5px;}
+
+  .legend{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:14px 0 6px;font-size:10px;font-weight:700;}
+  .legend span{padding:4px 8px;border-radius:999px;color:#fff;}
+
+  .score-bar{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 20px;
+    background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);
+    font-weight:700;font-size:14px;width:fit-content;margin-inline:auto;position:sticky;top:8px;z-index:10;
+  }
+  .score-bar span{color:var(--purple);}
+
+  .card{
+    background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;
+    margin-bottom:22px;border:2px solid rgba(0,0,0,0.03);position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;
+    background:var(--accent, var(--teal));opacity:0.12;border-radius:50%;
+  }
+  .qtitle{
+    display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2';font-weight:700;
+    font-size:13.5px;color:var(--accent, var(--teal-dark));margin-bottom:10px;flex-wrap:wrap;
+  }
+  .qnum{
+    display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+    background:var(--accent, var(--teal));color:#fff;font-weight:900;font-size:15px;box-shadow:var(--shadow);
+  }
+  .qtag{font-size:10.5px;color:#fff;background:var(--accent, var(--teal));padding:2px 10px;border-radius:999px;opacity:0.85;}
+  .qtext{
+    background:#f8f4ea;border-radius:14px;padding:15px;font-size:20px;font-weight:900;line-height:1.7;
+    margin-bottom:8px;border:2px dashed rgba(0,0,0,0.07);text-align:center;direction:ltr;
+  }
+  .qtext.ar{direction:rtl;font-size:16.5px;}
+  .funny{font-size:12.5px;color:#8a7350;margin:0 0 16px;text-align:center;direction:rtl;}
+
+  .hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .hint-btn{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;
+    background:#fdf2ea;color:var(--ink);font-family:'Cairo';font-weight:700;font-size:13.5px;
+    padding:11px 14px;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:right;
+  }
+  .hint-btn:active{transform:scale(0.98);}
+  .hint-reveal{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;
+    background:#eef7f6;border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:0 14px;
+  }
+  .hint-reveal.open{max-height:220px;padding:11px 14px;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    display:flex;align-items:center;justify-content:space-between;border:2px solid #e9e1d2;background:#fffdf9;
+    font-family:'Cairo';font-weight:700;font-size:15px;padding:13px 16px;border-radius:14px;cursor:pointer;
+    transition:all .18s ease;
+  }
+  .opt-btn:hover{border-color:var(--accent, var(--teal));}
+  .opt-btn .tag{font-size:17px;}
+  .opt-btn.correct{background:#e8f8f1;border-color:var(--green);color:var(--green);}
+  .opt-btn.wrong{background:#fdecea;border-color:var(--coral);color:#b6392e;}
+  .opt-btn.disabled{pointer-events:none;opacity:0.85;}
+
+  .opt-explain{
+    display:none;font-size:13px;line-height:1.7;font-weight:600;
+    background:#fff7ef;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px;margin-bottom:2px;
+  }
+  .opt-explain.show{display:block;}
+  .opt-explain.ok{background:#eafaf3;color:#136b47;}
+  .opt-explain.no{background:#fdeceb;color:#8f2e22;}
+
+  .solution-box{
+    display:none;margin-top:14px;background:#eef4fb;border-radius:14px;padding:14px 16px;
+    font-size:14px;line-height:1.9;border:2px solid #d7e6f7;
+  }
+  .solution-box.show{display:block;}
+  .solution-box .lbl{font-family:'Baloo Bhaijaan 2';font-weight:700;color:#2a5da0;margin-bottom:6px;display:block;}
+
+  .result-card{
+    text-align:center;background:linear-gradient(135deg, var(--teal), var(--purple));color:#fff;
+    border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none;
+  }
+  .result-card.show{display:block;}
+  .result-card h2{font-family:'Baloo Bhaijaan 2';font-size:22px;margin:0 0 8px;}
+  .result-card p{margin:0;font-size:14.5px;opacity:0.95;}
+  .result-card .emoji{font-size:40px;margin-bottom:6px;}
+
+  .share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;
+    font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:14px;cursor:pointer;box-shadow:var(--shadow);
+    text-decoration:none;color:#fff;
+  }
+  .wa{background:#25D366;}
+  .rt{background:var(--sun);color:var(--ink);}
+
+  footer{text-align:center;margin-top:18px;font-size:11.5px;color:#a9a094;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>تحدي قوانين الأسس</h1>
+    <p>ضرب، قسمة، قوة القوة، أس سالب وكسري ومقارنات... ٨ قوانين بـ٢٠ سؤال ⚡</p>
+  </header>
+
+  <div class="legend">
+    <span style="background:#0E8C86">✖️ ضرب الأسس</span>
+    <span style="background:#FF6B5E">➗ قسمة الأسس</span>
+    <span style="background:#8E6FD1">🔁 قوة القوة</span>
+    <span style="background:#3E7CB1">➖ أس سالب</span>
+    <span style="background:#D9739F">0️⃣ أس صفري</span>
+    <span style="background:#1a9c6b">🔢 أس كسري</span>
+    <span style="background:#A0714E">⚖️ مقارنة أسس</span>
+  </div>
+
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">0 / 20</span></div>
+
+  <div id="cardsContainer"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="emoji" id="resultEmoji">🎉</div>
+    <h2 id="resultTitle">تمام!</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+
+  <footer>فكّر أقل ... حُلّ أسرع — تحدي قوانين الأسس 🧠✨</footer>
+</div>
+
+<script>
+const TYPE_META = {
+  mul: {label:"ضرب الأسس",  color:"#0E8C86", emoji:"✖️"},
+  div: {label:"قسمة الأسس", color:"#FF6B5E", emoji:"➗"},
+  pow: {label:"قوة القوة",  color:"#8E6FD1", emoji:"🔁"},
+  neg: {label:"أس سالب",    color:"#3E7CB1", emoji:"➖"},
+  zero:{label:"أس صفري",    color:"#D9739F", emoji:"0️⃣"},
+  frac:{label:"أس كسري",    color:"#1a9c6b", emoji:"🔢"},
+  cmp: {label:"مقارنة أسس", color:"#A0714E", emoji:"⚖️"}
+};
+
+const QUESTIONS = [
+{type:"mul", text:"2³ × 2⁴", ar:false, funny:"💬 نفس الأساس؟ لا تضرب الأساس بنفسه، اجمع الأسس بس 😏",
+ h1:"الأساس نفسه (٢) في الاثنين، فالقانون: أ^م × أ^ن = أ^(م+ن)", h2:"اجمع الأسس: ٣+٤ = ٧ ← الناتج = ٢⁷",
+ correct:"128", solution:"٢³×٢⁴ = ٢^(٣+٤) = ٢⁷ = ١٢٨ ✅",
+ options:[
+   {v:"128", ok:true, ex:"صحيح! ٢^(٣+٤)=٢⁷=١٢٨ ✅"},
+   {v:"4096", ex:"هذا لو ضربت الأسس (٣×٤) بدل جمعها، وذا قانون خطأ."},
+   {v:"2", ex:"هذا لو طرحت الأسس (٤-٣) بدل جمعها."},
+   {v:"16", ex:"هذا ناتج ٢⁴ بس، متجاهلاً العامل ٢³ بالكامل."}
+ ]},
+{type:"mul", text:"5² × 5³", ar:false, funny:"💬 نفس الفكرة، بس أساسها ٥ هذي المرة 🎯",
+ h1:"الأساس نفسه (٥) في الاثنين، فالقانون: أ^م × أ^ن = أ^(م+ن)", h2:"اجمع الأسس: ٢+٣ = ٥ ← الناتج = ٥⁵",
+ correct:"3125", solution:"٥²×٥³ = ٥^(٢+٣) = ٥⁵ = ٣١٢٥ ✅",
+ options:[
+   {v:"3125", ok:true, ex:"صحيح! ٥^(٢+٣)=٥⁵=٣١٢٥ ✅"},
+   {v:"15625", ex:"هذا لو ضربت الأسس (٢×٣) بدل جمعها، وذا قانون خطأ."},
+   {v:"5", ex:"هذا لو طرحت الأسس (٣-٢) بدل جمعها."},
+   {v:"25", ex:"هذا ناتج ٥² بس، متجاهلاً العامل ٥³ بالكامل."}
+ ]},
+{type:"mul", text:"3⁴ × 3²", ar:false, funny:"💬 آخر سؤال بهذي الحيلة، طبّق نفس القانون 💪",
+ h1:"الأساس نفسه (٣) في الاثنين، فالقانون: أ^م × أ^ن = أ^(م+ن)", h2:"اجمع الأسس: ٤+٢ = ٦ ← الناتج = ٣⁶",
+ correct:"729", solution:"٣⁴×٣² = ٣^(٤+٢) = ٣⁶ = ٧٢٩ ✅",
+ options:[
+   {v:"729", ok:true, ex:"صحيح! ٣^(٤+٢)=٣⁶=٧٢٩ ✅"},
+   {v:"6561", ex:"هذا لو ضربت الأسس (٤×٢) بدل جمعها، وذا قانون خطأ."},
+   {v:"9", ex:"هذا لو طرحت الأسس (٤-٢) بدل جمعها."},
+   {v:"81", ex:"هذا ناتج ٣⁴ بس، متجاهلاً العامل ٣² بالكامل."}
+ ]},
+{type:"div", text:"2⁷ ÷ 2³", ar:false, funny:"💬 نفس الأساس بالقسمة؟ اطرح الأسس ولا تقسمهم 😉",
+ h1:"الأساس نفسه (٢) في الاثنين، فالقانون: أ^م ÷ أ^ن = أ^(م-ن)", h2:"اطرح الأسس: ٧-٣ = ٤ ← الناتج = ٢⁴",
+ correct:"16", solution:"٢⁷÷٢³ = ٢^(٧-٣) = ٢⁴ = ١٦ ✅",
+ options:[
+   {v:"16", ok:true, ex:"صحيح! ٢^(٧-٣)=٢⁴=١٦ ✅"},
+   {v:"1024", ex:"هذا لو جمعت الأسس (٧+٣) بدل طرحها."},
+   {v:"128", ex:"هذا ناتج ٢⁷ بس، من غير ما تقسم فعليًا."},
+   {v:"8", ex:"هذا ناتج ٢³ (المقسوم عليه نفسه)، مو ناتج القسمة."}
+ ]},
+{type:"div", text:"5⁶ ÷ 5⁴", ar:false, funny:"💬 نفس الفكرة، اطرح الأسس بس 🧐",
+ h1:"الأساس نفسه (٥) في الاثنين، فالقانون: أ^م ÷ أ^ن = أ^(م-ن)", h2:"اطرح الأسس: ٦-٤ = ٢ ← الناتج = ٥²",
+ correct:"25", solution:"٥⁶÷٥⁴ = ٥^(٦-٤) = ٥² = ٢٥ ✅",
+ options:[
+   {v:"25", ok:true, ex:"صحيح! ٥^(٦-٤)=٥²=٢٥ ✅"},
+   {v:"625", ex:"هذا ناتج ٥⁴ (المقسوم عليه نفسه)، مو ناتج القسمة."},
+   {v:"125", ex:"هذا ناتج ٥³، غير مبني على طرح الأسس الصحيح."},
+   {v:"9765625", ex:"هذا لو جمعت الأسس (٦+٤) بدل طرحها."}
+ ]},
+{type:"div", text:"3⁸ ÷ 3⁵", ar:false, funny:"💬 آخر سؤال بهذي الحيلة، اطرح واحصل على الجواب بسرعة 💪",
+ h1:"الأساس نفسه (٣) في الاثنين، فالقانون: أ^م ÷ أ^ن = أ^(م-ن)", h2:"اطرح الأسس: ٨-٥ = ٣ ← الناتج = ٣³",
+ correct:"27", solution:"٣⁸÷٣⁵ = ٣^(٨-٥) = ٣³ = ٢٧ ✅",
+ options:[
+   {v:"27", ok:true, ex:"صحيح! ٣^(٨-٥)=٣³=٢٧ ✅"},
+   {v:"243", ex:"هذا ناتج ٣⁵ (المقسوم عليه نفسه)، مو ناتج القسمة."},
+   {v:"81", ex:"هذا ناتج ٣⁴، غير مبني على طرح الأسس الصحيح."},
+   {v:"9", ex:"هذا ناتج ٣² بس، راجع خطوة الطرح."}
+ ]},
+{type:"pow", text:"(2³)²", ar:false, funny:"💬 قوة فوق قوة؟ اضرب الأسس مع بعض 🔁",
+ h1:"رفع أس لقوة أخرى، فالقانون: (أ^م)^ن = أ^(م×ن)", h2:"اضرب الأسس: ٣×٢ = ٦ ← الناتج = ٢⁶",
+ correct:"64", solution:"(٢³)² = ٢^(٣×٢) = ٢⁶ = ٦٤ ✅",
+ options:[
+   {v:"64", ok:true, ex:"صحيح! ٢^(٣×٢)=٢⁶=٦٤ ✅"},
+   {v:"32", ex:"هذا لو جمعت الأسس (٣+٢) بدل ضربها."},
+   {v:"8", ex:"هذا ناتج ٢³ بس، متجاهلاً القوة الخارجية بالكامل."},
+   {v:"36", ex:"هذا ناتج ٦² (تربيع رقم الأس نفسه)، وذا خطأ مفاهيمي."}
+ ]},
+{type:"pow", text:"(3²)³", ar:false, funny:"💬 آخر سؤال بهذي الحيلة، نفس القانون بالضبط 🎉",
+ h1:"رفع أس لقوة أخرى، فالقانون: (أ^م)^ن = أ^(م×ن)", h2:"اضرب الأسس: ٢×٣ = ٦ ← الناتج = ٣⁶",
+ correct:"729", solution:"(٣²)³ = ٣^(٢×٣) = ٣⁶ = ٧٢٩ ✅",
+ options:[
+   {v:"729", ok:true, ex:"صحيح! ٣^(٢×٣)=٣⁶=٧٢٩ ✅"},
+   {v:"243", ex:"هذا لو جمعت الأسس (٢+٣) بدل ضربها."},
+   {v:"9", ex:"هذا ناتج ٣² بس، متجاهلاً القوة الخارجية بالكامل."},
+   {v:"64", ex:"هذا ناتج غير مرتبط بالقانون الصحيح، راجع الحل."}
+ ]},
+{type:"neg", text:"2⁻³", ar:false, funny:"💬 الأس السالب ما يعني رقم سالب! لا توقع بهذا الفخ 😏",
+ h1:"الأس السالب لا يعني عددًا سالبًا، بل يعني مقلوب العدد.", h2:"أ^-ن = ١/أ^ن ← إذن ٢^-٣ = ١/٢³",
+ correct:"1/8", solution:"٢^-٣ = ١/٢³ = ١/٨ ✅",
+ options:[
+   {v:"1/8", ok:true, ex:"صحيح! ٢^-٣ = ١/٢³ = ١/٨ ✅"},
+   {v:"-8", ex:"هذا الفخ الشائع بالضبط! الأس السالب يعني مقلوب، مو عدد سالب."},
+   {v:"8", ex:"نسيت تاخذ المقلوب (القسمة على ١)، الإشارة السالبة لها معنى مختلف."},
+   {v:"-1/8", ex:"جمعت بين خطأين معًا: العدد السالب والمقلوب، راجع الحل."}
+ ]},
+{type:"neg", text:"5⁻²", ar:false, funny:"💬 نفس الفكرة، الناتج لازم يكون كسر موجب 🧐",
+ h1:"الأس السالب لا يعني عددًا سالبًا، بل يعني مقلوب العدد.", h2:"أ^-ن = ١/أ^ن ← إذن ٥^-٢ = ١/٥²",
+ correct:"1/25", solution:"٥^-٢ = ١/٥² = ١/٢٥ ✅",
+ options:[
+   {v:"1/25", ok:true, ex:"صحيح! ٥^-٢ = ١/٥² = ١/٢٥ ✅"},
+   {v:"-25", ex:"هذا الفخ الشائع بالضبط! الأس السالب يعني مقلوب، مو عدد سالب."},
+   {v:"25", ex:"نسيت تاخذ المقلوب، الإشارة السالبة لها معنى مختلف."},
+   {v:"-1/25", ex:"جمعت بين خطأين معًا: العدد السالب والمقلوب، راجع الحل."}
+ ]},
+{type:"zero", text:"7⁰", ar:false, funny:"💬 أي عدد (غير الصفر) مرفوع للصفر... تعرف الجواب؟ 😄",
+ h1:"أي عدد لا يساوي صفر مرفوع للأس صفر = ١ دائمًا، بغض النظر عن قيمة العدد نفسه.", h2:"إذن ٧⁰ = ١ (نفس القاعدة تنطبق على أي عدد)",
+ correct:"1", solution:"أي عدد ≠ صفر مرفوع للصفر = ١ ← ٧⁰ = ١ ✅",
+ options:[
+   {v:"1", ok:true, ex:"صحيح! أي عدد ≠ صفر مرفوع للصفر = ١ ✅"},
+   {v:"0", ex:"هذا الفخ الشائع بالضبط! الأس صفر لا يعني الناتج صفر."},
+   {v:"7", ex:"هذا لو تركت العدد كما هو، متجاهلاً قاعدة الأس الصفري."},
+   {v:"49", ex:"هذا ناتج ٧² بالخطأ، مو ٧⁰."}
+ ]},
+{type:"zero", text:"123⁰", ar:false, funny:"💬 آخر سؤال بهذي الحيلة، ما يهم حجم العدد 🎉",
+ h1:"أي عدد لا يساوي صفر مرفوع للأس صفر = ١ دائمًا، حتى لو كان العدد كبير.", h2:"إذن ١٢٣⁰ = ١ (نفس القاعدة تنطبق دائمًا)",
+ correct:"1", solution:"أي عدد ≠ صفر مرفوع للصفر = ١ ← ١٢٣⁰ = ١ ✅",
+ options:[
+   {v:"1", ok:true, ex:"صحيح! أي عدد ≠ صفر مرفوع للصفر = ١، مهما كان حجمه ✅"},
+   {v:"0", ex:"هذا الفخ الشائع بالضبط! الأس صفر لا يعني الناتج صفر."},
+   {v:"123", ex:"هذا لو تركت العدد كما هو، متجاهلاً قاعدة الأس الصفري."},
+   {v:"1230", ex:"هذا ناتج تخمين غير مرتبط بقاعدة الأس الصفري."}
+ ]},
+{type:"frac", text:"8^(1/3)", ar:false, funny:"💬 الأس الكسري = جذر ثم رفع لقوة، طبّق القانون 🔢",
+ h1:"الأس الكسري م/ن يعني: خذ الجذر النوني (ن) للعدد، ثم ارفعه للقوة (م).", h2:"هنا المقام ٣ (جذر تكعيبي) والبسط ١ (رفع للقوة ١) ← الجذر التكعيبي لـ ٨",
+ correct:"2", solution:"٨^(١/٣) = الجذر التكعيبي لـ ٨ = ٢ (لأن ٢³=٨) ✅",
+ options:[
+   {v:"2", ok:true, ex:"صحيح! الجذر التكعيبي لـ ٨ = ٢ (لأن ٢³=٨) ✅"},
+   {v:"4", ex:"هذا لو أخذت الجذر التربيعي بدل التكعيبي."},
+   {v:"8/3", ex:"هذا لو تعاملت مع الأس الكسري كأنه قسمة عادية، وذا خطأ مفاهيمي."},
+   {v:"2.67", ex:"نفس الخطأ السابق (معاملة الكسر كقسمة مباشرة) بصيغة عشرية."}
+ ]},
+{type:"frac", text:"16^(1/2)", ar:false, funny:"💬 هذي المرة المقام ٢، يعني جذر تربيعي بس 😉",
+ h1:"الأس الكسري م/ن يعني: خذ الجذر النوني (ن) للعدد، ثم ارفعه للقوة (م).", h2:"هنا المقام ٢ (جذر تربيعي) والبسط ١ (رفع للقوة ١) ← الجذر التربيعي لـ ١٦",
+ correct:"4", solution:"١٦^(١/٢) = الجذر التربيعي لـ ١٦ = ٤ (لأن ٤²=١٦) ✅",
+ options:[
+   {v:"4", ok:true, ex:"صحيح! الجذر التربيعي لـ ١٦ = ٤ (لأن ٤²=١٦) ✅"},
+   {v:"8", ex:"هذا لو تعاملت مع الأس الكسري كقسمة مباشرة (١٦÷٢)، وذا خطأ."},
+   {v:"32", ex:"هذا ناتج تخمين غير مبني على قاعدة الجذر الصحيحة."},
+   {v:"256", ex:"هذا ناتج ١٦² (رفع للقوة بدل أخذ الجذر)، وهذا معكوس القانون."}
+ ]},
+{type:"frac", text:"27^(2/3)", ar:false, funny:"💬 آخر سؤال بهذي الحيلة، خطوتين: جذر ثم قوة 💪",
+ h1:"المقام ٣ يعني جذر تكعيبي، والبسط ٢ يعني رفع الناتج للقوة ٢.", h2:"الجذر التكعيبي لـ ٢٧ = ٣ ← ثم ارفعه للقوة ٢",
+ correct:"9", solution:"الجذر التكعيبي لـ ٢٧=٣ ← ٣²=٩ ✅",
+ options:[
+   {v:"9", ok:true, ex:"صحيح! الجذر التكعيبي لـ ٢٧=٣، و٣²=٩ ✅"},
+   {v:"18", ex:"هذا لو ضربت ٢٧×(٢/٣) كقسمة وضرب مباشر، وذا خطأ مفاهيمي."},
+   {v:"729", ex:"هذا ناتج ٢٧² مباشرة، من غير ما تاخذ الجذر التكعيبي أولًا."},
+   {v:"3", ex:"هذا الجذر التكعيبي بس، نسيت ترفعه للقوة ٢."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: 2⁵ أم 2³ ؟", ar:true, isAr:true, funny:"💬 نفس الأساس وأكبر من ١؟ قارن الأسس مباشرة ⚖️",
+ h1:"نفس الأساس (٢) وهو أكبر من ١، فالمقارنة تكون على الأسس مباشرة.", h2:"الأس الأكبر يعطي القيمة الأكبر (لأن الأساس > ١)",
+ correct:"25", solution:"الأساس ٢ أكبر من ١ ← الأس الأكبر (٥) يعطي القيمة الأكبر ← ٢⁵ أكبر ✅",
+ options:[
+   {v:"٢⁵ أكبر", ok:true, ex:"صحيح! الأساس أكبر من ١، فالأس الأكبر (٥) يعطي القيمة الأكبر ✅"},
+   {v:"٢³ أكبر", ex:"هذا عكس القاعدة الصحيحة عندما الأساس أكبر من ١."},
+   {v:"متساويان", ex:"الأسان مختلفان (٥ و٣) فالقيمتان غير متساويتين."},
+   {v:"لا يمكن المقارنة", ex:"يمكن المقارنة دائمًا بمقارنة الأسس مباشرة عند تساوي الأساس."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: 3⁴ أم 3⁶ ؟", ar:true, isAr:true, funny:"💬 نفس الفكرة، أساس أكبر من ١ 🎯",
+ h1:"نفس الأساس (٣) وهو أكبر من ١، فالمقارنة تكون على الأسس مباشرة.", h2:"الأس الأكبر يعطي القيمة الأكبر (لأن الأساس > ١)",
+ correct:"36", solution:"الأساس ٣ أكبر من ١ ← الأس الأكبر (٦) يعطي القيمة الأكبر ← ٣⁶ أكبر ✅",
+ options:[
+   {v:"٣⁶ أكبر", ok:true, ex:"صحيح! الأساس أكبر من ١، فالأس الأكبر (٦) يعطي القيمة الأكبر ✅"},
+   {v:"٣⁴ أكبر", ex:"هذا عكس القاعدة الصحيحة عندما الأساس أكبر من ١."},
+   {v:"متساويان", ex:"الأسان مختلفان (٤ و٦) فالقيمتان غير متساويتين."},
+   {v:"لا يمكن المقارنة", ex:"يمكن المقارنة دائمًا بمقارنة الأسس مباشرة عند تساوي الأساس."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: 5² أم 5⁷ ؟", ar:true, isAr:true, funny:"💬 آخر سؤال بهذا النوع، طبّق نفس القاعدة 💪",
+ h1:"نفس الأساس (٥) وهو أكبر من ١، فالمقارنة تكون على الأسس مباشرة.", h2:"الأس الأكبر يعطي القيمة الأكبر (لأن الأساس > ١)",
+ correct:"57", solution:"الأساس ٥ أكبر من ١ ← الأس الأكبر (٧) يعطي القيمة الأكبر ← ٥⁷ أكبر ✅",
+ options:[
+   {v:"٥⁷ أكبر", ok:true, ex:"صحيح! الأساس أكبر من ١، فالأس الأكبر (٧) يعطي القيمة الأكبر ✅"},
+   {v:"٥² أكبر", ex:"هذا عكس القاعدة الصحيحة عندما الأساس أكبر من ١."},
+   {v:"متساويان", ex:"الأسان مختلفان (٢ و٧) فالقيمتان غير متساويتين."},
+   {v:"لا يمكن المقارنة", ex:"يمكن المقارنة دائمًا بمقارنة الأسس مباشرة عند تساوي الأساس."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: (1/2)³ أم (1/2)⁵ ؟", ar:true, isAr:true, funny:"💬 احذر! الأساس هذي المرة بين ٠ و١، العلاقة تنعكس 🔄",
+ h1:"الأساس (١/٢) بين ٠ و١، وهذي حالة خاصة تنعكس فيها العلاقة المعتادة.", h2:"عندما الأساس بين ٠ و١: الأس الأكبر يعطي القيمة الأصغر (عكس الحالة العادية)",
+ correct:"13", solution:"الأساس بين ٠و١ ← الأس الأصغر (٣) يعطي القيمة الأكبر ← (١/٢)³ أكبر ✅",
+ options:[
+   {v:"(1/2)³ أكبر", ok:true, ex:"صحيح! الأساس بين ٠و١، فالأس الأصغر (٣) يعطي القيمة الأكبر ✅"},
+   {v:"(1/2)⁵ أكبر", ex:"هذا لو طبّقت قاعدة \"الأس الأكبر = القيمة الأكبر\" الخاصة بالأساس > ١ بالخطأ هنا."},
+   {v:"متساويان", ex:"الأسان مختلفان (٣ و٥) فالقيمتان غير متساويتين."},
+   {v:"لا يمكن المقارنة", ex:"يمكن المقارنة دائمًا، بس لازم تنتبه إن الأساس بين ٠و١ يعكس القاعدة."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: (1/3)² أم (1/3)⁴ ؟", ar:true, isAr:true, funny:"💬 آخر سؤال بالتحدي كله! نفس فكرة الانعكاس 🎉",
+ h1:"الأساس (١/٣) بين ٠ و١، فالعلاقة المعتادة بين الأسس تنعكس هنا.", h2:"عندما الأساس بين ٠ و١: الأس الأكبر يعطي القيمة الأصغر (عكس الحالة العادية)",
+ correct:"12", solution:"الأساس بين ٠و١ ← الأس الأصغر (٢) يعطي القيمة الأكبر ← (١/٣)² أكبر ✅",
+ options:[
+   {v:"(1/3)² أكبر", ok:true, ex:"صحيح! الأساس بين ٠و١، فالأس الأصغر (٢) يعطي القيمة الأكبر ✅"},
+   {v:"(1/3)⁴ أكبر", ex:"هذا لو طبّقت قاعدة \"الأس الأكبر = القيمة الأكبر\" الخاصة بالأساس > ١ بالخطأ هنا."},
+   {v:"متساويان", ex:"الأسان مختلفان (٢ و٤) فالقيمتان غير متساويتين."},
+   {v:"لا يمكن المقارنة", ex:"يمكن المقارنة دائمًا، بس لازم تنتبه إن الأساس بين ٠و١ يعكس القاعدة."}
+ ]}
+];
+
+const container = document.getElementById('cardsContainer');
+const QCOUNT = QUESTIONS.length;
+document.getElementById('scoreDisplay').textContent = '0 / ' + QCOUNT;
+
+let score = 0;
+let answered = {};
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const meta = TYPE_META[q.type];
+  answered[n] = false;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card' + n;
+  card.style.setProperty('--accent', meta.color);
+
+  const opts = q.options.map((o,i)=>({...o, key:n+'-'+i}));
+
+  let optsHtml = '';
+  opts.forEach(o=>{
+    optsHtml += `
+      <button class="opt-btn" data-key="${o.key}" data-ok="${o.ok?'1':'0'}">
+        <span>${o.v}</span><span class="tag"></span>
+      </button>
+      <div class="opt-explain ${o.ok?'ok':'no'}" id="ex-${o.key}">${o.ex}</div>`;
+  });
+
+  const qtextClass = q.isAr ? 'qtext ar' : 'qtext';
+
+  card.innerHTML = `
+    <div class="qtitle">
+      <span class="qnum">${n}</span> السؤال ${n}
+      <span class="qtag">${meta.emoji} ${meta.label}</span>
+    </div>
+    <div class="${qtextClass}">${q.text}</div>
+    <div class="funny">${q.funny}</div>
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h${n}-1"><span>🔎 تلميح: أي قانون يُستخدم؟</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-1">${q.h1}</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h${n}-2"><span>🎯 تلميح: كمّل الحل</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-2">${q.h2}</div>
+      </div>
+    </div>
+    <div class="options" id="opts${n}">${optsHtml}</div>
+    <div class="solution-box" id="sol${n}">
+      <span class="lbl">✅ الحل الكامل</span>${q.solution}
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+document.querySelectorAll('.hint-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('open');
+    const icon = btn.querySelector('span:last-child');
+    icon.textContent = target.classList.contains('open') ? '－' : '＋';
+  });
+});
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const cont = document.getElementById('opts'+n);
+  const buttons = cont.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered[n]) return;
+      answered[n] = true;
+      const isOk = btn.dataset.ok === '1';
+      buttons.forEach(b=>b.classList.add('disabled'));
+      btn.classList.add(isOk ? 'correct' : 'wrong');
+      btn.querySelector('.tag').textContent = isOk ? '✅' : '❌';
+      document.getElementById('ex-'+btn.dataset.key).classList.add('show');
+      document.getElementById('sol'+n).classList.add('show');
+      if(isOk){ score++; }
+      updateScore();
+      checkFinish();
+    });
+  });
+});
+
+function updateScore(){
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + QCOUNT;
+}
+
+function checkFinish(){
+  const allDone = Object.values(answered).every(v=>v===true);
+  if(allDone){
+    const rc = document.getElementById('resultCard');
+    const title = document.getElementById('resultTitle');
+    const text = document.getElementById('resultText');
+    const emoji = document.getElementById('resultEmoji');
+    rc.classList.add('show');
+    rc.scrollIntoView({behavior:'smooth', block:'center'});
+
+    if(score === QCOUNT){
+      emoji.textContent = '🏆';
+      title.textContent = 'خرافي! نتيجة كاملة';
+      text.textContent = 'حليت الـ' + QCOUNT + ' سؤال كلهم صح 😎 صرت خبير بكل قوانين الأسس';
+    } else if(score >= QCOUNT*0.7){
+      emoji.textContent = '💪';
+      title.textContent = 'أداء ممتاز!';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الأسئلة اللي غلطت فيها وشوف الحل المكتوب تحتها';
+    } else if(score >= QCOUNT*0.4){
+      emoji.textContent = '🙂';
+      title.textContent = 'بداية طيبة';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الحلول المكتوبة تحت كل سؤال غلطت فيه';
+    } else {
+      emoji.textContent = '🌱';
+      title.textContent = 'وقت المراجعة';
+      text.textContent = 'ولا يهمك، كل الحلول مكتوبة تحت كل سؤال، راجعها بهدوء وحاول مرة ثانية';
+    }
+  }
+}
+
+function restart(){
+  score = 0;
+  QUESTIONS.forEach((q, idx)=>{
+    const n = idx + 1;
+    answered[n] = false;
+    const buttons = document.querySelectorAll('#opts'+n+' .opt-btn');
+    buttons.forEach(b=>{
+      b.classList.remove('correct','wrong','disabled');
+      b.querySelector('.tag').textContent = '';
+    });
+    document.querySelectorAll('#opts'+n+' .opt-explain').forEach(e=>e.classList.remove('show'));
+    document.getElementById('sol'+n).classList.remove('show');
+  });
+  updateScore();
+  document.getElementById('resultCard').classList.remove('show');
+  document.querySelectorAll('.hint-reveal.open').forEach(h=>h.classList.remove('open'));
+  document.querySelectorAll('.hint-btn span:last-child').forEach(i=>i.textContent='＋');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+const waText = encodeURIComponent(
+`🧠 تحدي: فكّر أقل ... حُلّ أسرع (قوانين الأسس)
+
+٢٠ سؤال في: ضرب الأسس ✖️ + قسمة الأسس ➗ + قوة القوة 🔁 + أس سالب ➖ + أس صفري 0️⃣ + أس كسري 🔢 + مقارنة أسس ⚖️
+
+جرب تحل الأسئلة بنفسك قبل ما تشوف الحل المكتوب تحت كل سؤال 😉
+رابط التحدي: (الصق الرابط هنا بعد رفعه)`
+);
+document.getElementById('waBtn').href = `https://wa.me/?text=${waText}`;
+</script>
+</body>
+</html>

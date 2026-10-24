@@ -938,3 +938,18 @@ body { background: var(--bg-main); color: var(--text-dark); direction: rtl; over
 .quiz-file-title { font-size: 0.9rem; font-weight: 600; color: #555; line-height: 1.6; }
 .training-back { padding: 12px 26px; font-size: 0.95rem; }
 #trainings { scroll-margin-top: 90px; }
+
+/* Ready-made training shown in a frame (training-qudurat-*.html, training-frame.js) */
+.training-frame {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  height: 80vh;
+  margin: 20px auto 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: #FFF8EE;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.quiz-file-title:empty { display: none; }

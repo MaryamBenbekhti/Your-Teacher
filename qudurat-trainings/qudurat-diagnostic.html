@@ -1,0 +1,377 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اختبار تشخيصي شامل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@600;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EAF2F1; --card:#FFFFFF; --ink:#1E2B33; --soft:#5C6B73;
+  --main:#2A5F7E; --main-2:#D9E8EE; --sun:#F2C14E;
+  --ok:#2F9567; --ok-bg:#E2F4EA; --bad:#CC4F4F; --bad-bg:#FBE6E6; --line:#D4E0E3;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13202A; --card:#1C2C37; --ink:#E7EEF1; --soft:#9DB0BA;
+    --main:#7FB6D6; --main-2:#24394A; --sun:#F2C14E;
+    --ok:#5BC48F; --ok-bg:#1D3A2D; --bad:#EE7B7B; --bad-bg:#40252A; --line:#2C4250;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13202A; --card:#1C2C37; --ink:#E7EEF1; --soft:#9DB0BA;
+  --main:#7FB6D6; --main-2:#24394A; --sun:#F2C14E;
+  --ok:#5BC48F; --ok-bg:#1D3A2D; --bad:#EE7B7B; --bad-bg:#40252A; --line:#2C4250;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);
+  font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;font-size:18px;line-height:1.7}
+.wrap{max-width:560px;margin:0 auto;padding:20px 16px 32px}
+h1,h2,.big{font-family:"Baloo Bhaijaan 2","Tajawal",sans-serif;line-height:1.25}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+/* math */
+.m{display:inline-block;direction:ltr;unicode-bidi:isolate-override;white-space:nowrap}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .12em;font-size:.92em;line-height:1.2}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 .2em}
+.fr>span:last-child{padding:0 .2em}
+sup{font-size:.68em;vertical-align:.7em;line-height:0}
+sup .fr{font-size:.8em;vertical-align:.1em}
+.rt{white-space:nowrap}
+.rd{border-top:2px solid currentColor;padding:0 .12em;display:inline-block;line-height:1.25}
+.fr>span,.rd{direction:ltr;unicode-bidi:isolate-override}
+.w{direction:rtl;unicode-bidi:isolate}
+.seq{direction:rtl;unicode-bidi:isolate;white-space:nowrap}
+
+/* start */
+.hero{padding:28px 4px 8px}
+.hero h1{font-size:2.1rem;margin:0 0 6px}
+.hero p{margin:0 0 4px;color:var(--soft)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 26px}
+.tag{background:var(--main-2);color:var(--main);border-radius:999px;padding:4px 14px;font-weight:700;font-size:.95rem}
+.rules{background:var(--card);border-radius:18px;padding:16px 18px;border:1px solid var(--line);margin-bottom:22px}
+.rules p{margin:4px 0}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:15px;font-weight:700;font-size:1.1rem;background:var(--main);color:#fff}
+:root[data-theme="dark"] .btn{color:#10202A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#10202A}}
+.btn.ghost{background:transparent;color:var(--main);border:2px solid var(--main);margin-top:10px}
+
+/* quiz */
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--soft);font-size:.95rem;margin-bottom:8px}
+.skill{color:var(--main)}
+.bar{height:10px;background:var(--main-2);border-radius:999px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;background:var(--sun);border-radius:999px;transition:width .3s}
+.q{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 18px}
+.qn{font-family:"Baloo Bhaijaan 2",sans-serif;font-size:2.4rem;color:var(--sun);line-height:1;margin-bottom:6px}
+.prompt{font-size:1.15rem;font-weight:500;margin-bottom:6px}
+.prompt .m{font-size:1.15em}
+.fig{max-width:340px;margin:12px auto 0;background:var(--bg);border-radius:14px;padding:6px}
+.figsvg{display:block;width:100%;height:auto}
+.figsvg .ln{stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.figsvg .ar{fill:none;stroke:var(--ink);stroke-width:2}
+.figsvg .dt{fill:var(--ink)}
+.figsvg text{font-family:"Tajawal","DejaVu Sans",sans-serif;font-size:14px;font-weight:700;direction:ltr;unicode-bidi:bidi-override}
+.figsvg .lb{fill:var(--main)}
+.figsvg .rtl{direction:rtl;unicode-bidi:embed}
+.figsvg .sh{fill:#F2C14E;fill-opacity:.5;stroke:none}
+.figsvg .hole{fill:var(--bg);stroke:none}
+.figsvg .ln{stroke-linejoin:round}
+.figsvg .nm{fill:var(--soft);font-size:13px}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
+.cmp div{border:2px dashed var(--line);border-radius:14px;padding:10px;text-align:center}
+.cmp small{display:block;color:var(--soft);font-weight:700;font-size:.85rem}
+.cmp .m{font-size:1.25em}
+.opts{display:grid;gap:10px;margin-top:16px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:right;background:var(--bg);border:2px solid transparent;border-radius:16px;padding:12px 14px;min-height:60px;font-size:1.15rem;transition:border-color .15s,background .15s}
+.opt b{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--card);color:var(--main);font-size:.95rem}
+.opt:hover:not(:disabled){border-color:var(--main)}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--ok-bg);border-color:var(--ok)}
+.opt.ok b{background:var(--ok);color:#fff}
+.opt.no{background:var(--bad-bg);border-color:var(--bad)}
+.opt.no b{background:var(--bad);color:#fff}
+.fb{margin-top:14px;border-radius:14px;padding:12px 14px;font-size:1rem}
+.fb.ok{background:var(--ok-bg)} .fb.no{background:var(--bad-bg)}
+.fb strong{display:block}
+.next{margin-top:16px}
+
+/* result */
+.score{text-align:center;padding:24px 0 6px}
+.score .big{font-size:4.2rem;color:var(--main)}
+.score .big span{font-size:1.6rem;color:var(--soft)}
+.msg{text-align:center;font-size:1.2rem;font-weight:700;margin:0 0 6px}
+.time{text-align:center;color:var(--soft);margin:0 0 20px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:14px}
+.panel h2{font-size:1.3rem;margin:0 0 10px}
+.row{margin:10px 0}
+.row .lbl{display:flex;justify-content:space-between;font-weight:700}
+.row .lbl em{font-style:normal;font-size:.9rem;padding:0 10px;border-radius:999px}
+.st-strong{background:var(--ok-bg);color:var(--ok)}
+.st-mid{background:#FFF3D2;color:#9A6B00}
+.st-weak{background:var(--bad-bg);color:var(--bad)}
+.track{height:12px;background:var(--main-2);border-radius:999px;overflow:hidden;margin-top:4px}
+.track i{display:block;height:100%;border-radius:999px}
+.wrong{list-style:none;margin:0;padding:0}
+.wrong li{border-top:1px solid var(--line);padding:10px 0;font-size:1rem}
+.wrong li:first-child{border-top:0}
+.wrong .meta{color:var(--soft);font-size:.88rem}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="hero">
+    <h1>اختبار تشخيصي شامل</h1>
+    <p>٤٠ سؤال في ١٠ مهارات، من المتوسط لفوق المتوسط. الرسومات ليست بالضرورة بمقياس رسم.</p>
+    <div class="tags"><span class="tag">الجذور</span><span class="tag">الأسس</span><span class="tag">الكسور</span><span class="tag">السرعة</span><span class="tag">النسب والتناسب</span><span class="tag">المسائل اللفظية</span><span class="tag">المتتابعات</span><span class="tag">الدوريات</span><span class="tag">الإحصاء</span><span class="tag">الهندسة</span></div>
+    <div class="rules">
+      <p>✏️ ورقة وقلم، والآلة الحاسبة في الدرج.</p>
+      <p>🎯 الهدف نعرف وين تقف، مو نطلع درجة كاملة.</p>
+      <p>⏱️ الوقت يُحسب، بس لا تستعجل على حساب الفهم.</p>
+    </div>
+    <button class="btn" id="go">ابدأ الاختبار</button>
+  </section>
+
+  <section id="quiz" class="hide">
+    <div class="top"><span id="count"></span><span class="skill" id="skill"></span></div>
+    <div class="bar"><i id="prog"></i></div>
+    <div class="q">
+      <div class="qn" id="qn"></div>
+      <div class="prompt" id="prompt"></div>
+      <div id="cmp"></div>
+      <div class="opts" id="opts"></div>
+      <div id="fb"></div>
+    </div>
+    <button class="btn next hide" id="next">التالي</button>
+  </section>
+
+  <section id="result" class="hide">
+    <div class="score"><div class="big" id="sc"></div></div>
+    <p class="msg" id="msg"></p>
+    <p class="time" id="tm"></p>
+    <div class="panel"><h2>التشخيص حسب المهارة</h2><div id="skills"></div></div>
+    <div class="panel"><h2>الأسئلة اللي غلط فيها</h2><ul class="wrong" id="wrong"></ul></div>
+    <button class="btn ghost" id="again">أعيدي الاختبار</button>
+  </section>
+
+</div>
+<script>
+const F=(a,b)=>`<span class="fr"><span>${a}</span><span>${b}</span></span>`;
+const R=x=>`<span class="rt">√<span class="rd">${x}</span></span>`;
+const P=(b,e)=>`${b}<sup>${e}</sup>`;
+const M=s=>`<span class="m" dir="ltr">${s}</span>`;
+const CMP=["القيمة الأولى أكبر","القيمة الثانية أكبر","القيمتان متساويتان","المعطيات غير كافية"];
+const AR=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+
+const D=n=>M(n+"°");
+const W=s=>`<span class="w">${s}</span>`;
+const SQ=s=>`<span class="seq">${s}</span>`;
+const S={rt:"الجذور",ex:"الأسس",fr:"الكسور",sp:"السرعة",ra:"النسب والتناسب",wp:"المسائل اللفظية",sq:"المتتابعات",pe:"الدوريات",st:"الإحصاء",ge:"الهندسة"};
+const SV=(inner)=>`<svg viewBox="0 0 300 200" class="figsvg" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+const L=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="ln"/>`;
+const T=(x,y,s,c="lb",a="middle")=>`<text x="${x}" y="${y}" text-anchor="${a}" class="${c}">${s}</text>`;
+const ARW=(x,y)=>`<path d="M${x-5} ${y-5} L${x+3} ${y} L${x-5} ${y+5}" class="ar"/>`;
+const DOT=(x,y)=>`<circle cx="${x}" cy="${y}" r="3" class="dt"/>`;
+const FIG={
+ ext:SV(L(60,165,290,165)+L(60,165,150,60)+L(150,60,215,165)+T(93,157,"٤٥°")+T(150,94,"س")+T(252,152,"١٢٠°")),
+ zig:SV(L(20,40,280,40)+L(20,170,280,170)+ARW(255,40)+ARW(255,170)+L(100,40,190,105)+L(125,170,190,105)+DOT(190,105)+
+   T(136,58,"٣٥°")+T(160,162,"٤٥°")+T(172,110,"س"))
+};
+const Q=[
+/* ---------- متوسط ---------- */
+{s:"fr",p:`ما قيمة ${M(`(${F("٣","٤")} − ${F("٢","٣")}) ÷ ${F("١","٦")}`)} ؟`,
+ o:[F("١","٧٢"),F("١","١٢"),F("١","٢"),"٢"],a:2,
+ e:`القوس أول: ${M(`${F("٩","١٢")} − ${F("٨","١٢")} = ${F("١","١٢")}`)}، وبعدين القسمة = ضرب في المقلوب: ${M(`${F("١","١٢")} × ٦ = ${F("١","٢")}`)}. الـ ${M(F("١","٧٢"))} لو ضربتي بدل ما تقسمين.`},
+{s:"sp",p:`سيارة تسير بسرعة ثابتة ٨٠ كم/س. كم كيلومتراً تقطع في ساعتين وربع؟`,
+ o:["١٦٠","١٨٠","١٧٢","٢٠٠"],a:1,
+ e:`ربع الساعة = ${M("٠٫٢٥")} ساعة، والمسافة = السرعة × الزمن: ${M("٨٠ × ٢٫٢٥ = ١٨٠")}. الـ ١٧٢ لو كتبتي «ساعتين وربع» ${M("٢٫١٥")}، والربع مو ١٥ من مية!`},
+{s:"ex",p:`ما قيمة ${M(F(`${P("٢","٥")} × ${P("٢","٣")}`,P("٤","٢")))} ؟`,
+ o:["٢٥٦","٦٤","٢٠٤٨","١٦"],a:3,
+ e:`حوّلي كله لأساس ٢: ${M(`${P("٤","٢")} = ${P("٢","٤")}`)}، والناتج ${M(`${P("٢","٥ + ٣ − ٤")} = ${P("٢","٤")} = ١٦`)}. الـ ٦٤ لو حسبتي ${M(P("٤","٢"))} كأنها ${M(P("٢","٢"))}.`},
+{s:"st",p:`ما الوسيط للقيم: ${SQ("٨، ٣، ١٢، ٥، ٩")} ؟`,
+ o:["٨","١٢","٧٫٤","٥"],a:0,
+ e:`رتّبي أول: ${SQ("٣، ٥، ٨، ٩، ١٢")}، والوسيط اللي في النص = ٨. الـ ١٢ لو أخذتي النص قبل الترتيب، والـ ٧٫٤ هو المتوسط مو الوسيط.`},
+{s:"rt",p:`ما ناتج ${M(`${R("٧٥")} − ${R("٢٧")}`)} ؟`,
+ o:[R("٤٨"),`٨${R("٣")}`,`٢${R("٣")}`,"٢"],a:2,
+ e:`بسّطي أول: ${M(`${R("٧٥")} = ٥${R("٣")}`)} و ${M(`${R("٢٧")} = ٣${R("٣")}`)}، والفرق ${M(`٢${R("٣")}`)}. الطرح تحت الجذر (${M(R("٤٨"))}) ممنوع!`},
+{s:"ra",p:`نسبة عدد الأولاد إلى عدد البنات في فصل ٣ إلى ٥، ومجموعهم ٤٠. كم عدد البنات؟`,
+ o:["١٥","٢٤","٨","٢٥"],a:3,
+ e:`مجموع الأجزاء ${M("٣ + ٥ = ٨")}، والجزء الواحد ${M("٤٠ ÷ ٨ = ٥")}، والبنات ${M("٥ × ٥ = ٢٥")}. الـ ١٥ عدد الأولاد، ركّزي على المطلوب!`},
+{s:"ge",p:`زاويتان متكاملتان، الفرق بين قياسيهما ${D("٤٠")}. ما قياس الكبرى بالدرجات؟`,
+ o:["١١٠","٧٠","٦٥","١٤٠"],a:0,
+ e:`مجموعهما ${D("١٨٠")}، فالكبرى ${M("(١٨٠ + ٤٠) ÷ ٢ = ١١٠")} والصغرى ٧٠. الـ ٦٥ لو حسبتيها متتامة (مجموعها ${D("٩٠")}).`},
+{s:"sq",p:`ما الحد التالي في المتتابعة: ${SQ("٢، ٥، ١٠، ١٧، ٢٦، ...")} ؟`,
+ o:["٣٥","٣٧","٣٦","٣٨"],a:1,
+ e:`الفروق ${SQ("٣، ٥، ٧، ٩")} (أعداد فردية)، فالفرق التالي ١١: ${M("٢٦ + ١١ = ٣٧")}. أو كل حد = مربع عدد + ١: ${M(`${P("٦","٢")} + ١ = ٣٧`)}.`},
+{s:"wp",p:`عمر الأب الآن ٤ أمثال عمر ابنه، وبعد ٥ سنوات سيكون مجموع عمريهما ٦٠ سنة. كم عمر الابن الآن؟`,
+ o:["١٢","١١","٤٠","١٠"],a:3,
+ e:`الابن س والأب ٤س، وبعد ٥ سنوات كل واحد يزيد ٥: ${M("س + ٤س + ١٠ = ٦٠")} ← ${M("س = ١٠")}. الـ ١٢ لو نسيتي إن السنين تزيد على الاثنين.`},
+{s:"pe",t:1,p:`إذا كان اليوم الأحد، فما اليوم بعد ٥٠ يوماً؟`,
+ o:["الأحد","الثلاثاء","الاثنين","السبت"],a:2,
+ e:`الأسبوع يتكرر كل ٧ أيام: ${M("٥٠ = ٧ × ٧ + ١")}. بعد ٤٩ يوم يرجع الأحد، ويوم زيادة = الاثنين.`},
+{s:"ra",p:`ثمن ٦ أقلام ٤٥ ريالاً. ما ثمن ١٠ أقلام من النوع نفسه بالريال؟`,
+ o:["٧٥","٤٩","٩٠","٦٠"],a:0,
+ e:`ثمن القلم ${M("٤٥ ÷ ٦ = ٧٫٥")} ريال، و ${M("١٠ × ٧٫٥ = ٧٥")}. الـ ٤٩ لو زدتي ٤ ريالات لأن الأقلام زادت ٤، والتناسب ضرب مو جمع!`},
+{s:"rt",p:`ما أقرب عدد صحيح إلى ${M(R("٨٠"))} ؟`,
+ o:["٨","٤٠","١٠","٩"],a:3,
+ e:`${M("٨ × ٨ = ٦٤")} و ${M("٩ × ٩ = ٨١")}، و ٨٠ لاصق في ٨١، فالجذر قريب جداً من ٩. الـ ٨ لو أخذتي الأصغر بدون ما تقارنين.`},
+{s:"pe",t:1,p:`كرات مرتبة بالألوان: أحمر، أزرق، أخضر، أصفر، أبيض، ثم يتكرر الترتيب نفسه. ما لون الكرة رقم ١٠٣؟`,
+ o:["أزرق","أخضر","أصفر","أحمر"],a:1,
+ e:`الدورة ٥ كرات: ${M("١٠٣ = ٥ × ٢٠ + ٣")}، والباقي ٣ يعني ثالث لون = أخضر. الباقي هو اللي يحدد مكانك في الدورة!`},
+{s:"fr",p:`أي الكسور التالية يقع بين ${M(F("١","٣"))} و ${M(F("١","٢"))} ؟`,
+ o:[F("٣","٥"),F("١","٤"),F("٢","٥"),F("٤","٧")],a:2,
+ e:`حوّلي لعشري: ${M(`${F("١","٣")} ≈ ٠٫٣٣`)} و ${M(`${F("١","٢")} = ٠٫٥`)}، و ${M(`${F("٢","٥")} = ٠٫٤`)} بينهم. أما ${M(`${F("٤","٧")} ≈ ٠٫٥٧`)} فأكبر من النص.`},
+{s:"ge",fig:"ext",p:`في الشكل، ما قيمة س بالدرجات؟`,
+ o:["٧٥","٦٠","١٦٥","٤٥"],a:0,
+ e:`الزاوية الخارجية = مجموع الداخليتين البعيدتين: ${M("س + ٤٥ = ١٢٠")} ← ${M("س = ٧٥")}. الـ ٦٠ هي الزاوية الداخلية المجاورة، مو س!`},
+{s:"sp",p:`سيارة سرعتها ٧٢ كم/س. كم متراً تقطع في الثانية الواحدة؟`,
+ o:["٧٢٠","١٢٠٠","٢","٢٠"],a:3,
+ e:`الكيلو = ١٠٠٠ متر، والساعة = ٣٦٠٠ ثانية: ${M("٧٢ × ١٠٠٠ ÷ ٣٦٠٠ = ٢٠")}. حركة سريعة: اضربي في ${M(F("٥","١٨"))}. الـ ١٢٠٠ هي المسافة في الدقيقة مو الثانية.`},
+{s:"sq",p:`متتابعة حدها الأول ٧، وكل حد يزيد على الحد الذي قبله بمقدار ٤. ما الحد العشرون؟`,
+ o:["٨٧","٨٠","٨٣","١٤٠"],a:2,
+ e:`من الحد الأول للعشرين فيه ١٩ قفزة مو ٢٠: ${M("٧ + ١٩ × ٤ = ٨٣")}. الـ ٨٧ لو حسبتي ٢٠ قفزة.`},
+{s:"ex",p:`إذا كان ${M(`${P("٢","س")} = ٣٢`)} ، فما قيمة ${M(P("٢","س − ٢"))} ؟`,
+ o:["٣٠","٨","١٦","٣"],a:1,
+ e:`${M(`${P("٢","س − ٢")} = ${F(P("٢","س"),P("٢","٢"))} = ${F("٣٢","٤")} = ٨`)}. الـ ٣٠ لو طرحتي ٢ من الناتج بدل ما تطرحينه من الأس.`},
+{s:"st",p:`متوسط ٥ أعداد يساوي ١٢. إذا أُضيف إليها العدد ١٨، فما المتوسط الجديد؟`,
+ o:["١٣","١٥","١٥٫٦","١٤"],a:0,
+ e:`المجموع القديم ${M("٥ × ١٢ = ٦٠")}، والجديد ${M("٦٠ + ١٨ = ٧٨")}، والمتوسط ${M("٧٨ ÷ ٦ = ١٣")}. الـ ١٥ لو أخذتي متوسط ١٢ و ١٨ بس!`},
+{s:"wp",p:`اشترت هند ٣ كتب ودفترين بـ ٨٠ ريالاً، وثمن الكتاب ضعف ثمن الدفتر. كم ثمن الكتاب بالريال؟`,
+ o:["١٠","١٦","٤٠","٢٠"],a:3,
+ e:`الدفتر س والكتاب ٢س: ${M("٣ × ٢س + ٢ × س = ٨٠")} ← ${M("٨س = ٨٠")} ← ${M("س = ١٠")}، والكتاب ٢٠. الـ ١٠ ثمن الدفتر، والمطلوب الكتاب!`},
+/* ---------- فوق المتوسط ---------- */
+{s:"sp",p:`سافر سعد إلى مدينة بسرعة ٦٠ كم/س، ثم عاد بالطريق نفسه بسرعة ٩٠ كم/س. ما متوسط سرعته في الرحلة كاملة بالكيلومتر في الساعة؟`,
+ o:["٧٥","٨٠","٧٢","٧٠"],a:2,
+ e:`افرضي المسافة ١٨٠ كم: الذهاب ٣ ساعات والعودة ساعتين، فالمتوسط = ${M("٣٦٠ ÷ ٥ = ٧٢")}. الـ ٧٥ فخ: متوسط السرعتين مو متوسط السرعة!`},
+{s:"fr",cmp:[M(F("س","س + ١")),M(F("س + ١","س + ٢"))],p:`إذا كان ${M("س > ٠")} ، قارن بين:`,a:1,
+ e:`جربي س = ١: ${M(`${F("١","٢")} = ٠٫٥`)} و ${M(`${F("٢","٣")} ≈ ٠٫٦٧`)}. وبالضرب التبادلي: ${M(`س(س + ٢) = ${P("س","٢")} + ٢س`)} و ${M(`(س + ١)<sup>٢</sup> = ${P("س","٢")} + ٢س + ١`)}، فالثانية أكبر دائماً.`},
+{s:"ge",fig:"zig",p:`في الشكل، المستقيمان الأفقيان متوازيان. ما قيمة س بالدرجات؟`,
+ o:["٨٠","١٠","١٠٠","٢٨٠"],a:0,
+ e:`ارسمي من رأس الزاوية مستقيماً موازياً لهم، يقسم س لزاويتين متبادلتين مع ${D("٣٥")} و ${D("٤٥")}: ${M("س = ٣٥ + ٤٥ = ٨٠")}. حركة النينجا 🥷`},
+{s:"pe",p:`ما رقم الآحاد في العدد ${M(P("٧","٢٠٢٦"))} ؟`,
+ o:["٧","١","٣","٩"],a:3,
+ e:`آحاد قوى ٧ تتكرر كل ٤: ${SQ("٧، ٩، ٣، ١")}. ${M("٢٠٢٦ = ٤ × ٥٠٦ + ٢")}، والباقي ٢ يعني ثاني رقم في الدورة = ٩.`},
+{s:"ex",cmp:[M(P("٢","٣٠")),M(P("٣","٢٠"))],p:`قارن بين:`,a:1,
+ e:`وحّدي الأس: ${M(`${P("٢","٣٠")} = (${P("٢","٣")})<sup>١٠</sup> = ${P("٨","١٠")}`)} و ${M(`${P("٣","٢٠")} = (${P("٣","٢")})<sup>١٠</sup> = ${P("٩","١٠")}`)}، و ٩ أكبر من ٨. الأس الأكبر ما يعني دايماً عدد أكبر!`},
+{s:"wp",p:`سعر جهاز ٥٠٠ ريال، خُفّض سعره ٢٠٪ ثم خُفّض السعر الجديد ١٠٪. كم أصبح سعره بالريال؟`,
+ o:["٣٥٠","٤٠٠","٣٦٠","٤٧٠"],a:2,
+ e:`بعد الخصم الأول ${M("٥٠٠ × ٠٫٨ = ٤٠٠")}، والثاني على السعر الجديد: ${M("٤٠٠ × ٠٫٩ = ٣٦٠")}. الـ ٣٥٠ لو جمعتي الخصمين ٣٠٪، والخصم الثاني ينحسب من سعر أقل!`},
+{s:"rt",p:`ما قيمة ${M(`(${R("٥")} + ${R("٣")})(${R("٥")} − ${R("٣")})`)} ؟`,
+ o:["٢","٨",R("٢"),`٢${R("١٥")}`],a:0,
+ e:`فرق بين مربعين: ${M(`(${R("٥")})<sup>٢</sup> − (${R("٣")})<sup>٢</sup> = ٥ − ٣ = ٢`)}. الحدود اللي فيها ${M(R("١٥"))} تروح مع بعض.`},
+{s:"st",p:`القيم: ${SQ("٤، ٧، ١٠، س، ١٥، ٢٠")} مرتبة تصاعدياً، ووسيطها ١١. ما قيمة س؟`,
+ o:["١١","١٣","٢٢","١٢"],a:3,
+ e:`عدد القيم زوجي (٦)، فالوسيط = متوسط القيمتين اللي في النص: ${M("(١٠ + س) ÷ ٢ = ١١")} ← ${M("س = ١٢")}. الـ ١١ لو حسبتي س نفسها هي الوسيط.`},
+{s:"ra",p:`يُنهي ٦ عمال عملاً في ١٢ يوماً. في كم يوماً يُنهي ٨ عمال العمل نفسه بالكفاءة نفسها؟`,
+ o:["١٦","١٠","٩","١٤"],a:2,
+ e:`العمل كله ${M("٦ × ١٢ = ٧٢")} يوم عمل، و ${M("٧٢ ÷ ٨ = ٩")}. عمال أكثر = أيام أقل، فالـ ١٦ مستحيلة!`},
+{s:"sq",p:`ما الحد التالي في المتتابعة: ${SQ("١، ٢، ٦، ٢٤، ١٢٠، ...")} ؟`,
+ o:["٧٢٠","٢٤٠","٦٠٠","١٤٤"],a:0,
+ e:`نضرب في ٢ ثم ٣ ثم ٤ ثم ٥، فالتالي نضرب في ٦: ${M("١٢٠ × ٦ = ٧٢٠")}.`},
+{s:"ex",p:`إذا كان ${M(`${P("٣","ن + ٢")} − ${P("٣","ن")} = ٧٢`)} ، فما قيمة ن ؟`,
+ o:["٩","٢","٣","٤"],a:1,
+ e:`أخرجي ${M(P("٣","ن"))} عامل مشترك: ${M(`${P("٣","ن")} × (٩ − ١) = ٧٢`)} ← ${M(`${P("٣","ن")} = ٩`)} ← ن = ٢. الـ ٩ لو وقفتي عند ${M(P("٣","ن"))}!`},
+{s:"st",cmp:["وسيط الأعداد الخمسة",M("١٠")],p:`خمسة أعداد مختلفة متوسطها الحسابي ١٠. قارن بين:`,a:3,
+ e:`المتوسط ما يحدد الوسيط: الأعداد ${SQ("٨، ٩، ١٠، ١١، ١٢")} وسيطها ١٠، والأعداد ${SQ("١، ٢، ٣، ٤، ٤٠")} متوسطها ١٠ بعد بس وسيطها ٣. فالمعطيات غير كافية.`},
+{s:"ra",p:`إذا كان ${M("أ : ب = ٢ : ٣")} و ${M("ب : ج = ٤ : ٥")} ، فما النسبة ${M("أ : ج")} ؟`,
+ o:["٢ : ٥","٣ : ٤","٨ : ١٥","٥ : ٦"],a:2,
+ e:`وحّدي ب: اضربي الأولى في ٤ والثانية في ٣: ${M("أ : ب : ج = ٨ : ١٢ : ١٥")}، إذن ${M("أ : ج = ٨ : ١٥")}. الـ ${M("٢ : ٥")} لو أخذتي الطرفين على طول.`},
+{s:"sq",p:`ما الحد التالي في المتتابعة: ${SQ("٣، ٤، ٦، ٨، ٩، ١٦، ١٢، ...")} ؟`,
+ o:["٣٢","١٥","٢٤","٢٠"],a:0,
+ e:`متتابعتين متداخلتين! الحدود الفردية ${SQ("٣، ٦، ٩، ١٢")} (نزيد ٣)، والزوجية ${SQ("٤، ٨، ١٦")} (نضرب في ٢). الحد التالي زوجي: ${M("١٦ × ٢ = ٣٢")}. الـ ١٥ لو كمّلتي المتتابعة الغلط.`},
+{s:"ge",cmp:["قياس أكبر زاوية في المثلث",D("٩٠")],p:`مثلث أطوال أضلاعه ٥ سم و ١٢ سم و ١٣ سم. قارن بين:`,a:2,
+ e:`${M(`${P("٥","٢")} + ${P("١٢","٢")} = ٢٥ + ١٤٤ = ١٦٩ = ${P("١٣","٢")}`)}، فالمثلث قائم الزاوية (عكس فيثاغورس)، وأكبر زاوية فيه ${D("٩٠")} بالضبط.`},
+{s:"fr",p:`ما قيمة ${M(`${F("١","٢")} + ${F("١","٦")} + ${F("١","١٢")} + ${F("١","٢٠")}`)} ؟`,
+ o:[F("٤","٤٠"),F("٤","٥"),F("٣","٤"),F("٥","٦")],a:1,
+ e:`اجمعي خطوة خطوة: ${M(`${F("١","٢")} + ${F("١","٦")} = ${F("٢","٣")}`)}، ثم ${M(`${F("٢","٣")} + ${F("١","١٢")} = ${F("٣","٤")}`)}، ثم ${M(`${F("٣","٤")} + ${F("١","٢٠")} = ${F("٤","٥")}`)}. لاحظي النمط الحلو! الـ ${M(F("٤","٤٠"))} لو جمعتي البسوط مع بعض والمقامات مع بعض.`},
+{s:"pe",p:`علماً بأن ${M(`${F("٣","٧")} = ٠٫٤٢٨٥٧١٤٢٨٥٧١...`)} ، ما الرقم في الخانة العشرية رقم ٥٠ ؟`,
+ o:["٨","٤","١","٢"],a:3,
+ e:`الدورة ٦ أرقام: ${SQ("٤، ٢، ٨، ٥، ٧، ١")}. ${M("٥٠ = ٦ × ٨ + ٢")}، والباقي ٢ يعني ثاني رقم في الدورة = ٢.`},
+{s:"sp",p:`انطلقت سيارتان في اللحظة نفسها من مدينتين المسافة بينهما ٣٦٠ كم، تتحركان باتجاه بعضهما. سرعة الأولى ٥٠ كم/س والثانية ٧٠ كم/س. بعد كم ساعة تلتقيان؟`,
+ o:["١٨","٣","٧٫٢","٦"],a:1,
+ e:`باتجاه بعض؟ نجمع السرعتين: كل ساعة تقرب المسافة ${M("٥٠ + ٧٠ = ١٢٠")} كم، والزمن ${M("٣٦٠ ÷ ١٢٠ = ٣")} ساعات. الـ ١٨ لو طرحتي السرعتين، وهذا لما يمشون بنفس الاتجاه.`},
+{s:"rt",cmp:[M(`${R("٥")} + ${R("٣")}`),M(R("٨"))],p:`قارن بين:`,a:0,
+ e:`ربّعي القيمتين: ${M(`(${R("٥")} + ${R("٣")})<sup>٢</sup> = ٨ + ٢${R("١٥")}`)} و ${M(`(${R("٨")})<sup>٢</sup> = ٨`)}، فالأولى أكبر. جمع الجذرين أكبر من جذر المجموع!`},
+{s:"wp",p:`خزان ماء يملؤه صنبور في ٦ ساعات، ويفرّغه صنبور آخر في ٩ ساعات. إذا فُتح الصنبوران معاً والخزان فارغ، ففي كم ساعة يمتلئ؟`,
+ o:["٣","١٨","١٥","٣٫٦"],a:1,
+ e:`في الساعة يمتلئ ${M(F("١","٦"))} وينزل ${M(F("١","٩"))}، فالصافي ${M(`${F("١","٦")} − ${F("١","٩")} = ${F("٣","١٨")} − ${F("٢","١٨")} = ${F("١","١٨")}`)}، يعني يمتلئ في ١٨ ساعة. الـ ٣٫٦ لو حسبتي الصنبورين يعبّون. أنهيتي الوحش الأخير 🐉`}
+];
+
+
+
+
+
+
+
+
+const $=id=>document.getElementById(id);
+let i=0,ans=[],t0=0,qt=0;
+const LET=["أ","ب","ج","د"];
+
+function show(id){["start","quiz","result"].forEach(x=>$(x).classList.toggle("hide",x!==id));window.scrollTo(0,0)}
+
+function render(){
+  const q=Q[i];
+  $("count").textContent=`سؤال ${AR(i+1)} من ${AR(Q.length)}`;
+  $("skill").textContent=S[q.s];
+  $("prog").style.width=(i/Q.length*100)+"%";
+  $("qn").textContent=AR(i+1);
+  $("prompt").innerHTML=q.p+(q.fig?`<div class="fig">${FIG[q.fig]}</div>`:"");
+  $("cmp").innerHTML=q.cmp?`<div class="cmp"><div><small>القيمة الأولى</small>${q.cmp[0]}</div><div><small>القيمة الثانية</small>${q.cmp[1]}</div></div>`:"";
+  const opts=q.cmp?CMP:q.o;
+  $("opts").innerHTML=opts.map((o,k)=>`<button class="opt" data-k="${k}"><b>${LET[k]}</b><span>${(q.cmp||q.t)?o:M(o)}</span></button>`).join("");
+  $("fb").innerHTML="";$("next").classList.add("hide");
+  $("next").textContent=i===Q.length-1?"شوفي النتيجة":"التالي";
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.k));
+  qt=Date.now();
+}
+
+function pick(k){
+  const q=Q[i],ok=k===q.a;
+  ans[i]={ok,k,sec:Math.round((Date.now()-qt)/1000)};
+  document.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add("ok");else if(j===k)b.classList.add("no")});
+  $("fb").innerHTML=`<div class="fb ${ok?"ok":"no"}"><strong>${ok?"صح عليكِ! ✅":"قريبة.. بس لا ❌"}</strong>${q.e}</div>`;
+  $("next").classList.remove("hide");$("next").focus();
+}
+
+$("next").onclick=()=>{i++;if(i<Q.length)render();else finish()};
+
+function finish(){
+  $("prog").style.width="100%";
+  const total=ans.filter(a=>a.ok).length;
+  const secs=Math.round((Date.now()-t0)/1000);
+  $("sc").innerHTML=`${AR(total)}<span> / ${AR(Q.length)}</span>`;
+  $("msg").textContent=total>=36?"أسطورة! الأرقام تعدّل جلستها لما تشوفك 😎":total>=28?"ممتاز! باقي شوية تلميع ✨":total>=16?"بداية طيبة، والحين نعرف وين نشتغل 💪":"ولا يهمك! هذا تشخيص مو حكم، ومن هنا نبدأ 🚀";
+  $("tm").textContent=`الوقت الكلي: ${AR(Math.floor(secs/60))} دقيقة و ${AR(secs%60)} ثانية`;
+  $("skills").innerHTML=Object.keys(S).map(s=>{
+    const idx=Q.map((q,j)=>q.s===s?j:-1).filter(j=>j>=0);
+    const c=idx.filter(j=>ans[j].ok).length,pct=Math.round(c/idx.length*100);
+    const [cls,lbl,col]=pct>=80?["st-strong","قوية","var(--ok)"]:pct>=50?["st-mid","متوسطة","var(--sun)"]:["st-weak","تحتاج علاج","var(--bad)"];
+    return `<div class="row"><div class="lbl"><span>${S[s]}: ${AR(c)} من ${AR(idx.length)}</span><em class="${cls}">${lbl}</em></div><div class="track"><i style="width:${pct}%;background:${col}"></i></div></div>`;
+  }).join("");
+  const w=Q.map((q,j)=>({q,j})).filter(x=>!ans[x.j].ok);
+  $("wrong").innerHTML=w.length?w.map(({q,j})=>{
+    const opts=q.cmp?CMP:q.o,a=ans[j];
+    const show=o=>(q.cmp||q.t)?o:M(o);
+    return `<li><strong>سؤال ${AR(j+1)}</strong> <span class="meta">(${S[q.s]} • ${AR(a.sec)} ث)</span><br>اختارت: ${show(opts[a.k])} &nbsp;|&nbsp; الصح: ${show(opts[q.a])}</li>`;
+  }).join(""):`<li>ولا غلطة! 🎉</li>`;
+  show("result");
+}
+
+$("go").onclick=()=>{i=0;ans=[];t0=Date.now();show("quiz");render()};
+$("again").onclick=()=>show("start");
+</script>
+</body>
+</html>
+
+</body></html>

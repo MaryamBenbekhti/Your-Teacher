@@ -8,6 +8,8 @@
 //   questions: its questions in order
 // A ready-made training (its own HTML/JS kept as is in training-<id>.html)
 // has no questions here; it lists `count` (number of questions) instead.
+// Key "qudurat" (قدرات section, qudurat.html) has no grade/subject: its tiles
+// show the training title and `desc`, and pages go back to qudurat.html.
 // Never remove or edit existing trainings when adding a new one.
 //
 // QUESTION FORMAT:
@@ -205,6 +207,112 @@ const QUESTIONS_DATA = {
       id: "term1-grade5-math-review",
       title: "مراجعة اختبار الفترة الأولى",
       count: 40,
+    },
+  ],
+
+  // ── قدرات (qudurat.html) ─ ready-made trainings, originals in qudurat-trainings/
+  "qudurat": [
+    {
+      id: "qudurat-diagnostic",
+      title: "اختبار تشخيصي شامل",
+      desc: "الجذور، الأسس، الكسور، السرعة، النسب، المسائل اللفظية، المتتابعات، الدوريات، الإحصاء والهندسة",
+      count: 40,
+    },
+    {
+      id: "qudurat-speed-distance-time",
+      title: "تدريب السرعة والمسافة والزمن",
+      desc: "القانون الأساسي، تحويل الوحدات، وقت الوصول، السرعة النسبية، الالتقاء، اللحاق والسرعة المتوسطة",
+      count: 40,
+    },
+    {
+      id: "qudurat-roots-big",
+      title: "تحدي الجذور الكبير",
+      desc: "٨ قوانين للجذور: التعريف، الضرب، القسمة، الجمع، الترشيد، الفخ، المقارنة والجذر التكعيبي",
+      count: 40,
+    },
+    {
+      id: "qudurat-mental-math-test",
+      title: "الاختبار الشامل للحساب الذهني",
+      desc: "جمع وطرح وضرب وقسمة، كل سؤال بحيلة مختلفة",
+      count: 10,
+    },
+    {
+      id: "qudurat-mental-math-quick",
+      title: "تحدي الحساب الذهني السريع",
+      desc: "تجزئة، تعويض، تقريب، تماثل وعشرية",
+      count: 20,
+    },
+    {
+      id: "qudurat-fractions",
+      title: "تدريب على الكسور",
+      desc: "اختصار، جمع وطرح، ضرب، قسمة، مقارنة، نسبة مئوية، عشري ومسائل تطبيقية",
+      count: 20,
+    },
+    {
+      id: "qudurat-roots-summary",
+      title: "تحدي ملخّص الجذور",
+      desc: "تعريف، ضرب، قسمة، جمع، ترشيد بالمرافق، فخ التوزيع، مقارنة وجذر تكعيبي",
+      count: 20,
+    },
+    {
+      id: "qudurat-final-achievement",
+      title: "الإنجاز النهائي",
+      desc: "معادلات، قاعدة ثلاثية، ربح وخسارة، شراكة، متوسط، فخوخ، زوايا، أعمار وأكثر",
+      count: 40,
+    },
+    {
+      id: "qudurat-angles-equations",
+      title: "تحدي الزوايا",
+      desc: "متتامة، متكاملة، حول نقطة، متوازيان: افترض الزاوية = س وكوّن المعادلة",
+      count: 5,
+    },
+    {
+      id: "qudurat-basics-mix",
+      title: "تحدي أساسيات القدرات المنوّع",
+      desc: "مقارنة، تحليل، فرق مربعين، أسس كسرية، ضرب وقسمة سريعة",
+      count: 19,
+    },
+    {
+      id: "qudurat-exponents",
+      title: "تحدي قوانين الأسس",
+      desc: "ضرب، قسمة، قوة القوة، أس سالب وصفري وكسري ومقارنات",
+      count: 20,
+    },
+    {
+      id: "qudurat-multiply-divide-tricks",
+      title: "تحدي حيل الضرب والقسمة",
+      desc: "آحاد الضرب، تحليل عوامل، فرق مربعين، الضرب في ١١، نسبة سريعة، مقارنة وعشرية",
+      count: 20,
+    },
+    {
+      id: "qudurat-big-challenge-4",
+      title: "التحدي الكبير ٤",
+      desc: "قياس، زوايا، زيادة ونقصان، عمل وإنجاز، أعمار، تكلفة وسعر",
+      count: 20,
+    },
+    {
+      id: "qudurat-big-challenge-2-averages",
+      title: "التحدي الكبير ٢: المتوسط والتناسب المركّب",
+      desc: "متوسط، تناسب مركّب، اكتشف الفخ، تكلفة وسعر",
+      count: 20,
+    },
+    {
+      id: "qudurat-angles-basics",
+      title: "تدريبات الزوايا بأسلوب القياس",
+      desc: "متتامة، متكاملة، متقابلة بالرأس، حول نقطة",
+      count: 5,
+    },
+    {
+      id: "qudurat-big-challenge-2-profit",
+      title: "التحدي الكبير ٢: الربح والخسارة والشراكة",
+      desc: "ربح وخسارة، نسب وخلطات، شراكة، معادلات",
+      count: 20,
+    },
+    {
+      id: "qudurat-cost-price",
+      title: "تحدي التكلفة والسعر",
+      desc: "تكلفة الإنتاج، توفير الجملة، سعر البيع المطلوب",
+      count: 5,
     },
   ],
 

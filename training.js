@@ -27,6 +27,11 @@ const TRAINING_LABELS = {
 
 const toArabicNum = n => String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
 
+// ٥ أسئلة / ١٩ سؤالًا (Arabic number agreement)
+const questionsLabel = n =>
+  n === 1 ? 'سؤال واحد' : n === 2 ? 'سؤالان' :
+  toArabicNum(n) + (n >= 3 && n <= 10 ? ' أسئلة' : ' سؤالًا');
+
 // "term1--سادس-ابتدائي--math" → "رياضيات — سادس ابتدائي — الترم الأول"
 function trainingLabel(key) {
   const [cat, grade, subject] = key.split('--');
@@ -77,10 +82,13 @@ function renderTrainingTiles(container, key) {
       <span class="quiz-file-title"></span>
       <span class="quiz-file-hint"></span>
     `;
-    a.querySelector('.quiz-file-name').textContent  = trainingLabel(key);
-    a.querySelector('.quiz-file-title').textContent = set.title;
+    // Subject trainings: «المادة — الصف — الترم» then the title.
+    // Category-only keys (e.g. "qudurat"): the title then its description.
+    const bySubject = key.includes('--');
+    a.querySelector('.quiz-file-name').textContent  = bySubject ? trainingLabel(key) : set.title;
+    a.querySelector('.quiz-file-title').textContent = bySubject ? set.title : (set.desc || '');
     a.querySelector('.quiz-file-hint').textContent  =
-      toArabicNum(set.questions ? set.questions.length : set.count) + ' سؤال • اضغطي لفتح التدريب';
+      questionsLabel(set.questions ? set.questions.length : set.count) + ' • اضغطي لفتح التدريب';
     list.appendChild(a);
   });
 }

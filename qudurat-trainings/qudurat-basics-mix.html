@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>تحدي: فكّر أقل، حُلّ أسرع 🧠⚡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF8EE;
+    --ink:#1F2A37;
+    --teal:#0E8C86;
+    --teal-dark:#0A6B66;
+    --coral:#FF6B5E;
+    --sun:#FFC23C;
+    --purple:#8E6FD1;
+    --blue:#3E7CB1;
+    --green:#1a9c6b;
+    --pink:#D9739F;
+    --brown:#A0714E;
+    --card:#FFFFFF;
+    --shadow: 0 10px 25px rgba(31,42,55,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,194,60,0.25), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(142,111,209,0.18), transparent 45%),
+      var(--cream);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    padding:16px 12px 60px;
+    min-height:100vh;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:14px;}
+  header .badge{
+    display:inline-block;background:var(--teal);color:#fff;font-family:'Baloo Bhaijaan 2';
+    font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);
+    transform:rotate(-2deg);
+  }
+  header h1{font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:22px;margin:12px 0 4px;color:var(--teal-dark);}
+  header p{margin:0;color:#5b6572;font-size:13.5px;}
+
+  .legend{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:14px 0 6px;font-size:10.5px;font-weight:700;}
+  .legend span{padding:4px 9px;border-radius:999px;color:#fff;}
+
+  .score-bar{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 20px;
+    background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);
+    font-weight:700;font-size:14px;width:fit-content;margin-inline:auto;position:sticky;top:8px;z-index:10;
+  }
+  .score-bar span{color:var(--purple);}
+
+  .card{
+    background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;
+    margin-bottom:22px;border:2px solid rgba(0,0,0,0.03);position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;
+    background:var(--accent, var(--teal));opacity:0.12;border-radius:50%;
+  }
+  .qtitle{
+    display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2';font-weight:700;
+    font-size:13.5px;color:var(--accent, var(--teal-dark));margin-bottom:10px;flex-wrap:wrap;
+  }
+  .qnum{
+    display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+    background:var(--accent, var(--teal));color:#fff;font-weight:900;font-size:15px;box-shadow:var(--shadow);
+  }
+  .qtag{font-size:10.5px;color:#fff;background:var(--accent, var(--teal));padding:2px 10px;border-radius:999px;opacity:0.85;}
+  .qtext{
+    background:#f8f4ea;border-radius:14px;padding:15px;font-size:16.5px;font-weight:800;line-height:1.8;
+    margin-bottom:8px;border:2px dashed rgba(0,0,0,0.07);text-align:center;
+  }
+  .funny{font-size:12.5px;color:#8a7350;margin:0 0 16px;text-align:center;}
+
+  .hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .hint-btn{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;
+    background:#fdf2ea;color:var(--ink);font-family:'Cairo';font-weight:700;font-size:13.5px;
+    padding:11px 14px;border-radius:12px;cursor:pointer;transition:all .2s ease;text-align:right;
+  }
+  .hint-btn:active{transform:scale(0.98);}
+  .hint-reveal{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;
+    background:#eef7f6;border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:0 14px;
+  }
+  .hint-reveal.open{max-height:220px;padding:11px 14px;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    display:flex;align-items:center;justify-content:space-between;border:2px solid #e9e1d2;background:#fffdf9;
+    font-family:'Cairo';font-weight:700;font-size:15px;padding:13px 16px;border-radius:14px;cursor:pointer;
+    transition:all .18s ease;
+  }
+  .opt-btn:hover{border-color:var(--accent, var(--teal));}
+  .opt-btn .tag{font-size:17px;}
+  .opt-btn.correct{background:#e8f8f1;border-color:var(--green);color:var(--green);}
+  .opt-btn.wrong{background:#fdecea;border-color:var(--coral);color:#b6392e;}
+  .opt-btn.disabled{pointer-events:none;opacity:0.85;}
+
+  .opt-explain{
+    display:none;font-size:13px;line-height:1.7;font-weight:600;
+    background:#fff7ef;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px;margin-bottom:2px;
+  }
+  .opt-explain.show{display:block;}
+  .opt-explain.ok{background:#eafaf3;color:#136b47;}
+  .opt-explain.no{background:#fdeceb;color:#8f2e22;}
+
+  .solution-box{
+    display:none;margin-top:14px;background:#eef4fb;border-radius:14px;padding:14px 16px;
+    font-size:14px;line-height:1.9;border:2px solid #d7e6f7;
+  }
+  .solution-box.show{display:block;}
+  .solution-box .lbl{font-family:'Baloo Bhaijaan 2';font-weight:700;color:#2a5da0;margin-bottom:6px;display:block;}
+
+  .result-card{
+    text-align:center;background:linear-gradient(135deg, var(--teal), var(--purple));color:#fff;
+    border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none;
+  }
+  .result-card.show{display:block;}
+  .result-card h2{font-family:'Baloo Bhaijaan 2';font-size:22px;margin:0 0 8px;}
+  .result-card p{margin:0;font-size:14.5px;opacity:0.95;}
+  .result-card .emoji{font-size:40px;margin-bottom:6px;}
+
+  .share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .share-btn{
+    display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;
+    font-family:'Baloo Bhaijaan 2';font-weight:700;font-size:14px;cursor:pointer;box-shadow:var(--shadow);
+    text-decoration:none;color:#fff;
+  }
+  .wa{background:#25D366;}
+  .rt{background:var(--sun);color:var(--ink);}
+
+  footer{text-align:center;margin-top:18px;font-size:11.5px;color:#a9a094;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>تحدي أساسيات القدرات المنوّع</h1>
+    <p>مقارنة، تحليل، فرق مربعين، أسس كسرية، ضرب وقسمة سريعة... ٢٠ سؤال ⚡</p>
+  </header>
+
+  <div class="legend">
+    <span style="background:#0E8C86">⚖️ مقارنة أعداد</span>
+    <span style="background:#FF6B5E">🧩 تحليل للضرب</span>
+    <span style="background:#8E6FD1">⬛ فرق مربعين</span>
+    <span style="background:#3E7CB1">🔢 أس كسري</span>
+    <span style="background:#D9739F">✖️ ضرب سريع</span>
+    <span style="background:#1a9c6b">➗ قسمة سريعة</span>
+  </div>
+
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">0 / 20</span></div>
+
+  <div id="cardsContainer"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="emoji" id="resultEmoji">🎉</div>
+    <h2 id="resultTitle">تمام!</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+
+  <footer>فكّر أقل ... حُلّ أسرع — أساسيات القدرات المنوّع 🧠✨</footer>
+</div>
+
+<script>
+const TYPE_META = {
+  cmp: {label:"مقارنة أعداد", color:"#0E8C86", emoji:"⚖️"},
+  fact:{label:"تحليل للضرب",  color:"#FF6B5E", emoji:"🧩"},
+  sq:  {label:"فرق مربعين",   color:"#8E6FD1", emoji:"⬛"},
+  frac:{label:"أس كسري",      color:"#3E7CB1", emoji:"🔢"},
+  mul: {label:"ضرب سريع",     color:"#D9739F", emoji:"✖️"},
+  div: {label:"قسمة سريعة",   color:"#1a9c6b", emoji:"➗"}
+};
+
+const QUESTIONS = [
+{type:"cmp", text:"أيهما أكبر: 5067 أم 4576 ؟", funny:"💬 لا تحسب شي، بس قارن الخانة الأولى المختلفة 😏",
+ h1:"قارن الأرقام من اليسار خانة خانة: الآلاف أولاً (٥ مقابل ٤).", h2:"أول خانة يختلف فيها الرقمان تحدد العدد الأكبر مباشرة",
+ correct:"a", solution:"خانة الآلاف: ٥>٤ ← ٥٠٦٧ أكبر، بدون الحاجة لباقي الأرقام ✅",
+ options:[
+   {v:"5067 أكبر", ok:true, ex:"صحيح! خانة الآلاف ٥>٤ تحسم المقارنة فورًا ✅"},
+   {v:"4576 أكبر", ex:"عكس النتيجة، راجع خانة الآلاف في العددين."},
+   {v:"متساويان", ex:"العددان مختلفان بوضوح من أول خانة."},
+   {v:"يعتمد على القيمة", ex:"المقارنة محسومة من أول خانة مختلفة، لا حاجة لأي تخمين إضافي."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: 7890 أم 7809 ؟", funny:"💬 الآلاف والمئات متطابقة، دوّر عن أول اختلاف 🔍",
+ h1:"قارن خانة خانة من اليسار: الآلاف متساوية (٧=٧)، المئات متساوية (٨=٨)، انتقل للعشرات.", h2:"في خانة العشرات: ٩ مقابل ٠ ← هذا يحسم المقارنة",
+ correct:"a", solution:"العشرات: ٩>٠ ← ٧٨٩٠ أكبر ✅",
+ options:[
+   {v:"7890 أكبر", ok:true, ex:"صحيح! خانة العشرات ٩>٠ تحسم المقارنة ✅"},
+   {v:"7809 أكبر", ex:"عكس النتيجة، راجع خانة العشرات في العددين."},
+   {v:"متساويان", ex:"العددان مختلفان في خانة العشرات."},
+   {v:"يعتمد على القيمة", ex:"المقارنة محسومة بمجرد الوصول لأول خانة مختلفة."}
+ ]},
+{type:"cmp", text:"أيهما أكبر: 3215 أم 3199 ؟", funny:"💬 آخر سؤال بهذا النوع، طبّق نفس الطريقة 💪",
+ h1:"قارن خانة خانة من اليسار: الآلاف متساوية (٣=٣)، انتقل للمئات.", h2:"في خانة المئات: ٢ مقابل ١ ← هذا يحسم المقارنة",
+ correct:"a", solution:"المئات: ٢>١ ← ٣٢١٥ أكبر ✅",
+ options:[
+   {v:"3215 أكبر", ok:true, ex:"صحيح! خانة المئات ٢>١ تحسم المقارنة ✅"},
+   {v:"3199 أكبر", ex:"عكس النتيجة، راجع خانة المئات في العددين."},
+   {v:"متساويان", ex:"العددان مختلفان في خانة المئات."},
+   {v:"يعتمد على القيمة", ex:"المقارنة محسومة بمجرد الوصول لأول خانة مختلفة."}
+ ]},
+{type:"fact", text:"24 × 25", ar:false, funny:"💬 حلل ٢٤ عشان توصل لـ١٠٠ بسهولة 🧩",
+ h1:"حلل ٢٤ = ٦ × ٤، وخلّي ٤×٢٥ يعطيك رقم مستدير.", h2:"٤×٢٥=١٠٠ ← اضرب الناتج في ٦ المتبقية",
+ correct:"600", solution:"٢٤=٦×٤ ← ٤×٢٥=١٠٠ ← ١٠٠×٦=٦٠٠ ✅",
+ options:[
+   {v:"600", ok:true, ex:"صحيح! ٤×٢٥=١٠٠، و١٠٠×٦=٦٠٠ ✅"},
+   {v:"500", ex:"هذا ناتج تخمين غير مبني على التحليل الصحيح."},
+   {v:"700", ex:"هذا ناتج ضرب خاطئ، راجع التحليل ٦×٤."},
+   {v:"480", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"fact", text:"16 × 125", ar:false, funny:"💬 ١٢٥ رقم سحري، دوّر عن عامل يعطيك ٥٠٠ أو ١٠٠٠ 😎",
+ h1:"حلل ١٦ = ٤ × ٤، وخلّي ٤×١٢٥ يعطيك رقم مستدير.", h2:"٤×١٢٥=٥٠٠ ← اضرب الناتج في ٤ المتبقية",
+ correct:"2000", solution:"١٦=٤×٤ ← ٤×١٢٥=٥٠٠ ← ٥٠٠×٤=٢٠٠٠ ✅",
+ options:[
+   {v:"2000", ok:true, ex:"صحيح! ٤×١٢٥=٥٠٠، و٥٠٠×٤=٢٠٠٠ ✅"},
+   {v:"1600", ex:"هذا ناتج تخمين غير مبني على التحليل الصحيح."},
+   {v:"2500", ex:"هذا ناتج ضرب خاطئ، راجع التحليل ٤×٤."},
+   {v:"1800", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"fact", text:"45 × 20", ar:false, funny:"💬 آخر سؤال بهذا النوع، ضاعف وزوّد صفر 💪",
+ h1:"حلل ٢٠ = ٢ × ١٠، وخلّي ٤٥×٢ يكون الخطوة الأولى.", h2:"٤٥×٢=٩٠ ← اضرب الناتج في ١٠ (زِد صفرًا)",
+ correct:"900", solution:"٤٥×٢=٩٠ ← ٩٠×١٠=٩٠٠ ✅",
+ options:[
+   {v:"900", ok:true, ex:"صحيح! ٤٥×٢=٩٠، و٩٠×١٠=٩٠٠ ✅"},
+   {v:"800", ex:"هذا ناتج ضرب خاطئ، تحقق من ٤٥×٢ مرة ثانية."},
+   {v:"950", ex:"هذا ناتج تخمين غير مبني على التحليل الصحيح."},
+   {v:"850", ex:"هذا ناتج عملية حسابية غير مكتملة، راجع الحل."}
+ ]},
+{type:"sq", text:"بسّط: (50² - 3²) ÷ (50 + 3)", ar:false, funny:"💬 لا تحسب ٥٠² كاملة! البسط فرق مربعين 🎯",
+ h1:"البسط على صورة فرق مربعين: (أ²-ب²) = (أ+ب)(أ-ب)، هنا أ=٥٠ وب=٣.", h2:"بما إن المقام = (أ+ب) بالضبط، فالكسر يبسّط مباشرة إلى (أ-ب)",
+ correct:"47", solution:"(٥٠+٣)(٥٠-٣)÷(٥٠+٣) = ٥٠-٣ = ٤٧ ✅",
+ options:[
+   {v:"47", ok:true, ex:"صحيح! الكسر يبسّط مباشرة إلى ٥٠-٣ = ٤٧ ✅"},
+   {v:"53", ex:"هذا هو المقام (٥٠+٣) نفسه، مو ناتج التبسيط."},
+   {v:"50", ex:"هذا العدد أ لوحده، نسيت تطرح منه ب."},
+   {v:"2491", ex:"هذا ناتج البسط الكامل قبل التبسيط (٢٥٠٠-٩)، لكن السؤال يطلب الناتج بعد القسمة."}
+ ]},
+{type:"sq", text:"بسّط: (100² - 7²) ÷ (100 + 7)", ar:false, funny:"💬 نفس الفكرة، لا تحسب ١٠٠٠٠ كاملة 😉",
+ h1:"البسط على صورة فرق مربعين: (أ²-ب²) = (أ+ب)(أ-ب)، هنا أ=١٠٠ وب=٧.", h2:"بما إن المقام = (أ+ب) بالضبط، فالكسر يبسّط مباشرة إلى (أ-ب)",
+ correct:"93", solution:"(١٠٠+٧)(١٠٠-٧)÷(١٠٠+٧) = ١٠٠-٧ = ٩٣ ✅",
+ options:[
+   {v:"93", ok:true, ex:"صحيح! الكسر يبسّط مباشرة إلى ١٠٠-٧ = ٩٣ ✅"},
+   {v:"107", ex:"هذا هو المقام (١٠٠+٧) نفسه، مو ناتج التبسيط."},
+   {v:"100", ex:"هذا العدد أ لوحده، نسيت تطرح منه ب."},
+   {v:"9951", ex:"هذا ناتج البسط الكامل قبل التبسيط، لكن السؤال يطلب الناتج بعد القسمة."}
+ ]},
+{type:"sq", text:"بسّط: (25² - 4²) ÷ (25 + 4)", ar:false, funny:"💬 آخر سؤال بهذي الحيلة قبل الأس الكسري 🎉",
+ h1:"البسط على صورة فرق مربعين: (أ²-ب²) = (أ+ب)(أ-ب)، هنا أ=٢٥ وب=٤.", h2:"بما إن المقام = (أ+ب) بالضبط، فالكسر يبسّط مباشرة إلى (أ-ب)",
+ correct:"21", solution:"(٢٥+٤)(٢٥-٤)÷(٢٥+٤) = ٢٥-٤ = ٢١ ✅",
+ options:[
+   {v:"21", ok:true, ex:"صحيح! الكسر يبسّط مباشرة إلى ٢٥-٤ = ٢١ ✅"},
+   {v:"29", ex:"هذا هو المقام (٢٥+٤) نفسه، مو ناتج التبسيط."},
+   {v:"25", ex:"هذا العدد أ لوحده، نسيت تطرح منه ب."},
+   {v:"609", ex:"هذا ناتج البسط الكامل قبل التبسيط، لكن السؤال يطلب الناتج بعد القسمة."}
+ ]},
+{type:"sq", text:"بسّط: (20² - 3²) ÷ (20 + 3)", ar:false, funny:"💬 هذا آخر سؤال بهذا النوع فعليًا، طبّق نفس الحيلة 💪",
+ h1:"البسط على صورة فرق مربعين: (أ²-ب²) = (أ+ب)(أ-ب)، هنا أ=٢٠ وب=٣.", h2:"بما إن المقام = (أ+ب) بالضبط، فالكسر يبسّط مباشرة إلى (أ-ب)",
+ correct:"17", solution:"(٢٠+٣)(٢٠-٣)÷(٢٠+٣) = ٢٠-٣ = ١٧ ✅",
+ options:[
+   {v:"17", ok:true, ex:"صحيح! الكسر يبسّط مباشرة إلى ٢٠-٣ = ١٧ ✅"},
+   {v:"23", ex:"هذا هو المقام (٢٠+٣) نفسه، مو ناتج التبسيط."},
+   {v:"20", ex:"هذا العدد أ لوحده، نسيت تطرح منه ب."},
+   {v:"391", ex:"هذا ناتج البسط الكامل قبل التبسيط، لكن السؤال يطلب الناتج بعد القسمة."}
+ ]},
+{type:"frac", text:"64^(1/3)", ar:false, funny:"💬 جذر تكعيبي بس، سهلة إذا حفظت المكعبات 🔢",
+ h1:"الأس ١/٣ يعني: خذ الجذر التكعيبي للعدد.", h2:"دوّر عن عدد إذا رفعته للقوة ٣ يعطيك ٦٤",
+ correct:"4", solution:"٤³=٦٤ ← إذن ٦٤^(١/٣) = ٤ ✅",
+ options:[
+   {v:"4", ok:true, ex:"صحيح! ٤³=٦٤ ← الجذر التكعيبي لـ٦٤=٤ ✅"},
+   {v:"8", ex:"هذا لو أخذت الجذر التربيعي بدل التكعيبي (٨²=٦٤)."},
+   {v:"64/3", ex:"هذا لو تعاملت مع الأس الكسري كقسمة مباشرة، وذا خطأ مفاهيمي."},
+   {v:"21.3", ex:"نفس الخطأ السابق بصيغة عشرية، راجع مفهوم الأس الكسري."}
+ ]},
+{type:"frac", text:"32^(2/5)", ar:false, funny:"💬 هذي المرة خطوتين: جذر خامس ثم تربيع 😏",
+ h1:"المقام ٥ يعني جذر خامس، والبسط ٢ يعني رفع الناتج للقوة ٢.", h2:"الجذر الخامس لـ ٣٢ = ٢ (لأن ٢⁵=٣٢) ← ثم ارفعه للقوة ٢",
+ correct:"4", solution:"الجذر الخامس لـ٣٢=٢ ← ٢²=٤ ✅",
+ options:[
+   {v:"4", ok:true, ex:"صحيح! الجذر الخامس لـ٣٢=٢، و٢²=٤ ✅"},
+   {v:"2", ex:"هذا الجذر الخامس بس، نسيت ترفعه للقوة ٢."},
+   {v:"16", ex:"هذا ناتج ٣٢^(١/٢) تقريبًا، غير مرتبط بالأس الصحيح هنا."},
+   {v:"64", ex:"هذا ناتج تخمين غير مبني على قاعدة الجذر ثم القوة."}
+ ]},
+{type:"frac", text:"81^(1/4)", ar:false, funny:"💬 آخر سؤال بهذا النوع، جذر رابع بس 🎉",
+ h1:"الأس ١/٤ يعني: خذ الجذر الرابع للعدد.", h2:"دوّر عن عدد إذا رفعته للقوة ٤ يعطيك ٨١",
+ correct:"3", solution:"٣⁴=٨١ ← إذن ٨١^(١/٤) = ٣ ✅",
+ options:[
+   {v:"3", ok:true, ex:"صحيح! ٣⁴=٨١ ← الجذر الرابع لـ٨١=٣ ✅"},
+   {v:"9", ex:"هذا الجذر التربيعي لـ٨١، مو الجذر الرابع."},
+   {v:"27", ex:"هذا ناتج غير مرتبط بقاعدة الجذر الرابع الصحيحة."},
+   {v:"20.25", ex:"هذا لو تعاملت مع الأس الكسري كقسمة مباشرة، وذا خطأ مفاهيمي."}
+ ]},
+{type:"mul", text:"99 × 45", ar:false, funny:"💬 قرّب الـ٩٩ لـ١٠٠، الضرب يصير أسهل بكثير 😎",
+ h1:"اكتب ٩٩ = ١٠٠ - ١، وطبّق التوزيع: ٤٥×(١٠٠-١).", h2:"٤٥×١٠٠=٤٥٠٠ ← اطرح منها ٤٥×١=٤٥",
+ correct:"4455", solution:"٤٥×١٠٠=٤٥٠٠ ← ٤٥٠٠-٤٥=٤٤٥٥ ✅",
+ options:[
+   {v:"4455", ok:true, ex:"صحيح! ٤٥٠٠-٤٥ = ٤٤٥٥ ✅"},
+   {v:"4500", ex:"نسيت تطرح ٤٥×١ من الناتج (الفرق بين ٩٩ و١٠٠)."},
+   {v:"4550", ex:"هذا ناتج جمع خاطئ بدل طرح، راجع القانون."},
+   {v:"4410", ex:"هذا ناتج طرح خاطئ، تحقق من ٤٥٠٠-٤٥."}
+ ]},
+{type:"mul", text:"98 × 67", ar:false, funny:"💬 ٩٨=١٠٠-٢، نفس الفكرة بس فرق أكبر شوي 🧐",
+ h1:"اكتب ٩٨ = ١٠٠ - ٢، وطبّق التوزيع: ٦٧×(١٠٠-٢).", h2:"٦٧×١٠٠=٦٧٠٠ ← اطرح منها ٦٧×٢=١٣٤",
+ correct:"6566", solution:"٦٧٠٠-١٣٤ = ٦٥٦٦ ✅",
+ options:[
+   {v:"6566", ok:true, ex:"صحيح! ٦٧٠٠-١٣٤ = ٦٥٦٦ ✅"},
+   {v:"6700", ex:"نسيت تطرح ٦٧×٢ من الناتج (الفرق بين ٩٨ و١٠٠)."},
+   {v:"6600", ex:"هذا ناتج طرح خاطئ (طرحت ١٠٠ بدل ١٣٤)."},
+   {v:"6534", ex:"هذا ناتج طرح خاطئ، تحقق من ٦٧٠٠-١٣٤ مرة ثانية."}
+ ]},
+{type:"mul", text:"102 × 48", ar:false, funny:"💬 آخر سؤال بهذا النوع، هذي المرة زيادة مو نقصان 💪",
+ h1:"اكتب ١٠٢ = ١٠٠ + ٢، وطبّق التوزيع: ٤٨×(١٠٠+٢).", h2:"٤٨×١٠٠=٤٨٠٠ ← أضف عليها ٤٨×٢=٩٦",
+ correct:"4896", solution:"٤٨٠٠+٩٦ = ٤٨٩٦ ✅",
+ options:[
+   {v:"4896", ok:true, ex:"صحيح! ٤٨٠٠+٩٦ = ٤٨٩٦ ✅"},
+   {v:"4800", ex:"نسيت تضيف ٤٨×٢ للناتج (الفرق بين ١٠٢ و١٠٠)."},
+   {v:"4900", ex:"هذا ناتج تخمين غير مبني على الحساب الدقيق."},
+   {v:"4944", ex:"هذا ناتج جمع خاطئ، تحقق من ٤٨٠٠+٩٦ مرة ثانية."}
+ ]},
+{type:"div", text:"588 ÷ 14", ar:false, funny:"💬 دوّر عن مضاعف لـ١٤ قريب من ٥٨٨ 🔍",
+ h1:"دوّر عن عدد إذا ضربته في ١٤ يعطيك ٥٨٨ (جرب مضاعفات ١٤ القريبة من ٦٠٠).", h2:"تحقق: ١٤ × ٤٢ = ٥٨٨",
+ correct:"42", solution:"١٤×٤٢ = ٥٨٨ ← ٥٨٨÷١٤ = ٤٢ ✅",
+ options:[
+   {v:"42", ok:true, ex:"صحيح! ١٤×٤٢ = ٥٨٨ ✅"},
+   {v:"40", ex:"هذا ناتج قسمة خاطئ، جرب تتحقق بضرب ١٤×٤٠."},
+   {v:"44", ex:"هذا ناتج قسمة خاطئ، جرب تتحقق بضرب ١٤×٤٤."},
+   {v:"48", ex:"هذا ناتج تخمين غير مبني على التحقق الصحيح."}
+ ]},
+{type:"div", text:"552 ÷ 24", ar:false, funny:"💬 نفس الفكرة، دوّر عن المضاعف المناسب 🎯",
+ h1:"دوّر عن عدد إذا ضربته في ٢٤ يعطيك ٥٥٢.", h2:"تحقق: ٢٤ × ٢٣ = ٥٥٢",
+ correct:"23", solution:"٢٤×٢٣ = ٥٥٢ ← ٥٥٢÷٢٤ = ٢٣ ✅",
+ options:[
+   {v:"23", ok:true, ex:"صحيح! ٢٤×٢٣ = ٥٥٢ ✅"},
+   {v:"22", ex:"هذا ناتج قسمة خاطئ، جرب تتحقق بضرب ٢٤×٢٢."},
+   {v:"24", ex:"هذا نفس المقسوم عليه، مو ناتج القسمة."},
+   {v:"25", ex:"هذا ناتج قسمة خاطئ، جرب تتحقق بضرب ٢٤×٢٥."}
+ ]},
+{type:"div", text:"936 ÷ 39", ar:false, funny:"💬 آخر سؤال بالتحدي كله! دوّر عن المضاعف الصحيح 🎉",
+ h1:"دوّر عن عدد إذا ضربته في ٣٩ يعطيك ٩٣٦.", h2:"تحقق: ٣٩ × ٢٤ = ٩٣٦",
+ correct:"24", solution:"٣٩×٢٤ = ٩٣٦ ← ٩٣٦÷٣٩ = ٢٤ ✅",
+ options:[
+   {v:"24", ok:true, ex:"صحيح! ٣٩×٢٤ = ٩٣٦ ✅"},
+   {v:"23", ex:"هذا ناتج قسمة خاطئ، جرب تتحقق بضرب ٣٩×٢٣."},
+   {v:"26", ex:"هذا ناتج قسمة خاطئ، جرب تتحقق بضرب ٣٩×٢٦."},
+   {v:"36", ex:"هذا ناتج تخمين غير مبني على التحقق الصحيح."}
+ ]}
+];
+
+const container = document.getElementById('cardsContainer');
+const QCOUNT = QUESTIONS.length;
+document.getElementById('scoreDisplay').textContent = '0 / ' + QCOUNT;
+
+let score = 0;
+let answered = {};
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const meta = TYPE_META[q.type];
+  answered[n] = false;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.id = 'card' + n;
+  card.style.setProperty('--accent', meta.color);
+
+  const opts = q.options.map((o,i)=>({...o, key:n+'-'+i}));
+
+  let optsHtml = '';
+  opts.forEach(o=>{
+    optsHtml += `
+      <button class="opt-btn" data-key="${o.key}" data-ok="${o.ok?'1':'0'}">
+        <span>${o.v}</span><span class="tag"></span>
+      </button>
+      <div class="opt-explain ${o.ok?'ok':'no'}" id="ex-${o.key}">${o.ex}</div>`;
+  });
+
+  card.innerHTML = `
+    <div class="qtitle">
+      <span class="qnum">${n}</span> السؤال ${n}
+      <span class="qtag">${meta.emoji} ${meta.label}</span>
+    </div>
+    <div class="qtext">${q.text}</div>
+    <div class="funny">${q.funny}</div>
+    <div class="hints">
+      <div>
+        <button class="hint-btn" data-target="h${n}-1"><span>🔎 تلميح: أول خطوة</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-1">${q.h1}</div>
+      </div>
+      <div>
+        <button class="hint-btn" data-target="h${n}-2"><span>🎯 تلميح: كمّل الحل</span><span>＋</span></button>
+        <div class="hint-reveal" id="h${n}-2">${q.h2}</div>
+      </div>
+    </div>
+    <div class="options" id="opts${n}">${optsHtml}</div>
+    <div class="solution-box" id="sol${n}">
+      <span class="lbl">✅ الحل الكامل</span>${q.solution}
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+document.querySelectorAll('.hint-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.dataset.target);
+    target.classList.toggle('open');
+    const icon = btn.querySelector('span:last-child');
+    icon.textContent = target.classList.contains('open') ? '－' : '＋';
+  });
+});
+
+QUESTIONS.forEach((q, idx)=>{
+  const n = idx + 1;
+  const cont = document.getElementById('opts'+n);
+  const buttons = cont.querySelectorAll('.opt-btn');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered[n]) return;
+      answered[n] = true;
+      const isOk = btn.dataset.ok === '1';
+      buttons.forEach(b=>b.classList.add('disabled'));
+      btn.classList.add(isOk ? 'correct' : 'wrong');
+      btn.querySelector('.tag').textContent = isOk ? '✅' : '❌';
+      document.getElementById('ex-'+btn.dataset.key).classList.add('show');
+      document.getElementById('sol'+n).classList.add('show');
+      if(isOk){ score++; }
+      updateScore();
+      checkFinish();
+    });
+  });
+});
+
+function updateScore(){
+  document.getElementById('scoreDisplay').textContent = score + ' / ' + QCOUNT;
+}
+
+function checkFinish(){
+  const allDone = Object.values(answered).every(v=>v===true);
+  if(allDone){
+    const rc = document.getElementById('resultCard');
+    const title = document.getElementById('resultTitle');
+    const text = document.getElementById('resultText');
+    const emoji = document.getElementById('resultEmoji');
+    rc.classList.add('show');
+    rc.scrollIntoView({behavior:'smooth', block:'center'});
+
+    if(score === QCOUNT){
+      emoji.textContent = '🏆';
+      title.textContent = 'خرافي! نتيجة كاملة';
+      text.textContent = 'حليت الـ' + QCOUNT + ' سؤال كلهم صح 😎 صرت خبير بأساسيات القدرات';
+    } else if(score >= QCOUNT*0.7){
+      emoji.textContent = '💪';
+      title.textContent = 'أداء ممتاز!';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الأسئلة اللي غلطت فيها وشوف الحل المكتوب تحتها';
+    } else if(score >= QCOUNT*0.4){
+      emoji.textContent = '🙂';
+      title.textContent = 'بداية طيبة';
+      text.textContent = 'نتيجتك ' + score + ' من ' + QCOUNT + '، راجع الحلول المكتوبة تحت كل سؤال غلطت فيه';
+    } else {
+      emoji.textContent = '🌱';
+      title.textContent = 'وقت المراجعة';
+      text.textContent = 'ولا يهمك، كل الحلول مكتوبة تحت كل سؤال، راجعها بهدوء وحاول مرة ثانية';
+    }
+  }
+}
+
+function restart(){
+  score = 0;
+  QUESTIONS.forEach((q, idx)=>{
+    const n = idx + 1;
+    answered[n] = false;
+    const buttons = document.querySelectorAll('#opts'+n+' .opt-btn');
+    buttons.forEach(b=>{
+      b.classList.remove('correct','wrong','disabled');
+      b.querySelector('.tag').textContent = '';
+    });
+    document.querySelectorAll('#opts'+n+' .opt-explain').forEach(e=>e.classList.remove('show'));
+    document.getElementById('sol'+n).classList.remove('show');
+  });
+  updateScore();
+  document.getElementById('resultCard').classList.remove('show');
+  document.querySelectorAll('.hint-reveal.open').forEach(h=>h.classList.remove('open'));
+  document.querySelectorAll('.hint-btn span:last-child').forEach(i=>i.textContent='＋');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+const waText = encodeURIComponent(
+`🧠 تحدي: فكّر أقل ... حُلّ أسرع (أساسيات القدرات المنوّع)
+
+٢٠ سؤال في: مقارنة أعداد ⚖️ + تحليل للضرب 🧩 + فرق مربعين ⬛ + أس كسري 🔢 + ضرب سريع ✖️ + قسمة سريعة ➗
+
+جرب تحل الأسئلة بنفسك قبل ما تشوف الحل المكتوب تحت كل سؤال 😉
+رابط التحدي: (الصق الرابط هنا بعد رفعه)`
+);
+document.getElementById('waBtn').href = `https://wa.me/?text=${waText}`;
+</script>
+</body>
+</html>
