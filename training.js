@@ -46,7 +46,7 @@ function trainingsPageUrl(key) {
 
 function findTraining(id) {
   for (const [key, sets] of Object.entries(QUESTIONS_DATA)) {
-    const set = sets.find(s => s.id === id);
+    const set = sets.find(s => s.id === id && s.questions);
     if (set) return { key, set };
   }
   return null;
@@ -80,7 +80,7 @@ function renderTrainingTiles(container, key) {
     a.querySelector('.quiz-file-name').textContent  = trainingLabel(key);
     a.querySelector('.quiz-file-title').textContent = set.title;
     a.querySelector('.quiz-file-hint').textContent  =
-      toArabicNum(set.questions.length) + ' سؤال • اضغطي لفتح التدريب';
+      toArabicNum(set.questions ? set.questions.length : set.count) + ' سؤال • اضغطي لفتح التدريب';
     list.appendChild(a);
   });
 }

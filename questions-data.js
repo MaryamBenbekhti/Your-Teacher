@@ -6,6 +6,8 @@
 //              training page and change TRAINING_ID)
 //   title:     training title shown on its page
 //   questions: its questions in order
+// A ready-made training (its own HTML/JS kept as is in training-<id>.html)
+// has no questions here; it lists `count` (number of questions) instead.
 // Never remove or edit existing trainings when adding a new one.
 //
 // QUESTION FORMAT:
@@ -193,6 +195,16 @@ const QUESTIONS_DATA = {
           options: ["٧", "٥", "٣", "٦"],
           answer: 0 },
       ],
+    },
+  ],
+
+  "term1--خامس-ابتدائي--math": [
+    {
+      // Ready-made training: questions live in training-term1-grade5-math-review.html
+      // (two tests: «اختبار اليوم» and «اختبار بكرة», 20 questions each)
+      id: "term1-grade5-math-review",
+      title: "مراجعة اختبار الفترة الأولى",
+      count: 40,
     },
   ],
 
