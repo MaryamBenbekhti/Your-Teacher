@@ -112,7 +112,10 @@
   const grid   = document.getElementById('videos-grid');
 
   if (videos.length === 0) {
-    document.getElementById('empty-state').style.display = 'block';
+    // "Coming soon" only when the subject has neither videos nor a training
+    if ((QUESTIONS_DATA[key] || []).length === 0) {
+      document.getElementById('empty-state').style.display = 'block';
+    }
   } else {
     videos.forEach(v => {
       const card = document.createElement('div');
