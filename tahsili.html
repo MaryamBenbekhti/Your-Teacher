@@ -85,15 +85,15 @@
 <script src="script.js"></script>
 <script>
   const params  = new URLSearchParams(window.location.search);
-  const cat     = params.get('cat')     || '';
+  const cat     = params.get('cat')     || 'tahsili';
   const grade   = params.get('grade')   || '';
   const subject = params.get('subject') || '';
 
   const catMeta = {
-    qudurat: { label: '🧠 قدرات' },
-    tahsili: { label: '📚 تحصيلي' },
-    term1:   { label: '🍂 الترم الأول' },
-    term2:   { label: '🌸 الترم الثاني' },
+    qudurat: { label: '🧠 قدرات',        name: 'قدرات' },
+    tahsili: { label: '📚 تحصيلي',       name: 'تحصيلي' },
+    term1:   { label: '🍂 الترم الأول',  name: 'الترم الأول' },
+    term2:   { label: '🌸 الترم الثاني', name: 'الترم الثاني' },
   };
 
   const gradeLabels = {
@@ -120,21 +120,22 @@
   };
 
   const catLabel     = (catMeta[cat] || {}).label || cat;
+  const catName      = (catMeta[cat] || {}).name  || cat;
   const gradeLabel   = gradeLabels[grade]          || grade;
   const subjectLabel = subjectLabels[subject]       || subject;
 
-  // Update page text
-  document.getElementById('page-badge').textContent    = catLabel + ' • ' + gradeLabel;
-  document.getElementById('page-title').textContent    = subjectLabel;
-  document.getElementById('page-subtitle').textContent = 'جميع شروحات ' + subjectLabel + ' لـ ' + gradeLabel;
-  document.title = subjectLabel + ' — ' + gradeLabel + ' | مدربتك';
+  // This page is usually opened with only ?cat=, so grade and subject are optional
+  const heading  = subjectLabel || catName;
+  const forGrade = gradeLabel ? ' لـ ' + gradeLabel : '';
 
-  // Breadcrumb links
-  document.getElementById('bc-grade').textContent   = gradeLabel;
-  document.getElementById('bc-grade').href          = 'grade-select.html?cat=' + cat;
-  document.getElementById('bc-subject').textContent = subjectLabel;
-  document.getElementById('bc-subject').href        = 'subject-select.html?cat=' + cat + '&grade=' + grade;
-  document.getElementById('bc-current').textContent = 'الفيديوهات';
+  // Update page text
+  document.getElementById('page-badge').textContent    = catLabel + (gradeLabel ? ' • ' + gradeLabel : '');
+  document.getElementById('page-title').textContent    = heading;
+  document.getElementById('page-subtitle').textContent = 'جميع شروحات ' + heading + forGrade;
+  document.title = heading + (gradeLabel ? ' — ' + gradeLabel : '') + ' | مدربتك';
+
+  // Breadcrumb
+  document.getElementById('bc-current').textContent = heading;
 </script>
 </body>
 </html>
