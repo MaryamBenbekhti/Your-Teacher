@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفصل الثاني: التوازي والتعامد — رياضيات — أول ثانوي — الترم الأول | مدربتك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+/* Ready-made training (from the original HTML file), restyled with the site's colours.
+   Everything is scoped to .ready-training so it can't affect the rest of the site. */
+.ready-training{
+  --bg:#F7F3EE; --card:#FFFFFF; --ink:#1A1A1A; --muted:#6B6158; --line:#E6DCD1;
+  --accent:#C78255; --accent-ink:#FFFFFF; --sun:#1A1A1A; --sun-ink:#FFFFFF;
+  --ok:#2E7D32; --okbg:#E3F4E6; --bad:#C62828; --badbg:#FBE6E4; --chip:rgba(199,130,85,0.12);
+  color:var(--ink); font-size:19px; line-height:1.7; direction:rtl;
+}
+.ready-training *{box-sizing:border-box}
+.ready-training .wrap{max-width:680px;margin:0 auto;padding-block:10px 20px}
+.ready-training h1,.ready-training h2{line-height:1.3;text-wrap:balance;margin:0;font-weight:800}
+.ready-training button{font:inherit;color:inherit;cursor:pointer}
+.ready-training button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ready-training .m{direction:ltr;unicode-bidi:isolate;display:inline-block;font-weight:700;white-space:nowrap}
+.ready-training .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.15;margin-inline:4px;font-weight:700}
+.ready-training .fr span:first-child{border-bottom:2px solid currentColor;padding-inline:4px}
+.ready-training .box{display:inline-block;width:1.1em;height:1.1em;background:var(--line);border-radius:4px;vertical-align:-0.15em;border:2px dashed var(--muted)}
+.ready-training u{text-decoration-thickness:3px;text-underline-offset:5px;text-decoration-color:var(--bad)}
+
+.ready-training .home{display:flex;flex-direction:column;gap:22px;padding-top:10px}
+.ready-training .tag{display:inline-block;background:var(--chip);color:var(--accent);font-size:15px;font-weight:700;padding:4px 14px;border-radius:99px;align-self:flex-start}
+.ready-training .home h1{font-size:40px}
+.ready-training .home p{margin:0;color:var(--muted)}
+.ready-training .big{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:26px 24px;border:none;border-radius:var(--radius);text-align:right;font-size:30px;font-weight:800;transition:0.3s}
+.ready-training .big:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,0.12)}
+.ready-training .big small{display:block;font-size:16px;font-weight:600;opacity:.85}
+.ready-training .big .arrow{font-size:34px}
+.ready-training .b1{background:var(--accent);color:var(--accent-ink)}
+.ready-training .b2{background:var(--sun);color:var(--sun-ink)}
+.ready-training .big:active{transform:scale(.98)}
+.ready-training .foot{text-align:center;color:var(--muted);font-size:14px;margin-top:10px}
+
+.ready-training .top{position:sticky;top:79px;z-index:5;background:var(--bg);padding-block:10px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line)}
+.ready-training .back{border:1px solid var(--line);background:var(--card);border-radius:50px;padding:6px 16px;font-size:16px;font-weight:700}
+.ready-training .prog{flex:1;min-width:0}
+.ready-training .prog .lbl{font-size:15px;color:var(--muted);font-weight:600}
+.ready-training .bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.ready-training .bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .3s}
+.ready-training .qhead{margin-block:18px 6px}
+.ready-training .qhead h2{font-size:28px}
+.ready-training .list{display:flex;flex-direction:column;gap:16px}
+.ready-training .q{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.ready-training .qt{display:flex;gap:10px;align-items:flex-start;font-size:20px;font-weight:700}
+.ready-training .num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--accent);color:white;display:grid;place-items:center;font-weight:800;font-size:17px;margin-top:2px}
+.ready-training .qtext{min-width:0}
+.ready-training .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.ready-training .opt{display:flex;align-items:center;gap:10px;min-height:56px;padding:10px 12px;background:var(--bg);border:2px solid transparent;border-radius:15px;text-align:right;font-size:20px;font-weight:600}
+.ready-training .opt .k{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);background:var(--card);color:var(--ink);display:grid;place-items:center;font-size:14px;font-weight:800}
+.ready-training .opt:hover:not(:disabled){border-color:var(--accent)}
+.ready-training .opt:disabled{cursor:default}
+.ready-training .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.ready-training .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.ready-training .opt.dim{opacity:.55}
+.ready-training .fb{margin-top:12px;padding:10px 14px;border-radius:12px;font-size:17px}
+.ready-training .fb.ok{background:var(--okbg);color:var(--ok);font-weight:700}
+.ready-training .fb.no{background:var(--badbg);color:var(--ink)}
+.ready-training .fb.no b{color:var(--bad)}
+.ready-training table.t{border-collapse:collapse;margin-top:10px;font-size:17px}
+.ready-training table.t th,.ready-training table.t td{border:1px solid var(--line);padding:4px 14px;text-align:center}
+.ready-training table.t th{background:var(--chip)}
+
+.ready-training .res{margin-top:22px;background:var(--card);border:2px solid var(--accent);border-radius:var(--radius);padding:22px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.ready-training .score{font-size:64px;font-weight:800;color:var(--accent);line-height:1}
+.ready-training .score span{font-size:30px;color:var(--muted)}
+.ready-training .res p{margin:0}
+.ready-training .miss{font-size:16px;color:var(--muted)}
+.ready-training .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.ready-training .btn{border:none;border-radius:50px;padding:12px 24px;font-size:18px;font-weight:700}
+.ready-training .btn.main{background:var(--accent);color:var(--accent-ink)}
+.ready-training .btn.alt{background:var(--text-dark);color:white}
+.ready-training .pending{text-align:center;color:var(--muted);font-size:16px;margin-top:18px}
+@media (max-width:768px){.ready-training .top{top:0}}
+@media (max-width:420px){.ready-training .opts{grid-template-columns:1fr}.ready-training .home h1{font-size:34px}.ready-training{font-size:18px}}
+@media (prefers-reduced-motion:reduce){.ready-training *{transition:none!important}}
+
+/* Extra styles from this training (geometry figures etc.), scoped and in the site's colours */
+.ready-training .eq{unicode-bidi:isolate;display:inline-block;white-space:nowrap;font-weight:700}
+.ready-training .ol{text-decoration:overline;text-decoration-thickness:2px}
+.ready-training .rt{white-space:nowrap;unicode-bidi:isolate;display:inline-block}
+.ready-training .rt>span{border-top:2px solid currentColor;padding-inline:3px;display:inline-block}
+.ready-training [hidden]{display:none!important}
+.ready-training .psg{background:var(--chip);border-radius:12px;padding:10px 12px;font-size:17px;font-weight:400;line-height:1.9;margin-bottom:10px}
+.ready-training .psgd{margin-bottom:10px}
+.ready-training .psgd summary{cursor:pointer;color:var(--accent);font-size:16px;font-weight:700;margin-bottom:6px}
+.ready-training .opts.three{grid-template-columns:1fr}
+.ready-training .figw{margin:4px auto 10px;max-width:320px}
+.ready-training .gf{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.ready-training .gf .ln,.ready-training .gf .poly{stroke:var(--accent);stroke-width:2;fill:none}
+.ready-training .gf .ah{fill:var(--accent)}
+.ready-training .gf .pm{fill:#E0457B}
+.ready-training .gf .lb{font-size:13px;text-anchor:middle;dominant-baseline:middle;fill:var(--ink);font-weight:700}
+.ready-training .gf .sm{font-size:12px}
+.ready-training .gf .nm{font-size:15px;font-style:italic;text-anchor:middle;dominant-baseline:middle;fill:var(--ink)}
+.ready-training .nav{display:flex;justify-content:flex-start;margin-top:12px}
+.ready-training .nav:empty{display:none}
+.ready-training .next{width:100%;padding:14px}
+.ready-training .fb .why{display:block;font-weight:400;color:var(--ink);margin-top:2px}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-content">
+    <a href="index.html" class="logo">مدربتك<span>✦</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="about.html">مين أستاذة عزيزة؟</a></li>
+      <li><a href="subjects.html">المواد</a></li>
+      <li><a href="problems.html">المشاكل الشائعة</a></li>
+      <li><a href="moms.html">آراء الأمهات</a></li>
+      <li><a href="videos.html">شروحات</a></li>
+      <li><a href="contact.html" class="nav-btn">احجزي جلستك الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Ready-made training page: its questions, correction and interaction are kept
+     from the original HTML file (script below). Listed in questions-data.js by id. -->
+<section class="container">
+
+  <div style="margin-bottom:30px; font-size:0.9rem; color:#999; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <a href="videos.html" style="color:var(--accent); font-weight:700; text-decoration:none;">الشروحات</a>
+    <span style="opacity:0.4;">◂</span>
+    <a class="training-back-link" href="video-list.html?cat=term1&grade=اول-ثانوي&subject=math#trainings" style="color:var(--accent); font-weight:700; text-decoration:none;">رياضيات — أول ثانوي — الترم الأول</a>
+    <span style="opacity:0.4;">◂</span>
+    <span style="color:var(--text-dark); font-weight:700;">التدريب</span>
+  </div>
+
+  <a class="training-back btn-black" href="video-list.html?cat=term1&grade=اول-ثانوي&subject=math#trainings">→ العودة للتدريبات</a>
+
+  <div class="ready-training">
+    <div class="wrap" id="app"></div>
+  </div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a class="training-back btn-black" href="video-list.html?cat=term1&grade=اول-ثانوي&subject=math#trainings">→ العودة للتدريبات</a>
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+<script>
+const M = s => `<span class="m" dir="ltr">${s}</span>`;
+const BOX = '<span class="box"></span>';
+const CMP = [M('&lt;')+' أصغر من', M('&gt;')+' أكبر من', M('=')+' يساوي'];
+const WHALES = `<table class="t"><tr><th>الحوت</th><th>المسافة (كم)</th></tr><tr><td>الأحدب</td><td>5631</td></tr><tr><td>الرمادي</td><td>19308</td></tr><tr><td>القاتل</td><td>1448</td></tr></table>`;
+
+const FR = (n,d) => `<span class="fr"><span>${n}</span><span>${d}</span></span>`;
+const SUP = (b,e) => `${b}<sup>${e}</sup>`;
+const ME = s => M(s.replace(/([^\u0660-\u0669\u066B])/g,'\u200E$1\u200E'));
+const RT = s => `<span class="rt" dir="ltr">√<span>${s}</span></span>`;
+const LTR = s => `<bdi dir="ltr">${s}</bdi>`;
+const TF = ['صح','خطأ'];
+const NEG = (n,d) => M('−'+FR(n,d));
+const OL = s => `<span class="ol">${s}</span>`;
+const SETS = ['صحيحة ، نسبية','غير نسبية','كلية ، صحيحة ، نسبية','طبيعية ، نسبية'];
+const PT = s => M(`(${s})`);
+const FIG={"f1": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 320 170\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arf1\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><line x1=\"10.0\" y1=\"85.0\" x2=\"310.0\" y2=\"85.0\" class=\"ln\" marker-start=\"url(#arf1)\" marker-end=\"url(#arf1)\"/><line x1=\"69.9\" y1=\"152.0\" x2=\"110.1\" y2=\"18.0\" class=\"ln\" marker-start=\"url(#arf1)\" marker-end=\"url(#arf1)\"/><line x1=\"199.9\" y1=\"152.0\" x2=\"240.1\" y2=\"18.0\" class=\"ln\" marker-start=\"url(#arf1)\" marker-end=\"url(#arf1)\"/><text x=\"81.0\" y=\"73.0\" class=\"lb\">1</text><text x=\"102.0\" y=\"76.0\" class=\"lb\">2</text><text x=\"78.0\" y=\"94.0\" class=\"lb\">5</text><text x=\"99.0\" y=\"97.0\" class=\"lb\">6</text><text x=\"211.0\" y=\"73.0\" class=\"lb\">3</text><text x=\"232.0\" y=\"76.0\" class=\"lb\">4</text><text x=\"208.0\" y=\"94.0\" class=\"lb\">7</text><text x=\"229.0\" y=\"97.0\" class=\"lb\">8</text></svg></div>", "f3": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 330 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arf3\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><line x1=\"10.0\" y1=\"70.0\" x2=\"305.0\" y2=\"70.0\" class=\"ln\" marker-start=\"url(#arf3)\" marker-end=\"url(#arf3)\"/><text x=\"317.0\" y=\"70.0\" class=\"nm\">p</text><line x1=\"10.0\" y1=\"170.0\" x2=\"305.0\" y2=\"170.0\" class=\"ln\" marker-start=\"url(#arf3)\" marker-end=\"url(#arf3)\"/><text x=\"317.0\" y=\"170.0\" class=\"nm\">r</text><line x1=\"113.1\" y1=\"10.8\" x2=\"86.9\" y2=\"229.2\" class=\"ln\" marker-start=\"url(#arf3)\" marker-end=\"url(#arf3)\"/><text x=\"85.5\" y=\"241.1\" class=\"nm\">s</text><line x1=\"216.9\" y1=\"10.8\" x2=\"243.1\" y2=\"229.2\" class=\"ln\" marker-start=\"url(#arf3)\" marker-end=\"url(#arf3)\"/><text x=\"244.5\" y=\"241.1\" class=\"nm\">t</text><text x=\"95.4\" y=\"58.0\" class=\"lb\">1</text><text x=\"118.0\" y=\"59.4\" class=\"lb\">5</text><text x=\"94.0\" y=\"80.6\" class=\"lb\">2</text><text x=\"116.6\" y=\"82.0\" class=\"lb\">6</text><text x=\"212.0\" y=\"59.4\" class=\"lb\">9</text><text x=\"234.6\" y=\"58.0\" class=\"lb\">13</text><text x=\"213.4\" y=\"82.0\" class=\"lb\">10</text><text x=\"236.0\" y=\"80.6\" class=\"lb\">14</text><text x=\"83.4\" y=\"158.0\" class=\"lb\">3</text><text x=\"106.0\" y=\"159.4\" class=\"lb\">7</text><text x=\"82.0\" y=\"180.6\" class=\"lb\">4</text><text x=\"104.6\" y=\"182.0\" class=\"lb\">8</text><text x=\"224.0\" y=\"159.4\" class=\"lb\">11</text><text x=\"246.6\" y=\"158.0\" class=\"lb\">15</text><text x=\"225.4\" y=\"182.0\" class=\"lb\">12</text><text x=\"248.0\" y=\"180.6\" class=\"lb\">16</text></svg></div>", "f4": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 320 150\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arf4\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><line x1=\"10.0\" y1=\"75.0\" x2=\"310.0\" y2=\"75.0\" class=\"ln\" marker-start=\"url(#arf4)\" marker-end=\"url(#arf4)\"/><line x1=\"62.5\" y1=\"121.9\" x2=\"137.5\" y2=\"28.1\" class=\"ln\" marker-start=\"url(#arf4)\" marker-end=\"url(#arf4)\"/><line x1=\"182.5\" y1=\"121.9\" x2=\"257.5\" y2=\"28.1\" class=\"ln\" marker-start=\"url(#arf4)\" marker-end=\"url(#arf4)\"/><text x=\"93.5\" y=\"61.5\" class=\"lb\">1</text><text x=\"113.5\" y=\"68.5\" class=\"lb\">4</text><text x=\"86.5\" y=\"81.5\" class=\"lb\">2</text><text x=\"106.5\" y=\"88.5\" class=\"lb\">3</text><text x=\"213.5\" y=\"61.5\" class=\"lb\">5</text><text x=\"233.5\" y=\"68.5\" class=\"lb\">8</text><text x=\"206.5\" y=\"81.5\" class=\"lb\">6</text><text x=\"226.5\" y=\"88.5\" class=\"lb\">7</text></svg></div>", "g1": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 300 190\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arg1\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><line x1=\"14.2\" y1=\"129.0\" x2=\"285.8\" y2=\"61.0\" class=\"ln\" marker-start=\"url(#arg1)\" marker-end=\"url(#arg1)\"/><line x1=\"110.0\" y1=\"185.0\" x2=\"110.0\" y2=\"25.0\" class=\"ln\" marker-start=\"url(#arg1)\" marker-end=\"url(#arg1)\"/><path d=\"M110.0 143.8 L114.0 152.8 L106.0 152.8 Z\" class=\"pm\"/><line x1=\"190.0\" y1=\"165.0\" x2=\"190.0\" y2=\"5.0\" class=\"ln\" marker-start=\"url(#arg1)\" marker-end=\"url(#arg1)\"/><path d=\"M190.0 123.8 L194.0 132.8 L186.0 132.8 Z\" class=\"pm\"/><text x=\"98.2\" y=\"95.8\" class=\"lb\">1</text><text x=\"119.2\" y=\"93.2\" class=\"lb\">2</text><text x=\"100.8\" y=\"116.8\" class=\"lb\">8</text><text x=\"121.8\" y=\"114.2\" class=\"lb\">7</text><text x=\"178.2\" y=\"75.8\" class=\"lb\">3</text><text x=\"199.2\" y=\"73.2\" class=\"lb\">4</text><text x=\"180.8\" y=\"96.8\" class=\"lb\">6</text><text x=\"201.8\" y=\"94.2\" class=\"lb\">5</text></svg></div>", "g2": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 300 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arg2\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><line x1=\"15.0\" y1=\"80.0\" x2=\"270.0\" y2=\"80.0\" class=\"ln\" marker-start=\"url(#arg2)\" marker-end=\"url(#arg2)\"/><path d=\"M77.1 80.0 L68.1 84.0 L68.1 76.0 Z\" class=\"pm\"/><text x=\"282.0\" y=\"80.0\" class=\"nm\">n</text><line x1=\"15.0\" y1=\"150.0\" x2=\"270.0\" y2=\"150.0\" class=\"ln\" marker-start=\"url(#arg2)\" marker-end=\"url(#arg2)\"/><path d=\"M77.1 150.0 L68.1 154.0 L68.1 146.0 Z\" class=\"pm\"/><text x=\"282.0\" y=\"150.0\" class=\"nm\">p</text><line x1=\"115.3\" y1=\"214.1\" x2=\"184.7\" y2=\"15.9\" class=\"ln\" marker-start=\"url(#arg2)\" marker-end=\"url(#arg2)\"/><text x=\"188.7\" y=\"4.6\" class=\"nm\">t</text><text x=\"153.6\" y=\"67.8\" class=\"lb\">1</text><text x=\"174.5\" y=\"71.3\" class=\"lb\">2</text><text x=\"150.0\" y=\"88.7\" class=\"lb\">4</text><text x=\"170.9\" y=\"92.2\" class=\"lb\">3</text><text x=\"129.1\" y=\"137.8\" class=\"lb\">8</text><text x=\"150.0\" y=\"141.3\" class=\"lb\">7</text><text x=\"125.5\" y=\"158.7\" class=\"lb\">5</text><text x=\"146.4\" y=\"162.2\" class=\"lb\">6</text></svg></div>", "g3": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 300 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arg3\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><line x1=\"33.9\" y1=\"33.6\" x2=\"266.1\" y2=\"126.4\" class=\"ln\" marker-start=\"url(#arg3)\" marker-end=\"url(#arg3)\"/><path d=\"M90.6 56.2 L80.7 56.6 L83.7 49.2 Z\" class=\"pm\"/><line x1=\"33.9\" y1=\"103.6\" x2=\"266.1\" y2=\"196.4\" class=\"ln\" marker-start=\"url(#arg3)\" marker-end=\"url(#arg3)\"/><path d=\"M90.6 126.2 L80.7 126.6 L83.7 119.2 Z\" class=\"pm\"/><line x1=\"124.5\" y1=\"216.9\" x2=\"175.5\" y2=\"13.1\" class=\"ln\" marker-start=\"url(#arg3)\" marker-end=\"url(#arg3)\"/><text x=\"151.1\" y=\"69.8\" class=\"lb\">1</text><text x=\"171.3\" y=\"76.4\" class=\"lb\">2</text><text x=\"144.6\" y=\"90.0\" class=\"lb\">4</text><text x=\"164.8\" y=\"96.5\" class=\"lb\">3</text><text x=\"135.2\" y=\"133.5\" class=\"lb\">5</text><text x=\"155.4\" y=\"140.0\" class=\"lb\">6</text><text x=\"128.7\" y=\"153.6\" class=\"lb\">8</text><text x=\"148.9\" y=\"160.2\" class=\"lb\">7</text></svg></div>", "h3": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 300 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arh3\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><line x1=\"31.5\" y1=\"16.7\" x2=\"268.5\" y2=\"123.3\" class=\"ln\" marker-start=\"url(#arh3)\" marker-end=\"url(#arh3)\"/><path d=\"M89.1 42.6 L79.2 42.5 L82.5 35.2 Z\" class=\"pm\"/><line x1=\"31.5\" y1=\"86.7\" x2=\"268.5\" y2=\"193.3\" class=\"ln\" marker-start=\"url(#arh3)\" marker-end=\"url(#arh3)\"/><path d=\"M89.1 112.6 L79.2 112.5 L82.5 105.2 Z\" class=\"pm\"/><line x1=\"121.3\" y1=\"200.8\" x2=\"178.7\" y2=\"9.2\" class=\"ln\" marker-start=\"url(#arh3)\" marker-end=\"url(#arh3)\"/><text x=\"119.2\" y=\"92.4\" class=\"lb sm\">(2x − 15)°</text><text x=\"177.1\" y=\"119.2\" class=\"lb sm\">(x + 55)°</text></svg></div>", "h4": "<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 300 170\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><defs><marker id=\"arh4\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\"><path d=\"M0 0 L10 5 L0 10 z\" class=\"ah\"/></marker></defs><path d=\"M50 40 L160 40 L200 135 L85 135 Z\" class=\"poly\"/><line x1=\"200\" y1=\"135\" x2=\"275\" y2=\"135\" class=\"ln\" marker-end=\"url(#arh4)\"/><path d=\"M111 40 L102 36 L102 44 Z\" class=\"pm\"/><path d=\"M146 135 L137 131 L137 139 Z\" class=\"pm\"/><text x=\"75\" y=\"56\" class=\"lb sm\">(5y)°</text><text x=\"148\" y=\"56\" class=\"lb sm\">(2x)°</text><text x=\"108\" y=\"124\" class=\"lb sm\">120°</text><text x=\"228\" y=\"124\" class=\"lb sm\">108°</text></svg></div>"};
+const TYPES=['متبادلتان داخليًا','متبادلتان خارجيًا','متناظرتان','متحالفتان'];
+const A=s=>M(s);
+const BOX3=`<div class=\"figw\" dir=\"ltr\"><svg class=\"gf\" viewBox=\"0 0 320 200\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"60\" y1=\"80\" x2=\"200\" y2=\"80\" class=\"poly\"/><line x1=\"200\" y1=\"80\" x2=\"200\" y2=\"170\" class=\"poly\"/><line x1=\"200\" y1=\"170\" x2=\"60\" y2=\"170\" class=\"poly\"/><line x1=\"60\" y1=\"170\" x2=\"60\" y2=\"80\" class=\"poly\"/><line x1=\"120\" y1=\"35\" x2=\"260\" y2=\"35\" class=\"poly\"/><line x1=\"260\" y1=\"35\" x2=\"260\" y2=\"125\" class=\"poly\"/><line x1=\"260\" y1=\"125\" x2=\"120\" y2=\"125\" class=\"poly\" stroke-dasharray=\"6 5\"/><line x1=\"120\" y1=\"125\" x2=\"120\" y2=\"35\" class=\"poly\" stroke-dasharray=\"6 5\"/><line x1=\"60\" y1=\"80\" x2=\"120\" y2=\"35\" class=\"poly\"/><line x1=\"200\" y1=\"80\" x2=\"260\" y2=\"35\" class=\"poly\"/><line x1=\"200\" y1=\"170\" x2=\"260\" y2=\"125\" class=\"poly\"/><line x1=\"60\" y1=\"170\" x2=\"120\" y2=\"125\" class=\"poly\" stroke-dasharray=\"6 5\"/><text x=\"48\" y=\"74\" class=\"nm\">A</text><text x=\"204\" y=\"70\" class=\"nm\">B</text><text x=\"210\" y=\"180\" class=\"nm\">C</text><text x=\"48\" y=\"180\" class=\"nm\">D</text><text x=\"108\" y=\"27\" class=\"nm\">E</text><text x=\"270\" y=\"29\" class=\"nm\">F</text><text x=\"272\" y=\"131\" class=\"nm\">G</text><text x=\"106\" y=\"129\" class=\"nm\">H</text></svg></div>`;
+const QUIZ={today:{name:'الفصل الثاني: التوازي والتعامد',qs:[
+ {q:`${FIG.f1}مستعملًا الشكل، صنّف الزاويتين ${A('∠1')} و ${A('∠8')}`, o:TYPES, a:1, e:'خارج المستقيمين، وعلى جهتين مختلفتين من القاطع'},
+ {q:`${FIG.f1}مستعملًا الشكل، صنّف الزاويتين ${A('∠2')} و ${A('∠4')}`, o:TYPES, a:2, e:'نفس الموقع (فوق القاطع ويمين كل مستقيم)'},
+ {q:`${FIG.f1}مستعملًا الشكل، صنّف الزاويتين ${A('∠3')} و ${A('∠6')}`, o:TYPES, a:0, e:'بين المستقيمين، وعلى جهتين مختلفتين من القاطع'},
+ {q:`${FIG.f1}مستعملًا الشكل، صنّف الزاويتين ${A('∠6')} و ${A('∠7')}`, o:TYPES, a:3, e:'بين المستقيمين، وفي نفس الجهة من القاطع'},
+ {q:`${FIG.f3}حدّد القاطع الذي يصل الزاويتين ${A('∠3')} و ${A('∠6')} ثم صنّفهما`, o:['القاطع s ، متبادلتان داخليًا','القاطع r ، متبادلتان داخليًا','القاطع s ، متناظرتان','القاطع p ، متحالفتان'], a:0, e:'الزاويتان على المستقيم s، بين p و r وعلى جهتين مختلفتين من s'},
+ {q:`${FIG.f3}حدّد القاطع الذي يصل الزاويتين ${A('∠1')} و ${A('∠14')} ثم صنّفهما`, o:['القاطع s ، متبادلتان خارجيًا','القاطع p ، متناظرتان','القاطع p ، متبادلتان خارجيًا','القاطع t ، متحالفتان'], a:2, e:'الزاويتان على p، خارج s و t، وعلى جهتين مختلفتين من p'},
+ {q:`${FIG.f3}حدّد القاطع الذي يصل الزاويتين ${A('∠10')} و ${A('∠11')} ثم صنّفهما`, o:['القاطع r ، متحالفتان','القاطع t ، متبادلتان داخليًا','القاطع p ، متناظرتان','القاطع t ، متحالفتان'], a:3, e:'على المستقيم t، بين p و r، وفي نفس الجهة من t'},
+ {q:`${FIG.f3}حدّد القاطع الذي يصل الزاويتين ${A('∠5')} و ${A('∠7')} ثم صنّفهما`, o:['القاطع s ، متناظرتان','القاطع s ، متبادلتان داخليًا','القاطع p ، متناظرتان','القاطع r ، متحالفتان'], a:0, e:'على s، وكل وحدة فوق المستقيم ويمين s: نفس الموقع'},
+ {q:`${FIG.f4}أيٌّ مما يأتي يصف الزاويتين ${A('∠8')} و ${A('∠4')}؟`, o:TYPES, a:2, e:'الاثنتان فوق المستقيم ويمين كل قاطع'},
+ {q:`${FIG.g1}في الشكل ${A('m∠1 = 94°')}. أوجد ${A('m∠3')}`, o:['86°','94°','104°','47°'], a:1, e:`${A('∠1')} و ${A('∠3')} متناظرتان، فهما متطابقتان`},
+ {q:`${FIG.g1}في الشكل ${A('m∠1 = 94°')}. أوجد ${A('m∠5')}`, o:['94°','86°','184°','76°'], a:0, e:`${A('∠5')} تقابل ${A('∠3')} بالرأس، و ${A('m∠3 = 94°')}`},
+ {q:`${FIG.g1}في الشكل ${A('m∠1 = 94°')}. أوجد ${A('m∠4')}`, o:['94°','76°','86°','96°'], a:2, e:`${A('∠4')} و ${A('∠3')} على استقامة: ${A('180° − 94° = 86°')}`},
+ {q:`${FIG.g2}في الشكل ${A('m∠5 = 72°')}. أوجد ${A('m∠1')}`, o:['72°','108°','118°','18°'], a:1, e:`${A('∠4')} تناظر ${A('∠5')} فقياسها ${A('72°')}، و ${A('∠1')} مكملة لها: ${A('180° − 72° = 108°')}`},
+ {q:`${FIG.g2}في الشكل ${A('m∠5 = 72°')}. أوجد ${A('m∠2')}`, o:['108°','82°','72°','36°'], a:2, e:`${A('∠2')} تقابل ${A('∠4')} بالرأس، و ${A('m∠4 = 72°')}`},
+ {q:`${FIG.g2}في الشكل ${A('m∠5 = 72°')}. أوجد ${A('m∠3')}`, o:['72°','108°','98°','144°'], a:1, e:`${A('∠3')} تقابل ${A('∠1')} بالرأس، فقياسها ${A('108°')}`},
+ {q:`${FIG.g3}في الشكل ${A('m∠4 = 101°')}. أوجد ${A('m∠6')}`, o:['79°','89°','101°','111°'], a:2, e:`${A('∠4')} و ${A('∠6')} متبادلتان داخليًا، فهما متطابقتان`},
+ {q:`${FIG.g3}في الشكل ${A('m∠4 = 101°')}. أوجد ${A('m∠7')}`, o:['101°','79°','90°','69°'], a:1, e:`${A('∠7')} تناظر ${A('∠3')}، و ${A('m∠3 = 180° − 101° = 79°')}`},
+ {q:`${FIG.h3}أوجد قيمة ${A('x')}`, o:['70','40','50','140'], a:0, e:`متبادلتان داخليًا، إذن متطابقتان:<br>${A('2x − 15 = x + 55')} ، إذن ${A('x = 70')}`},
+ {q:`${FIG.h4}أوجد قيمة ${A('x')}`, o:['36','54','72','60'], a:1, e:`الزاوية الداخلية المجاورة لـ ${A('108°')} قياسها ${A('72°')}، والزاويتان متحالفتان:<br>${A('2x + 72 = 180')} ، إذن ${A('x = 54')}`},
+ {q:`${FIG.h4}أوجد قيمة ${A('y')}`, o:['24','12','20','36'], a:1, e:`متحالفتان:<br>${A('5y + 120 = 180')} ، إذن ${A('5y = 60')} ، ${A('y = 12')}`},
+ {q:`${BOX3}في المنشور، القطعة المستقيمة التي توازي ${A("AB")}:`, o:[`${A("BC")}`,`${A("AE")}`,`${A("FG")}`,`${A("HG")}`], a:3, e:`الأحرف الأفقية الأمامية والخلفية متوازية`},
+ {q:`${BOX3}في المنشور، القطعة المستقيمة التي تخالف ${A("AB")}:`, o:[`${A("DC")}`,`${A("EF")}`,`${A("FG")}`,`${A("BC")}`], a:2, e:`لا تتقاطعان ولا تتوازيان وليستا في مستوى واحد`},
+ {q:`${BOX3}في المنشور، المستوى الذي يوازي المستوى ${A("ABCD")}:`, o:[`${A("ADHE")}`,`${A("ABFE")}`,`${A("EFGH")}`,`${A("BCGF")}`], a:2, e:`الوجهان الأمامي والخلفي متوازيان`},
+ {q:`${BOX3}في المنشور، القطعة المستقيمة التي توازي ${A("AE")}:`, o:[`${A("CG")}`,`${A("AB")}`,`${A("EF")}`,`${A("AD")}`], a:0, e:`أحرف العمق كلها متوازية`},
+ {q:`${BOX3}في المنشور، القطعة المستقيمة التي تخالف ${A("CG")}:`, o:[`${A("AD")}`,`${A("BC")}`,`${A("DH")}`,`${A("GH")}`], a:0, e:`${A("BC")} و ${A("GH")} تقطعانها، و ${A("DH")} توازيها`},
+ {q:`${BOX3}في المنشور، المستوى الذي يوازي المستوى ${A("ABFE")}:`, o:[`${A("DCGH")}`,`${A("ABCD")}`,`${A("EFGH")}`,`${A("BCGF")}`], a:0, e:`الوجهان العلوي والسفلي متوازيان`},
+ {q:`${BOX3}في المنشور، كم مستوى يتقاطع مع المستوى ${A("EFGH")}؟`, o:[`${A("5")}`,`${A("2")}`,`${A("1")}`,`${A("4")}`], a:3, e:`الأوجه الأربعة الجانبية، والوجه المقابل يوازيه`},
+ {q:`المستقيمان المتخالفان هما مستقيمان:`, o:[`يقعان في مستوى واحد ولا يتقاطعان`,`يتقاطعان في نقطة واحدة`,`متعامدان دائمًا`,`لا يتقاطعان ولا يقعان في مستوى واحد`], a:3, e:`ليسا متوازيين لأنهما ليسا في مستوى واحد`},
+ {q:`المستويان المتوازيان هما مستويان:`, o:[`يتقاطعان في مستقيم`,`يتقاطعان في نقطة`,`لا يتقاطعان`,`متعامدان`], a:2, e:`مثل أرضية الغرفة وسقفها`},
+ {q:`المستقيم الذي يقطع مستقيمين أو أكثر في نقاط مختلفة يُسمّى:`, o:[`المنصف`,`المستقيم المتخالف`,`القاطع`,`الشعاع`], a:2, e:`Transversal`},
+ {q:`إذا قطع قاطع مستقيمين متوازيين، فإن كل زاويتين متناظرتين:`, o:[`متكاملتان`,`متتامتان`,`متطابقتان`,`مجموعهما 360°`], a:2, e:`مسلمة الزوايا المتناظرة`},
+ {q:`قطع قاطع مستقيمين متوازيين، وكان قياس إحدى زاويتين متحالفتين ${A("65°")}. قياس الأخرى:`, o:[`${A("25°")}`,`${A("115°")}`,`${A("295°")}`,`${A("65°")}`], a:1, e:`المتحالفتان متكاملتان: ${A("180° − 65° = 115°")}`},
+ {q:`قطع قاطع مستقيمين متوازيين، وكان قياس زاوية ${A("130°")}. قياس الزاوية المتبادلة خارجيًا معها:`, o:[`${A("90°")}`,`${A("130°")}`,`${A("50°")}`,`${A("230°")}`], a:1, e:`المتبادلتان خارجيًا متطابقتان`},
+ {q:`إذا كان مستقيم عموديًا على أحد مستقيمين متوازيين، فإنه:`, o:[`لا يقطع الآخر`,`يخالف الآخر`,`يوازي الآخر`,`عمودي على الآخر أيضًا`], a:3, e:`نظرية القاطع العمودي`},
+ {q:`إذا كان ${A("m ∥ n")}، والزاويتان ${A("(4x − 23)°")} و ${A("(2x + 17)°")} متبادلتان داخليًا، فإن ${A("x")} =`, o:[`${A("30")}`,`${A("20")}`,`${A("10")}`,`${A("40")}`], a:1, e:`${A("4x − 23 = 2x + 17")} ← ${A("2x = 40")} ← ${A("x = 20")}`},
+ {q:`إذا كان ${A("m ∥ n")}، والزاويتان ${A("(3x − 14)°")} و ${A("(2x + 25)°")} متناظرتان، فإن ${A("x")} =`, o:[`${A("33")}`,`${A("39")}`,`${A("22")}`,`${A("11")}`], a:1, e:`${A("3x − 14 = 2x + 25")} ← ${A("x = 39")}`},
+ {q:`إذا كان ${A("m ∥ n")} والقاطع عمودي على ${A("n")}، وقياس الزاوية بين القاطع و ${A("m")} يساوي ${A("(5x − 20)°")}، فإن ${A("x")} =`, o:[`${A("18")}`,`${A("40")}`,`${A("22")}`,`${A("14")}`], a:2, e:`الزاوية قائمة: ${A("5x − 20 = 90")} ← ${A("x = 22")}`},
+ {q:`إذا كان ${A("m ∥ n")}، والزاويتان ${A("(21 + 2x)°")} و ${A("(x + 84)°")} متحالفتان، فإن ${A("x")} =`, o:[`${A("35")}`,`${A("25")}`,`${A("21")}`,`${A("63")}`], a:1, e:`${A("21 + 2x + x + 84 = 180")} ← ${A("3x = 75")} ← ${A("x = 25")}`},
+ {q:`زاويتان متناظرتان قياساهما ${A("(3x + 10)°")} و ${A("(4x − 5)°")}. ما قيمة ${A("x")} التي تجعل المستقيمين متوازيين؟`, o:[`${A("5")}`,`${A("15")}`,`${A("10")}`,`${A("25")}`], a:1, e:`${A("3x + 10 = 4x − 5")} ← ${A("x = 15")}`},
+ {q:`زاويتان متحالفتان قياساهما ${A("(2x + 10)°")} و ${A("(3x + 20)°")}. ما قيمة ${A("x")} التي تجعل المستقيمين متوازيين؟`, o:[`${A("10")}`,`${A("30")}`,`${A("34")}`,`${A("50")}`], a:1, e:`${A("5x + 30 = 180")} ← ${A("x = 30")}`},
+ {q:`إذا تطابقت زاويتان متبادلتان داخليًا، فإن المستقيمين متوازيان حسب:`, o:[`مسلمة الزوايا المتناظرة`,`عكس نظرية الزاويتين المتبادلتين داخليًا`,`نظرية الزاويتين المتقابلتين بالرأس`,`نظرية القاطع العمودي`], a:1, e:`عكس النظرية يُستعمل لإثبات التوازي`},
+ {q:`إذا كان مجموع قياسي زاويتين متحالفتين 180°، فإن المستقيمين:`, o:[`متعامدان`,`متقاطعان`,`متوازيان`,`متخالفان`], a:2, e:`عكس نظرية الزاويتين المتحالفتين`},
+ {q:`أيّ المعطيات التالية لا يكفي لإثبات توازي مستقيمين؟`, o:[`تطابق زاويتين متقابلتين بالرأس`,`تكامل زاويتين متحالفتين`,`تطابق زاويتين متناظرتين`,`تطابق زاويتين متبادلتين خارجيًا`], a:0, e:`المتقابلتان بالرأس متطابقتان دائمًا، حتى لو لم يتوازَ المستقيمان`},
+ {q:`في كرسي الاسترخاء، قياس الزاوية بين مسند الظهر والقاعدة ${A("135°")}، والزاوية المناظرة لها عند مسند القدمين ${A("135°")}. إذن مسند الظهر ومسند القدمين:`, o:[`متخالفان`,`لا يمكن الحكم`,`متوازيان حسب عكس مسلمة الزوايا المتناظرة`,`متعامدان`], a:2, e:`زاويتان متناظرتان متطابقتان ← توازٍ`},
+ {q:`ميل المستقيم المار بالنقطتين ${A("(1, 2)")} و ${A("(3, 8)")}:`, o:[`${A("3")}`,`${A("1/3")}`,`${A("6")}`,`${A("−3")}`], a:0, e:`${A("m = (8 − 2) ÷ (3 − 1) = 6 ÷ 2 = 3")}`},
+ {q:`ميل المستقيم المار بالنقطتين ${A("(−2, 4)")} و ${A("(2, 4)")}:`, o:[`${A("1")}`,`${A("4")}`,`غير معرّف`,`${A("0")}`], a:3, e:`المستقيم أفقي`},
+ {q:`ميل المستقيم الرأسي:`, o:[`${A("−1")}`,`صفر`,`غير معرّف`,`${A("1")}`], a:2, e:`فرق السينات = 0`},
+ {q:`مستقيم ميله ${A("2/3")}. ميل المستقيم الموازي له:`, o:[`${A("2/3")}`,`${A("3/2")}`,`${A("−2/3")}`,`${A("−3/2")}`], a:0, e:`المستقيمات المتوازية لها الميل نفسه`},
+ {q:`مستقيم ميله ${A("2/3")}. ميل المستقيم العمودي عليه:`, o:[`${A("2/3")}`,`${A("−3/2")}`,`${A("3/2")}`,`${A("−2/3")}`], a:1, e:`نقلب الكسر ونغيّر الإشارة`},
+ {q:`المستقيم المار بالنقطتين ${A("(0, 1)")} و ${A("(2, 5)")}، ومستقيم آخر ميله ${A("−1/2")}. العلاقة بينهما:`, o:[`متوازيان`,`لا شيء مما سبق`,`متعامدان`,`منطبقان`], a:2, e:`ميل الأول ${A("2")}، و ${A("2 × (−1/2) = −1")}`},
+]}};
+
+const AR='٠١٢٣٤٥٦٧٨٩';
+const ar = s => String(s);
+const KEYS=['أ','ب','ج','د'];
+const CHEERS=['صح عليك!','ممتاز!','بطل!','كفو!','أحسنت!'];
+const app=document.getElementById('app');
+let cur=null, answers=[];
+
+function home(){
+  cur=null;
+  app.innerHTML=`<div class="home">
+    <span class="tag">رياضيات أولى ثانوي · الترم الأول</span>
+    <h1>الفصل الثاني: التوازي والتعامد</h1>
+    <p>50 تدريبًا: المستقيمان المتوازيان والقاطع، الزوايا والمستقيمات المتوازية، إثبات توازي مستقيمين، وميل المستقيم.</p>
+    <button class="big b1" id="go-today"><span>ابدأ التدريب<small>50 سؤالًا</small></span><span class="arrow">←</span></button>
+    <p class="foot">مدرّبتك | يلا نبسطها</p>
+  </div>`;
+  document.getElementById('go-today').onclick=()=>start('today');
+  window.scrollTo(0,0);
+}
+
+let idx=0;
+function start(key){
+  cur=key; idx=0; const Q=QUIZ[key]; answers=new Array(Q.qs.length).fill(null);
+  let h=`<div class="top"><button class="back" id="back">البداية</button>
+    <div class="prog"><div class="lbl" id="lbl"></div><div class="bar"><i id="barf"></i></div></div></div>
+    <div class="qhead"><h2>${Q.name}</h2></div><div class="list">`;
+  Q.qs.forEach((q,i)=>{
+    h+=`<div class="q" id="q-${i}"><div class="qt"><span class="num">${ar(i+1)}</span><div class="qtext">${ar(q.q)}</div></div>
+      <div class="opts three">${q.o.map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}"><span class="k">${KEYS[j]}</span><span>${ar(o)}</span></button>`).join('')}</div>
+      <div class="fbslot"></div><div class="nav"></div></div>`;
+  });
+  h+=`</div><div id="end"></div>`;
+  app.innerHTML=h;
+  document.getElementById('back').onclick=home;
+  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o,b));
+  update(); window.scrollTo(0,0);
+}
+
+function go(i){
+  document.getElementById('q-'+idx).hidden=true; idx=i;
+  document.getElementById('q-'+idx).hidden=false; update(); window.scrollTo(0,0);
+}
+
+function pick(i,j,btn){
+  if(answers[i]!==null) return;
+  const q=QUIZ[cur].qs[i]; answers[i]=j;
+  const card=btn.closest('.q'); const opts=card.querySelectorAll('.opt');
+  opts.forEach((b,k)=>{b.disabled=true; if(k===q.a) b.classList.add('right'); else if(k===j) b.classList.add('wrong'); else b.classList.add('dim');});
+  card.querySelector('.fbslot').innerHTML = j===q.a
+    ? `<div class="fb ok">${CHEERS[i%CHEERS.length]} <span class="why">${ar(q.e)}</span></div>`
+    : `<div class="fb no"><b>الإجابة الصحيحة: ${ar(q.o[q.a])}</b><br>${ar(q.e)}</div>`;
+  update();
+  if(answers.every(x=>x!==null)) finish();
+}
+
+function update(){
+  const n=answers.filter(x=>x!==null).length, t=answers.length;
+  document.getElementById('lbl').textContent=`أجبت ${ar(n)} من ${ar(t)}`;
+  document.getElementById('barf').style.width=(n/t*100)+'%';
+}
+
+function finish(){
+  const qs=QUIZ[cur].qs, t=qs.length; const score=answers.filter((x,i)=>x===qs[i].a).length;
+  const wrong=answers.map((x,i)=>x===qs[i].a?null:ar(i+1)).filter(Boolean);
+  let msg = score===t?'علامة كاملة! زواياك كلها متطابقة مع الصح 📐'
+          : score>=t-5?`قريب جدًا من الكمال، راجع أخطاءك وتصير ${ar(t)}`
+          : score>=Math.ceil(t/2)?'شغل حلو، ينقصك شوي مراجعة بس'
+          : 'ولا يهمك، أعد الاختبار وبتشوف الفرق';
+  document.getElementById('lbl').textContent='خلّصت!';
+  document.getElementById('end').innerHTML=`<div class="res"><div>نتيجتك</div>
+    <div class="score">${ar(score)} <span>/ ${ar(t)}</span></div>
+    <p>${ar(msg)}</p>
+    ${wrong.length?`<p class="miss">الأسئلة اللي تحتاج مراجعة: ${wrong.join(' ، ')}</p>`:''}
+    <div class="actions"><button class="btn main" id="again">أعد الاختبار</button><button class="btn alt" id="home2">البداية</button></div></div>`;
+  document.getElementById('again').onclick=()=>start(cur);
+  document.getElementById('home2').onclick=home;
+  document.getElementById('end').scrollIntoView({behavior:'smooth',block:'center'});
+}
+home();
+</script>
+</body>
+</html>

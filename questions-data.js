@@ -220,6 +220,16 @@ const QUESTIONS_DATA = {
     },
   ],
 
+  "term1--اول-ثانوي--math": [
+    {
+      // Ready-made training: questions live in training-term1-grade10-math-parallel-perpendicular.html
+      // (المستقيمان المتوازيان والقاطع، الزوايا، إثبات التوازي، ميل المستقيم — 50 questions)
+      id: "term1-grade10-math-parallel-perpendicular",
+      title: "الفصل الثاني: التوازي والتعامد",
+      count: 50,
+    },
+  ],
+
   // ── قدرات (qudurat.html) ─ ready-made trainings, originals in qudurat-trainings/
   "qudurat": [
     {
