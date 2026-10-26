@@ -238,6 +238,13 @@ const QUESTIONS_DATA = {
       title: "اختبار أحياء 1",
       count: 40,
     },
+    {
+      // Ready-made training: questions live in training-term1-grade10-biology-fungi.html
+      // (مدخل إلى الفطريات، تنوع الفطريات وبيئتها — 70 questions)
+      id: "term1-grade10-biology-fungi",
+      title: "تدريب الفطريات",
+      count: 70,
+    },
   ],
 
   "term1--اول-ثانوي--math": [

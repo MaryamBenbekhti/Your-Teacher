@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تدريب الفطريات — أحياء — أول ثانوي — الترم الأول | مدربتك</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+/* Ready-made training (from the original HTML file), restyled with the site's colours.
+   Everything is scoped to .ready-training so it can't affect the rest of the site. */
+.ready-training{
+  --navy:#1A1A1A; --gold:#C78255; --cream:#F7F3EE; --ok:#2E7D32; --okbg:#E3F4E6; --bad:#C62828; --badbg:#FBE6E4;
+  --ink:#1A1A1A; --muted:#6B6158; --card:#FFFFFF; --line:#E6DCD1;
+  color:var(--ink); direction:rtl;
+}
+.ready-training *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+.ready-training .wrap{max-width:560px;margin:0 auto;padding:6px 0 10px;display:flex;flex-direction:column}
+.ready-training .brand{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin-bottom:12px}
+.ready-training .brand .b2{color:var(--muted);font-weight:600;font-size:13px}
+.ready-training .pill{background:var(--navy);color:#fff;padding:4px 12px;border-radius:99px;font-size:14px;font-weight:800}
+.ready-training .card{background:var(--card);border-radius:22px;padding:20px;box-shadow:var(--shadow);transform:none}
+.ready-training .card:hover{transform:none}
+.ready-training h1{font-size:26px;margin:4px 0 6px;line-height:1.4;font-weight:800}
+.ready-training .sub{color:var(--muted);margin:0 0 18px;font-size:15px;line-height:1.8}
+.ready-training input{width:100%;font:inherit;font-size:17px;padding:14px;border:2px solid var(--line);border-radius:14px;background:var(--cream);color:var(--ink);outline:none}
+.ready-training input:focus{border-color:var(--gold)}
+.ready-training .btn{display:block;width:100%;border:0;font:inherit;font-weight:800;font-size:18px;padding:15px;border-radius:50px;background:var(--navy);color:#fff;margin-top:14px;cursor:pointer}
+.ready-training .btn.gold{background:var(--gold);color:#fff}
+.ready-training .btn:active{transform:scale(.98)}
+.ready-training .btn:focus-visible,.ready-training .opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.ready-training .prog{display:flex;justify-content:space-between;font-size:14px;font-weight:700;margin-bottom:6px}
+.ready-training .bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:14px}
+.ready-training .bar i{display:block;height:100%;background:var(--gold);border-radius:99px;transition:width .3s}
+.ready-training .qtext{font-size:19px;font-weight:700;line-height:1.85;margin:0 0 12px}
+.ready-training .m{unicode-bidi:isolate;direction:ltr;display:inline-block;white-space:nowrap;font-weight:700}
+.ready-training .opts{display:grid;gap:10px;margin-top:6px}
+.ready-training .opt{display:flex;align-items:center;gap:12px;text-align:right;font:inherit;font-size:18px;font-weight:700;color:var(--ink);background:var(--cream);border:2px solid transparent;border-radius:16px;padding:14px;cursor:pointer;min-height:58px}
+.ready-training .opt:hover:not(:disabled){border-color:var(--gold)}
+.ready-training .opt .l{flex:0 0 34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;color:var(--navy)}
+.ready-training .opt.ok{background:var(--okbg);border-color:var(--ok)}
+.ready-training .opt.ok .l{background:var(--ok);color:#fff}
+.ready-training .opt.bad{background:var(--badbg);border-color:var(--bad)}
+.ready-training .opt.bad .l{background:var(--bad);color:#fff}
+.ready-training .opt:disabled{cursor:default}
+.ready-training .opt.sel{background:#F3E6DC;border-color:var(--navy)}
+.ready-training .opt.sel .l{background:var(--navy);color:#fff}
+.ready-training .fb{margin-top:14px;border-radius:16px;padding:14px;font-size:16px;line-height:1.9;display:none}
+.ready-training .fb.show{display:block;animation:rt-pop .25s}
+.ready-training .fb.ok{background:var(--okbg)}
+.ready-training .fb.bad{background:var(--badbg)}
+.ready-training .fb b.t{display:block;font-size:17px;margin-bottom:2px}
+@keyframes rt-pop{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.ready-training .score{font-size:64px;font-weight:800;text-align:center;line-height:1.2;margin:6px 0;color:var(--gold)}
+.ready-training .score small{font-size:24px;color:var(--muted)}
+.ready-training .msg{text-align:center;font-size:19px;font-weight:700;margin:0 0 14px;line-height:1.8}
+.ready-training .who{text-align:center;color:var(--muted);font-weight:700}
+.ready-training .wr{margin-top:12px}
+.ready-training .wr h3{font-size:16px;margin:0 0 8px}
+.ready-training .wr ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ready-training .wr li{background:var(--badbg);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.8}
+.ready-training .wr li b{color:var(--bad)}
+.ready-training .hide{display:none}
+@media (prefers-reduced-motion:reduce){.ready-training *{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-content">
+    <a href="index.html" class="logo">مدربتك<span>✦</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="about.html">مين أستاذة عزيزة؟</a></li>
+      <li><a href="subjects.html">المواد</a></li>
+      <li><a href="problems.html">المشاكل الشائعة</a></li>
+      <li><a href="moms.html">آراء الأمهات</a></li>
+      <li><a href="videos.html">شروحات</a></li>
+      <li><a href="contact.html" class="nav-btn">احجزي جلستك الآن</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Ready-made training page: its questions, correction and interaction are kept
+     from the original HTML file (script below). Listed in questions-data.js by id. -->
+<section class="container">
+
+  <div style="margin-bottom:30px; font-size:0.9rem; color:#999; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <a href="videos.html" style="color:var(--accent); font-weight:700; text-decoration:none;">الشروحات</a>
+    <span style="opacity:0.4;">◂</span>
+    <a class="training-back-link" href="video-list.html?cat=term1&grade=اول-ثانوي&subject=biology#trainings" style="color:var(--accent); font-weight:700; text-decoration:none;">أحياء — أول ثانوي — الترم الأول</a>
+    <span style="opacity:0.4;">◂</span>
+    <span style="color:var(--text-dark); font-weight:700;">التدريب</span>
+  </div>
+
+  <a class="training-back btn-black" href="video-list.html?cat=term1&grade=اول-ثانوي&subject=biology#trainings">→ العودة للتدريبات</a>
+
+  <div class="ready-training">
+<div class="wrap">
+  <div class="brand"><span class="pill">مدربتك</span><span class="b2">يلا نبسطها ✨</span></div>
+
+  <section id="start" class="card">
+    <h1>تدريب الفطريات 🍄<br><span style='font-size:17px;color:#5D6B85'>مدخل إلى الفطريات • تنوع الفطريات وبيئتها</span></h1>
+    <p class="sub">٧٠ سؤال: التركيب، الخيوط، التغذية، التكاثر، الأقسام الخمسة، الأشنات، الفطريات الجذرية، الفوائد والأمراض.<br>جاهزة؟ خلّينا نبسطها!</p>
+    <input id="name" placeholder="اكتبي اسمك هنا" autocomplete="off">
+    <button class="btn" id="go">يلا نبدأ 🚀</button>
+  </section>
+
+  <section id="quiz" class="hide">
+    <div class="prog"><span id="pt"></span><span id="ps"></span></div>
+    <div class="bar"><i id="pb"></i></div>
+    <div class="card">
+      <p class="qtext" id="qt"></p>
+      <div id="qp"></div>
+      <div class="opts" id="qo"></div>
+      <div class="fb" id="fb"></div>
+      <button class="btn gold hide" id="next">التالي ←</button>
+    </div>
+  </section>
+
+  <section id="end" class="card hide">
+    <p class="who" id="who"></p>
+    <div class="score" id="sc"></div>
+    <p class="msg" id="msg"></p>
+    <div class="wr" id="wr"></div>
+    <button class="btn" id="again">أعيد المحاولة 🔁</button>
+  </section>
+</div>
+  </div>
+
+  <div style="text-align:center; margin-top:40px;">
+    <a class="training-back btn-black" href="video-list.html?cat=term1&grade=اول-ثانوي&subject=biology#trainings">→ العودة للتدريبات</a>
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+<script>
+const Q = [{"q": "تُقسم الفطريات حسب عدد الخلايا إلى:", "plot": "", "choices": ["ذاتية التغذية وغير ذاتية التغذية", "جنسية ولاجنسية", "وحيدة الخلية وعديدة الخلايا", "رمية وتطفلية"], "answer": 2, "exp": "حسب عدد الخلايا = خلية وحدة أو خلايا كثيرة. بسيطة 😎"}, {"q": "من أمثلة الفطريات وحيدة الخلية:", "plot": "", "choices": ["عيش الغراب", "الخميرة", "عفن الخبز", "الكمأة"], "answer": 1, "exp": "الخميرة خلية وحدة بس وتسوي شغل كبير في الخبز 🍞"}, {"q": "من أمثلة الفطريات عديدة الخلايا:", "plot": "", "choices": ["عيش الغراب", "الخميرة", "البكتيريا", "الطحالب الخضراء"], "answer": 0, "exp": "عيش الغراب (المشروم) عديد الخلايا 🍄 والبكتيريا والطحالب مو فطريات أصلاً!"}, {"q": "أي مما يلي لا يُعد من الفطريات عديدة الخلايا؟", "plot": "", "choices": ["فطر عيش الغراب", "فطر الباكسينيا", "فطر الكمأة", "فطر الخميرة"], "answer": 3, "exp": "الخميرة هي الوحيدة اللي خلية وحدة 🫧"}, {"q": "الخيوط الفطرية تتجمع وتتشابك لتكوّن الغزل الفطري.", "plot": "", "choices": ["صحيحة ✅", "خاطئة ❌"], "answer": 0, "exp": "صح! خيوط كثيرة متشابكة = غزل فطري 🕸️"}, {"q": "يتركب جسم الفطريات عديدة الخلايا من:", "plot": "", "choices": ["الجذور والساق والأوراق", "الخلايا والأنسجة والأعضاء", "الخيوط الفطرية والغزل الفطري والجسم الثمري", "الأبواغ والأمشاج والبذور"], "answer": 2, "exp": "خيوط ← تتجمع غزل ← ويطلع منه جسم ثمري 🍄"}, {"q": "وحدات البناء الأساسية للفطر عديد الخلايا، وهي سلاسل طويلة من الخلايا على شكل خيوط:", "plot": "", "choices": ["الغزل الفطري", "الجسم الثمري", "الممصات", "الخيوط الفطرية"], "answer": 3, "exp": "الخيوط الفطرية = الطوب اللي ينبني منه الفطر 🧱"}, {"q": "كتلة شبكية من الخيوط الفطرية المتفرعة:", "plot": "", "choices": ["الجسم الثمري", "الغزل الفطري", "حافظة الأبواغ", "الحاجز"], "answer": 1, "exp": "خيوط كثيرة متشابكة = غزل فطري 🕸️"}, {"q": "التركيب التكاثري للفطريات الذي ينتج الأبواغ:", "plot": "", "choices": ["الجسم الثمري", "الغزل الفطري", "الخيوط الفطرية", "الممصات"], "answer": 0, "exp": "الجسم الثمري = مصنع الأبواغ 🏭"}, {"q": "يتكوّن الجدار الخلوي في الفطريات من مادة:", "plot": "", "choices": ["الكايتين", "السليلوز", "النشا", "الليبيدات"], "answer": 0, "exp": "الكايتين! نفس المادة اللي في هيكل الحشرات 🐞 أما السليلوز فللنبات."}, {"q": "الجزء الظاهر من فطر عيش الغراب فوق سطح التربة هو:", "plot": "", "choices": ["الغزل الفطري", "الممصات", "الجذور", "الجسم الثمري"], "answer": 3, "exp": "اللي تشوفينه وتاكلينه هو الجسم الثمري 🍄"}, {"q": "الجزء الذي ينتشر تحت سطح التربة في فطر عيش الغراب هو:", "plot": "", "choices": ["الجسم الثمري", "الغزل الفطري", "القبعة", "الخياشيم"], "answer": 1, "exp": "تحت التربة شبكة خيوط ضخمة = الغزل الفطري 🕸️"}, {"q": "يتعذّر رؤية الخيوط الفطرية في المشروم لأنها شديدة التراص.", "plot": "", "choices": ["صحيحة ✅", "خاطئة ❌"], "answer": 0, "exp": "صح! الخيوط ملزّقة في بعض لدرجة إنك ما تفرقينها 👀"}, {"q": "هناك نوعان من الخيوط الفطرية هما:", "plot": "", "choices": ["خيوط حية وخيوط ميتة", "خيوط رمية وخيوط تطفلية", "خيوط مقسّمة وخيوط غير مقسّمة", "خيوط جنسية وخيوط لاجنسية"], "answer": 2, "exp": "الفرق كله في الحواجز: فيه حواجز ولا ما فيه 🚧"}, {"q": "الخيوط الفطرية غير المقسّمة تتميز بأنها:", "plot": "", "choices": ["فيها حواجز تفصل كل خلية", "فيها نواة واحدة فقط", "فيها بلاستيدات خضراء", "بلا حواجز وفيها أنوية كثيرة في سيتوبلازم متصل"], "answer": 3, "exp": "بدون حواجز = أنوية كثيرة سابحة في سيتوبلازم واحد 🏊‍♀️"}, {"q": "الحواجز في الخيوط الفطرية المقسّمة فيها ثقوب تسمح بـ:", "plot": "", "choices": ["دخول الضوء للخلايا", "خروج الأبواغ", "انتقال السيتوبلازم والعضيات بين الخلايا", "القيام بالبناء الضوئي"], "answer": 2, "exp": "الثقوب مثل الأبواب بين الغرف 🚪 السيتوبلازم يتنقل بحرية."}, {"q": "جميع الفطريات ذاتية التغذية تصنع غذاءها بنفسها.", "plot": "", "choices": ["صحيحة ✅", "خاطئة ❌"], "answer": 1, "exp": "خطأ! الفطريات غير ذاتية التغذية، ما تسوي بناء ضوئي 🚫☀️"}, {"q": "هناك ثلاث طرق لحصول الفطريات على الغذاء، هي:", "plot": "", "choices": ["رمية وتطفلية وتكافلية", "ضوئية وكيميائية ورمية", "رمية وضوئية وتطفلية", "افتراسية وتطفلية وضوئية"], "answer": 0, "exp": "رمية • تطفلية • تكافلية. ولا وحدة فيها ضوئية ☀️❌"}, {"q": "الفطريات التي تتغذى على المواد العضوية الميتة تُسمى:", "plot": "", "choices": ["فطريات رمية", "فطريات تطفلية", "فطريات تكافلية", "فطريات ذاتية التغذية"], "answer": 0, "exp": "رمية = تاكل الرِّمة (الميت) 🍂"}, {"q": "الفطريات التي تحصل على غذائها من مخلوق حي وتسبب له الضرر تُسمى:", "plot": "", "choices": ["فطريات رمية", "فطريات تطفلية", "فطريات تكافلية", "فطريات جذرية"], "answer": 1, "exp": "طفيلي = ياخذ ويضر 😤"}, {"q": "الفطريات التي تعيش مع مخلوق آخر في علاقة تبادل منفعة تُسمى:", "plot": "", "choices": ["فطريات رمية", "فطريات تطفلية", "فطريات ناقصة", "فطريات تكافلية"], "answer": 3, "exp": "تكافل = الطرفين مستفيدين 🤝"}, {"q": "تهضم الفطريات غذاءها:", "plot": "", "choices": ["داخل فجوات غذائية", "بالبناء الضوئي", "بابتلاع الغذاء كاملاً", "خارجياً بإفراز إنزيمات ثم تمتص المواد المهضومة"], "answer": 3, "exp": "تطبخ برّا وتشرب جوا 😄 تفرز إنزيمات تهضم الغذاء ثم تمتصه."}, {"q": "خيوط خاصة تنتجها الفطريات التطفلية، تخترق خلايا العائل وتمتص منها الغذاء:", "plot": "", "choices": ["الممصات", "الحواجز", "الغزل الفطري", "حوافظ الأبواغ"], "answer": 0, "exp": "الممصات مثل الماصّة (الشفاط) 🥤 تشفط الغذاء من العائل."}, {"q": "فسّري: تنتج العديد من الفطريات التطفلية نوعاً خاصاً من الخيوط يُسمى الممصات.", "plot": "", "choices": ["لتثبّت الفطر في التربة", "لتنتج الأبواغ", "لتقوم بالبناء الضوئي", "لتخترق خلايا العائل وتمتص منها المواد الغذائية"], "answer": 3, "exp": "الممصات وظيفتها وحدة: تدخل خلية العائل وتمتص الغذاء 🥤"}, {"q": "تتغذى فطريات الباكسينيا تغذية رمية.", "plot": "", "choices": ["صحيحة ✅", "خاطئة ❌"], "answer": 1, "exp": "خطأ! الباكسينيا (صدأ القمح) فطر تطفلي يتغذى على نبات القمح الحي 🌾"}, {"q": "للفطريات الرمية دور مهم في البيئة لأنها:", "plot": "", "choices": ["منتجات تقوم بالبناء الضوئي", "محللات تعيد تدوير المواد في البيئة", "تفترس الحيوانات الصغيرة", "تزيد تلوث التربة"], "answer": 1, "exp": "بدون المحللات كان العالم مليان أوراق ميتة 🍂♻️"}, {"q": "تتكاثر الفطريات:", "plot": "", "choices": ["جنسياً فقط", "لاجنسياً فقط", "بالبذور فقط", "جنسياً ولاجنسياً"], "answer": 3, "exp": "الفطريات عندها الطريقتين ✌️"}, {"q": "من طرق التكاثر اللاجنسي في الفطريات:", "plot": "", "choices": ["الإخصاب والتجزؤ والتبرعم", "التجزؤ والتبرعم وإنتاج الأبواغ", "الاقتران والإخصاب", "البذور والأزهار"], "answer": 1, "exp": "اللاجنسي = تجزؤ • تبرعم • أبواغ. ولا فيه إخصاب 🙅‍♀️"}, {"q": "تتكاثر الخميرة لاجنسياً عن طريق:", "plot": "", "choices": ["التجزؤ", "إنتاج الأبواغ", "التبرعم", "التجدد"], "answer": 2, "exp": "الخميرة يطلع لها برعم صغير وينفصل 🫧"}, {"q": "انفصال جزء من الغزل الفطري ونموه إلى فطر جديد يُسمى:", "plot": "", "choices": ["التبرعم", "الاقتران", "الإخصاب", "التجزؤ"], "answer": 3, "exp": "جزء ينقطع ← فطر جديد = تجزؤ ✂️"}, {"q": "خلايا أحادية العدد الكروموسومي لها غلاف صلب، تنمو فتصبح مخلوقاً جديداً دون اندماج الأمشاج:", "plot": "", "choices": ["الأمشاج", "البذور", "الممصات", "الأبواغ"], "answer": 3, "exp": "الأبواغ = بذور الفطريات بس بدون إخصاب 🌬️"}, {"q": "تركيب كيسي يحوي الأبواغ بداخله:", "plot": "", "choices": ["الجسم الثمري", "الغزل الفطري", "الحاجز", "حافظة الأبواغ"], "answer": 3, "exp": "اسمها يقول كل شي: تحفظ الأبواغ 👜"}, {"q": "العدد الكروموسومي في الأبواغ:", "plot": "", "choices": ["ثنائي (2n)", "ثلاثي (3n)", "أحادي (n)", "رباعي (4n)"], "answer": 2, "exp": "الأبواغ أحادية العدد الكروموسومي (n) ☝️"}, {"q": "يحدث التكاثر الجنسي في الفطريات بتكوين أبواغ عن طريق الانقسام:", "plot": "", "choices": ["المتساوي", "الثنائي البسيط", "المنصّف (الاختزالي)", "بالتبرعم"], "answer": 2, "exp": "التكاثر الجنسي = انقسام منصّف يقسم الكروموسومات للنص ➗"}, {"q": "فسّري: تنتج العديد من الفطريات كميات ضخمة من الأبواغ.", "plot": "", "choices": ["لزيادة فرصة بقائها، لأن أغلب الأبواغ لا تصل لبيئة مناسبة", "لأن الأبواغ تقوم بالبناء الضوئي", "لأن الأبواغ تحتاج إلى إخصاب", "لتتغذى على الأبواغ الأخرى"], "answer": 0, "exp": "كثرة الأبواغ = فرص أكثر إن بعضها يوصل لمكان مناسب وينمو 🎯"}, {"q": "فسّري: الأبواغ خفيفة الوزن ولها جدار قاسٍ ومقاوم للماء.", "plot": "", "choices": ["لتقوم بالبناء الضوئي", "لتمتص الغذاء من العائل", "لتلتصق بالجسم الثمري", "لتنتشر بسهولة وتتحمّل الظروف القاسية"], "answer": 3, "exp": "خفيفة = تطير مع الهواء 🌬️ وجدار قاسي = تصمد في الظروف الصعبة 🛡️"}, {"q": "تنتقل أبواغ الفطريات إلى أماكن جديدة بواسطة:", "plot": "", "choices": ["الجذور فقط", "البناء الضوئي", "الرياح والماء والحيوانات", "الممصات"], "answer": 2, "exp": "الأبواغ تسافر مجاناً مع الهواء والماء والحيوانات ✈️"}, {"q": "تُقسم الفطريات إلى خمسة أقسام بناءً على:", "plot": "", "choices": ["لونها وحجمها", "طريقة تغذيتها فقط", "تراكيبها وطريقة تكاثرها", "موطنها البيئي فقط"], "answer": 2, "exp": "التصنيف حسب التركيب + طريقة التكاثر 🗂️"}, {"q": "أي مما يلي يمثل أقسام الفطريات الخمسة؟", "plot": "", "choices": ["اللزجة، الجذرية، الكيسية، الدعامية، الناقصة", "الاقترانية، الكيسية، الوعائية، الدعامية، الناقصة", "اللزجة، الاقترانية، الكيسية، الأشنية، الدعامية", "اللزجة، الاقترانية، الكيسية، الدعامية، الناقصة"], "answer": 3, "exp": "احفظيها: لزجة • اقترانية • كيسية • دعامية • ناقصة 🖐️"}, {"q": "يُعد أكبر أقسام الفطريات من حيث عدد الأنواع:", "plot": "", "choices": ["الفطريات اللزجة", "الفطريات الاقترانية", "الفطريات الكيسية", "الفطريات الناقصة"], "answer": 2, "exp": "الكيسية هي العائلة الأكبر 👨‍👩‍👧‍👦"}, {"q": "تتميز بإنتاجها أبواغاً سوطية:", "plot": "", "choices": ["الفطريات الاقترانية", "الفطريات اللزجة", "الفطريات الكيسية", "الفطريات الدعامية"], "answer": 1, "exp": "الأبواغ السوطية تسبح بالسوط 🏊‍♀️ وهذي ميزة الفطريات اللزجة."}, {"q": "تعيش معظم الفطريات اللزجة في:", "plot": "", "choices": ["الصحاري الجافة", "الماء أو التربة الرطبة", "داخل جذور النباتات فقط", "على الصخور الجافة"], "answer": 1, "exp": "أبواغ تسبح = لازم فيه ماء 💧"}, {"q": "عفن الخبز الأسود من أمثلة:", "plot": "", "choices": ["الفطريات الاقترانية", "الفطريات الكيسية", "الفطريات الدعامية", "الفطريات اللزجة"], "answer": 0, "exp": "عفن الخبز = اقترانية 🍞 لا تنسينها!"}, {"q": "في عفن الخبز، تتكوّن الأبواغ اللاجنسية داخل:", "plot": "", "choices": ["الخياشيم أسفل القبعة", "الأكياس", "الممصات", "حوافظ الأبواغ في نهايات الخيوط القائمة"], "answer": 3, "exp": "الكرات السودا الصغيرة فوق العفن = حوافظ أبواغ ⚫"}, {"q": "يحدث التكاثر الجنسي في الفطريات الاقترانية بتكوين:", "plot": "", "choices": ["أبواغ كيسية", "أبواغ اقترانية (زيجية)", "أبواغ دعامية", "أبواغ سوطية"], "answer": 1, "exp": "اسم القسم يقول لك: اقترانية ← أبواغ اقترانية 🔗"}, {"q": "من أمثلة الفطريات الكيسية:", "plot": "", "choices": ["عيش الغراب", "عفن الخبز", "الخميرة", "صدأ القمح"], "answer": 2, "exp": "الخميرة كيسية 🫧 عيش الغراب وصدأ القمح دعامية، وعفن الخبز اقتراني."}, {"q": "الكمأة (الفقع) من الفطريات:", "plot": "", "choices": ["الكيسية", "الاقترانية", "اللزجة", "الدعامية"], "answer": 0, "exp": "الفقع اللذيذ من الفطريات الكيسية 😋"}, {"q": "تتكون الأبواغ الجنسية في الفطريات الكيسية داخل تركيب يشبه الكيس يُسمى:", "plot": "", "choices": ["الكيس", "الحامل البوغي الدعامي", "الخيشوم", "الممص"], "answer": 0, "exp": "كيسية ← أبواغها داخل كيس 👝"}, {"q": "تتكون الأبواغ الخاصة بالتكاثر الجنسي خارج نهاية الحامل البوغي لا في داخله في:", "plot": "", "choices": ["الفطريات الكونيدية", "الفطريات الدعامية", "الفطريات الاقترانية", "الفطريات اللزجة المختلطة"], "answer": 1, "exp": "الدعامية: الأبواغ على الدعامة من برّا، مو داخل كيس 🏛️"}, {"q": "عيش الغراب (المشروم) من أمثلة:", "plot": "", "choices": ["الفطريات الكيسية", "الفطريات الدعامية", "الفطريات الاقترانية", "الفطريات اللزجة"], "answer": 1, "exp": "المشروم = دعامي 🍄"}, {"q": "في فطر عيش الغراب، تتكوّن الأبواغ في:", "plot": "", "choices": ["الخياشيم أسفل القبعة", "الساق", "الغزل الفطري تحت التربة", "الممصات"], "answer": 0, "exp": "اقلبي المشروم وشوفي الخطوط تحت القبعة: هذي الخياشيم 🔍"}, {"q": "فطر صدأ القمح (الباكسينيا) من الفطريات:", "plot": "", "choices": ["الدعامية", "الكيسية", "الاقترانية", "اللزجة"], "answer": 0, "exp": "الأصداء والتفحمات من الدعامية 🌾"}, {"q": "اكتشف عالم فطراً جديداً ولاحظ أنه لا يتكاثر جنسياً، لذا سيصنّفه ضمن:", "plot": "", "choices": ["الفطريات الاقترانية", "الفطريات الكيسية", "الفطريات الناقصة", "الفطريات الدعامية"], "answer": 2, "exp": "ما شفنا له تكاثر جنسي؟ إذن ناقصة 🤷‍♀️"}, {"q": "فسّري: سُمّيت الفطريات الناقصة بهذا الاسم.", "plot": "", "choices": ["لأنها لا تحتوي على أنوية", "لأنها لا تنتج أبواغاً", "لأنه لم يُلاحظ فيها طور تكاثر جنسي", "لأن جسمها صغير جداً"], "answer": 2, "exp": "ناقصة = ناقصها التكاثر الجنسي (ما انلاحظ) 🧩"}, {"q": "يُستفاد من فطر البنسليوم في:", "plot": "", "choices": ["تصنيع فيتامين k", "إنتاج مضاد حيوي", "المعالجة الحيوية للتربة الملوثة", "إعطاء نكهة للمخبوزات"], "answer": 1, "exp": "البنسلين أول مضاد حيوي، جا من فطر البنسليوم 💊"}, {"q": "يعطي فطر البنسليوم نكهة مميزة لبعض أنواع:", "plot": "", "choices": ["الخبز", "الأجبان", "العسل", "العصائر"], "answer": 1, "exp": "الجبن الأزرق طعمه المميز من البنسليوم 🧀"}, {"q": "علاقة تبادل منفعة بين الفطريات والطحالب الخضراء أو البكتيريا الخضراء المزرقة:", "plot": "", "choices": ["الفطريات الجذرية", "التطفل", "الأشنات", "الممصات"], "answer": 2, "exp": "فطر + طحلب = أشنة 🤝"}, {"q": "في الأشنات، يتمثل دور الطحلب في:", "plot": "", "choices": ["امتصاص الماء والأملاح للفطر", "حماية الفطر من الجفاف", "القيام بالبناء الضوئي وتزويد الفطر بالغذاء", "إنتاج الأبواغ"], "answer": 2, "exp": "الطحلب هو الطبّاخ ☀️ يسوي بناء ضوئي ويعطي الفطر أكل."}, {"q": "في الأشنات، يتمثل دور الفطر في:", "plot": "", "choices": ["القيام بالبناء الضوئي", "إنتاج السكريات للطحلب", "تحليل الطحلب", "توفير الماء والأملاح والحماية للطحلب"], "answer": 3, "exp": "الفطر هو البيت 🏠 يحمي الطحلب ويوفر له الماء والأملاح."}, {"q": "المخلوقات الحية الحساسة لتغيّرات ظروف البيئة تُسمى:", "plot": "", "choices": ["المؤشرات الحيوية", "المحللات", "المنتجات", "الطفيليات"], "answer": 0, "exp": "مؤشر حيوي = جرس إنذار طبيعي 🚨"}, {"q": "فسّري: تُعد الأشنات مؤشراً حيوياً.", "plot": "", "choices": ["لأنها تقوم بالبناء الضوئي فقط", "لأنها حساسة للتلوث، فوجودها يدل على نظافة البيئة", "لأنها تسبب أمراضاً للنبات", "لأنها تعيش في الماء فقط"], "answer": 1, "exp": "شفتي أشنات؟ الهواء نظيف 🌿 اختفت؟ فيه تلوث!"}, {"q": "علاقة تبادل المنفعة بين الفطريات وجذور النباتات تُسمى:", "plot": "", "choices": ["الأشنات", "التطفل", "الفطريات الجذرية", "الفطريات الرمية"], "answer": 2, "exp": "فطر + جذور = فطريات جذرية 🌱"}, {"q": "في علاقة الفطريات الجذرية مع نبات الذرة، يتمثل دور الذرة في:", "plot": "", "choices": ["تزويد الفطر بالسكريات الناتجة من البناء الضوئي", "امتصاص الماء للفطر", "حماية الفطر من الحيوانات", "إنتاج الأبواغ للفطر"], "answer": 0, "exp": "الذرة تسوي بناء ضوئي وتشارك الفطر السكر 🍬🌽"}, {"q": "في علاقة الفطريات الجذرية مع نبات الذرة، يتمثل دور الفطر في:", "plot": "", "choices": ["زيادة امتصاص الجذور للماء والأملاح المعدنية", "القيام بالبناء الضوئي للنبات", "إنتاج السكريات للنبات", "تحليل جذور النبات"], "answer": 0, "exp": "خيوط الفطر تكبّر مساحة الامتصاص، مثل جذور إضافية 💧"}, {"q": "من فوائد الفطريات:", "plot": "", "choices": ["صناعة الخبز باستخدام الخميرة", "التسبب في مرض قدم الرياضي", "إفساد الأطعمة", "التسبب في صدأ القمح"], "answer": 0, "exp": "شكراً للخميرة على الخبز الطري 🍞"}, {"q": "تُستخدم الخميرة في صناعة الخبز لأنها:", "plot": "", "choices": ["تنتج غاز الأكسجين", "تنتج غاز ثاني أكسيد الكربون فينتفخ العجين", "تقتل البكتيريا في العجين", "تزيد ملوحة العجين"], "answer": 1, "exp": "فقاعات ثاني أكسيد الكربون هي اللي تنفخ العجين 🎈"}, {"q": "استخدام الفطريات في إزالة الملوثات من التربة يُسمى:", "plot": "", "choices": ["المعالجة الحيوية", "التخمر", "التطفل", "التبرعم"], "answer": 0, "exp": "الفطريات عمّال نظافة للتربة 🧹"}, {"q": "كل الفطريات ضارة بالإنسان.", "plot": "", "choices": ["صحيحة ✅", "خاطئة ❌"], "answer": 1, "exp": "خطأ! فيه فطريات تعطينا خبز ومضادات حيوية وأكل 🍄💊🍞"}, {"q": "من أمراض النبات التي تسببها الفطريات:", "plot": "", "choices": ["قدم الرياضي", "صدأ القمح", "الإنفلونزا", "السعفة"], "answer": 1, "exp": "صدأ القمح يصيب النبات 🌾 أما قدم الرياضي والسعفة فللإنسان."}, {"q": "من أمراض الإنسان التي تسببها الفطريات:", "plot": "", "choices": ["صدأ القمح", "تفحم الذرة", "الإنفلونزا", "قدم الرياضي"], "answer": 3, "exp": "قدم الرياضي فطر يحب الأماكن الرطبة بين الأصابع 🦶 جففي رجولك!"}];
+const TEST = false;
+let sel = -1;
+const L = ["أ","ب","ج","د"];
+const ar = n => String(n).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+const $ = id => document.getElementById(id);
+let i = 0, score = 0, wrong = [], name = "";
+const yay = ["صح عليك! 🎉","كفو! 👏","ولا غلطة 😎","أيوه كذا! ✨","بطلة! 🏆"];
+const oops = ["قريبة! 🙈","ما عليه، ركّزي 👀","أوبس 😅","المرة الجاية تصيدينها 💪"];
+
+$("go").onclick = () => { name = $("name").value.trim(); $("start").classList.add("hide"); $("quiz").classList.remove("hide"); show(); };
+$("again").onclick = () => { i = 0; score = 0; wrong = []; $("end").classList.add("hide"); $("quiz").classList.remove("hide"); show(); };
+
+function show(){
+  const q = Q[i];
+  $("pt").textContent = "سؤال " + ar(i+1) + " من " + ar(Q.length);
+  $("ps").textContent = TEST ? "📝 اختبار" : "✅ " + ar(score);
+  $("pb").style.width = (i / Q.length * 100) + "%";
+  $("qt").innerHTML = q.q;
+  $("qp").innerHTML = q.plot;
+  $("fb").className = "fb"; $("fb").innerHTML = "";
+  $("next").classList.add("hide");
+  $("qo").innerHTML = "";
+  q.choices.forEach((c, k) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = '<span class="l">' + L[k] + '</span><span>' + c + '</span>';
+    b.onclick = () => TEST ? choose(k) : pick(k);
+    $("qo").appendChild(b);
+  });
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function pick(k){
+  const q = Q[i], btns = $("qo").children, ok = k === q.answer;
+  [...btns].forEach(b => b.disabled = true);
+  btns[q.answer].classList.add("ok");
+  if (ok) score++; else { btns[k].classList.add("bad"); wrong.push(i); }
+  const pool = ok ? yay : oops;
+  $("fb").className = "fb show " + (ok ? "ok" : "bad");
+  $("fb").innerHTML = '<b class="t">' + pool[Math.floor(Math.random()*pool.length)] + '</b>' + q.exp;
+  $("ps").textContent = "✅ " + ar(score);
+  $("next").textContent = i === Q.length - 1 ? "شوفي نتيجتك 🎯" : "التالي ←";
+  $("next").classList.remove("hide");
+  $("next").scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function choose(k){
+  sel = k;
+  [...$("qo").children].forEach((b, j) => b.classList.toggle("sel", j === k));
+  $("next").textContent = i === Q.length - 1 ? "سلّمي الاختبار 📩" : "التالي ←";
+  $("next").classList.remove("hide");
+}
+$("next").onclick = () => {
+  if (TEST) { if (sel === Q[i].answer) score++; else wrong.push(i); sel = -1; }
+  i++; if (i < Q.length) show(); else end();
+};
+
+function end(){
+  $("quiz").classList.add("hide"); $("end").classList.remove("hide");
+  $("pb").style.width = "100%";
+  $("who").textContent = name ? "النتيجة النهائية لـ " + name : "النتيجة النهائية";
+  $("sc").innerHTML = ar(score) + "<small> / " + ar(Q.length) + "</small>";
+  const p = score / Q.length;
+  $("msg").textContent =
+    p === 1 ? "العلامة الكاملة! الإحصاء صار يخاف منك 😎🏆" :
+    p >= .85 ? "ممتازة! باقي لمسة بسيطة وتقفلينها 🔥" :
+    p >= .65 ? "حلو! بس راجعي الأسئلة اللي تحت وتصيرين وحش 💪" :
+    p >= .4 ? "بداية حلوة، الإحصاء سهل بس يبغاله تركيز 👀" :
+    "ولا يهمك! نراجعها سوا وخلنبسطها 🤍";
+  if (wrong.length){
+    const tmp = document.createElement("div");
+    $("wr").innerHTML = "<h3>الأسئلة اللي تحتاج مراجعة (" + ar(wrong.length) + "):</h3><ul>" +
+      wrong.map(w => { tmp.innerHTML = Q[w].q; let t = tmp.textContent; if (t.length > 70) t = t.slice(0, 70) + "…"; return "<li><b>س" + ar(w+1) + ":</b> " + t + "</li>"; }).join("") + "</ul>";
+  } else $("wr").innerHTML = "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+</script>
+</body>
+</html>
