@@ -200,6 +200,16 @@ const QUESTIONS_DATA = {
     },
   ],
 
+  "term1--سادس-ابتدائي--english": [
+    {
+      // Ready-made training: questions live in training-term1-grade6-english-vocabulary.html
+      // (body parts, health problems, products and places — 20 questions)
+      id: "term1-grade6-english-vocabulary",
+      title: "Vocabulary Practice",
+      count: 20,
+    },
+  ],
+
   "term1--رابع-ابتدائي--math": [
     {
       // Ready-made training: questions live in training-term1-grade4-math-data-organization.html
