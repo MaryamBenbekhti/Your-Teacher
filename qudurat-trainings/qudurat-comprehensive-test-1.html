@@ -1,0 +1,211 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الاختبار الشامل الأول</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&family=Noto+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF8EE; --ink:#1F2A37; --soft:#5b6572; --card:#FFFFFF; --box:#f8f4ea; --boxLine:rgba(0,0,0,.08);
+  --hint:#fdf2ea; --hintOpen:#eef7f6; --opt:#fffdf9; --optLine:#e9e1d2; --funny:#8a7350;
+  --okBg:#e8f8f1; --ok:#1a9c6b; --okTxt:#136b47; --noBg:#fdecea; --no:#FF6B5E; --noTxt:#8f2e22;
+  --solBg:#eef4fb; --solLine:#d7e6f7; --solTxt:#2a5da0; --teal:#0E8C86; --tealDark:#0A6B66; --purple:#8E6FD1;
+  --shadow:0 10px 25px rgba(31,42,55,.10);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141A22; --ink:#ECEFF3; --soft:#A9B3BF; --card:#1E2632; --box:#26303D; --boxLine:rgba(255,255,255,.10);
+    --hint:#2B2A2A; --hintOpen:#1F3433; --opt:#232C38; --optLine:#38434F; --funny:#D2B98E;
+    --okBg:#173B2C; --okTxt:#8FE0B9; --noBg:#43201F; --noTxt:#F5A9A2;
+    --solBg:#1D2B3D; --solLine:#2C4260; --solTxt:#9CC3F0; --tealDark:#5CC7C0; --shadow:0 10px 25px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141A22; --ink:#ECEFF3; --soft:#A9B3BF; --card:#1E2632; --box:#26303D; --boxLine:rgba(255,255,255,.10);
+  --hint:#2B2A2A; --hintOpen:#1F3433; --opt:#232C38; --optLine:#38434F; --funny:#D2B98E;
+  --okBg:#173B2C; --okTxt:#8FE0B9; --noBg:#43201F; --noTxt:#F5A9A2;
+  --solBg:#1D2B3D; --solLine:#2C4260; --solTxt:#9CC3F0; --tealDark:#5CC7C0; --shadow:0 10px 25px rgba(0,0,0,.35);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,'Segoe UI',sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:16px 12px 50px}
+header{text-align:center;margin-bottom:12px}
+.badge{display:inline-block;background:var(--teal);color:#fff;font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);transform:rotate(-2deg)}
+h1{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:23px;margin:12px 0 4px;color:var(--tealDark)}
+header p{margin:0;color:var(--soft);font-size:13.5px}
+.groups{display:flex;gap:8px;justify-content:center;margin:14px 0 4px;font-size:12px;font-weight:700}
+.groups span{padding:5px 12px;border-radius:999px;color:#fff}
+.score-bar{display:flex;align-items:center;gap:10px;margin:14px auto 20px;background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);font-weight:700;font-size:14px;width:fit-content;position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:10}
+.score-bar span{color:var(--purple)}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;margin-bottom:22px;position:relative;overflow:hidden;border-top:5px solid var(--accent)}
+.card::before{content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;background:var(--accent);opacity:.12;border-radius:50%}
+.qtitle{display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:14px;color:var(--accent);margin-bottom:10px;flex-wrap:wrap}
+.qnum{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:15px}
+.qtag{font-size:11px;color:#fff;background:var(--accent);padding:2px 10px;border-radius:999px}
+.qgroup{font-size:11px;color:var(--soft);margin-inline-start:auto}
+.qtext{background:var(--box);border-radius:14px;padding:15px;font-size:22px;font-weight:900;line-height:1.7;margin-bottom:8px;border:2px dashed var(--boxLine);text-align:center}
+.funny{font-size:12.5px;color:var(--funny);margin:0 0 14px;text-align:center}
+.hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.hint-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;background:var(--hint);color:var(--ink);font-family:inherit;font-weight:700;font-size:13.5px;padding:11px 14px;border-radius:12px;cursor:pointer;text-align:right}
+.hint-btn:focus-visible,.opt-btn:focus-visible,.share-btn:focus-visible{outline:3px solid #FFC23C;outline-offset:2px}
+.hint-reveal{display:none;background:var(--hintOpen);border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:11px 14px}
+.hint-reveal.open{display:block}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt-btn{display:flex;align-items:center;gap:12px;border:2px solid var(--optLine);background:var(--opt);color:var(--ink);font-family:inherit;font-weight:700;font-size:16px;padding:12px 14px;border-radius:14px;cursor:pointer;text-align:right;width:100%}
+.opt-btn:hover{border-color:var(--accent)}
+.opt-btn .l{flex:0 0 28px;height:28px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:13px}
+.opt-btn .v{flex:1}
+.opt-btn .tag{font-size:17px}
+.opt-btn.correct{background:var(--okBg);border-color:var(--ok);color:var(--okTxt)}
+.opt-btn.wrong{background:var(--noBg);border-color:var(--no);color:var(--noTxt)}
+.opt-btn:disabled{cursor:default}
+.opt-explain{display:none;font-size:13px;line-height:1.7;font-weight:600;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px}
+.opt-explain.show{display:block}
+.opt-explain.ok{background:var(--okBg);color:var(--okTxt)}
+.opt-explain.no{background:var(--noBg);color:var(--noTxt)}
+.solution-box{display:none;margin-top:14px;background:var(--solBg);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.9;border:2px solid var(--solLine)}
+.solution-box.show{display:block}
+.solution-box .lbl{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;color:var(--solTxt);display:block;margin-bottom:4px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.15;margin:0 3px;font-size:.9em}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 3px}
+.result-card{text-align:center;background:linear-gradient(135deg,#0E8C86,#8E6FD1);color:#fff;border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none}
+.result-card.show{display:block}
+.result-card h2{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-size:22px;margin:0 0 8px}
+.result-card p{margin:0;font-size:14.5px}
+.result-card .emoji{font-size:40px;margin-bottom:6px}
+.share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.share-btn{display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;color:#fff}
+.wa{background:#25D366}.rt{background:#1F2A37}
+footer{text-align:center;color:var(--soft);font-size:12px;margin-top:24px}
+
+.legend{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.legend a{font-size:11.5px;font-weight:700;color:#fff;text-decoration:none;padding:5px 11px;border-radius:999px}
+.legend a:focus-visible{outline:3px solid #FFC23C;outline-offset:2px}
+.sec{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:17px;color:#fff;padding:8px 16px;border-radius:14px;margin:28px 0 14px;text-align:center;scroll-margin-top:70px}
+.m{direction:ltr;unicode-bidi:isolate;display:inline-block;white-space:nowrap;font-family:'Noto Sans',Arial,'Helvetica Neue',sans-serif}
+.qtext .m{font-size:1.08em}
+.qtext{font-size:19px}
+sup{font-size:.6em;vertical-align:.8em;line-height:0}
+.qtext .m sup{font-size:.6em}
+.opt-btn .v{line-height:1.5}
+.fr{font-size:.92em}
+.hint-reveal .m,.opt-explain .m,.solution-box .m{font-weight:700}
+.solution-box .m,.opt-explain .m,.hint-reveal .m{white-space:normal}
+.done-count{color:var(--soft)!important;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>الاختبار الشامل الأول</h1>
+    <p>١١ مهارة بـ٥٠ سؤال 🧠 اضغط على أي مهارة تروح لها مباشرة</p>
+  </header>
+  <nav class="legend" id="legend"></nav>
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">٠ من ٥٠</span><span class="done-count" id="doneDisplay">· ٠ مجاوب</span></div>
+  <div id="cards"></div>
+  <div class="result-card" id="resultCard" aria-live="polite">
+    <div class="emoji" id="rEmoji">🎉</div><h2 id="rTitle"></h2><p id="rText"></p>
+  </div>
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank" rel="noopener">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+  <footer>فكّر أقل ... حُلّ أسرع — الاختبار الشامل الأول 🧠✨</footer>
+</div>
+<script>
+const META={"add": ["الجمع والطرح الذهني", "#E8590C", "➕"], "mul": ["الضرب والقسمة الذهني", "#D9480F", "✖️"], "exp": ["الأسس", "#C2410C", "🔢"], "root": ["الجذور", "#9A3412", "√"], "frac": ["الكسور", "#B45309", "🍕"], "ratio": ["النسبة والتناسب", "#1D4ED8", "⚖️"], "speed": ["السرعة والمسافة", "#2563EB", "🚗"], "alg": ["الجبر", "#1E40AF", "🧮"], "stat": ["الإحصاء والاحتمالات", "#7E22CE", "🎲"], "seq": ["المتتابعات والأنماط", "#6D28D9", "🔁"], "word": ["المسائل التطبيقية", "#B91C1C", "📝"]};
+const Q=[{"t": "add", "text": "$547 + 238$", "fun": "فكّها مئات وعشرات وآحاد 🧠", "h": "(500 + 200) و(40 + 30) و(7 + 8)", "o": [["775", "نسيت الحمل من الآحاد: 7 + 8 = 15"], ["785", null], ["795", "زدت 10 بالعشرات"], ["685", "المئات غلط: 500 + 200 = 700"]], "a": 1, "sol": "700 + 70 + 15 = 785"}, {"t": "add", "text": "$398 + 476$", "fun": "398 قريبة من 400 😏", "h": "قرّب 398 إلى 400 وعوّض", "o": [["874", null], ["876", "نسيت تطرح الـ2 اللي زدتها"], ["872", "طرحت 4 بدل 2"], ["884", "غلطة بالجمع: 400 + 476 = 876"]], "a": 0, "sol": "400 + 476 = 876 ← نطرح 2 = 874"}, {"t": "add", "text": "$1003 − 487$", "fun": "اطرح 500 وعوّض 🔄", "h": "طرحت 13 زيادة، فأضفها", "o": [["516", null], ["490", "طرحت الـ13 بدل ما تضيفها"], ["526", "غلطة بالتعويض"], ["616", "غلطة بالمئات"]], "a": 0, "sol": "1003 − 500 = 503 ← نضيف 13 = 516"}, {"t": "add", "text": "$45.7 − 18.95$", "fun": "45.7 = 45.70 🔟", "h": "ساوِ الخانات العشرية", "o": [["26.75", null], ["27.75", "نسيت الاستلاف"], ["26.85", "غلطة بالجزء العشري"], ["64.65", "جمعت بدل ما تطرح"]], "a": 0, "sol": "45.70 − 18.95 = 26.75"}, {"t": "mul", "text": "$38 × 42$", "fun": "جيران الـ40 😎", "h": "$(40 − 2)(40 + 2) = 40² − 2²$", "o": [["1600", "هذا 40² بس، نسيت تطرح 4"], ["1596", null], ["1604", "جمعت بدل ما تطرح"], ["1592", "طرحت 8 بدل 4"]], "a": 1, "sol": "1600 − 4 = 1596"}, {"t": "mul", "text": "$64 × 11$", "fun": "المجموع 10، فيه حمل! 🔥", "h": "6 + 4 = 10 ← اكتب 0 واحمل 1", "o": [["6104", "حطيت 10 كاملة بالنص"], ["604", "نسيت تحمل الـ1"], ["714", "غلطة بالرقم الأوسط"], ["704", null]], "a": 3, "sol": "6 + 1 = 7 | 0 | 4 ← 704"}, {"t": "mul", "text": "كم يساوي 15% من 460 ؟", "fun": "10% + نصها 😏", "h": "10% من 460 = 46", "o": [["46", "هذا 10% بس"], ["23", "هذا 5% بس"], ["61", "راجع: 46 + 23"], ["69", null]], "a": 3, "sol": "46 + 23 = 69"}, {"t": "mul", "text": "$7.2 ÷ 0.09$", "fun": "تخلّص من الفاصلة: اضرب الاثنين في 100 💯", "h": "720 ÷ 9", "o": [["8", "ضربت في 10 بدل 100"], ["0.8", "الفاصلة بمكان غلط"], ["800", "ضربت 7.2 في 1000"], ["80", null]], "a": 3, "sol": "720 ÷ 9 = 80"}, {"t": "exp", "text": "$5³ × 5^{−1}$", "fun": "اجمع الأسس، حتى لو فيها سالب ➕", "h": "$5^{3 + (−1)} = 5²$", "o": [["25", null], ["[[1|125]]", "ضربت الأسس"], ["125", "تجاهلت 5^{−1}"], ["5", "طرحت 3 − 1 − 1"]], "a": 0, "sol": "$5² = 25$"}, {"t": "exp", "text": "$(3²)² ÷ 3³$", "fun": "قانونين بسؤال واحد 💪", "h": "$(3²)² = 3⁴$", "o": [["27", "هذا 3³"], ["3", null], ["9", "هذا 3²"], ["1", "3⁴ ÷ 3³ = 3¹ مو 3⁰"]], "a": 1, "sol": "$3⁴ ÷ 3³ = 3¹ = 3$"}, {"t": "exp", "text": "$2^{−3} × 2⁵$", "fun": "سالب + موجب 🤔", "h": "$2^{−3 + 5}$", "o": [["[[1|4]]", "الإشارة غلط: −3 + 5 = +2"], ["256", "جمعت 3 + 5 وتجاهلت السالب"], ["8", "هذا 2³"], ["4", null]], "a": 3, "sol": "$2² = 4$"}, {"t": "exp", "text": "$125^{2/3}$", "fun": "جذر تكعيبي، وبعدين تربيع 🧗", "h": "$∛125 = 5$", "o": [["5", "نسيت ترفع للقوة 2"], ["625", "رفعت للقوة 4"], ["25", null], ["15625", "ربّعت بدون ما تجذّر"]], "a": 2, "sol": "$(∛125)² = 5² = 25$"}, {"t": "root", "text": "ما قيمة $√324$ ؟", "fun": "آخره 4، فجذره آخره 2 أو 8 👀", "h": "$18 × 18 = ?$", "o": [["162", "هذا النص، الجذر مو قسمة على 2"], ["17", "$17 × 17 = 289$"], ["18", null], ["19", "$19 × 19 = 361$"]], "a": 2, "sol": "$18 × 18 = 324$"}, {"t": "root", "text": "$√50 + √8$", "fun": "بسّط أول 🪄", "h": "$√50 = 5√2$ و $√8 = 2√2$", "o": [["$√58$", "جمعت اللي تحت الجذر بدون تبسيط"], ["$7√2$", null], ["$7√4$", "جمعت اللي تحت الجذور"], ["$3√2$", "طرحت بدل ما تجمع"]], "a": 1, "sol": "$5√2 + 2√2 = 7√2$"}, {"t": "root", "text": "$√12 × √3$", "fun": "اضرب اللي تحت الجذر ✖️", "h": "$√(12 × 3) = √36$", "o": [["$√15$", "جمعت بدل ما تضرب"], ["36", "نسيت تاخذ الجذر"], ["$3√2$", "راجع: 12 × 3 = 36"], ["6", null]], "a": 3, "sol": "$√36 = 6$"}, {"t": "root", "text": "بسّط: $[[12|√6]]$", "fun": "اضرب فوق وتحت في $√6$ 😎", "h": "$[[12√6|6]]$", "o": [["$12√6$", "نسيت تقسم على 6"], ["$2√6$", null], ["$6√2$", "قسمت 12 على √6 غلط"], ["2", "الجذر ما يختفي"]], "a": 1, "sol": "$[[12√6|6]] = 2√6$"}, {"t": "root", "text": "أيهما أكبر: $5√2$ أم $4√3$ ؟", "fun": "دخّل المعامل تحت الجذر 🧳", "h": "$5√2 = √50$ ، $4√3 = √48$", "o": [["$4√3$ أكبر", "$√48$ أصغر من $√50$"], ["متساويان", "50 ≠ 48"], ["$5√2$ أكبر", null], ["لا يمكن المقارنة", "دخّل المعامل وقارن"]], "a": 2, "sol": "$√50 > √48$ ← $5√2$ أكبر"}, {"t": "frac", "text": "$[[2|5]] + [[3|10]]$", "fun": "وحّد المقام 🔄", "h": "$[[2|5]] = [[4|10]]$", "o": [["[[1|3]]", "جمعت البسوط والمقامات"], ["[[1|2]]", "نسيت تضرب بسط الأول في 2"], ["[[7|10]]", null], ["[[3|25]]", "ضربت بدل ما تجمع"]], "a": 2, "sol": "$[[4|10]] + [[3|10]] = [[7|10]]$"}, {"t": "frac", "text": "$[[5|6]] × [[9|20]]$", "fun": "اختصر قبل ما تضرب ✂️", "h": "5 مع 20 ، و6 مع 9", "o": [["[[7|13]]", "جمعت البسوط والمقامات"], ["[[50|27]]", "قلبت الثاني، هذي قسمة"], ["[[3|8]]", null], ["[[3|4]]", "غلطة بالاختصار"]], "a": 2, "sol": "$[[1 × 3|2 × 4]] = [[3|8]]$"}, {"t": "frac", "text": "$[[3|4]] ÷ [[3|2]]$", "fun": "اقلب الثاني وحوّلها ضرب 🔄", "h": "$[[3|4]] × [[2|3]]$", "o": [["[[9|8]]", "ضربت بدون ما تقلب"], ["2", "قلبت الأول بدل الثاني"], ["[[3|8]]", "غلطة بالضرب"], ["[[1|2]]", null]], "a": 3, "sol": "$[[6|12]] = [[1|2]]$"}, {"t": "frac", "text": "حوّل $[[3|8]]$ إلى نسبة مئوية", "fun": "اقسم واضرب في 100 💯", "h": "3 ÷ 8 = 0.375", "o": [["38%", "قرّبت، والجواب الدقيق 37.5%"], ["3.8%", "الفاصلة بمكان غلط"], ["0.375%", "نسيت تضرب في 100"], ["37.5%", null]], "a": 3, "sol": "0.375 × 100 = 37.5%"}, {"t": "frac", "text": "ما هو $[[5|9]]$ من 81 ؟", "fun": "كسر من عدد 🎯", "h": "81 ÷ 9 ، وبعدين × 5", "o": [["9", "هذا التُسع بس"], ["36", "هذا $[[4|9]]$"], ["45", null], ["50", "راجع: 9 × 5"]], "a": 2, "sol": "9 × 5 = 45"}, {"t": "ratio", "text": "وُزّع 900 ريال بين أحمد وخالد بنسبة 4 : 5. كم نصيب خالد؟", "fun": "اجمع النسب أول ⚖️", "h": "مجموع الأجزاء = 9", "o": [["500 ريال", null], ["400 ريال", "هذا نصيب أحمد"], ["450 ريال", "هذا النص، والنسبة مو متساوية"], ["180 ريال", "قسمت على 5 بس"]], "a": 0, "sol": "900 ÷ 9 = 100 ← خالد = 5 × 100 = 500"}, {"t": "ratio", "text": "6 عمال ينهون عملًا في 12 يومًا. كم يومًا يحتاج 4 عمال لإنهاء نفس العمل؟", "fun": "عمال أقل = وقت أطول 🔁", "h": "علاقة عكسية: 6 × 12 = 4 × س", "o": [["8 أيام", "حليتها طردية، والعمال أقل فالأيام تزيد"], ["16 يومًا", "راجع: 72 ÷ 4"], ["24 يومًا", "ضربت 12 × 2"], ["18 يومًا", null]], "a": 3, "sol": "72 ÷ 4 = 18"}, {"t": "ratio", "text": "وصفة: 3 أكواب سكر لكل 5 أكواب دقيق. كم كوب سكر نحتاج لـ 20 كوب دقيق؟", "fun": "تناسب طردي 🍰", "h": "الدقيق تضاعف 4 مرات", "o": [["18", "طرحت 2 من 20"], ["12", null], ["15", "ضربت 3 × 5"], ["100", "ضربت 20 × 5"]], "a": 1, "sol": "20 ÷ 5 = 4 ← 3 × 4 = 12"}, {"t": "ratio", "text": "خُلط 2 لتر بتركيز 40% مع 3 لتر بتركيز 20%. ما تركيز الخليط؟", "fun": "مو متوسط التركيزين ⚠️", "h": "المادة = 2 × 0.4 + 3 × 0.2", "o": [["30%", "أخذت متوسط التركيزين"], ["28%", null], ["60%", "جمعت التركيزين"], ["14%", "قسمت على 10 بدل 5"]], "a": 1, "sol": "(0.8 + 0.6) ÷ 5 = 0.28 = 28%"}, {"t": "ratio", "text": "النسبة بين عمري أب وابنه 7 : 2 ، والفرق بين عمريهما 35 سنة. كم عمر الأب؟", "fun": "الفرق بالأجزاء = 7 − 2 🧩", "h": "5 أجزاء = 35", "o": [["14 سنة", "هذا عمر الابن"], ["35 سنة", "هذا الفرق"], ["63 سنة", "استخدمت 9 أجزاء"], ["49 سنة", null]], "a": 3, "sol": "الجزء = 7 ← الأب = 7 × 7 = 49"}, {"t": "speed", "text": "سيارة سرعتها 72 كم/س سارت لمدة ساعتين و15 دقيقة. كم المسافة؟", "fun": "15 دقيقة = ربع ساعة ⏱️", "h": "ز = 2.25 ساعة", "o": [["154.8 كم", "اعتبرت ساعتين و15 دقيقة = 2.15"], ["144 كم", "حسبت الساعتين بس"], ["162 كم", null], ["180 كم", "حسبت ساعتين ونص"]], "a": 2, "sol": "72 × 2.25 = 162 كم"}, {"t": "speed", "text": "حوّل 15 م/ث إلى كم/س", "fun": "م/ث ← كم/س : اضرب في 3.6 ✖️", "h": "15 × 3.6", "o": [["4 كم/س", "قسمت بدل ما تضرب (≈ 4)"], ["150 كم/س", "ضربت في 10"], ["15 كم/س", "نسيت تحوّل"], ["54 كم/س", null]], "a": 3, "sol": "15 × 3.6 = 54"}, {"t": "speed", "text": "قطاران متقابلان بينهما 600 كم، سرعتاهما 110 كم/س و90 كم/س. بعد كم ساعة يلتقيان؟", "fun": "يقتربون؟ اجمع 🤝", "h": "ز = 600 ÷ (110 + 90)", "o": [["30 ساعة", "قسمت على الفرق"], ["3 ساعات", null], ["6 ساعات", "قسمت على متوسط السرعتين"], ["2 ساعة", "راجع: 600 ÷ 200"]], "a": 1, "sol": "600 ÷ 200 = 3"}, {"t": "speed", "text": "انطلقت دراجة بسرعة 15 كم/س، وبعد ساعة انطلقت خلفها سيارة بسرعة 45 كم/س. بعد كم دقيقة من انطلاق السيارة تلحقها؟", "fun": "احسب المسافة الفاصلة أول 🏃", "h": "الدراجة سبقت بـ 15 كم", "o": [["30 دقيقة", null], ["20 دقيقة", "قسمت على سرعة السيارة بدل الفرق"], ["15 دقيقة", "قسمت 15 على 60"], ["60 دقيقة", "راجع: 15 ÷ 30 = نص ساعة"]], "a": 0, "sol": "15 ÷ (45 − 15) = 0.5 ساعة = 30 دقيقة"}, {"t": "speed", "text": "ذهب شخص بسرعة 30 كم/س ورجع نفس الطريق بسرعة 20 كم/س. ما سرعته المتوسطة؟", "fun": "احذر الفخ ⚠️", "h": "(2 × 30 × 20) ÷ (30 + 20)", "o": [["25 كم/س", "هذا الفخ! أخذت متوسط السرعتين"], ["24 كم/س", null], ["50 كم/س", "جمعت السرعتين"], ["12 كم/س", "نسيت تضرب في 2"]], "a": 1, "sol": "1200 ÷ 50 = 24"}, {"t": "alg", "text": "بسّط: 7س − 3ص + 2س + 5ص", "fun": "السين مع السين 🤝", "h": "(7 + 2)س + (−3 + 5)ص", "o": [["9س + 8ص", "تجاهلت إشارة −3ص"], ["9س + 2ص", null], ["5س + 2ص", "طرحت 2س بدل ما تجمعها"], ["11سص", "جمعت حدود مختلفة"]], "a": 1, "sol": "9س + 2ص"}, {"t": "alg", "text": "(س − 6)^{2} = ؟", "fun": "مربع الفرق: لا تنسى الحد الأوسط 🕳️", "h": "(أ − ب)^{2} = أ^{2} − 2أب + ب^{2}", "o": [["س^{2} − 36", "نسيت الحد الأوسط"], ["س^{2} + 12س + 36", "الحد الأوسط سالب"], ["س^{2} − 12س + 36", null], ["س^{2} − 6س + 36", "الحد الأوسط مضروب في 2"]], "a": 2, "sol": "س^{2} − 12س + 36"}, {"t": "alg", "text": "ما قيمة س في: 3(س − 2) = 2س + 5 ؟", "fun": "وزّع أول 🧩", "h": "3س − 6 = 2س + 5", "o": [["11", null], ["7", "نسيت توزّع 3 على الـ2"], ["−1", "الإشارة غلط: انقل −6 موجبة"], ["3", "تحقق بالتعويض"]], "a": 0, "sol": "س = 5 + 6 = 11"}, {"t": "alg", "text": "ما حل المتباينة: −3س + 4 ≤ 19 ؟", "fun": "قسمة على سالب؟ اقلب ⚠️", "h": "−3س ≤ 15", "o": [["س ≥ −5", null], ["س ≤ −5", "نسيت تقلب الإشارة"], ["س ≥ 5", "ضيّعت السالب"], ["س ≤ 5", "ضيّعت السالب ونسيت تقلب"]], "a": 0, "sol": "اقسم على −3 واقلب ← س ≥ −5"}, {"t": "alg", "text": "ما حلول المعادلة: س^{2} − 9س + 20 = 0 ؟", "fun": "عددين ضربهم 20 ومجموعهم 9 🔍", "h": "(س − 4)(س − 5) = 0", "o": [["س = 4 أو س = 5", null], ["س = −4 أو س = −5", "الإشارات غلط"], ["س = 2 أو س = 10", "ضربهم 20 بس مجموعهم 12"], ["س = 1 أو س = 20", "ضربهم 20 بس مجموعهم 21"]], "a": 0, "sol": "س = 4 أو س = 5"}, {"t": "stat", "text": "ما متوسط: 6، 10، 18، 7، 14 ؟", "fun": "اجمع واقسم ➗", "h": "المجموع ÷ 5", "o": [["11", null], ["10", "هذا الوسيط"], ["55", "هذا المجموع"], ["12", "راجع: 55 ÷ 5"]], "a": 0, "sol": "55 ÷ 5 = 11"}, {"t": "stat", "text": "ما وسيط: 13، 7، 21، 4، 18، 10 ؟", "fun": "رتّب، وعددهم زوجي ✌️", "h": "4، 7، 10، 13، 18، 21", "o": [["10", "أخذت وحدة من الوسطيتين"], ["11.5", null], ["13", "أخذت وحدة من الوسطيتين"], ["23", "جمعت الوسطيتين ونسيت تقسم"]], "a": 1, "sol": "(10 + 13) ÷ 2 = 11.5"}, {"t": "stat", "text": "كيس فيه 4 كرات حمراء و6 خضراء و5 صفراء. ما احتمال أن تكون الكرة المسحوبة ليست خضراء؟", "fun": "النقيض 🔄", "h": "1 − احتمال الخضراء", "o": [["[[3|5]]", null], ["[[2|5]]", "هذا احتمال الخضراء نفسها"], ["[[1|3]]", "حسبت الصفراء بس"], ["[[4|15]]", "حسبت الحمراء بس"]], "a": 0, "sol": "[[9|15]] = [[3|5]]"}, {"t": "stat", "text": "بكم طريقة نختار لجنة من 3 أشخاص من بين 7 ؟", "fun": "لجنة = الترتيب ما يهم 👥", "h": "ق(7، 3)", "o": [["210", "هذي تباديل، اللجنة ترتيبها ما يهم"], ["21", "هذا ق(7، 2)"], ["343", "7³ ، نفس الشخص ما ينختار مرتين"], ["35", null]], "a": 3, "sol": "[[7 × 6 × 5|3 × 2 × 1]] = 35"}, {"t": "stat", "text": "رُمي نردان. ما احتمال أن يكون مجموعهما 7 ؟", "fun": "36 نتيجة ممكنة 🎲", "h": "عدّ الأزواج: (1،6)، (2،5)، ...", "o": [["[[7|36]]", "المجموع 7 ما يعني 7 حالات"], ["[[1|36]]", "فيه 6 حالات مو حالة وحدة"], ["[[1|6]]", null], ["[[1|12]]", "عدّيت 3 حالات بس"]], "a": 2, "sol": "6 حالات من 36 ← [[1|6]]"}, {"t": "seq", "text": "المتتابعة: 8، 13، 18، 23، ... ما الحد الثاني عشر؟", "fun": "حسابية، الفرق 5 ➕", "h": "8 + 11 × 5", "o": [["68", "استخدمت 12 بدل 11"], ["60", "ضربت 12 × 5"], ["63", null], ["55", "نسيت الحد الأول"]], "a": 2, "sol": "8 + 55 = 63"}, {"t": "seq", "text": "المتتابعة: 3، 12، 48، ... ما الحد الخامس؟", "fun": "هندسية، النسبة 4 ✖️", "h": "3 × 4^{4}", "o": [["192", "هذا الحد الرابع"], ["3072", "هذا الحد السادس"], ["768", null], ["84", "زدت 36، تعاملت معها كحسابية"]], "a": 2, "sol": "3 × 256 = 768"}, {"t": "seq", "text": "ما ناتج: 1 + 2 + 3 + ... + 40 ؟", "fun": "غاوس 🤝", "h": "20 زوج × 41", "o": [["1640", "نسيت تقسم على 2"], ["820", null], ["800", "ضربت 20 × 40"], ["840", "ضربت 20 × 42"]], "a": 1, "sol": "20 × 41 = 820"}, {"t": "seq", "text": "تتكرر الألوان: أحمر، أزرق، أخضر، أصفر، أبيض. ما لون الحبة رقم 37 ؟", "fun": "دورة طولها 5 🔁", "h": "37 ÷ 5", "o": [["أزرق", null], ["أحمر", "الباقي 2 مو 1"], ["أخضر", "الباقي 2 مو 3"], ["أبيض", "الباقي مو صفر"]], "a": 0, "sol": "37 ÷ 5 = 7 والباقي 2 ← ثاني لون = أزرق"}, {"t": "word", "text": "اشترى خالد 3 أقلام ودفترين بـ 26 ريالًا، وسعر الدفتر يزيد عن القلم بـ 3 ريالات. كم سعر الدفتر؟", "fun": "افرض سعر القلم س 📝", "h": "3س + 2(س + 3) = 26", "o": [["4 ريالات", "هذا سعر القلم"], ["10 ريالات", "تحقق بالتعويض"], ["7 ريالات", null], ["8 ريالات", "تحقق بالتعويض"]], "a": 2, "sol": "5س + 6 = 26 ← س = 4 ← الدفتر = 7"}, {"t": "word", "text": "سلعة سعرها 250 ريالًا عليها خصم 20%. كم سعرها بعد الخصم؟", "fun": "احسب الخصم واطرحه 🏷️", "h": "20% من 250 = 50", "o": [["50 ريال", "هذا الخصم نفسه"], ["230 ريال", "طرحت 20 ريال بدل 20%"], ["270 ريال", "أضفت بدل ما تطرح"], ["200 ريال", null]], "a": 3, "sol": "250 − 50 = 200"}, {"t": "word", "text": "زاد سعر سلعة 10% ثم نقص السعر الجديد 10%. ما التغيّر في السعر الأصلي؟", "fun": "فخ مشهور 😏", "h": "جرّب سعر 100", "o": [["لا يتغير", "النقص كان من سعر أكبر"], ["نقص 1%", null], ["زاد 1%", "النقص أكبر من الزيادة"], ["نقص 10%", "الزيادة عوّضت جزء"]], "a": 1, "sol": "100 ← 110 ← 99 ← نقص 1%"}, {"t": "word", "text": "صنبور يملأ حوضًا في 6 ساعات، وصنبور آخر يملؤه في 3 ساعات. كم ساعة يحتاجان معًا؟", "fun": "آخر سؤال بالاختبار! 🎉", "h": "بالساعة: [[1|6]] + [[1|3]] من الحوض", "o": [["4.5 ساعات", "أخذت متوسط الزمنين"], ["9 ساعات", "جمعت الزمنين"], ["2 ساعة", null], ["3 ساعات", "معًا أسرع من أسرع واحد"]], "a": 2, "sol": "[[1|6]] + [[1|3]] = [[1|2]] ← ساعتين"}];
+const L=["أ","ب","ج","د"], AD="٠١٢٣٤٥٦٧٨٩";
+const ar=n=>String(n).replace(/\d/g,d=>AD[d]);
+const hasAr=t=>/[\u0621-\u064A]/.test(t);
+const frac=t=>{let p;do{p=t;t=t.replace(/\[\[([^\[\]|]*)\|([^\[\]|]*)\]\]/g,'<span class="fr"><span>$1</span><span>$2</span></span>');}while(t!==p);return t;};
+const sup=t=>t.replace(/\^\{([^}]*)\}/g,'<sup>$1</sup>');
+const M=t=>`<span class="m">${frac(sup(t))}</span>`;
+const P=t=>frac(sup(t.replace(/(\d)\.(\d)/g,'$1٫$2').replace(/%/g,'٪').replace(/\d/g,d=>AD[d])));
+// $...$ = math (always left-to-right); plain text without Arabic = math too
+const R=t=>{ if(!t.includes("$")) return hasAr(t)?P(t):M(t); return t.split("$").map((s,i)=>i%2?M(s):P(s)).join(""); };
+const box=document.getElementById("cards"), legend=document.getElementById("legend");
+let score=0, done=0, wrongTypes={};
+let lastType=null;
+Q.forEach((q,i)=>{
+  const [label,color,emo]=META[q.t], n=i+1;
+  if(q.t!==lastType){
+    lastType=q.t;
+    const s=document.createElement("div"); s.className="sec"; s.id="sec-"+q.t; s.style.background=color;
+    s.textContent=`${emo} ${label}`; box.appendChild(s);
+    const a=document.createElement("a"); a.href="#sec-"+q.t; a.style.background=color; a.textContent=`${emo} ${label}`; legend.appendChild(a);
+  }
+  const card=document.createElement("section");
+  card.className="card"; card.style.setProperty("--accent",color);
+  card.innerHTML=`<div class="qtitle"><span class="qnum">${ar(n)}</span>السؤال ${ar(n)}<span class="qtag">${emo} ${label}</span></div>
+   <div class="qtext">${R(q.text)}</div>
+   <div class="funny">💬 ${R(q.fun)}</div>
+   <div class="hints"><div><button class="hint-btn" aria-expanded="false"><span>🔎 تلميح</span><span>＋</span></button><div class="hint-reveal">${R(q.h)}</div></div></div>
+   <div class="options">${q.o.map((o,k)=>`
+     <button class="opt-btn" data-k="${k}"><span class="l">${L[k]}</span><span class="v">${R(o[0])}</span><span class="tag"></span></button>
+     <div class="opt-explain ${k===q.a?"ok":"no"}">${k===q.a?"صح عليك! 👏":"❌ "+R(o[1])}</div>`).join("")}</div>
+   <div class="solution-box"><span class="lbl">✅ الحل</span>${R(q.sol)}</div>`;
+  box.appendChild(card);
+  const hb=card.querySelector(".hint-btn");
+  hb.onclick=()=>{const r=hb.nextElementSibling,open=r.classList.toggle("open");hb.lastElementChild.textContent=open?"－":"＋";hb.setAttribute("aria-expanded",open);};
+  const btns=card.querySelectorAll(".opt-btn");
+  btns.forEach(b=>b.onclick=()=>{
+    if(card.dataset.done) return;
+    card.dataset.done=1; done++;
+    const k=+b.dataset.k, ok=k===q.a;
+    btns.forEach(x=>x.disabled=true);
+    btns[q.a].classList.add("correct"); btns[q.a].querySelector(".tag").textContent="✅";
+    if(ok) score++; else { b.classList.add("wrong"); b.querySelector(".tag").textContent="❌"; wrongTypes[q.t]=(wrongTypes[q.t]||0)+1; }
+    b.nextElementSibling.classList.add("show");
+    card.querySelector(".solution-box").classList.add("show");
+    document.getElementById("scoreDisplay").textContent=`${ar(score)} من ٥٠`;
+    document.getElementById("doneDisplay").textContent=`· ${ar(done)} مجاوب`;
+    if(done===Q.length) finish();
+  });
+});
+function finish(){
+  const rc=document.getElementById("resultCard"), e=document.getElementById("rEmoji"), t=document.getElementById("rTitle"), p=document.getElementById("rText");
+  const s=ar(score);
+  const weak=Object.entries(wrongTypes).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k])=>META[k][0]);
+  const tip=weak.length?` راجع: ${weak.join("، ")}`:"";
+  if(score===50){e.textContent="🏆";t.textContent="أسطوري! ٥٠ من ٥٠";p.textContent="ولا غلطة! خلصت كل الدروس بدون ولا خطأ 😎";}
+  else if(score>=40){e.textContent="🔥";t.textContent="ممتاز جدًا!";p.textContent=`نتيجتك ${s} من ٥٠.`+tip;}
+  else if(score>=30){e.textContent="💪";t.textContent="شغل حلو!";p.textContent=`نتيجتك ${s} من ٥٠.`+tip;}
+  else if(score>=15){e.textContent="🙂";t.textContent="بداية طيبة";p.textContent=`نتيجتك ${s} من ٥٠.`+tip;}
+  else{e.textContent="🌱";t.textContent="وقت المراجعة";p.textContent="ولا يهمك، كل خبير بدأ من هنا."+tip;}
+  rc.classList.add("show");
+  rc.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function restart(){
+  score=0; done=0; wrongTypes={};
+  document.getElementById("scoreDisplay").textContent="٠ من ٥٠";
+  document.getElementById("doneDisplay").textContent="· ٠ مجاوب";
+  document.querySelectorAll(".card").forEach(c=>delete c.dataset.done);
+  document.querySelectorAll(".opt-btn").forEach(b=>{b.disabled=false;b.classList.remove("correct","wrong");b.querySelector(".tag").textContent="";});
+  document.querySelectorAll(".opt-explain,.solution-box").forEach(x=>x.classList.remove("show"));
+  document.querySelectorAll(".hint-reveal").forEach(h=>h.classList.remove("open"));
+  document.querySelectorAll(".hint-btn").forEach(b=>{b.lastElementChild.textContent="＋";b.setAttribute("aria-expanded","false");});
+  document.getElementById("resultCard").classList.remove("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.getElementById("waBtn").href="https://wa.me/?text="+encodeURIComponent(`🧠 الاختبار الشامل الأول: فكّر أقل ... حُلّ أسرع
+
+٥٠ سؤال يغطي كل المهارات: الحساب الذهني، الأسس، الجذور، الكسور، النسبة والتناسب، السرعة، الجبر، الإحصاء والاحتمالات، المتتابعات، والمسائل التطبيقية
+كم بتجيب من ٥٠؟ 😉
+
+${location.href}`);
+</script>
+</body>
+</html>
+
+</body></html>
