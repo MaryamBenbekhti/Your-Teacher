@@ -200,6 +200,16 @@ const QUESTIONS_DATA = {
     },
   ],
 
+  "term1--رابع-ابتدائي--math": [
+    {
+      // Ready-made training: questions live in training-term1-grade4-math-data-organization.html
+      // (إشارات العد، الجداول، الأعمدة، الخطوط، القطاعات الدائرية، الاحتمال — 50 questions)
+      id: "term1-grade4-math-data-organization",
+      title: "تدريب تنظيم البيانات",
+      count: 50,
+    },
+  ],
+
   "term1--خامس-ابتدائي--math": [
     {
       // Ready-made training: questions live in training-term1-grade5-math-review.html
