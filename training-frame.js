@@ -19,15 +19,20 @@
     const doc = frame.contentDocument;
     if (!doc || !doc.body || win.location.href === 'about:blank') return;
 
-    // Height = bottom of the training's content (its .wrap) + the body's bottom padding
-    const content = doc.querySelector('.wrap') || doc.body;
+    // Height = bottom of the training's content (its .wrap) + the body's bottom padding.
+    // Without a .wrap, measure the body's children, not the body: a body with
+    // min-height:100vh would grow with the frame and never settle.
+    const wrap = doc.querySelector('.wrap');
+    const parts = wrap ? [wrap] : [...doc.body.children].filter(el => el.tagName !== 'SCRIPT');
     const fit = () => {
       const pad = parseFloat(win.getComputedStyle(doc.body).paddingBottom) || 0;
-      const h = Math.ceil(content.getBoundingClientRect().bottom + pad + 24);
+      const bottom = Math.max(0, ...parts.map(el => el.getBoundingClientRect().bottom));
+      const h = Math.ceil(bottom + pad + 24);
       if (Math.abs(frame.offsetHeight - h) > 2) frame.style.height = h + 'px';
     };
     fit();
-    new win.ResizeObserver(fit).observe(content);
+    const ro = new win.ResizeObserver(fit);
+    parts.forEach(el => ro.observe(el));
     win.addEventListener('resize', fit);
 
     // Jump links inside the training (e.g. its skills list) scroll the page

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>فكّر أقل، حُلّ أسرع 🧠⚡ | المساحات المظللة</title>
+<style>
+  :root{
+    --page-bg1:#fbe9c6;
+    --page-bg2:#f6d9a0;
+    --teal:#1ba394;
+    --teal-dark:#12786d;
+    --good:#2ecc71;
+    --bad:#e74c3c;
+    --card-bg:#ffffff;
+    --text-dark:#2b2b2b;
+  }
+  *{box-sizing:border-box;}
+  bdi{unicode-bidi:isolate;}
+  body{
+    margin:0;
+    font-family:'Tajawal','Segoe UI',Tahoma,sans-serif;
+    background:linear-gradient(160deg,var(--page-bg1),var(--page-bg2));
+    min-height:100vh;
+    color:var(--text-dark);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:18px 10px 60px;
+  }
+  .tagline{text-align:center;font-size:1rem;color:#5a4322;opacity:.85;margin-bottom:4px;}
+  h1{text-align:center;font-size:1.35rem;margin:4px 0 6px;color:#3f2f14;}
+  .diff-note{text-align:center;font-size:.85rem;color:#7a5c2e;margin-bottom:14px;}
+
+  .badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:680px;margin-bottom:18px;}
+  .badge{color:#fff;padding:8px 16px;border-radius:999px;font-size:.82rem;font-weight:700;white-space:nowrap;}
+
+  .score-pill{
+    background:#fff;color:#3f2f14;font-weight:800;padding:10px 22px;border-radius:999px;
+    box-shadow:0 6px 16px rgba(0,0,0,.12);margin-bottom:22px;font-size:1.05rem;
+  }
+
+  .feed{width:100%;max-width:560px;display:flex;flex-direction:column;gap:18px;}
+
+  .qcard{
+    position:relative;background:var(--card-bg);border-radius:22px;padding:22px 18px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.10);overflow:hidden;
+  }
+  .qcard::before{
+    content:"";position:absolute;top:0;right:0;width:70px;height:70px;
+    background:rgba(27,163,148,.12);border-radius:0 0 0 100%;
+  }
+  .qcard-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:16px;position:relative;z-index:1;}
+  .qcard-head-right{display:flex;align-items:center;gap:10px;}
+  .qnum-badge{
+    background:var(--teal);color:#fff;width:32px;height:32px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;flex-shrink:0;
+  }
+  .qcard-title{font-weight:800;font-size:1rem;color:#333;}
+  .cat-tag{background:#e6f7f4;color:var(--teal-dark);font-size:.76rem;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+  .diff-dot{font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:999px;margin-right:6px;white-space:nowrap;}
+  .diff-easy{background:#e6f7ee;color:#1e7e42;}
+  .diff-med{background:#fff4e0;color:#a56a00;}
+  .diff-hard{background:#fdeaea;color:#a52a1f;}
+
+  .qtext-box{
+    border:2px dashed #dcd3bd;border-radius:16px;padding:16px 14px;text-align:center;
+    font-weight:800;font-size:1.06rem;color:#2b2b2b;margin-bottom:12px;line-height:1.9;
+  }
+  .nudge{text-align:center;font-style:italic;color:#8a8a8a;font-size:.85rem;margin-bottom:16px;line-height:1.6;}
+
+  .accordion{background:#fdeee0;border-radius:14px;margin-bottom:10px;overflow:hidden;}
+  .accordion-head{
+    display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;
+    font-size:.92rem;font-weight:700;color:#5a4630;
+  }
+  .accordion-plus{font-size:1.1rem;font-weight:800;color:#8a6d00;flex-shrink:0;}
+  .accordion-body{
+    max-height:0;overflow:hidden;transition:max-height .25s ease;padding:0 16px;
+    font-size:.9rem;color:#5a4630;line-height:1.9;
+  }
+  .accordion.open .accordion-body{max-height:320px;padding:0 16px 14px;}
+  .accordion.open .accordion-plus{transform:rotate(45deg);}
+
+  .options{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+  .option{
+    background:#fdfcf8;border:2px solid #ece4d0;border-radius:14px;padding:14px 18px;font-size:1.02rem;
+    font-weight:700;text-align:right;cursor:pointer;transition:.15s;font-family:inherit;color:#2b2b2b;
+  }
+  .option:hover:not(:disabled){border-color:var(--teal);}
+  .option.correct{background:#e9fbf0;border-color:var(--good);color:#1e7e42;}
+  .option.wrong{background:#fdecea;border-color:var(--bad);color:#a52a1f;}
+  .option:disabled{cursor:default;opacity:.9;}
+
+  .qfeedback{min-height:22px;font-weight:700;margin-top:12px;text-align:center;font-size:.92rem;}
+  .qfeedback.good{color:var(--good);}
+  .qfeedback.bad{color:var(--bad);}
+
+  .result-card{
+    display:none;background:var(--card-bg);border-radius:22px;padding:30px 22px;text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.10);
+  }
+  .result-card.show{display:block;}
+  .result-emoji{font-size:3rem;margin-bottom:8px;}
+  .result-title{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
+  .result-score{font-size:2.1rem;font-weight:900;color:var(--teal-dark);margin-bottom:10px;}
+  .result-note{font-size:.95rem;color:#555;margin-bottom:22px;line-height:1.7;}
+  .btn-row{display:flex;flex-direction:column;gap:10px;}
+  .whatsapp-btn,.retry-btn{
+    border:none;padding:13px 18px;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;
+    text-decoration:none;display:inline-block;font-family:inherit;
+  }
+  .whatsapp-btn{background:#25D366;color:#fff;}
+  .retry-btn{background:#f1f1f1;color:#333;}
+  .footer-tag{margin-top:26px;text-align:center;font-size:.85rem;color:#5a4322;opacity:.8;}
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 3px;line-height:1.25;font-size:.95em;}
+  .frac .num{border-bottom:1.6px solid currentColor;padding:0 4px 1px;}
+  .frac .den{padding:1px 4px 0;}
+  sup{font-size:.7em;line-height:0;vertical-align:super;}
+.fig{background:#fffdf6;border:1.5px solid #efe6d0;border-radius:16px;padding:8px;margin:0 0 12px;display:flex;justify-content:center;}
+  .fig svg{width:100%;max-width:340px;height:auto;display:block;}
+</style>
+</head>
+<body>
+
+  <div class="tagline">فكّر أقل ... حُلّ أسرع 🚀</div>
+  <h1>تحدي المساحات المظللة</h1>
+  <div class="diff-note">🎨 متوسط وصعب فقط — مع رسم توضيحي لكل سؤال 🔥</div>
+
+  <div class="badges" id="badges"></div>
+  <div class="score-pill">🏆 نتيجتك: <span id="scoreNow">0</span> / <span id="scoreTotal">20</span></div>
+
+  <div class="feed" id="feed"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="result-emoji" id="resultEmoji">🎉</div>
+    <div class="result-title">تمام!</div>
+    <div class="result-score"><span id="finalScore">0</span> / 20</div>
+    <div class="result-note" id="resultNote"></div>
+    <div class="btn-row">
+      <a href="#" class="whatsapp-btn" id="shareBtn">📲 شارك التحدي بالواتساب</a>
+      <button class="retry-btn" id="retryBtn">🔄 حاول من جديد</button>
+    </div>
+  </div>
+
+  <div class="footer-tag">فكّر أقل ... حُلّ أسرع — تحدي المساحات المظللة 🧠✨</div>
+
+<script>
+// {{...}} = تعبير رياضي (يسار←يمين) | @{أ|ب} = كسر مكدّس | ^{٢} = أُس مرفوع
+function fmt(s){
+  return s
+    .replace(/@\{([^{}|]*)\|([^{}|]*)\}/g,'<span class="frac"><span class="num">$1</span><span class="den">$2</span></span>')
+    .replace(/\^\{([^{}]*)\}/g,'<sup>$1</sup>')
+    .replace(/\{\{(.+?)\}\}/g,'<bdi dir="ltr">$1</bdi>')
+    .replace(/\n/g,'<br>');
+}
+
+const categories = [
+  {name:"مستطيلات ومربعات", color:"#1ba394"},
+  {name:"الدوائر والأقواس", color:"#7c5cff"},
+  {name:"الحلقات", color:"#f2665a"},
+  {name:"أنصاف الدوائر", color:"#4a90d9"},
+  {name:"المثلثات داخل الأشكال", color:"#ec6f9b"},
+  {name:"التقاطع والبتلات", color:"#a9754f"},
+  {name:"النسب والكسور", color:"#9b59b6"}
+];
+
+const questions = [
+ {
+  "cat": "مستطيلات ومربعات",
+  "diff": "med",
+  "q": "مستطيل أبعاده {{١٢ × ٨}} بداخله مستطيل أبيض أبعاده {{٨ × ٤}}. ما مساحة الجزء المظلل؟ (الأطوال بالسنتيمتر)",
+  "nudge": "المظلل = الكبير ناقص الأبيض ➖",
+  "rule": "{{المظلل = مساحة الكبير − مساحة الأبيض}}",
+  "steps": "{{١٢ × ٨ = ٩٦}}\n{{٨ × ٤ = ٣٢}}\n{{٩٦ − ٣٢ = ؟}}",
+  "options": [
+   "{{٦٤ سم^{٢}}}",
+   "{{٣٢ سم^{٢}}}",
+   "{{٩٦ سم^{٢}}}",
+   "{{٤٨ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"30\" y=\"25\" width=\"180\" height=\"120\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><rect x=\"60\" y=\"55\" width=\"120\" height=\"60\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"120\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٢</text><text x=\"17\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text><text x=\"120\" y=\"72\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text><text x=\"72\" y=\"91\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٤</text>"
+ },
+ {
+  "cat": "الدوائر والأقواس",
+  "diff": "med",
+  "q": "مربع طول ضلعه {{١٠ سم}}، رُسم داخله ربع دائرة مركزها أحد رؤوسه ونصف قطرها {{١٠ سم}}. ما مساحة الجزء المظلل (خارج ربع الدائرة)؟",
+  "nudge": "ربع الدائرة يأخذ جزء من المربع، والباقي هو المطلوب 🔑",
+  "rule": "{{مساحة ربع الدائرة = @{١|٤} π نق^{٢}}}",
+  "steps": "مساحة ربع الدائرة = {{@{١|٤} × π × ١٠^{٢}}}\nالمظلل = المربع − ربع الدائرة = ؟",
+  "options": [
+   "{{١٠٠ − ٢٥π سم^{٢}}}",
+   "{{١٠٠ − ١٠٠π سم^{٢}}}",
+   "{{١٠٠ − ٥٠π سم^{٢}}}",
+   "{{٢٥π سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"50\" y=\"15\" width=\"140\" height=\"140\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M50,155 L50,15 A140,140 0 0 1 190,155 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"36\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text><text x=\"120\" y=\"170\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text>"
+ },
+ {
+  "cat": "الحلقات",
+  "diff": "med",
+  "q": "دائرتان متحدتا المركز، نصفا قطريهما {{٤ سم}} و{{٧ سم}}. ما مساحة الحلقة المظللة بينهما؟",
+  "nudge": "اطرح المساحتين، مو نصفي القطرين ⚠️",
+  "rule": "{{مساحة الحلقة = π (نق١^{٢} − نق٢^{٢})}}",
+  "steps": "{{٧^{٢} − ٤^{٢} = ٤٩ − ١٦ = ؟}}\nثم نضرب الناتج في π",
+  "options": [
+   "{{٣٣π سم^{٢}}}",
+   "{{٣π سم^{٢}}}",
+   "{{٦٥π سم^{٢}}}",
+   "{{٩π سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<circle cx=\"120\" cy=\"85\" r=\"70\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><circle cx=\"120\" cy=\"85\" r=\"40\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><line x1=\"120\" y1=\"85\" x2=\"160\" y2=\"85\" stroke=\"#12514b\" stroke-width=\"1.6\"/><text x=\"140\" y=\"79\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٤</text><line x1=\"120\" y1=\"85\" x2=\"169.5\" y2=\"134.5\" stroke=\"#12514b\" stroke-width=\"1.6\"/><text x=\"156\" y=\"118\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٧</text>"
+ },
+ {
+  "cat": "الدوائر والأقواس",
+  "diff": "med",
+  "q": "مربع طول ضلعه {{١٢ سم}}، قُطعت من أركانه الأربعة أرباع دوائر نصف قطر كل منها {{٦ سم}}. ما مساحة الجزء المظلل؟",
+  "nudge": "٤ أرباع دوائر = دائرة كاملة 🔑",
+  "rule": "{{٤ × @{١|٤} π نق^{٢} = π نق^{٢}}}",
+  "steps": "{{π × ٦^{٢} = ٣٦π}}\nالمظلل = المربع − الدائرة الكاملة = ؟",
+  "options": [
+   "{{١٤٤ − ٣٦π سم^{٢}}}",
+   "{{١٤٤ − ٩π سم^{٢}}}",
+   "{{١٤٤ − ١٨π سم^{٢}}}",
+   "{{١٤٤ − ١٤٤π سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"48\" y=\"13\" width=\"144\" height=\"144\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M48,13 L120,13 A72,72 0 0 1 48,85 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M192,13 L192,85 A72,72 0 0 1 120,13 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M192,157 L120,157 A72,72 0 0 1 192,85 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M48,157 L48,85 A72,72 0 0 1 120,157 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"84\" y=\"29\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٦</text><text x=\"120\" y=\"171\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٢</text>"
+ },
+ {
+  "cat": "أنصاف الدوائر",
+  "diff": "med",
+  "q": "نصف دائرة قطرها {{١٤ سم}}، رُسم داخلها مثلث قاعدته القطر ورأسه منتصف القوس. ما مساحة الجزء المظلل؟",
+  "nudge": "ارتفاع المثلث = نصف القطر 🔺",
+  "rule": "{{مساحة نصف الدائرة = @{١|٢} π نق^{٢}}} ، {{مساحة المثلث = @{١|٢} × القاعدة × الارتفاع}}",
+  "steps": "{{نق = ٧ ← الارتفاع = ٧}}\n{{@{١|٢} × π × ٤٩ − @{١|٢} × ١٤ × ٧ = ؟}}",
+  "options": [
+   "{{@{٤٩|٢}π − ٤٩ سم^{٢}}}",
+   "{{@{٤٩|٢}π − ٩٨ سم^{٢}}}",
+   "{{٤٩π − ٤٩ سم^{٢}}}",
+   "{{@{٤٩|٤}π − ٤٩ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<path d=\"M22,140 A98,98 0 0 1 218,140 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><polygon points=\"22,140 218,140 120,42\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><line x1=\"120\" y1=\"42\" x2=\"120\" y2=\"140\" stroke=\"#12514b\" stroke-width=\"1.6\" stroke-dasharray=\"5 4\"/><text x=\"133\" y=\"96\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٧</text><text x=\"120\" y=\"160\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٤</text>"
+ },
+ {
+  "cat": "مستطيلات ومربعات",
+  "diff": "med",
+  "q": "مربع طول ضلعه {{٨ سم}}، وُصلت منتصفات أضلاعه لتكوين مربع داخلي أبيض. ما مساحة الأركان الأربعة المظللة؟",
+  "nudge": "المربع الداخلي = نصف المربع الكبير بالضبط 💡",
+  "rule": "وصل منتصفات أضلاع أي مربع ينتج مربعًا مساحته نصف مساحته.",
+  "steps": "{{٨ × ٨ = ٦٤}}\nالأركان = المربع − المربع الداخلي = ؟",
+  "options": [
+   "{{٣٢ سم^{٢}}}",
+   "{{١٦ سم^{٢}}}",
+   "{{٤٨ سم^{٢}}}",
+   "{{٦٤ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"52\" y=\"17\" width=\"136\" height=\"136\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><polygon points=\"120,17 188,85 120,153 52,85\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><text x=\"120\" y=\"11\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text><text x=\"38\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text>"
+ },
+ {
+  "cat": "المثلثات داخل الأشكال",
+  "diff": "med",
+  "q": "مستطيل بعداه {{١٠ سم}} و{{٨ سم}}، رُسم بداخله مثلث قاعدته الضلع السفلي ورأسه منتصف الضلع العلوي. ما مساحة الجزء المظلل (خارج المثلث)؟",
+  "nudge": "المثلث نصف المستطيل لما قاعدته ضلع المستطيل 😉",
+  "rule": "{{مساحة المثلث = @{١|٢} × القاعدة × الارتفاع}}",
+  "steps": "{{@{١|٢} × ١٠ × ٨}} = مساحة المثلث\nالمظلل = المستطيل − المثلث = ؟",
+  "options": [
+   "{{٤٠ سم^{٢}}}",
+   "{{٨٠ سم^{٢}}}",
+   "{{٢٠ سم^{٢}}}",
+   "{{٣٢ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"35\" y=\"17\" width=\"170\" height=\"136\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><polygon points=\"35,153 205,153 120,17\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><text x=\"120\" y=\"170\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text><text x=\"21\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text>"
+ },
+ {
+  "cat": "مستطيلات ومربعات",
+  "diff": "med",
+  "q": "الشكل على هيئة حرف L: مستطيل أبعاده {{١٠ × ٨}} قُطع من ركنه مستطيل أبعاده {{٤ × ٣}}. ما مساحة الشكل المظلل؟",
+  "nudge": "مساحة الكل ناقص القطعة المقطوعة ✂️",
+  "rule": "{{المظلل = مساحة الكل − مساحة القطعة}}",
+  "steps": "{{١٠ × ٨ = ٨٠}}\n{{٤ × ٣ = ١٢}}\n{{٨٠ − ١٢ = ؟}}",
+  "options": [
+   "{{٦٨ سم^{٢}}}",
+   "{{٧٦ سم^{٢}}}",
+   "{{٥٦ سم^{٢}}}",
+   "{{٧٢ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<path d=\"M35,17 L137,17 L137,68 L205,68 L205,153 L35,153 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><rect x=\"137\" y=\"17\" width=\"68\" height=\"51\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-dasharray=\"5 4\"/><text x=\"120\" y=\"170\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text><text x=\"21\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text><text x=\"171\" y=\"11\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٤</text><text x=\"220\" y=\"46\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٣</text>"
+ },
+ {
+  "cat": "الدوائر والأقواس",
+  "diff": "hard",
+  "q": "مربع طول ضلعه {{١٤ سم}} رُسمت بداخله أكبر دائرة ممكنة. ما مساحة الأركان المظللة؟ (اعتبر {{π ≈ @{٢٢|٧}}})",
+  "nudge": "أكبر دائرة قطرها = ضلع المربع 🔑",
+  "rule": "{{نق = @{١٤|٢} = ٧}} ، {{المظلل = ض^{٢} − π نق^{٢}}}",
+  "steps": "{{١٤^{٢} = ١٩٦}}\n{{@{٢٢|٧} × ٧^{٢} = ١٥٤}}\n{{١٩٦ − ١٥٤ = ؟}}",
+  "options": [
+   "{{٤٢ سم^{٢}}}",
+   "{{٥٦ سم^{٢}}}",
+   "{{١٥٤ سم^{٢}}}",
+   "{{٣٥ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"50\" y=\"15\" width=\"140\" height=\"140\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><circle cx=\"120\" cy=\"85\" r=\"70\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><line x1=\"50\" y1=\"85\" x2=\"190\" y2=\"85\" stroke=\"#12514b\" stroke-width=\"1.6\" stroke-dasharray=\"5 4\"/><text x=\"120\" y=\"79\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٤</text>"
+ },
+ {
+  "cat": "أنصاف الدوائر",
+  "diff": "hard",
+  "q": "مستطيل طوله {{١٦ سم}} وعرضه {{٨ سم}}، قُطع من كل طرف من طرفيه القصيرين نصف دائرة قطره {{٨ سم}}. ما مساحة الجزء المظلل؟",
+  "nudge": "نصفا دائرة متساويان = دائرة كاملة 🔑",
+  "rule": "{{نصف + نصف = دائرة واحدة ، نق = ٤}}",
+  "steps": "{{π × ٤^{٢} = ١٦π}}\n{{١٦ × ٨ = ١٢٨}}\nالمظلل = ؟",
+  "options": [
+   "{{١٢٨ − ١٦π سم^{٢}}}",
+   "{{١٢٨ − ٣٢π سم^{٢}}}",
+   "{{١٢٨ − ٨π سم^{٢}}}",
+   "{{١٢٨ − ٦٤π سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"32\" y=\"40\" width=\"176\" height=\"88\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M32,40 A44,44 0 0 1 32,128 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M208,40 A44,44 0 0 0 208,128 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"120\" y=\"32\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٦</text><text x=\"226\" y=\"88\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text>"
+ },
+ {
+  "cat": "النسب والكسور",
+  "diff": "hard",
+  "q": "دائرة نصف قطرها {{١٠ سم}} بداخلها دائرة بيضاء نصف قطرها {{٦ سم}} لها نفس المركز. ما النسبة المئوية للمساحة المظللة من مساحة الدائرة الكبرى؟",
+  "nudge": "النسبة تقارن مساحتين، يعني مربعات نصف القطر 📐",
+  "rule": "π تختصر عند القسمة، فنقارن مربعي نصفي القطر.",
+  "steps": "{{@{١٠٠π − ٣٦π|١٠٠π}}}\nاختصر π ثم حوّل الناتج لنسبة مئوية",
+  "options": [
+   "{{٦٤٪}}",
+   "{{٤٠٪}}",
+   "{{٣٦٪}}",
+   "{{٨٠٪}}"
+  ],
+  "correct": 0,
+  "fig": "<circle cx=\"120\" cy=\"85\" r=\"70\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><circle cx=\"120\" cy=\"85\" r=\"42\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><line x1=\"120\" y1=\"85\" x2=\"173.6\" y2=\"40\" stroke=\"#12514b\" stroke-width=\"1.6\"/><text x=\"160\" y=\"56\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text><line x1=\"120\" y1=\"85\" x2=\"81.9\" y2=\"102.8\" stroke=\"#12514b\" stroke-width=\"1.6\"/><text x=\"97\" y=\"112\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٦</text>"
+ },
+ {
+  "cat": "النسب والكسور",
+  "diff": "hard",
+  "q": "مربع طول ضلعه {{٨ سم}}، وُصلت منتصفات أضلاعه فتكوّن مربع، ثم وُصلت منتصفات أضلاع المربع الجديد فتكوّن مربع ثالث (مظلل). ما نسبة مساحة المربع المظلل إلى مساحة المربع الأصلي؟",
+  "nudge": "كل مرة توصل المنتصفات، المساحة تنقص للنصف ✂️",
+  "rule": "وصل منتصفات أضلاع أي مربع ينتج مربعًا مساحته نصف مساحته.",
+  "steps": "المربع الثاني = {{@{١|٢}}} الأصلي\nالمربع الثالث = {{@{١|٢} × @{١|٢} = ؟}}",
+  "options": [
+   "{{@{١|٤}}}",
+   "{{@{١|٨}}}",
+   "{{@{١|٢}}}",
+   "{{@{١|١٦}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"52\" y=\"17\" width=\"136\" height=\"136\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><polygon points=\"120,17 188,85 120,153 52,85\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><rect x=\"86\" y=\"51\" width=\"68\" height=\"68\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"120\" y=\"11\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text>"
+ },
+ {
+  "cat": "الحلقات",
+  "diff": "hard",
+  "q": "ربع دائرة نصف قطره {{٨ سم}} بداخله ربع دائرة أبيض نصف قطره {{٤ سم}} ولهما نفس المركز. ما مساحة الجزء المظلل؟",
+  "nudge": "اطرح مساحة الربع الصغير من الكبير 🔑",
+  "rule": "{{@{١|٤} π (٨^{٢} − ٤^{٢})}}",
+  "steps": "{{٨^{٢} − ٤^{٢} = ٦٤ − ١٦ = ٤٨}}\n{{@{١|٤} × π × ٤٨ = ؟}}",
+  "options": [
+   "{{١٢π سم^{٢}}}",
+   "{{١٦π سم^{٢}}}",
+   "{{٤π سم^{٢}}}",
+   "{{٤٨π سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<path d=\"M50,150 L50,22 A128,128 0 0 1 178,150 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M50,150 L50,86 A64,64 0 0 1 114,150 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"36\" y=\"56\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text><text x=\"82\" y=\"166\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٤</text>"
+ },
+ {
+  "cat": "المثلثات داخل الأشكال",
+  "diff": "hard",
+  "q": "ربع دائرة نصف قطره {{١٢ سم}}، رُسم داخله مثلث قائم ساقاه نصفا قطرين. ما مساحة الجزء المظلل (بين الوتر والقوس)؟",
+  "nudge": "ربع الدائرة ناقص المثلث القائم 🔺",
+  "rule": "{{مساحة المثلث = @{١|٢} × ١٢ × ١٢}} ، {{ربع الدائرة = @{١|٤} π نق^{٢}}}",
+  "steps": "{{@{١|٤} × π × ١٤٤ = ٣٦π}}\n{{@{١|٢} × ١٢ × ١٢ = ٧٢}}\nالمظلل = ؟",
+  "options": [
+   "{{٣٦π − ٧٢ سم^{٢}}}",
+   "{{٣٦π − ١٤٤ سم^{٢}}}",
+   "{{١٤٤π − ٧٢ سم^{٢}}}",
+   "{{٣٦π − ٣٦ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<path d=\"M45,150 L45,18 A132,132 0 0 1 177,150 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><polygon points=\"45,150 45,18 177,150\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><text x=\"30\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٢</text><text x=\"111\" y=\"167\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٢</text>"
+ },
+ {
+  "cat": "الدوائر والأقواس",
+  "diff": "hard",
+  "q": "دائرة نصف قطرها {{٨ سم}} رُسم بداخلها مربع رؤوسه على الدائرة. ما مساحة الجزء المظلل (بين الدائرة والمربع)؟",
+  "nudge": "قطر الدائرة هو قطر المربع 🔑",
+  "rule": "{{مساحة المربع = (القطر × القطر) ÷ ٢}}",
+  "steps": "{{القطر = ١٦}}\n{{١٦ × ١٦ ÷ ٢ = ١٢٨}}\n{{π × ٨^{٢} = ٦٤π}}\nالمظلل = ؟",
+  "options": [
+   "{{٦٤π − ١٢٨ سم^{٢}}}",
+   "{{٦٤π − ٦٤ سم^{٢}}}",
+   "{{٦٤π − ٢٥٦ سم^{٢}}}",
+   "{{٣٢π − ١٢٨ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<circle cx=\"120\" cy=\"85\" r=\"70\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><rect x=\"70.5\" y=\"35.5\" width=\"99\" height=\"99\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><line x1=\"70.5\" y1=\"35.5\" x2=\"169.5\" y2=\"134.5\" stroke=\"#12514b\" stroke-width=\"1.6\" stroke-dasharray=\"5 4\"/><text x=\"152\" y=\"92\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٦</text>"
+ },
+ {
+  "cat": "أنصاف الدوائر",
+  "diff": "hard",
+  "q": "نصف دائرة قطرها {{٢٠ سم}} رُسم بداخلها نصفا دائرتين قطر كل منهما {{١٠ سم}} على القطر (متجاورتان). ما مساحة الجزء المظلل؟",
+  "nudge": "اطرح مساحتي النصفين الصغيرين من الكبير ✂️",
+  "rule": "{{مساحة نصف الدائرة = @{١|٢} π نق^{٢}}}",
+  "steps": "{{@{١|٢} π × ١٠^{٢}}} للنصف الكبير\n{{@{١|٢} π × ٥^{٢}}} لكل نصف صغير\nالمظلل = الكبير − ٢ × الصغير = ؟",
+  "options": [
+   "{{٢٥π سم^{٢}}}",
+   "{{٥٠π سم^{٢}}}",
+   "{{١٢٫٥π سم^{٢}}}",
+   "{{٧٥π سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<path d=\"M20,130 A100,100 0 0 1 220,130 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M20,130 A50,50 0 0 1 120,130 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M120,130 A50,50 0 0 1 220,130 Z\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"70\" y=\"147\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text><text x=\"170\" y=\"147\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text><line x1=\"20\" y1=\"157\" x2=\"220\" y2=\"157\" stroke=\"#12514b\" stroke-width=\"1.6\"/><text x=\"120\" y=\"171\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٢٠</text>"
+ },
+ {
+  "cat": "المثلثات داخل الأشكال",
+  "diff": "hard",
+  "q": "مثلث قائم ساقاه {{٦ سم}} و{{٨ سم}} مرسوم داخل نصف دائرة قطرها وتر المثلث. ما مساحة الجزء المظلل (داخل نصف الدائرة وخارج المثلث)؟",
+  "nudge": "الوتر = قطر نصف الدائرة، فيثاغورس يطلعه 📐",
+  "rule": "{{الوتر = √(٦^{٢} + ٨^{٢})}}",
+  "steps": "{{الوتر = ١٠ ← نق = ٥}}\n{{@{١|٢} × π × ٥^{٢} − @{١|٢} × ٦ × ٨ = ؟}}",
+  "options": [
+   "{{@{٢٥|٢}π − ٢٤ سم^{٢}}}",
+   "{{@{٢٥|٢}π − ٤٨ سم^{٢}}}",
+   "{{٢٥π − ٢٤ سم^{٢}}}",
+   "{{@{٢٥|٤}π − ٢٤ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<path d=\"M20,140 A100,100 0 0 1 220,140 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><polygon points=\"20,140 220,140 92,44\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><polyline points=\"86,52 94,58 100,50\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.6\"/><text x=\"44\" y=\"88\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٦</text><text x=\"172\" y=\"86\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٨</text>"
+ },
+ {
+  "cat": "الدوائر والأقواس",
+  "diff": "hard",
+  "q": "مستطيل طوله {{١٨ سم}} وعرضه {{٦ سم}}، بداخله ثلاث دوائر متماسة متساوية قطر كل منها {{٦ سم}}. ما مساحة الجزء المظلل؟",
+  "nudge": "نصف القطر ٣، وعدد الدوائر ٣ 🔢",
+  "rule": "{{المظلل = المستطيل − ٣ × π نق^{٢}}}",
+  "steps": "{{١٨ × ٦ = ١٠٨}}\n{{٣ × π × ٣^{٢} = ؟}}\nثم نطرح من ١٠٨",
+  "options": [
+   "{{١٠٨ − ٢٧π سم^{٢}}}",
+   "{{١٠٨ − ٩π سم^{٢}}}",
+   "{{١٠٨ − ٥٤π سم^{٢}}}",
+   "{{١٠٨ − ١٨π سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"12\" y=\"49\" width=\"216\" height=\"72\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><circle cx=\"48\" cy=\"85\" r=\"36\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><circle cx=\"120\" cy=\"85\" r=\"36\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><circle cx=\"192\" cy=\"85\" r=\"36\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"120\" y=\"42\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٨</text><text x=\"235\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">٦</text>"
+ },
+ {
+  "cat": "التقاطع والبتلات",
+  "diff": "hard",
+  "q": "مربع طول ضلعه {{١٢ سم}}، رُسم فيه ربعا دائرة نصف قطر كل منهما {{١٢ سم}} مركزاهما رأسان متقابلان، فتقاطعا. ما مساحة منطقة التقاطع المظللة؟",
+  "nudge": "مجموع الربعين يغطي المربع، والتقاطع يتغطى مرتين 🔑",
+  "rule": "{{مساحة التقاطع = مساحة الربعين − مساحة المربع}}",
+  "steps": "{{٢ × @{١|٤} × π × ١٢^{٢}}} = مساحة الربعين\nالتقاطع = الربعين − المربع = ؟",
+  "options": [
+   "{{٧٢π − ١٤٤ سم^{٢}}}",
+   "{{٣٦π − ١٤٤ سم^{٢}}}",
+   "{{٧٢π − ٧٢ سم^{٢}}}",
+   "{{١٤٤π − ١٤٤ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"54\" y=\"20\" width=\"132\" height=\"132\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M54,20 A132,132 0 0 1 186,152\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-dasharray=\"5 4\"/><path d=\"M186,152 A132,132 0 0 1 54,20\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-dasharray=\"5 4\"/><path d=\"M54,20 A132,132 0 0 1 186,152 A132,132 0 0 1 54,20 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\"/><text x=\"120\" y=\"14\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٢</text><text x=\"38\" y=\"89\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٢</text>"
+ },
+ {
+  "cat": "التقاطع والبتلات",
+  "diff": "hard",
+  "q": "مربع طول ضلعه {{١٠ سم}}، رُسم على كل ضلع من أضلاعه نصف دائرة قطره الضلع إلى الداخل، فتكوّنت أربع بتلات مظللة عند التقاطع. ما مساحة البتلات الأربع؟",
+  "nudge": "أنصاف الدوائر تغطي المربع، والتقاطع يتغطى مرتين 🌸",
+  "rule": "{{البتلات = مجموع أنصاف الدوائر − المربع}}",
+  "steps": "{{٤ × @{١|٢} × π × ٥^{٢}}} = مجموع أنصاف الدوائر\n{{١٠ × ١٠}} = المربع\nالبتلات = ؟",
+  "options": [
+   "{{٥٠π − ١٠٠ سم^{٢}}}",
+   "{{٢٥π − ١٠٠ سم^{٢}}}",
+   "{{٥٠π − ٥٠ سم^{٢}}}",
+   "{{١٠٠π − ١٠٠ سم^{٢}}}"
+  ],
+  "correct": 0,
+  "fig": "<rect x=\"55\" y=\"20\" width=\"130\" height=\"130\" fill=\"#ffffff\" stroke=\"#12514b\" stroke-width=\"1.8\"/><path d=\"M55,20 A65,65 0 0 0 185,20\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-dasharray=\"5 4\"/><path d=\"M185,20 A65,65 0 0 0 185,150\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-dasharray=\"5 4\"/><path d=\"M185,150 A65,65 0 0 0 55,150\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-dasharray=\"5 4\"/><path d=\"M55,150 A65,65 0 0 0 55,20\" fill=\"none\" stroke=\"#12514b\" stroke-width=\"1.8\" stroke-dasharray=\"5 4\"/><path d=\"M185,20 A65,65 0 0 1 120,85 A65,65 0 0 1 185,20 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\" transform=\"rotate(0 120 85)\"/><path d=\"M185,20 A65,65 0 0 1 120,85 A65,65 0 0 1 185,20 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\" transform=\"rotate(90 120 85)\"/><path d=\"M185,20 A65,65 0 0 1 120,85 A65,65 0 0 1 185,20 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\" transform=\"rotate(180 120 85)\"/><path d=\"M185,20 A65,65 0 0 1 120,85 A65,65 0 0 1 185,20 Z\" fill=\"#7fd0c4\" stroke=\"#12514b\" stroke-width=\"1.8\" transform=\"rotate(270 120 85)\"/><text x=\"120\" y=\"167\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#7a4b00\" direction=\"ltr\">١٠</text>"
+ }
+];
+
+let score = 0;
+const total = questions.length;
+document.getElementById('scoreTotal').textContent = total;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderBadges(){
+  const el = document.getElementById('badges');
+  el.innerHTML = '';
+  categories.forEach(c => {
+    const span = document.createElement('span');
+    span.className = 'badge';
+    span.style.background = c.color;
+    span.textContent = c.name;
+    el.appendChild(span);
+  });
+}
+
+const diffLabel = {easy:"سهل 🌱", med:"متوسط ⚙️", hard:"صعب 🔥"};
+const diffClass = {easy:"diff-easy", med:"diff-med", hard:"diff-hard"};
+
+function buildAccordion(title, bodyHtml){
+  const acc = document.createElement('div');
+  acc.className = 'accordion';
+  const head = document.createElement('div');
+  head.className = 'accordion-head';
+  head.innerHTML = `<span>${title}</span><span class="accordion-plus">+</span>`;
+  const body = document.createElement('div');
+  body.className = 'accordion-body';
+  body.innerHTML = bodyHtml;
+  head.addEventListener('click', () => acc.classList.toggle('open'));
+  acc.appendChild(head);
+  acc.appendChild(body);
+  return acc;
+}
+
+function buildCard(item, index){
+  const card = document.createElement('div');
+  card.className = 'qcard';
+
+  const head = document.createElement('div');
+  head.className = 'qcard-head';
+  head.innerHTML = `
+    <div>
+      <span class="diff-dot ${diffClass[item.diff]}">${diffLabel[item.diff]}</span>
+      <span class="cat-tag">${item.cat}</span>
+    </div>
+    <div class="qcard-head-right">
+      <span class="qcard-title">السؤال ${index + 1}</span>
+      <span class="qnum-badge">${index + 1}</span>
+    </div>`;
+  card.appendChild(head);
+
+  const qBox = document.createElement('div');
+  qBox.className = 'qtext-box';
+  qBox.innerHTML = fmt(item.q);
+  card.appendChild(qBox);
+
+  if(item.fig){
+    const f = document.createElement('div');
+    f.className = 'fig';
+    f.innerHTML = '<svg viewBox="0 0 240 175" role="img" aria-label="شكل توضيحي للسؤال">' + item.fig + '</svg>';
+    card.appendChild(f);
+  }
+
+  const nudge = document.createElement('div');
+  nudge.className = 'nudge';
+  nudge.innerHTML = '🔍 ' + fmt(item.nudge) + ' 💬';
+  card.appendChild(nudge);
+
+  card.appendChild(buildAccordion('تلميح: أي قانون يُستخدم؟ 🔍', fmt(item.rule)));
+  card.appendChild(buildAccordion('تلميح: كمّل الحل 🎯', fmt(item.steps)));
+
+  const optionsBox = document.createElement('div');
+  optionsBox.className = 'options';
+  const pairs = shuffle(item.options.map((opt, idx) => ({text: opt, isCorrect: idx === item.correct})));
+
+  const feedbackEl = document.createElement('div');
+  feedbackEl.className = 'qfeedback';
+
+  pairs.forEach(pair => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = fmt(pair.text);
+    btn.addEventListener('click', () => {
+      const allBtns = optionsBox.querySelectorAll('.option');
+      if(card.dataset.answered) return;
+      card.dataset.answered = 'true';
+      allBtns.forEach(b => b.disabled = true);
+
+      if(pair.isCorrect){
+        btn.classList.add('correct');
+        feedbackEl.textContent = '✅ إجابة صحيحة!';
+        feedbackEl.className = 'qfeedback good';
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        allBtns.forEach((b, i) => { if(pairs[i].isCorrect) b.classList.add('correct'); });
+        feedbackEl.textContent = '❌ الإجابة الصحيحة موضّحة بالأخضر';
+        feedbackEl.className = 'qfeedback bad';
+      }
+      document.getElementById('scoreNow').textContent = score;
+      checkAllAnswered();
+    });
+    optionsBox.appendChild(btn);
+  });
+
+  card.appendChild(optionsBox);
+  card.appendChild(feedbackEl);
+  return card;
+}
+
+function renderFeed(){
+  const feed = document.getElementById('feed');
+  feed.innerHTML = '';
+  questions.forEach((item, idx) => feed.appendChild(buildCard(item, idx)));
+}
+
+function checkAllAnswered(){
+  const n = document.querySelectorAll('#feed .qcard[data-answered="true"]').length;
+  if(n === total) showResult();
+}
+
+function showResult(){
+  const resultCard = document.getElementById('resultCard');
+  document.getElementById('finalScore').textContent = score;
+
+  let emoji, note;
+  if(score >= 18){ emoji='🏆'; note='ممتاز! إتقان كامل لدرس المساحات المظللة 🔥'; }
+  else if(score >= 14){ emoji='🎉'; note='أداء رائع! راجع الأسئلة اللي أخطأت فيها وبتكون جاهز ١٠٠٪'; }
+  else if(score >= 9){ emoji='💪'; note='بداية جيدة، تحتاج مراجعة بسيطة على بعض النقاط.'; }
+  else { emoji='📘'; note='خذ وقتك في مراجعة الدرس وجرّب التحدي مرة ثانية!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultNote').textContent = note;
+
+  const shareText = encodeURIComponent(`جبت ${score} من ${total} في تحدي المساحات المظللة! 🧠⚡ جرب أنت كمان: ${location.href}`);
+  document.getElementById('shareBtn').href = `https://wa.me/?text=${shareText}`;
+
+  resultCard.classList.add('show');
+  resultCard.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  score = 0;
+  document.getElementById('scoreNow').textContent = 0;
+  document.getElementById('resultCard').classList.remove('show');
+  renderFeed();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+renderBadges();
+renderFeed();
+</script>
+
+</body>
+</html>
