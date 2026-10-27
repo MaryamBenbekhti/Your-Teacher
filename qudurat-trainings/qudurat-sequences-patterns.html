@@ -1,0 +1,196 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تدريب المتتابعات والأنماط</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Baloo+Bhaijaan+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF8EE; --ink:#1F2A37; --soft:#5b6572; --card:#FFFFFF; --box:#f8f4ea; --boxLine:rgba(0,0,0,.08);
+  --hint:#fdf2ea; --hintOpen:#eef7f6; --opt:#fffdf9; --optLine:#e9e1d2; --funny:#8a7350;
+  --okBg:#e8f8f1; --ok:#1a9c6b; --okTxt:#136b47; --noBg:#fdecea; --no:#FF6B5E; --noTxt:#8f2e22;
+  --solBg:#eef4fb; --solLine:#d7e6f7; --solTxt:#2a5da0; --teal:#0E8C86; --tealDark:#0A6B66; --purple:#8E6FD1;
+  --shadow:0 10px 25px rgba(31,42,55,.10);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141A22; --ink:#ECEFF3; --soft:#A9B3BF; --card:#1E2632; --box:#26303D; --boxLine:rgba(255,255,255,.10);
+    --hint:#2B2A2A; --hintOpen:#1F3433; --opt:#232C38; --optLine:#38434F; --funny:#D2B98E;
+    --okBg:#173B2C; --okTxt:#8FE0B9; --noBg:#43201F; --noTxt:#F5A9A2;
+    --solBg:#1D2B3D; --solLine:#2C4260; --solTxt:#9CC3F0; --tealDark:#5CC7C0; --shadow:0 10px 25px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141A22; --ink:#ECEFF3; --soft:#A9B3BF; --card:#1E2632; --box:#26303D; --boxLine:rgba(255,255,255,.10);
+  --hint:#2B2A2A; --hintOpen:#1F3433; --opt:#232C38; --optLine:#38434F; --funny:#D2B98E;
+  --okBg:#173B2C; --okTxt:#8FE0B9; --noBg:#43201F; --noTxt:#F5A9A2;
+  --solBg:#1D2B3D; --solLine:#2C4260; --solTxt:#9CC3F0; --tealDark:#5CC7C0; --shadow:0 10px 25px rgba(0,0,0,.35);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,'Segoe UI',sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:16px 12px 50px}
+header{text-align:center;margin-bottom:12px}
+.badge{display:inline-block;background:var(--teal);color:#fff;font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;padding:7px 18px;border-radius:999px;font-size:13.5px;box-shadow:var(--shadow);transform:rotate(-2deg)}
+h1{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:23px;margin:12px 0 4px;color:var(--tealDark)}
+header p{margin:0;color:var(--soft);font-size:13.5px}
+.groups{display:flex;gap:8px;justify-content:center;margin:14px 0 4px;font-size:12px;font-weight:700}
+.groups span{padding:5px 12px;border-radius:999px;color:#fff}
+.score-bar{display:flex;align-items:center;gap:10px;margin:14px auto 20px;background:var(--card);border-radius:999px;padding:8px 18px;box-shadow:var(--shadow);font-weight:700;font-size:14px;width:fit-content;position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:10}
+.score-bar span{color:var(--purple)}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 18px;margin-bottom:22px;position:relative;overflow:hidden;border-top:5px solid var(--accent)}
+.card::before{content:"";position:absolute;top:-40px;left:-40px;width:110px;height:110px;background:var(--accent);opacity:.12;border-radius:50%}
+.qtitle{display:flex;align-items:center;gap:8px;font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:14px;color:var(--accent);margin-bottom:10px;flex-wrap:wrap}
+.qnum{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:15px}
+.qtag{font-size:11px;color:#fff;background:var(--accent);padding:2px 10px;border-radius:999px}
+.qgroup{font-size:11px;color:var(--soft);margin-inline-start:auto}
+.qtext{background:var(--box);border-radius:14px;padding:15px;font-size:22px;font-weight:900;line-height:1.7;margin-bottom:8px;border:2px dashed var(--boxLine);text-align:center}
+.funny{font-size:12.5px;color:var(--funny);margin:0 0 14px;text-align:center}
+.hints{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.hint-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;border:none;background:var(--hint);color:var(--ink);font-family:inherit;font-weight:700;font-size:13.5px;padding:11px 14px;border-radius:12px;cursor:pointer;text-align:right}
+.hint-btn:focus-visible,.opt-btn:focus-visible,.share-btn:focus-visible{outline:3px solid #FFC23C;outline-offset:2px}
+.hint-reveal{display:none;background:var(--hintOpen);border-radius:0 0 12px 12px;font-size:13.5px;line-height:1.8;padding:11px 14px}
+.hint-reveal.open{display:block}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt-btn{display:flex;align-items:center;gap:12px;border:2px solid var(--optLine);background:var(--opt);color:var(--ink);font-family:inherit;font-weight:700;font-size:16px;padding:12px 14px;border-radius:14px;cursor:pointer;text-align:right;width:100%}
+.opt-btn:hover{border-color:var(--accent)}
+.opt-btn .l{flex:0 0 28px;height:28px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:13px}
+.opt-btn .v{flex:1}
+.opt-btn .tag{font-size:17px}
+.opt-btn.correct{background:var(--okBg);border-color:var(--ok);color:var(--okTxt)}
+.opt-btn.wrong{background:var(--noBg);border-color:var(--no);color:var(--noTxt)}
+.opt-btn:disabled{cursor:default}
+.opt-explain{display:none;font-size:13px;line-height:1.7;font-weight:600;border-radius:0 0 12px 12px;padding:10px 14px;margin-top:-8px}
+.opt-explain.show{display:block}
+.opt-explain.ok{background:var(--okBg);color:var(--okTxt)}
+.opt-explain.no{background:var(--noBg);color:var(--noTxt)}
+.solution-box{display:none;margin-top:14px;background:var(--solBg);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.9;border:2px solid var(--solLine)}
+.solution-box.show{display:block}
+.solution-box .lbl{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;color:var(--solTxt);display:block;margin-bottom:4px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.15;margin:0 3px;font-size:.9em}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 3px}
+.result-card{text-align:center;background:linear-gradient(135deg,#0E8C86,#8E6FD1);color:#fff;border-radius:22px;padding:26px 20px;box-shadow:var(--shadow);display:none}
+.result-card.show{display:block}
+.result-card h2{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-size:22px;margin:0 0 8px}
+.result-card p{margin:0;font-size:14.5px}
+.result-card .emoji{font-size:40px;margin-bottom:6px}
+.share-bar{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.share-btn{display:flex;align-items:center;gap:8px;border:none;padding:12px 18px;border-radius:14px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;color:#fff}
+.wa{background:#25D366}.rt{background:#1F2A37}
+footer{text-align:center;color:var(--soft);font-size:12px;margin-top:24px}
+
+.legend{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.legend a{font-size:11.5px;font-weight:700;color:#fff;text-decoration:none;padding:5px 11px;border-radius:999px}
+.legend a:focus-visible{outline:3px solid #FFC23C;outline-offset:2px}
+.sec{font-family:'Baloo Bhaijaan 2','Cairo',sans-serif;font-weight:700;font-size:17px;color:#fff;padding:8px 16px;border-radius:14px;margin:28px 0 14px;text-align:center;scroll-margin-top:70px}
+.qtext{font-size:19px;font-weight:800;text-align:right;line-height:2}
+.opt-btn .v{font-size:17px;line-height:1.9}
+sup{font-size:.62em;line-height:0;vertical-align:.85em;color:#C2410C;font-weight:800}
+.fr{font-size:.85em;margin:0 2px}
+.done-count{color:var(--soft)!important;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">فكّر أقل ... حُلّ أسرع 🚀</span>
+    <h1>تدريب المتتابعات والأنماط</h1>
+    <p>٥٠ سؤال بأسلوب القياس 🔢 اضغط على أي مهارة تروح لها مباشرة</p>
+  </header>
+  <nav class="legend" id="legend"></nav>
+  <div class="score-bar">🏆 نتيجتك: <span id="scoreDisplay">٠ من ٥٠</span><span class="done-count" id="doneDisplay">· ٠ مجاوب</span></div>
+  <div id="cards"></div>
+  <div class="result-card" id="resultCard" aria-live="polite">
+    <div class="emoji" id="rEmoji">🎉</div><h2 id="rTitle"></h2><p id="rText"></p>
+  </div>
+  <div class="share-bar">
+    <a class="share-btn wa" id="waBtn" href="#" target="_blank" rel="noopener">📲 شارك التحدي بالواتساب</a>
+    <button class="share-btn rt" onclick="restart()">🔄 حاول من جديد</button>
+  </div>
+  <footer>فكّر أقل ... حُلّ أسرع — تدريب المتتابعات والأنماط 🧠✨</footer>
+</div>
+<script>
+const SEC={"ari": ["المتتابعة الحسابية", "#0E8C86", "➕"], "sum": ["مجموع الحسابية", "#3E7CB1", "∑"], "gauss": ["طريقة غاوس", "#8E6FD1", "🤝"], "geo": ["المتتابعة الهندسية", "#FF6B5E", "✖️"], "pat": ["اكتشاف النمط", "#A0714E", "🔍"], "per": ["الدوريات", "#1a9c6b", "🔁"]};
+const Q=[{"s": "ari", "q": "المتتابعة: ٤، ٩، ١٤، ١٩، ... ما الحد العاشر؟", "f": "الفرق ثابت؟ يعني حسابية ➕", "h": "ح‌ن = أ + (ن − ١) × د ، والفرق د = ٥", "o": [["٥٤", "استخدمت ن بدل (ن − ١)"], ["٤٥", "نسيت تضيف الحد الأول"], ["٥٠", "ضربت ١٠ × ٥ بس"], ["٤٩", null]], "a": 3, "sol": "ح١٠ = ٤ + ٩ × ٥ = ٤٩"}, {"s": "ari", "q": "المتتابعة: ٣٠، ٢٦، ٢٢، ١٨، ... ما الحد الثامن؟", "f": "الفرق سالب هذي المرة 🔻", "h": "د = −٤", "o": [["−٢", "استخدمت ن بدل (ن − ١): ٣٠ − ٣٢"], ["٦", "هذا الحد السابع"], ["٢", null], ["٥٨", "جمعت ٤ بدل ما تطرحها"]], "a": 2, "sol": "ح٨ = ٣٠ + ٧ × (−٤) = ٣٠ − ٢٨ = ٢"}, {"s": "ari", "q": "متتابعة حسابية حدها الأول ٧ وأساسها ٣. ما الحد العشرون؟", "f": "طبّق القانون مباشرة 🎯", "h": "ح٢٠ = ٧ + ١٩ × ٣", "o": [["٦٧", "استخدمت ٢٠ بدل ١٩"], ["٦٠", "ضربت ٢٠ × ٣ ونسيت الحد الأول"], ["٥٧", "نسيت تضيف الحد الأول"], ["٦٤", null]], "a": 3, "sol": "٧ + ٥٧ = ٦٤"}, {"s": "ari", "q": "المتتابعة: ٥، ١٢، ١٩، ٢٦، ... في أي حد يظهر العدد ٧٥ ؟", "f": "اعكس القانون 🔄", "h": "٥ + (ن − ١) × ٧ = ٧٥", "o": [["١٠", "هذا (ن − ١)، نسيت تضيف ١"], ["١٢", "تحقق: ح١٢ = ٨٢"], ["٩", "تحقق: ح٩ = ٦١"], ["١١", null]], "a": 3, "sol": "(ن − ١) × ٧ = ٧٠ ← ن − ١ = ١٠ ← ن = ١١"}, {"s": "ari", "q": "في متتابعة حسابية: الحد الثالث = ١٤ والحد السابع = ٣٠. ما الأساس؟", "f": "بين الحد ٣ والحد ٧ كم خطوة؟ 🪜", "h": "من ح٣ إلى ح٧ = ٤ خطوات", "o": [["١٦", "هذا الفرق بين الحدين، لازم تقسمه على عدد الخطوات"], ["٤", null], ["٣٫٢", "قسمت على ٥ بدل ٤"], ["٥", "تحقق: ١٤ + ٤ × ٥ = ٣٤"]], "a": 1, "sol": "(٣٠ − ١٤) ÷ (٧ − ٣) = ١٦ ÷ ٤ = ٤"}, {"s": "ari", "q": "متتابعة حسابية حدها الأول ٢ وأساسها ٦. أي حد فيها يساوي ٦٢ ؟", "f": "نفس فكرة «في أي حد» 🔍", "h": "٢ + (ن − ١) × ٦ = ٦٢", "o": [["١١", null], ["١٠", "هذا (ن − ١)"], ["١٢", "تحقق: ح١٢ = ٦٨"], ["٣١", "قسمت ٦٢ على ٢"]], "a": 0, "sol": "(ن − ١) × ٦ = ٦٠ ← ن = ١١"}, {"s": "ari", "q": "المتتابعة: −٣، ١، ٥، ٩، ... ما الحد الخامس عشر؟", "f": "تبدأ بسالب، عادي 😉", "h": "د = ٤", "o": [["٥٧", "استخدمت ١٥ بدل ١٤"], ["٤٩", "استخدمت ١٣ بدل ١٤"], ["٥٣", null], ["٥٦", "نسيت الحد الأول −٣"]], "a": 2, "sol": "−٣ + ١٤ × ٤ = −٣ + ٥٦ = ٥٣"}, {"s": "ari", "q": "أيّ المتتابعات التالية حسابية؟", "f": "دوّر على الفرق الثابت 🧐", "h": "اطرح كل حد من اللي بعده", "o": [["٢، ٤، ٨، ١٦", "هذي هندسية: النسبة ثابتة مو الفرق"], ["١، ٤، ٩، ١٦", "هذي مربعات: الفروق ٣، ٥، ٧"], ["٢، ٥، ٨، ١١", null], ["١، ٢، ٤، ٧", "الفروق ١، ٢، ٣ تزيد"]], "a": 2, "sol": "٢، ٥، ٨، ١١ ← الفرق ثابت = ٣"}, {"s": "ari", "q": "الحد العام للمتتابعة ٣، ٧، ١١، ١٥، ... هو:", "f": "آخر سؤال بهذا القسم: جرّب ن = ١ و ن = ٢ 🧪", "h": "الأساس ٤ ، فالحد العام يبدأ بـ ٤ن", "o": [["٣ن + ١", "عوّض ن = ١: يطلع ٤ مو ٣"], ["٤ن − ١", null], ["٤ن + ٣", "عوّض ن = ١: يطلع ٧ مو ٣"], ["ن + ٤", "عوّض ن = ١: يطلع ٥ مو ٣"]], "a": 1, "sol": "عوّض: ن = ١ ← ٣ ، ن = ٢ ← ٧ ، ن = ٣ ← ١١ ✓"}, {"s": "sum", "q": "ما مجموع أول ١٠ حدود من المتتابعة: ٢، ٥، ٨، ... ؟", "f": "جيب الحد العاشر أول ∑", "h": "ح١٠ = ٢ + ٩ × ٣ = ٢٩", "o": [["٣١٠", "نسيت تقسم على ٢"], ["٢٩٠", "ضربت ١٠ × ٢٩ بدون الحد الأول"], ["١٥٥", null], ["١٦٠", "راجع الحد العاشر: ٢٩"]], "a": 2, "sol": "م = <span class=\"fr\"><span>١٠</span><span>٢</span></span> × (٢ + ٢٩) = ٥ × ٣١ = ١٥٥"}, {"s": "sum", "q": "ما مجموع: ٥، ٩، ١٣، ١٧، ٢١، ٢٥ ؟", "f": "الأول + الأخير، وبعدين × نص عدد الحدود 😎", "h": "عدد الحدود ٦", "o": [["٩٠", null], ["١٨٠", "نسيت تقسم على ٢"], ["٧٥", "حسبت ٥ حدود بدل ٦"], ["٣٠", "هذا مجموع الأول والأخير بس"]], "a": 0, "sol": "م = <span class=\"fr\"><span>٦</span><span>٢</span></span> × (٥ + ٢٥) = ٣ × ٣٠ = ٩٠"}, {"s": "sum", "q": "ما مجموع الأعداد الزوجية من ٢ إلى ٤٠ ؟", "f": "كم عدد زوجي فيه؟ 🤔", "h": "عدد الحدود = ٢٠", "o": [["٨٤٠", "نسيت تقسم على ٢"], ["٨٢٠", "جمعت كل الأعداد من ١ إلى ٤٠"], ["٤٠٠", "راجع: <span class=\"fr\"><span>٢٠</span><span>٢</span></span> × ٤٢"], ["٤٢٠", null]], "a": 3, "sol": "م = <span class=\"fr\"><span>٢٠</span><span>٢</span></span> × (٢ + ٤٠) = ١٠ × ٤٢ = ٤٢٠"}, {"s": "sum", "q": "ما مجموع الأعداد الفردية من ١ إلى ٢٩ ؟", "f": "الفردية من ١: مجموعها = (عددها)<sup>٢</sup> 🪄", "h": "عدد الحدود = ١٥", "o": [["٢٢٥", null], ["٤٣٥", "جمعت كل الأعداد من ١ إلى ٢٩"], ["٤٥٠", "نسيت تقسم على ٢"], ["٢١٠", "راجع: ١٥ × ١٥"]], "a": 0, "sol": "م = <span class=\"fr\"><span>١٥</span><span>٢</span></span> × (١ + ٢٩) = ٢٢٥ = ١٥<sup>٢</sup>"}, {"s": "sum", "q": "متتابعة حسابية مجموع أول ٨ حدود منها = ١٠٠ ، وحدها الأول = ٥. ما الحد الثامن؟", "f": "اعكس قانون المجموع 🔄", "h": "١٠٠ = <span class=\"fr\"><span>٨</span><span>٢</span></span> × (٥ + ح٨)", "o": [["١٢٫٥", "قسمت ١٠٠ على ٨ بس"], ["٢٠", null], ["٢٥", "هذا (الأول + الأخير)، اطرح منه ٥"], ["١٥", "راجع: ١٠٠ ÷ ٤ = ٢٥"]], "a": 1, "sol": "١٠٠ = ٤ × (٥ + ح٨) ← ٥ + ح٨ = ٢٥ ← ح٨ = ٢٠"}, {"s": "sum", "q": "ما مجموع مضاعفات ٥ من ٥ إلى ١٠٠ ؟", "f": "عدد الحدود أول 📏", "h": "عددها = ١٠٠ ÷ ٥ = ٢٠", "o": [["٢١٠٠", "نسيت تقسم على ٢"], ["٥٠٥٠", "هذا مجموع ١ إلى ١٠٠"], ["١٠٥٠", null], ["١٠٠٠", "راجع: ١٠ × ١٠٥"]], "a": 2, "sol": "م = <span class=\"fr\"><span>٢٠</span><span>٢</span></span> × (٥ + ١٠٠) = ١٠ × ١٠٥ = ١٠٥٠"}, {"s": "sum", "q": "كم عدد حدود المتتابعة: ٧، ١١، ١٥، ...، ٨٧ ؟", "f": "آخر سؤال بهذا القسم: لا تنسى +١ ⚠️", "h": "عدد الحدود = <span class=\"fr\"><span>الأخير − الأول</span><span>الأساس</span></span> + ١", "o": [["٢٠", "نسيت تضيف ١"], ["٨٠", "هذا الفرق بين الأخير والأول"], ["٢١", null], ["٢٢", "أضفت ٢ بدل ١"]], "a": 2, "sol": "<span class=\"fr\"><span>٨٧ − ٧</span><span>٤</span></span> + ١ = ٢٠ + ١ = ٢١"}, {"s": "gauss", "q": "ما ناتج: ١ + ٢ + ٣ + ... + ٥٠ ؟", "f": "اجمع الأول مع الأخير 🤝", "h": "١ + ٥٠ = ٥١ ، وكم زوج؟", "o": [["٢٥٥٠", "نسيت تقسم على ٢"], ["١٢٥٠", "ضربت ٢٥ × ٥٠"], ["١٢٧٥", null], ["١٢٢٥", "ضربت ٢٥ × ٤٩"]], "a": 2, "sol": "٢٥ زوج × ٥١ = ١٢٧٥"}, {"s": "gauss", "q": "ما ناتج: ١ + ٢ + ٣ + ... + ١٠٠ ؟", "f": "سؤال غاوس الشهير 🧠", "h": "١ + ١٠٠ = ١٠١ ، والأزواج ٥٠", "o": [["١٠١٠٠", "نسيت تقسم على ٢"], ["٥٠٥٠", null], ["٥٠٠٠", "ضربت ٥٠ × ١٠٠"], ["٥١٠٠", "ضربت ٥٠ × ١٠٢"]], "a": 1, "sol": "٥٠ × ١٠١ = ٥٠٥٠"}, {"s": "gauss", "q": "ما ناتج: ١١ + ١٢ + ١٣ + ... + ٢٠ ؟", "f": "ما يبدأ من ١؟ عادي، نفس الفكرة 😉", "h": "١١ + ٢٠ = ٣١ ، وعدد الحدود ١٠", "o": [["٣١٠", "نسيت تقسم على ٢"], ["١٥٠", "ضربت ٥ × ٣٠"], ["١٥٥", null], ["١٦٥", "راجع: ٥ × ٣١"]], "a": 2, "sol": "٥ أزواج × ٣١ = ١٥٥"}, {"s": "gauss", "q": "ما ناتج: ١٠١ + ١٠٢ + ... + ١١٠ ؟", "f": "أرقام كبيرة… بس الحيلة نفسها 💪", "h": "١٠١ + ١١٠ = ٢١١ ، وعدد الحدود ١٠", "o": [["١٠٥٥", null], ["٢١١٠", "نسيت تقسم على ٢"], ["١٠٥٠", "ضربت ٥ × ٢١٠"], ["١١٥٥", "راجع: ٥ × ٢١١"]], "a": 0, "sol": "٥ × ٢١١ = ١٠٥٥"}, {"s": "gauss", "q": "عند جمع ١ + ٢ + ... + ٦٠ بطريقة غاوس، كل زوج مجموعه ٦١. كم عدد الأزواج؟", "f": "آخر سؤال بهذا القسم: فهم الفكرة 🧩", "h": "كل زوج فيه عددين", "o": [["٦٠", "هذا عدد الحدود، والأزواج نصها"], ["٦١", "هذا مجموع كل زوج"], ["٣٠", null], ["٣١", "راجع: ٦٠ ÷ ٢"]], "a": 2, "sol": "٦٠ حد ÷ ٢ = ٣٠ زوج ← المجموع = ٣٠ × ٦١ = ١٨٣٠"}, {"s": "geo", "q": "المتتابعة: ٣، ٦، ١٢، ٢٤، ... ما الحد السادس؟", "f": "النسبة ثابتة؟ يعني هندسية ✖️", "h": "ح‌ن = أ × ر<sup>ن − ١</sup> ، ر = ٢", "o": [["١٩٢", "استخدمت ٢<sup>٦</sup> بدل ٢<sup>٥</sup>"], ["٤٨", "هذا الحد الخامس"], ["٩٦", null], ["٣٦", "تعاملت معها كحسابية: ٢٤ + ١٢"]], "a": 2, "sol": "٣ × ٢<sup>٥</sup> = ٣ × ٣٢ = ٩٦"}, {"s": "geo", "q": "المتتابعة: ٢، ٦، ١٨، ٥٤، ... ما الحد السادس؟", "f": "كل مرة × ٣ 🚀", "h": "ر = ٣", "o": [["٤٨٦", null], ["١٦٢", "هذا الحد الخامس"], ["١٤٥٨", "استخدمت ٣<sup>٦</sup> بدل ٣<sup>٥</sup>"], ["١٠٨", "ضربت ٥٤ × ٢"]], "a": 0, "sol": "٢ × ٣<sup>٥</sup> = ٢ × ٢٤٣ = ٤٨٦"}, {"s": "geo", "q": "المتتابعة: ٦٤، ٣٢، ١٦، ٨، ... ما الحد السابع؟", "f": "النسبة نص، يعني تصغر 📉", "h": "ر = <span class=\"fr\"><span>١</span><span>٢</span></span>", "o": [["٢", "هذا الحد السادس"], ["١", null], ["<span class=\"fr\"><span>١</span><span>٢</span></span>", "هذا الحد الثامن"], ["٠", "الهندسية ما توصل صفر"]], "a": 1, "sol": "٦٤ × (<span class=\"fr\"><span>١</span><span>٢</span></span>)<sup>٦</sup> = <span class=\"fr\"><span>٦٤</span><span>٦٤</span></span> = ١"}, {"s": "geo", "q": "ما أساس المتتابعة الهندسية: ٥، ١٥، ٤٥، ١٣٥ ؟", "f": "الأساس = حد ÷ اللي قبله ➗", "h": "١٥ ÷ ٥", "o": [["١٠", "هذا الفرق، والهندسية أساسها نسبة"], ["٥", "هذا الحد الأول"], ["٣", null], ["٣٠", "هذا الفرق بين ٤٥ و١٥"]], "a": 2, "sol": "١٥ ÷ ٥ = ٣"}, {"s": "geo", "q": "المتتابعة: ١، −٢، ٤، −٨، ... ما الحد السادس؟", "f": "الإشارة تتبدّل، انتبه 👀", "h": "ر = −٢", "o": [["٣٢", "الأس فردي ← الإشارة سالبة"], ["١٦", "هذا الحد الخامس"], ["−١٦", "راجع: (−٢)<sup>٥</sup> = −٣٢"], ["−٣٢", null]], "a": 3, "sol": "١ × (−٢)<sup>٥</sup> = −٣٢"}, {"s": "geo", "q": "متتابعة هندسية حدها الأول ٤ وأساسها ٣. ما الحد الرابع؟", "f": "طبّق القانون 🎯", "h": "ح٤ = ٤ × ٣<sup>٣</sup>", "o": [["٣٢٤", "استخدمت ٣<sup>٤</sup> بدل ٣<sup>٣</sup>"], ["٣٦", "هذا الحد الثالث"], ["١٠٨", null], ["١٣", "تعاملت معها كحسابية: ٤ + ٣ × ٣"]], "a": 2, "sol": "٤ × ٢٧ = ١٠٨"}, {"s": "geo", "q": "أيّ المتتابعات التالية هندسية؟", "f": "دوّر على النسبة الثابتة 🧐", "h": "اقسم كل حد على اللي قبله", "o": [["٣، ٦، ٩، ١٢", "هذي حسابية: الفرق ثابت ٣"], ["١، ٣، ٦، ١٠", "الفروق ٢، ٣، ٤"], ["٢، ٤، ٧، ١١", "الفروق ٢، ٣، ٤"], ["٣، ٦، ١٢، ٢٤", null]], "a": 3, "sol": "٣، ٦، ١٢، ٢٤ ← النسبة ثابتة = ٢"}, {"s": "geo", "q": "المتتابعة: ٢، ١٠، ٥٠، ٢٥٠، ... ما الحد الخامس؟", "f": "آخر سؤال بهذا القسم: × ٥ 💪", "h": "ر = ٥", "o": [["٤٥٠", "تعاملت معها كحسابية: ٢٥٠ + ٢٠٠"], ["١٢٥٠", null], ["٥٠٠", "ضربت في ٢ بدل ٥"], ["٦٢٥٠", "هذا الحد السادس"]], "a": 1, "sol": "٢٥٠ × ٥ = ١٢٥٠"}, {"s": "pat", "q": "ما الحد التالي: ٤، ٩، ١٦، ٢٥، ٣٦، ... ؟", "f": "مربعات؟ 👀", "h": "٤ = ٢<sup>٢</sup> ، ٩ = ٣<sup>٢</sup> ، ...", "o": [["٤٧", "الفروق ٥، ٧، ٩، ١١ ← التالي ١٣"], ["٦٤", "هذا ٨<sup>٢</sup> ، تخطيت ٧<sup>٢</sup>"], ["٤٩", null], ["٤٨", "راجع: ٧<sup>٢</sup> = ٤٩"]], "a": 2, "sol": "٧<sup>٢</sup> = ٤٩"}, {"s": "pat", "q": "ما الحد التالي: ١، ٨، ٢٧، ٦٤، ... ؟", "f": "مكعبات هذي المرة 🧊", "h": "١ = ١<sup>٣</sup> ، ٨ = ٢<sup>٣</sup> ، ...", "o": [["١٠٠", "هذا ١٠<sup>٢</sup> مو ٥<sup>٣</sup>"], ["٨١", "هذا ٩<sup>٢</sup> مو ٥<sup>٣</sup>"], ["٢١٦", "هذا ٦<sup>٣</sup> ، تخطيت ٥<sup>٣</sup>"], ["١٢٥", null]], "a": 3, "sol": "٥<sup>٣</sup> = ١٢٥"}, {"s": "pat", "q": "ما الحد التالي: ٢، ٥، ١٠، ١٧، ٢٦، ... ؟", "f": "مربعات + ١ 😉", "h": "ن<sup>٢</sup> + ١", "o": [["٣٧", null], ["٣٥", "الفروق ٣، ٥، ٧، ٩ ← التالي ١١"], ["٣٦", "نسيت + ١"], ["٣٣", "زدت ٧ بدل ١١"]], "a": 0, "sol": "٦<sup>٢</sup> + ١ = ٣٧"}, {"s": "pat", "q": "ما الحد التالي: ١، ١، ٢، ٣، ٥، ٨، ... ؟", "f": "كل حد = مجموع اللي قبله 🌀", "h": "٥ + ٨", "o": [["١١", "زدت ٣ بس"], ["١٣", null], ["١٢", "راجع: ٥ + ٨"], ["١٦", "ضربت ٨ × ٢"]], "a": 1, "sol": "٥ + ٨ = ١٣"}, {"s": "pat", "q": "ما الحد التالي: ٣، ٥، ٩، ١٥، ٢٣، ... ؟", "f": "الفروق نفسها لها نمط 🪜", "h": "الفروق: ٢، ٤، ٦، ٨ ← التالي ١٠", "o": [["٣١", "زدت ٨ بدل ١٠"], ["٢٩", "زدت ٦"], ["٣٥", "زدت ١٢"], ["٣٣", null]], "a": 3, "sol": "٢٣ + ١٠ = ٣٣"}, {"s": "pat", "q": "ما الحد التالي: ٢، ٣، ٥، ٨، ١٢، ... ؟", "f": "الفرق يزيد ١ كل مرة ⬆️", "h": "الفروق: ١، ٢، ٣، ٤ ← التالي ٥", "o": [["١٦", "زدت ٤ بدل ٥"], ["١٧", null], ["١٥", "زدت ٣"], ["٢٠", "ضربت في نسبة، والنمط بالفروق"]], "a": 1, "sol": "١٢ + ٥ = ١٧"}, {"s": "pat", "q": "ما الحد التالي: ١، ٢، ٦، ٢٤، ١٢٠، ... ؟", "f": "× ٢ ، × ٣ ، × ٤ … 🧮", "h": "١٢٠ × ٦", "o": [["٢٤٠", "ضربت في ٢ بس"], ["٧٢٠", null], ["٦٠٠", "ضربت في ٥ بدل ٦"], ["١٤٤", "جمعت ٢٤ بدل ما تضرب"]], "a": 1, "sol": "١٢٠ × ٦ = ٧٢٠"}, {"s": "pat", "q": "ما الحد التالي: ٥، ١٠، ٨، ١٦، ١٤، ... ؟", "f": "نمط بخطوتين: × ٢ ثم − ٢ 🔁", "h": "١٤ جاي بعد − ٢ ، فالتالي × ٢", "o": [["١٢", "طرحت ٢ مرة ثانية"], ["١٨", "زدت ٤"], ["٣٢", "ضربت ١٦ × ٢"], ["٢٨", null]], "a": 3, "sol": "١٤ × ٢ = ٢٨"}, {"s": "pat", "q": "ما الحد التالي: ١٠٠، ٨١، ٦٤، ٤٩، ... ؟", "f": "مربعات بالعكس 🔙", "h": "١٠<sup>٢</sup> ، ٩<sup>٢</sup> ، ٨<sup>٢</sup> ، ٧<sup>٢</sup> ، ...", "o": [["٣٦", null], ["٣٤", "الفروق ١٩، ١٧، ١٥ ← التالي ١٣"], ["٢٥", "هذا ٥<sup>٢</sup> ، تخطيت ٦<sup>٢</sup>"], ["٤٠", "راجع: ٦<sup>٢</sup> = ٣٦"]], "a": 0, "sol": "٦<sup>٢</sup> = ٣٦"}, {"s": "pat", "q": "ما الحد التالي: ١، ٣، ٧، ١٥، ٣١، ... ؟", "f": "× ٢ + ١ كل مرة 🚀", "h": "أو: الفروق ٢، ٤، ٨، ١٦ ← التالي ٣٢", "o": [["٦٢", "ضربت في ٢ ونسيت + ١"], ["٤٧", "زدت ١٦ بدل ٣٢"], ["٥٧", "راجع: ٣١ × ٢ + ١"], ["٦٣", null]], "a": 3, "sol": "٣١ × ٢ + ١ = ٦٣"}, {"s": "pat", "q": "ما العدد الناقص: ٢، ٦، ؟، ٥٤، ١٦٢", "f": "آخر سؤال بهذا القسم: هندسية فيها فراغ 🕳️", "h": "النسبة: ٦ ÷ ٢ = ٣", "o": [["١٨", null], ["١٢", "تعاملت معها كحسابية"], ["٣٠", "راجع: ٦ × ٣"], ["٢٤", "راجع: ٥٤ ÷ ٣ = ١٨"]], "a": 0, "sol": "٦ × ٣ = ١٨ ، و١٨ × ٣ = ٥٤ ✓"}, {"s": "per", "q": "المتتابعة: ١، ٢، ٣، ١، ٢، ٣، ... ما الحد الخمسون؟", "f": "حدد طول الدورة أول 🔁", "h": "طول الدورة ٣ ← ٥٠ ÷ ٣", "o": [["١", "الباقي ٢ مو ١"], ["٣", "الباقي مو صفر"], ["٥٠", "الأعداد ما تزيد، تتكرر"], ["٢", null]], "a": 3, "sol": "٥٠ ÷ ٣ = ١٦ والباقي ٢ ← الحد الثاني بالدورة = ٢"}, {"s": "per", "q": "المتتابعة: ٥، ٧، ٩، ٥، ٧، ٩، ... ما الحد الثلاثون؟", "f": "الباقي صفر؟ يعني آخر الدورة ⚠️", "h": "٣٠ ÷ ٣ = ١٠ والباقي ٠", "o": [["٥", "الباقي صفر يعني آخر الدورة مو أولها"], ["٩", null], ["٧", "الباقي صفر مو ٢"], ["٠", "الباقي صفر ما يعني الحد صفر"]], "a": 1, "sol": "الباقي ٠ ← آخر الدورة = ٩"}, {"s": "per", "q": "المتتابعة: س، ص، ع، س، ص، ع، ... ما الحد المئة؟", "f": "دورة حروف 🔤", "h": "١٠٠ ÷ ٣", "o": [["ص", "الباقي ١ مو ٢"], ["س", null], ["ع", "الباقي مو صفر"], ["لا يمكن تحديده", "تقدر تحدده بالباقي"]], "a": 1, "sol": "١٠٠ ÷ ٣ = ٣٣ والباقي ١ ← أول الدورة = س"}, {"s": "per", "q": "سلسلة خرز تتكرر ألوانها: أحمر، أخضر، أزرق، أصفر. ما لون الخرزة رقم ٤٢ ؟", "f": "طول الدورة ٤ 🎨", "h": "٤٢ ÷ ٤", "o": [["أخضر", null], ["أحمر", "الباقي ٢ مو ١"], ["أزرق", "الباقي ٢ مو ٣"], ["أصفر", "الباقي مو صفر"]], "a": 0, "sol": "٤٢ ÷ ٤ = ١٠ والباقي ٢ ← ثاني لون = أخضر"}, {"s": "per", "q": "اليوم السبت. أي يوم يكون بعد ١٠٠ يوم؟", "f": "الأسبوع دورة طولها ٧ 📅", "h": "١٠٠ ÷ ٧", "o": [["الأحد", "الباقي ٢ مو ١"], ["الاثنين", null], ["الثلاثاء", "الباقي ٢ مو ٣"], ["السبت", "الباقي مو صفر"]], "a": 1, "sol": "١٠٠ ÷ ٧ = ١٤ والباقي ٢ ← بعد السبت بيومين = الاثنين"}, {"s": "per", "q": "اليوم الأربعاء. أي يوم يكون بعد ٣٠ يومًا؟", "f": "نفس الفكرة 📆", "h": "٣٠ ÷ ٧", "o": [["الجمعة", null], ["الخميس", "الباقي ٢ مو ١"], ["السبت", "الباقي ٢ مو ٣"], ["الأربعاء", "الباقي مو صفر"]], "a": 0, "sol": "٣٠ ÷ ٧ = ٤ والباقي ٢ ← بعد الأربعاء بيومين = الجمعة"}, {"s": "per", "q": "المتتابعة: ٢، ٤، ٦، ٨، ٢، ٤، ٦، ٨، ... ما مجموع أول ٢٠ حدًا؟", "f": "كم دورة كاملة؟ 🔁", "h": "مجموع الدورة الوحدة = ٢٠", "o": [["١٠٠", null], ["٢٠", "هذا مجموع دورة وحدة"], ["٨٠", "حسبت ٤ دورات بدل ٥"], ["١٢٠", "حسبت ٦ دورات"]], "a": 0, "sol": "٢٠ ÷ ٤ = ٥ دورات ← ٥ × ٢٠ = ١٠٠"}, {"s": "per", "q": "ما طول الدورة في المتتابعة: ٣، ١، ٤، ٣، ١، ٤، ... ؟", "f": "الخطوة ١ من الدوريات 📏", "h": "متى يرجع أول حد؟", "o": [["٤", "٤ حد من الحدود، مو طول الدورة"], ["٦", "هذا دورتين"], ["٢", "الدورة فيها ٣ أعداد"], ["٣", null]], "a": 3, "sol": "٣، ١، ٤ ثم تتكرر ← طول الدورة ٣"}, {"s": "per", "q": "في المتتابعة ٧، ٣، ٧، ٣، ... كم مرة يظهر العدد ٧ في أول ٢٥ حدًا؟", "f": "٧ بالأماكن الفردية 👀", "h": "٢٥ حد = ١٢ دورة + حد زيادة", "o": [["١٣", null], ["١٢", "نسيت الحد الـ٢٥ ، وهو ٧"], ["٢٥", "هذا عدد الحدود كلها"], ["١٤", "زدت واحد"]], "a": 0, "sol": "١٢ دورة فيها ١٢ مرة + الحد الـ٢٥ = ٧ ← ١٣ مرة"}, {"s": "per", "q": "الحروف: ف، ك، ر، ف، ك، ر، ... ما الحرف رقم ٢٠٢٦ ؟", "f": "آخر سؤال بالتدريب كله! 🎉", "h": "٢٠٢٦ ÷ ٣ = ؟ (جرّب: ٢٠٢٥ تقبل القسمة على ٣)", "o": [["ف", null], ["ك", "الباقي ١ مو ٢"], ["ر", "الباقي مو صفر"], ["لا يمكن تحديده", "تقدر بالباقي"]], "a": 0, "sol": "٢٠٢٥ تقبل القسمة على ٣ ← ٢٠٢٦ باقيها ١ ← أول الدورة = ف"}];
+const L=["أ","ب","ج","د"], AD="٠١٢٣٤٥٦٧٨٩";
+const ar=n=>String(n).replace(/\d/g,d=>AD[d]);
+const box=document.getElementById("cards"), legend=document.getElementById("legend");
+let score=0, done=0, wrongSec={}, last=null;
+Q.forEach((q,i)=>{
+  const [label,color,emo]=SEC[q.s], n=i+1;
+  if(q.s!==last){
+    last=q.s;
+    const s=document.createElement("div"); s.className="sec"; s.id="sec-"+q.s; s.style.background=color; s.textContent=`${emo} ${label}`; box.appendChild(s);
+    const a=document.createElement("a"); a.href="#sec-"+q.s; a.style.background=color; a.textContent=`${emo} ${label}`; legend.appendChild(a);
+  }
+  const card=document.createElement("section");
+  card.className="card"; card.style.setProperty("--accent",color);
+  card.innerHTML=`<div class="qtitle"><span class="qnum">${ar(n)}</span>السؤال ${ar(n)}<span class="qtag">${emo} ${label}</span></div>
+   <div class="qtext">${q.q}</div>
+   <div class="funny">💬 ${q.f}</div>
+   <div class="hints"><div><button class="hint-btn" aria-expanded="false"><span>🔎 تلميح</span><span>＋</span></button><div class="hint-reveal">${q.h}</div></div></div>
+   <div class="options">${q.o.map((o,k)=>`
+     <button class="opt-btn" data-k="${k}"><span class="l">${L[k]}</span><span class="v">${o[0]}</span><span class="tag"></span></button>
+     <div class="opt-explain ${k===q.a?"ok":"no"}">${k===q.a?"صح عليك! 👏":"❌ "+o[1]}</div>`).join("")}</div>
+   <div class="solution-box"><span class="lbl">✅ الحل</span>${q.sol}</div>`;
+  box.appendChild(card);
+  const hb=card.querySelector(".hint-btn");
+  hb.onclick=()=>{const r=hb.nextElementSibling,open=r.classList.toggle("open");hb.lastElementChild.textContent=open?"－":"＋";hb.setAttribute("aria-expanded",open);};
+  const btns=card.querySelectorAll(".opt-btn");
+  btns.forEach(b=>b.onclick=()=>{
+    if(card.dataset.done) return;
+    card.dataset.done=1; done++;
+    const k=+b.dataset.k, ok=k===q.a;
+    btns.forEach(x=>x.disabled=true);
+    btns[q.a].classList.add("correct"); btns[q.a].querySelector(".tag").textContent="✅";
+    if(ok) score++; else { b.classList.add("wrong"); b.querySelector(".tag").textContent="❌"; wrongSec[q.s]=(wrongSec[q.s]||0)+1; }
+    b.nextElementSibling.classList.add("show");
+    card.querySelector(".solution-box").classList.add("show");
+    document.getElementById("scoreDisplay").textContent=`${ar(score)} من ٥٠`;
+    document.getElementById("doneDisplay").textContent=`· ${ar(done)} مجاوب`;
+    if(done===Q.length) finish();
+  });
+});
+function finish(){
+  const rc=document.getElementById("resultCard"), e=document.getElementById("rEmoji"), t=document.getElementById("rTitle"), p=document.getElementById("rText");
+  const s=ar(score);
+  const weak=Object.entries(wrongSec).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k])=>SEC[k][0]);
+  const tip=weak.length?` راجع: ${weak.join("، ")}`:"";
+  if(score===50){e.textContent="🏆";t.textContent="أسطوري! ٥٠ من ٥٠";p.textContent="ولا غلطة! صرت تشوف النمط قبل لا يكمل 😎";}
+  else if(score>=40){e.textContent="🔥";t.textContent="ممتاز جدًا!";p.textContent=`نتيجتك ${s} من ٥٠.`+tip;}
+  else if(score>=30){e.textContent="💪";t.textContent="شغل حلو!";p.textContent=`نتيجتك ${s} من ٥٠.`+tip;}
+  else if(score>=15){e.textContent="🙂";t.textContent="بداية طيبة";p.textContent=`نتيجتك ${s} من ٥٠.`+tip;}
+  else{e.textContent="🌱";t.textContent="وقت المراجعة";p.textContent="ولا يهمك، كل خبير بدأ من هنا."+tip;}
+  rc.classList.add("show");
+  rc.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function restart(){
+  score=0; done=0; wrongSec={};
+  document.getElementById("scoreDisplay").textContent="٠ من ٥٠";
+  document.getElementById("doneDisplay").textContent="· ٠ مجاوب";
+  document.querySelectorAll(".card").forEach(c=>delete c.dataset.done);
+  document.querySelectorAll(".opt-btn").forEach(b=>{b.disabled=false;b.classList.remove("correct","wrong");b.querySelector(".tag").textContent="";});
+  document.querySelectorAll(".opt-explain,.solution-box").forEach(x=>x.classList.remove("show"));
+  document.querySelectorAll(".hint-reveal").forEach(h=>h.classList.remove("open"));
+  document.querySelectorAll(".hint-btn").forEach(b=>{b.lastElementChild.textContent="＋";b.setAttribute("aria-expanded","false");});
+  document.getElementById("resultCard").classList.remove("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.getElementById("waBtn").href="https://wa.me/?text="+encodeURIComponent(`🔢 تدريب المتتابعات والأنماط: فكّر أقل ... حُلّ أسرع
+
+٥٠ سؤال بأسلوب القياس: الحسابية ومجموعها، طريقة غاوس، الهندسية، اكتشاف النمط، والدوريات
+كم بتجيب من ٥٠؟ 😉
+
+${location.href}`);
+</script>
+</body>
+</html>
+</body></html>
